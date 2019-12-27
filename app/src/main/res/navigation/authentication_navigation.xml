@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/authentication_navigation"
+    app:startDestination="@+id/share">
+
+    <fragment
+        android:id="@+id/share"
+        android:name="com.example.profitclub.ui.splash.SplashFragment"
+        android:label="@string/menu_share"
+        tools:layout="@layout/fragment_splash">
+        <action
+            android:id="@+id/optionAction"
+            app:destination="@id/slideshow" />
+        <action
+            android:id="@+id/loginAction"
+            app:destination="@id/toolsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/slideshow"
+        android:name="com.example.profitclub.ui.options.OptionsFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_options">
+        <action
+            android:id="@+id/accountCreateAction"
+            app:destination="@id/creationAccFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/toolsFragment"
+        android:name="com.example.profitclub.ui.login.LoginFragment"
+        android:label="fragment_tools"
+        tools:layout="@layout/fragment_login" />
+
+    <fragment
+        android:id="@+id/creationAccFragment"
+        android:name="com.example.profitclub.ui.create_account.CreationAcoountFragment"
+        android:label="fragment_acc_creation"
+        tools:layout="@layout/fragment_creation_account">
+        <action
+            android:id="@+id/emailCheckAction"
+            app:destination="@id/emailCheckFragment" />
+        <argument
+            android:name="Role"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/emailCheckFragment"
+        android:name="com.example.profitclub.ui.email_check.EmailCheckFragment"
+        android:label="fragment_email_check"
+        tools:layout="@layout/fragment_email_check">
+        <action
+            android:id="@+id/clientIndividualInfoAction"
+            app:destination="@id/client_individual_info" />
+        <action
+            android:id="@+id/clientLegalinfoAction"
+            app:destination="@id/client_legal_info" />
+        <argument
+            android:name="clientRole"
+            app:argType="integer"
+            android:defaultValue="1" />
+        <action
+            android:id="@+id/action_emailCheckFragment_to_consultantIndividualInfoFragment"
+            app:destination="@id/consultantIndividualInfoFragment" />
+        <action
+            android:id="@+id/action_emailCheckFragment_to_consultantLegalInfoFragment"
+            app:destination="@id/consultantLegalInfoFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/client_individual_info"
+        android:name="com.example.profitclub.ui.client_individual_infos.ClientIndividualInfoFragment"
+        android:label="fragment_client_individual_info"
+        tools:layout="@layout/fragment_client_individual_infos">
+        <action
+            android:id="@+id/splashScreeen2Action"
+            app:destination="@id/splash_screen2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/splash_screen2"
+        android:name="com.example.profitclub.ui.splash.SplashScreen2Fragment"
+        android:label="fragment_splash_screen2"
+        tools:layout="@layout/fragment_splashscreen2">
+        <action
+            android:id="@+id/clientIndividualVerificationAction"
+            app:destination="@id/client_verification" />
+        <argument
+            android:name="RoleNum"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/client_verification"
+        android:name="com.example.profitclub.ui.client_individual_infos.ClientVerificationFragment"
+        android:label="fragment_client_verification"
+        tools:layout="@layout/fragment_client_verification" >
+        <argument
+            android:name="RoleNum"
+            app:argType="integer"
+            android:defaultValue="1" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/client_legal_info"
+        android:name="com.example.profitclub.ui.client_individual_infos.client_legal_infos.ClientLegalInfoFragment"
+        android:label="fragment_client_legal_info"
+        tools:layout="@layout/fragment_client_legal_info">
+        <action
+            android:id="@+id/clientLegalinfo2Action"
+            app:destination="@id/client_legal_info2" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/client_legal_info2"
+        android:name="com.example.profitclub.ui.client_individual_infos.client_legal_infos.ClientLegalInfo2Fragment"
+        android:label="fragment_client_legal_info2"
+        tools:layout="@layout/fragment_client_legal_info2" >
+        <action
+            android:id="@+id/action_client_legal_info2_to_splash_screen2"
+            app:destination="@id/splash_screen2" />
+    </fragment>
+    <fragment
+        android:id="@+id/consultantIndividualInfoFragment"
+        android:name="com.example.profitclub.ui.consultant_individual_infos.ConsultantIndividualInfoFragment"
+        android:label="fragment_consultant_individual_infos"
+        tools:layout="@layout/fragment_consultant_individual_infos" >
+        <action
+            android:id="@+id/action_consultantIndividualInfoFragment_to_consultantIndividualInfo2Fragment"
+            app:destination="@id/consultantIndividualInfo2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/consultantIndividualInfo2Fragment"
+        android:name="com.example.profitclub.ui.consultant_individual_infos.ConsultantIndividualInfo2Fragment"
+        android:label="fragment_consultant_individual_info2"
+        tools:layout="@layout/fragment_consultant_individual_info2" >
+        <action
+            android:id="@+id/action_consultantIndividualInfo2Fragment_to_splash_screen2"
+            app:destination="@id/splash_screen2" />
+    </fragment>
+    <fragment
+        android:id="@+id/consultantLegalInfoFragment"
+        android:name="com.example.profitclub.ui.consultant_individual_infos.consultant_legal_infos.ConsultantLegalInfoFragment"
+        android:label="fragment_consultant_legal_info"
+        tools:layout="@layout/fragment_consultant_legal_info" >
+        <action
+            android:id="@+id/action_consultantLegalInfoFragment_to_consultantLegalInfo2Fragment"
+            app:destination="@id/consultantLegalInfo2Fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/consultantLegalInfo2Fragment"
+        android:name="com.example.profitclub.ui.consultant_individual_infos.consultant_legal_infos.ConsultantLegalInfo2Fragment"
+        android:label="fragment_consultant_legal_info2"
+        tools:layout="@layout/fragment_consultant_legal_info2" >
+        <action
+            android:id="@+id/action_consultantLegalInfo2Fragment_to_splash_screen2"
+            app:destination="@id/splash_screen2" />
+    </fragment>
+
+
+</navigation>
