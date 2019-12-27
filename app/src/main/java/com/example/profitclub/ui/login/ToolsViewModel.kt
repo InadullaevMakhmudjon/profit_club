@@ -1,13 +1,13 @@
-package com.example.profitclub.ui.slideshow
+package com.example.profitclub.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 
-class SlideshowViewModel : ViewModel() {
+class ToolsViewModel : ViewModel() {
 
     private val _text = MutableLiveData<String>().apply {
-        value = "This is slideshow Fragment"
+        value = "This is tools Fragment"
     }
     val text: LiveData<String> = _text
 }

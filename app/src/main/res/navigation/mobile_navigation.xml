@@ -3,41 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/chat">
 
     <fragment
-        android:id="@+id/nav_home"
-        android:name="com.example.profitclub.ui.home.HomeFragment"
-        android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        android:id="@+id/chat"
+        android:name="com.example.profitclub.ui.chats.ChatsFragment"
+        android:label="@string/fragment_chats"
+        tools:layout="@layout/fragment_chats" >
+        <action
+            android:id="@+id/action_chat_to_questions"
+            app:destination="@id/questions"
+            app:popEnterAnim="@anim/nav_default_enter_anim" />
+        <action
+            android:id="@+id/action_chat_to_account"
+            app:destination="@id/account" />
+    </fragment>
 
     <fragment
-        android:id="@+id/nav_gallery"
-        android:name="com.example.profitclub.ui.gallery.GalleryFragment"
-        android:label="@string/menu_gallery"
-        tools:layout="@layout/fragment_gallery" />
+        android:id="@+id/questions"
+        android:name="com.example.profitclub.ui.questions.QuestionsFragment"
+        android:label="@string/fragment_questions"
+        tools:layout="@layout/fragment_questions" />
 
     <fragment
-        android:id="@+id/nav_slideshow"
-        android:name="com.example.profitclub.ui.slideshow.SlideshowFragment"
-        android:label="@string/menu_slideshow"
-        tools:layout="@layout/fragment_slideshow" />
+        android:id="@+id/account"
+        android:name="com.example.profitclub.ui.account.AccountFragment"
+        android:label="@string/fragment_account"
+        tools:layout="@layout/fragment_account" />
 
     <fragment
-        android:id="@+id/nav_tools"
-        android:name="com.example.profitclub.ui.tools.ToolsFragment"
-        android:label="@string/menu_tools"
-        tools:layout="@layout/fragment_tools" />
+        android:id="@+id/browse"
+        android:name="com.example.profitclub.ui.browse.BrowseFragment"
+        android:label="BrowseFragment" />
 
-    <fragment
-        android:id="@+id/nav_share"
-        android:name="com.example.profitclub.ui.share.ShareFragment"
-        android:label="@string/menu_share"
-        tools:layout="@layout/fragment_share" />
-
-    <fragment
-        android:id="@+id/nav_send"
-        android:name="com.example.profitclub.ui.send.SendFragment"
-        android:label="@string/menu_send"
-        tools:layout="@layout/fragment_send" />
 </navigation>
