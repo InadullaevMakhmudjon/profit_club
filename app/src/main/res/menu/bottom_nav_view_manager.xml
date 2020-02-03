@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/approve"
+        android:icon="@drawable/ic_done_black_24dp"
+        android:title="@string/approved" />
+
+    <item
+        android:id="@+id/arbitration"
+        android:icon="@drawable/ic_report_black_24dp"
+        android:title="@string/arbitration" />
+
+    <item
+        android:id="@+id/chat"
+        android:icon="@drawable/ic_chat_black_24dp"
+        android:title="@string/Chats" />
+
+    <item
+        android:id="@+id/transaction"
+        android:icon="@drawable/ic_loop_black_24dp"
+        android:title="@string/transaction"/>
+
+    <item
+        android:id="@+id/setting"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="@string/setting" />
+
+</menu>

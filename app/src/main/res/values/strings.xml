@@ -1,16 +1,190 @@
 <resources>
     <string name="app_name">ProfitClub</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
+    <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
+    <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
+    <string name="nav_header_title" translatable="false">Android Studio</string>
+    <string name="nav_header_subtitle" translatable="false">android.studio@android.com</string>
+    <string name="nav_header_desc" translatable="false">Navigation header</string>
     <string name="action_settings">Settings</string>
 
-    <string name="menu_home">Home</string>
-    <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
-    <string name="menu_tools">Tools</string>
-    <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="fragment_chats" translatable="false">Chats Fragment</string>
+    <string name="fragment_questions" translatable="false">Questions Fragment</string>
+    <string name="fragment_account" translatable="false">Account fragment</string>
+
+    <string name="menu_chat">Chats</string>
+    <string name="menu_questions">My Questions</string>
+    <string name="menu_slideshow" translatable="false">Slideshow</string>
+    <string name="menu_tools" translatable="false">Tools</string>
+    <string name="menu_share" translatable="false">Share</string>
+    <string name="menu_send" translatable="false">Send</string>
+    <string name="Chats">Chats</string>
+    <string name="question_desc">Hi. I am looking for a consultant for my mobile app to
+    modify and improve UI design and development of a
+    CMS Portal</string>
+    <string name="question_details">Question details</string>
+    <string name="My_Questions">Questions</string>
+    <string name="My_Messages">Messages</string>
+    <string name="question_creation">Question Creation</string>
+    <string name="browse">Browse</string>
+    <string name="question">I am looking for app (android and IOS) expert.</string>
+    <string name="Account">Account</string>
+
+    <string name="title_activity_splash_screen" translatable="false">SplashScreen</string>
+    <string name="dummy_button">Create an account</string>
+    <string name="dummy_content">PROFITCLUB</string>
+    <string name="selection">Select your account</string>
+    <string name="client">I want to hire</string>
+    <string name="consultant">I want to work</string>
+    <string name="login">Log in</string>
+    <string name="individual">Individual</string>
+    <string name="legal_entity">Legal entity</string>
+    <string name="create_account">Create account</string>
+    <string name="create">Create</string>
+    <string name="email_check">Check your email</string>
+    <string name="info">Information about you</string>
+    <string name="name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="patronymic">Patronymic</string>
+    <string name="date_of_birth">Date of birth</string>
+    <string name="phone_number">Phone number</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="agree">I agree terms of Services and System</string>
+    <string name="confirm">Confirm</string>
+    <string name="get_started">GET STARTED</string>
+    <string name="confirmation_code">Code</string>
+    <string name="individual_verification">Individual verification</string>
+    <string name="payment_verification">Payment verification</string>
+    <string name="card_number">Card number</string>
+    <string name="passport_series">Passport series and numbers</string>
+    <string name="skip">SKIP</string>
+    <string name="title" translatable="false">Title / 255</string>
+    <string name="description">Full Description</string>
+    <string name="verify">Verify</string>
+    <string name="deadline">Deadline</string>
+    <string name="question_deadline">TAP HERE to select a deadline</string>
+    <string name="condition_of_work">Condition of work</string>
+    <string name="language">Language</string>
+    <string name="price">Price</string>
+    <string name="category_">Category</string>
+    <string name="become_a_bid">Become a bid</string>
+    <string name="brief">Brief info of the consulting strategy</string>
+    <string name="category">Category of consultation</string>
+    <string name="info_company">Information about the company</string>
+    <string name="number_of_employees">Number of employees</string>
+    <string name="legal_info">Information about organization</string>
+    <string name="name_of_legal">Name of legal entity</string>
+    <string name="address">Address</string>
+    <string name="your_info">Info about you</string>
+    <string name="next">Next</string>
+    <string name="post">Post</string>
+    <string name="app_version">App Version</string>
+    <string name="app_version_desc" translatable="false">3.10.0 (1903100436)</string>
+    <string name="about">About</string>
+    <string name="log_out">Log out</string>
+    <string name="terms_desc">Opens our terms and conditions page</string>
+    <string name="terms">Terms and Conditions</string>
+    <string name="privacy_desc">Opens our privacy policy</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="other">Other</string>
+    <string name="history">History</string>
+    <string name="place_a_bid">Place a bid</string>
+    <string name="new_user">Create a new user</string>
+    <string name="top_up">Top up</string>
+    <string name="withdraw">Withdraw</string>
+    <string name="cancel">Decline the question</string>
+    <string name="skills">Skills required</string>
+    <string name="skills_desc">Engineering, User Interface / IA,
+                               Software Architecture, HTML, Software
+                               Development</string>
+    <string name="question_id">Question ID</string>
+    <string name="id" translatable="false">22769117</string>
+    <string name="total">Total bids</string>
+    <string name="num_review" translatable="false">20</string>
+    <string name="review">My Reviews</string>
+    <string name="by">by</string>
+    <string name="employees">My Employees</string>
+    <string name="review_example">"Very helpful. Best consultant I have ever worked. Thank you!!!"</string>
+    <string name="settings_desc">Theme / Language </string>
+    <string name="transaction">Transactions</string>
+    <string name="settings">Settings</string>
+    <string name="usd_50" translatable="false">50.00 USD</string>
+    <string name="balance">Available Balance</string>
+    <string name="someone">Someone</string>
+    <string name="jason">Jason</string>
+    <string name="hire">hire me</string>
+    <string name="sum" translatable="false">100,00 USD in 6 days</string>
+    <string name="lorem" translatable="false">Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum
+dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum
+dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
+    <string name="view_and_edit">View and edit your profile</string>
+    <string name="post_question">Post a question</string>
+    <string name="welcome_to">Welcome to ProfitClub</string>
+    <string name="largest_marketplace">The largest marketplace for online services in Uzbekistan</string>
+    <string name="email_check_info">We have sent you a code to your email address.
+                               Check and confirm. Until you do not confirm
+                               you can not continue the registration.</string>
+
+    <string name="Log_in">Already have an account? Login here</string>
+    <string name="title_activity_login">Sign in</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">LOG IN</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="log_out_desc">"Are you really want to exit?"</string>
+    <string name="complete_desc">"Are you agree to complete?"</string>
+    <string name="complain">"Complain"</string>
+    <string name="cancel_alert">Cancel</string>
+    <string name="yes">Yes</string>
+    <string name="law">Law</string>
+    <string name="it">IT &amp; Software</string>
+    <string name="accounting">Accounting</string>
+    <string name="category_alert">Choose which your question relates to</string>
+    <string name="review_alert">Review</string>
+    <string name="review_desc">Give a comment to the work of the consultant</string>
+    <string name="comment">Write a comment…</string>
+    <string name="rating">Give a rating</string>
+    <string name="completed_alert_title">Attention</string>
+    <string name="completed_alert_message">The consultant have completed your work!</string>
+    <string name="language_title">language</string>
+    <string name="bids">Bids</string>
+    <string name="forgot">I Forgot my password</string>
+    <string name="manager">Manager</string>
+    <string name="bid_title">Bid details</string>
+    <string name="approved">Approve</string>
+    <string name="arbitration">Arbitration</string>
+    <string name="setting">Settings</string>
+    <string name="question_id_approve">Question id:</string>
+    <string name="client_id_approve">Client id:</string>
+    <string name="category_id_approve">Category:</string>
+    <string name="consultant_id_approve">Consultant id:</string>
+    <string name="space" translatable="false">\u0020</string>
+    <string name="reject">Reject</string>
+    <string name="close">Close</string>
+    <string name="deadline_">Deadline:  18/01/2020</string>
+    <string name="client_">Client</string>
+    <string name="alisa">Alisa</string>
+    <string name="score_5" translatable="false">5.0</string>
+    <string name="usd_100" translatable="false">100 USD</string>
+    <string name="choose">Choose</string>
+    <string name="delay">Delay deadline</string>
+    <string name="finance_accounting">Finance / Accounting</string>
+    <string name="enter_message">Enter a message…</string>
+    <string name="attach_file">Attach a file</string>
+    <string name="user_name">Name of the user</string>
+    <string name="user_surname">Surname</string>
+    <string name="user_surname_desc">Surname</string>
+    <string name="user_patronymic">Patronymic of the user</string>
+    <string name="user_address">Address of the user"</string>
+    <string name="consultant_">Consultant"</string>
+    <string name="comment_action">You should give a comment to your action</string>
+    <string name="arbitration_messages">Arbitration Messages</string>
+    <string name="penalty_desc">Percent of the PENALTY</string>
+    <string name="penalty">PENALTY (%)</string>
+    <string name="percentage" translatable="false">%</string>
+
 </resources>
