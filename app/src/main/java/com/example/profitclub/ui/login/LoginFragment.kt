@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.MainActivity
 import com.example.profitclub.R
+import com.example.profitclub.chooseLanguage
 import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {

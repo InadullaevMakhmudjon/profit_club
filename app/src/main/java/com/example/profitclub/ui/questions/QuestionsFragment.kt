@@ -16,23 +16,13 @@ import com.example.profitclub.databinding.FragmentQuestionsBinding
 import com.example.profitclub.model.Questions
 import kotlinx.android.synthetic.main.fragment_questions.*
 import kotlinx.android.synthetic.main.fragment_questions.view.*
-import uz.abubakrr.eventme.adapters.QuestionsAdapter
+import com.example.profitclub.adapters.QuestionsAdapter
 
 class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentQuestionsBinding
     private lateinit var galleryViewModel: QuestionsViewModel
-    private var layoutManager: LinearLayoutManager? = null
-    private var adapter: QuestionsAdapter? = null
-
-        val list = listOf(Questions("I need en expert who will help me putting my website into a domain", 11, 99),
-                          Questions("I need en expert who will help me putting my website into a domain", 41, 99),
-            Questions("I need en expert who will help me putting my website into a domain", 41, 99),
-            Questions("I need en expert who will help me putting my website into a domain", 41, 99),Questions("I need en expert who will help me putting my website into a domain", 41, 99),
-            Questions("I need en expert who will help me putting my website into a domain", 41, 99),Questions("I need en expert who will help me putting my website into a domain", 41, 99),
-            Questions("I need en expert who will help me putting my website into a domain", 41, 99),Questions("I need en expert who will help me putting my website into a domain", 41, 99),
-            Questions("I need en expert who will help me putting my website into a domain", 41, 99),Questions("I need en expert who will help me putting my website into a domain", 41, 99),
-            Questions("I need en expert who will help me putting my website into a domain", 41, 99))
+    private var mSectionPageAdapter: SectionPageAdapter2? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,11 +36,16 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             ViewModelProviders.of(this).get(QuestionsViewModel::class.java)
        // val root = inflater.inflate(R.layout.fragment_questions, container, false)
         binding = FragmentQuestionsBinding.inflate(layoutInflater)
-        adapter = QuestionsAdapter(this.context!!, list, this)
+
+        mSectionPageAdapter = SectionPageAdapter2(childFragmentManager)
+        binding.viewPager.adapter = mSectionPageAdapter
+        binding.pagerHeader.setTabIndicatorColorResource(R.color.colorAccent2)
+
+        /*adapter = QuestionsAdapter(this.context!!, list, this)
         layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
         binding.recycler.layoutManager = layoutManager
         binding.recycler.adapter = adapter
-        adapter?.notifyDataSetChanged()
+        adapter?.notifyDataSetChanged()*/
         /*val textView: TextView = root.findViewById(R.id.text_gallery)
         galleryViewModel.text.observe(this, Observer {
             textView.text = it
@@ -67,11 +62,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-
-
     override fun onResume() {
         super.onResume()
-        adapter?.notifyDataSetChanged()
     }
 
     override fun onClick(p0: View?) {

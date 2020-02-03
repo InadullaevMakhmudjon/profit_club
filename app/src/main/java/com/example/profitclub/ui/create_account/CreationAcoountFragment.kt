@@ -85,7 +85,15 @@ class CreationAcoountFragment : Fragment() {
             if (role == 2 && individual.isChecked){
                 emailAction.setClientRole(3)
             }
-            Navigation.findNavController(it).navigate(emailAction)
+
+            if(individual.isChecked || legal_entity.isChecked){
+                Navigation.findNavController(it).navigate(emailAction)
+            }else {
+                Snackbar.make(it, "Check one of checkboxes only", Snackbar.LENGTH_LONG)
+                    .setAction("Action", null).show()
+
+            }
+
 
         }
     }

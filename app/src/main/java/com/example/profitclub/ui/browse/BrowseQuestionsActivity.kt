@@ -7,9 +7,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.R
 import com.example.profitclub.model.Questions
 import kotlinx.android.synthetic.main.activity_browse_questions.*
-import kotlinx.android.synthetic.main.fragment_browse.*
-import kotlinx.android.synthetic.main.fragment_browse.toolbar
-import uz.abubakrr.eventme.adapters.QuestionsAdapter
 import uz.abubakrr.eventme.adapters.QuestionsInBrowseAdapter
 
 class BrowseQuestionsActivity : AppCompatActivity(), View.OnClickListener {

@@ -38,12 +38,12 @@ class ClientVerificationFragment : Fragment() {
 
                 arguments?.let {
                     val safeArgs = ClientVerificationFragmentArgs.fromBundle(it)
-                    role = safeArgs.roleNum
+                    this.role = safeArgs.roleNum
                 }
-        if(role == 2 || role ==4){
+        /*if(role == 2 || role ==4){
             verification_text.isVisible = false
             passport_container.isVisible = false
-        }
+        }*/
 
         verify.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)

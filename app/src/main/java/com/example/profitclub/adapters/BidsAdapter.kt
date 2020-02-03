@@ -1,24 +1,26 @@
-package uz.abubakrr.eventme.adapters
+package com.example.profitclub.adapters
 
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.databinding.UserItemBinding
 import com.example.profitclub.model.Bids
+import com.example.profitclub.ui.account.details.ProfileActivity
 import com.example.profitclub.ui.questions.QuestionDetailActivity
 
 
 class BidsAdapter(context: Context, items: List<Bids>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater
     private val TYPE_FEED = 1
-    private lateinit var context: Context
+    private  var context: Context
     private var items: List<Bids> = ArrayList()
-    private lateinit var listener: View.OnClickListener
+    private  var listener: View.OnClickListener
 
     init {
         this.context = context
@@ -35,7 +37,7 @@ class BidsAdapter(context: Context, items: List<Bids>, listener: View.OnClickLis
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 //        if (viewType == TYPE_FEED) {
         val binding = UserItemBinding.inflate(inflater, parent, false)
-        return EventFeedHolder(binding.getRoot())
+        return EventFeedHolder(binding.root)
 //        }
 //        return null
 
@@ -46,15 +48,24 @@ class BidsAdapter(context: Context, items: List<Bids>, listener: View.OnClickLis
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.bids = item
-            binding!!.name.text = item.name
-            binding!!.price.text = item.price
+            binding.name.text = item.name
+            binding.price.text = item.price
+            if(item.role == 1){
+                binding.hire.isVisible = false
+            }
+            //Flag activity new task needed here
+            binding.hire.setOnClickListener {
+                val intent = Intent(context, ProfileActivity::class.java)
+                intent.putExtra("role", 2)
+                context.startActivity(intent)
+            }
 
             /* Picasso.get()
                      .load(item.phost_photo)
                      .into(binding.imageActual)*/
 
-            binding?.container.setTag(item)
-            binding?.container.setOnClickListener(this)
+            binding.container.tag = item
+            binding.container.setOnClickListener(this)
 
         }
     }

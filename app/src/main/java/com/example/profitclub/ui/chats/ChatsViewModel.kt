@@ -6,8 +6,9 @@ import androidx.lifecycle.ViewModel
 
 class ChatsViewModel : ViewModel() {
 
+
     private val _text = MutableLiveData<String>().apply {
-        value = "You do not have any messages yet"
+        value = "Total Messages: 10"
     }
     val text: LiveData<String> = _text
 }

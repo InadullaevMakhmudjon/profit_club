@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.profitclub.MainActivity
 import com.example.profitclub.R
-import kotlinx.android.synthetic.main.activity_options.*
 import kotlinx.android.synthetic.main.fragment_splashscreen2.*
 
 class SplashScreen2Fragment : Fragment() {
@@ -42,9 +41,22 @@ class SplashScreen2Fragment : Fragment() {
         }
 
         skip.setOnClickListener {
-                val action_to_splash2 = SplashScreen2FragmentDirections.clientIndividualVerificationAction()
-                action_to_splash2.setRoleNum(role)
-                Navigation.findNavController(it).navigate(action_to_splash2)
+            if(role == 2 || role == 4){
+                val intent = Intent(context, MainActivity::class.java)
+                //intent.putExtra("role", role)
+                val data = Bundle()
+                data.putInt("role", role)
+                intent.putExtras(data)
+                startActivity(intent)
+                activity?.finish()
+            }
+
+            else{
+                val nextAction = SplashScreen2FragmentDirections.clientIndividualVerificationAction()
+                nextAction.setRoleNum(role)
+                Navigation.findNavController(it).navigate(nextAction)
+            }
+
         }
     }
 }

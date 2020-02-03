@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.profitclub.R
+import com.example.profitclub.chooseLanguage
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import kotlinx.android.synthetic.main.fragment_splash.*
 import kotlinx.android.synthetic.main.fragment_splash.account
@@ -29,10 +30,8 @@ class SplashFragment : Fragment() {
             ViewModelProviders.of(this).get(ShareViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_splash, container, false)
         //val textView: TextView = root.findViewById(R.id.text_share)
-
        // var bundle = Bundle()
        // val navController = findNavController()
-
         shareViewModel.text.observe(this, Observer {
            // textView.text = it
         })
@@ -41,6 +40,8 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        chooseLanguage()
 
         create_button.setOnClickListener {
             Navigation.findNavController(it).navigate(R.id.optionAction)

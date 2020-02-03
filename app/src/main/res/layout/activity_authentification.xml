@@ -8,7 +8,6 @@
         android:layout_height="match_parent"
         tools:context="com.example.profitclub.ui.AuthentificationActivity">
 
-
         <fragment
             android:id="@+id/face1"
             android:name="androidx.navigation.fragment.NavHostFragment"

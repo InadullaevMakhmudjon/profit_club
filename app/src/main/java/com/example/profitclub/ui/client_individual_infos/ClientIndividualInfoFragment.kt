@@ -66,7 +66,7 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
     }
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-            val date = "Date of birth: " + p1 + "/" + p2 + "/" + p3;
+            val date = "Date of birth: " + p1 + "/" + p2 + 1 + "/" + p3
             date_of_birth.text = date
         }
     }

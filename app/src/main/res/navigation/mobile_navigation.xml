@@ -10,13 +10,6 @@
         android:name="com.example.profitclub.ui.chats.ChatsFragment"
         android:label="@string/fragment_chats"
         tools:layout="@layout/fragment_chats" >
-        <action
-            android:id="@+id/action_chat_to_questions"
-            app:destination="@id/questions"
-            app:popEnterAnim="@anim/nav_default_enter_anim" />
-        <action
-            android:id="@+id/action_chat_to_account"
-            app:destination="@id/account" />
     </fragment>
 
     <fragment
@@ -26,14 +19,19 @@
         tools:layout="@layout/fragment_questions" />
 
     <fragment
+        android:id="@+id/bids"
+        android:name="com.example.profitclub.ui.bids.BidsFragment"
+        tools:layout="@layout/fragment_bids"/>
+
+    <fragment
+        android:id="@+id/transaction"
+        android:name="com.example.profitclub.ui.transactions.TransactionFragment"
+        tools:layout="@layout/fragment_transaction"/>
+
+    <fragment
         android:id="@+id/account"
         android:name="com.example.profitclub.ui.account.AccountFragment"
         android:label="@string/fragment_account"
         tools:layout="@layout/fragment_account" />
-
-    <fragment
-        android:id="@+id/browse"
-        android:name="com.example.profitclub.ui.browse.BrowseFragment"
-        android:label="BrowseFragment" />
-
+m
 </navigation>

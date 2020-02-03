@@ -12,7 +12,7 @@
         android:id="@+id/appBarLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -21,13 +21,22 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="@color/white"
             app:title="@string/question_creation"
-            app:titleTextColor="@color/black"
             android:textAlignment="center"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>
 
     </com.google.android.material.appbar.AppBarLayout>
+
+    <EditText
+        android:id="@+id/title_255"
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:hint="@string/title"
+        android:inputType="text"
+        android:maxLength="255"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"/>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/language_container"
@@ -53,41 +62,20 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/category_container"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_container">
-
-        <AutoCompleteTextView
+        <TextView
             android:id="@+id/category"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/category_"
+            android:text="@string/category_"
+            android:textSize="18sp"
+            android:layout_marginTop="14dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:backgroundTint="@color/black"
-            android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
 
-    </com.google.android.material.textfield.TextInputLayout>
 
-    <EditText
-        android:id="@+id/title_255"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        android:hint="@string/title"
-        android:inputType="text"
-        android:maxLength="255"
-        android:autofillHints="@string/deadline"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
 
     <EditText
         android:id="@+id/description"
@@ -95,23 +83,10 @@
         android:layout_height="100dp"
         android:hint="@string/description"
         android:inputType="text"
-        android:autofillHints="@string/deadline"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
 
-    <TextView
-        android:id="@+id/deadline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="16sp"
-        android:text="@string/deadline"
-        android:fontFamily="@font/roboto_bold"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"/>
 
     <TextView
         android:id="@+id/question_deadline"
@@ -119,6 +94,7 @@
         android:layout_height="wrap_content"
         android:textAlignment="center"
         android:clickable="true"
+        android:focusable="true"
         android:textColor="@android:color/holo_red_light"
         android:textSize="16sp"
         android:text="@string/question_deadline"

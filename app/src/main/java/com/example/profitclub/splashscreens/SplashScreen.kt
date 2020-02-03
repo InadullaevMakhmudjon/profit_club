@@ -5,10 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.Toast
 import com.example.profitclub.R
 import com.example.profitclub.ui.AuthentificationActivity
-import com.example.profitclub.ui.OptionsActivity
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 
 /**
@@ -56,6 +54,7 @@ class SplashScreen : AppCompatActivity() {
         setContentView(R.layout.activity_splash_screen)
         //supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+
         mVisible = true
 
         // Set up the user interaction to manually show or hide the system UI.
@@ -66,7 +65,6 @@ class SplashScreen : AppCompatActivity() {
         // while interacting with the UI.
         dummy_button.setOnTouchListener(mDelayHideTouchListener)
         dummy_button.setOnClickListener {
-            Toast.makeText(applicationContext, "Clicked button", Toast.LENGTH_SHORT).show()
             startActivity(Intent(applicationContext, AuthentificationActivity::class.java))
             finish()
         }
@@ -140,4 +138,5 @@ class SplashScreen : AppCompatActivity() {
          */
         private val UI_ANIMATION_DELAY = 300
     }
+
 }

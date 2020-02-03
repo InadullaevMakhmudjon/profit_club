@@ -1,4 +1,4 @@
-package uz.abubakrr.eventme.adapters
+package com.example.profitclub.adapters
 
 import android.content.Context
 import android.content.Intent
@@ -77,7 +77,6 @@ class QuestionsAdapter(context: Context, items: List<Questions>, listener: View.
             R.id.container -> {
               //  val item = p0?.getTag() as Questions
                 val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
-                //intent.putExtra(Const.EVENT_EXTRA, item)
                 context.startActivity(intent)
             }
         }

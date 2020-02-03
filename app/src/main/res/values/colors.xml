@@ -6,6 +6,7 @@
     <color name="colorAccent2">#304C73</color>
     <color name="white">#ffff</color>
     <color name="black">#000</color>
+    <color name="star_color_yellow">#FEA813</color>
 
     <color name="black_overlay">#66000000</color>
 </resources>

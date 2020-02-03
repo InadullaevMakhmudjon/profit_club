@@ -1,6 +1,6 @@
 package com.example.profitclub
 
-import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -8,14 +8,12 @@ import androidx.navigation.findNavController
 import androidx.drawerlayout.widget.DrawerLayout
 import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.widget.Toolbar
-import android.view.Menu
-import android.view.View
+import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.example.profitclub.databinding.ActivityMainBinding
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,24 +23,63 @@ class MainActivity : AppCompatActivity() {
     //private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
+    private var role: Int = 0
 
-    //@SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        //setSupportActionBar(binding.toolbar)
+        this.role = this.intent.getIntExtra("role", 1)
+
+        val myNavHostFragment: NavHostFragment = face as NavHostFragment
+        val inflater = myNavHostFragment.navController.navInflater
         navController = Navigation.findNavController(this, R.id.face)
-        NavigationUI.setupWithNavController(binding.bottomBar, navController)
 
-        val role = this.intent.getIntExtra("role", 1)
-        if(role == 1 || role == 2){
-            bottom_bar.menu.removeItem(R.id.browse)
-        }
-        if(role == 3 || role == 4){
-            bottom_bar.menu.removeItem(R.id.questions)
-        }
+        if (role == 5){
+            val graph = inflater.inflate(R.navigation.mobile_navigation_manager)
+            myNavHostFragment.navController.graph = graph
+            binding.bottomBar.menu.clear() //clear old inflated items.
+            binding.bottomBar.inflateMenu(R.menu.bottom_nav_view_manager)
+            NavigationUI.setupWithNavController(binding.bottomBar, navController)
 
+        } else{
+            val graph = inflater.inflate(R.navigation.mobile_navigation)
+            myNavHostFragment.navController.graph = graph
+            NavigationUI.setupWithNavController(binding.bottomBar, navController)
+            //binding.bottomBarManager.isVisible = false
+
+            if(role == 1 || role == 2){
+                bottom_bar.menu.removeItem(R.id.bids)
+            }
+            if(role == 3 || role == 4){
+                bottom_bar.menu.removeItem(R.id.questions)
+            }
+        }
+    }
+    fun getMyData(): Int {
+        return role
     }
 
+    @Override
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleManager.setLocale(base))
+    }
+
+   /* override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.language_menu, menu)
+
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.language -> {
+                Toast.makeText(this, "asdsdfa", Toast.LENGTH_SHORT).show()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }*/
 }
 
         /*val fab: FloatingActionButton = findViewById(R.id.fab)
@@ -63,7 +100,6 @@ class MainActivity : AppCompatActivity() {
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)*/
-
 
    /* override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // Inflate the menu; this adds items to the action bar if it is present.
