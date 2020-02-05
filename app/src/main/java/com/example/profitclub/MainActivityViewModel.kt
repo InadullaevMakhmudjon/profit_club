@@ -36,7 +36,7 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
 
                 loading.apply { value = false }
             } catch (e: Exception) {
-                error.apply { value = e.message }
+                error.apply { value = e.toString() }
             }
         }
     }
