@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.MainActivity
@@ -34,6 +35,7 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        Toast.makeText(activity, "HELLO", Toast.LENGTH_LONG).show()
         login.setOnClickListener {
             startActivity(Intent(context, MainActivity::class.java))
             activity?.finish()

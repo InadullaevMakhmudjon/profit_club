@@ -7,7 +7,7 @@ import com.example.profitclub.R
 
 class SectionPageAdapter2(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
                 OpenQuestionsFragment()
@@ -33,7 +33,7 @@ class SectionPageAdapter2(fm: FragmentManager) : FragmentPagerAdapter(fm) {
                 CompletedQuestionsFragment()
             }
 
-            else -> null
+            else -> Fragment()
         }
     }
 

@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 
 class SectionPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
                 ProfileDetailsFragment()
@@ -17,7 +17,7 @@ class SectionPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
                 ProfileReviewsFragment()
             }
 
-            else -> null
+            else -> Fragment()
         }
     }
 

@@ -76,13 +76,13 @@ class ChatsFragment : Fragment(), View.OnClickListener {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
-        return when (item!!.itemId) {
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item!!.itemId) {
             R.id.language -> {
-
-                true
+                return true
             }
             else -> super.onOptionsItemSelected(item)
         }
+        return false
     }
 }

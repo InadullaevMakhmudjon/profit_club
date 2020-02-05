@@ -8,7 +8,7 @@ import com.example.profitclub.R
 
 class SectionPageAdapter4(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
                 ChatsView1Fragment()
@@ -18,7 +18,7 @@ class SectionPageAdapter4(fm: FragmentManager) : FragmentPagerAdapter(fm) {
                 ChatsView2Fragment()
             }
 
-            else -> null
+            else -> Fragment()
         }
     }
 

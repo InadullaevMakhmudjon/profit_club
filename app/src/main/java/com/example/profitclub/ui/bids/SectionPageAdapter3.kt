@@ -9,7 +9,7 @@ import com.example.profitclub.ui.browse.BrowseFragment
 
 class SectionPageAdapter3(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
-    override fun getItem(position: Int): Fragment? {
+    override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
                 BrowseFragment()
@@ -38,7 +38,7 @@ class SectionPageAdapter3(fm: FragmentManager) : FragmentPagerAdapter(fm) {
             6 -> {
                 ClosedBidsFragment()
             }
-            else -> null
+            else -> Fragment()
         }
     }
 
