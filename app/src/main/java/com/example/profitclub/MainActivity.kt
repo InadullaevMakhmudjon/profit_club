@@ -1,7 +1,10 @@
 package com.example.profitclub
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
 import androidx.navigation.findNavController
@@ -10,6 +13,8 @@ import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
@@ -20,14 +25,42 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private lateinit var mainViewModel: MainActivityViewModel
+    private lateinit var preferences: SharedPreferences
+    private val APP_PREFERENCE = "MYSETTINGS"
+
     //private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
     private var role: Int = 0
 
+    @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        mainViewModel = ViewModelProviders.of(this, MainActivityViewModelFactory(preferences)).get(MainActivityViewModel::class.java)
+
+        mainViewModel.token.observe(this, Observer {token ->
+            // TODO Logic here whether token is exist or no
+            if(token != null) {
+                Toast.makeText(this, token, Toast.LENGTH_LONG)
+            } else {
+                Toast.makeText(this, "TOken is not exist", Toast.LENGTH_LONG)
+            }
+        })
+
+        // Error Observer
+        mainViewModel.error.observe(this, Observer {error ->
+            if(error.isNotEmpty()) {
+                Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+            }
+        })
+        mainViewModel.loading.observe(this, Observer { isLoading ->
+            // TODO Logic for loading progress
+        })
+
+
         //setSupportActionBar(binding.toolbar)
         this.role = this.intent.getIntExtra("role", 1)
 
