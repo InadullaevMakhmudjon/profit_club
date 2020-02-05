@@ -12,7 +12,7 @@ class AuthRepository(private val retrofit: AuthService, private val preference: 
         get() = token != null
 
     // Login user method
-    suspend fun login(username: String, password: String) = retrofit.getToken(PostAuthBody(username, password))
+    suspend fun login(email: String, password: String) = retrofit.getToken(PostAuthBody(email, password))
 
     // Logout user method
     fun logout() {

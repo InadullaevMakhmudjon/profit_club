@@ -2,6 +2,7 @@ package com.example.profitclub
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
@@ -21,6 +22,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.example.profitclub.databinding.ActivityMainBinding
+import com.example.profitclub.splashscreens.SplashScreen
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -47,6 +49,8 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, token, Toast.LENGTH_LONG)
             } else {
                 Toast.makeText(this, "TOken is not exist", Toast.LENGTH_LONG)
+                startActivity(Intent(this, SplashScreen::class.java))
+                this.finish()
             }
         })
 
@@ -56,10 +60,6 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, error, Toast.LENGTH_LONG).show()
             }
         })
-        mainViewModel.loading.observe(this, Observer { isLoading ->
-            // TODO Logic for loading progress
-        })
-
 
         //setSupportActionBar(binding.toolbar)
         this.role = this.intent.getIntExtra("role", 1)

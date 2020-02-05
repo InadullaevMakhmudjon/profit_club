@@ -1,6 +1,6 @@
 package com.example.profitclub.data.auth
 
 data class PostAuthBody(
-    val username: String,
+    val email: String,
     val password: String
 )

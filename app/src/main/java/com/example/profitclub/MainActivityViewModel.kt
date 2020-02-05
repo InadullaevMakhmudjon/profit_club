@@ -23,16 +23,16 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
         value = ""
     }
 
-    val login = fun(username: String, password: String) {
+    val login = fun(email: String, password: String) {
         viewModelScope.launch {
             try {
                 loading.apply { value = true }
 
-                val response = repository.login(username, password)
-
-                token.apply { value = response.body()?.token }
+                val response = repository.login(email, password)
 
                 repository.setUserToken(response.body()?.token)
+
+                token.apply { value = response.body()?.token }
 
                 loading.apply { value = false }
             } catch (e: Exception) {
