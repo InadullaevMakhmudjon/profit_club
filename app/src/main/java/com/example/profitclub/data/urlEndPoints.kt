@@ -17,3 +17,8 @@ const val MAIL_CONFIRM = "user/mail-confirm"
 // User info
 const val USER_INFO = "user/add-info"
 
+// Question consultant view
+const val QUESTIONCONSULTANTVIEW = "main/question-consultant-view"
+
+// Cities, Regions and Categories
+const val GETALLFILTERED = "http://87.237.236.184/auto/list"
