@@ -27,6 +27,7 @@
             android:id="@+id/accountCreateAction"
             app:destination="@id/creationAccFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/toolsFragment"
         android:name="com.example.profitclub.ui.login.LoginFragment"
@@ -68,6 +69,10 @@
         <action
             android:id="@+id/action_emailCheckFragment_to_consultantLegalInfoFragment"
             app:destination="@id/consultantLegalInfoFragment" />
+        <argument
+            android:name="loginId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
     <fragment

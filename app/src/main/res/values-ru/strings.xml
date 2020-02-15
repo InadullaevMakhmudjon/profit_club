@@ -77,7 +77,7 @@
     <string name="language_title">Язык</string>
     <string name="language">Язык</string>
     <string name="jason">Джейсон</string>
-    <string name="it">IT &amp; Програмное обеспечение</string>
+    <string name="it">IT и Програмное обеспечение</string>
     <string name="invalid_username">Неверное имя пользователя</string>
     <string name="invalid_password">Пароль должен быть больше 5 символов</string>
     <string name="info_company">Информация о компании</string>
@@ -152,4 +152,10 @@
     <string name="about">Об</string>
     <string name="penalty">ШТРАФ (%)</string>
     <string name="penalty_desc">Процент ШТРАФА</string>
+    <string name="retry">повторить попытку</string>
+    <string name="connect_to_internet">Пожалуйста, подключитесь к интернету</string>
+    <string name="password_repeat">Повторить пароль</string>
+    <string name="city">Город</string>
+    <string name="country">Страна</string>
+    <string name="region">Регион</string>
 </resources>

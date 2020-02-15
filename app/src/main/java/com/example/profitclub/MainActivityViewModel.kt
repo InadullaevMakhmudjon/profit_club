@@ -4,9 +4,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.profitclub.data.auth.AuthRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainActivityViewModel(private val repository: AuthRepository): ViewModel() {
+    val role = MutableLiveData<Int?>().apply {
+        value = repository.role
+    }
+
     val token = MutableLiveData<String?>().apply {
         value = repository.token
     }
@@ -29,11 +34,11 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
                 loading.apply { value = true }
 
                 val response = repository.login(email, password)
+                val Token = response.body()
+                repository.setUserToken(Token)
 
-                repository.setUserToken(response.body()?.token)
-
-                token.apply { value = response.body()?.token }
-
+                token.apply { value = Token?.token }
+                role.apply { value = Token?.type }
                 loading.apply { value = false }
             } catch (e: Exception) {
                 error.apply { value = e.toString() }
@@ -41,5 +46,4 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
         }
     }
 
-    val logout = fun() = repository.logout()
 }

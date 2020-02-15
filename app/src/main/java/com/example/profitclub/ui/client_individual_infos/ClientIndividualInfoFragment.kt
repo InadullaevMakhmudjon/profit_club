@@ -22,22 +22,21 @@ import java.util.*
 
 class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListener  {
 
-    private lateinit var toolsViewModel: ClientIndividualInfoViewModel
+    private lateinit var viewModel: ClientIndividualInfoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        toolsViewModel =
+        viewModel =
             ViewModelProviders.of(this).get(ClientIndividualInfoViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_client_individual_infos, container, false)
         //val textView: TextView = root.findViewById(R.id.text_tools)
         /*toolsViewModel.text.observe(this, Observer {
             textView.text = it
         })*/
 
-        return root
+        return inflater.inflate(R.layout.fragment_client_individual_infos, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

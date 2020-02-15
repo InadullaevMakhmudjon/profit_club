@@ -46,9 +46,10 @@ class MainActivity : AppCompatActivity() {
         mainViewModel.token.observe(this, Observer {token ->
             // TODO Logic here whether token is exist or no
             if(token != null) {
-                Toast.makeText(this, token, Toast.LENGTH_LONG)
+                val isRoleExist = mainViewModel.role.value
+                if(isRoleExist != null) role = isRoleExist
             } else {
-                Toast.makeText(this, "TOken is not exist", Toast.LENGTH_LONG)
+                Toast.makeText(this, "Token is not exist", Toast.LENGTH_LONG)
                 startActivity(Intent(this, SplashScreen::class.java))
                 this.finish()
             }

@@ -15,6 +15,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.profitclub.MainActivity
 import com.example.profitclub.R
+import com.example.profitclub.ui.AuthentificationViewModel
 import kotlinx.android.synthetic.main.fragment_client_individual_infos.*
 import kotlinx.android.synthetic.main.fragment_client_legal_info2.*
 import kotlinx.android.synthetic.main.fragment_consultant_legal_info2.*
@@ -24,26 +25,24 @@ import java.util.*
 
 class ConsultantLegalInfo2Fragment : Fragment(){
 
-    private lateinit var toolsViewModel: ConsultantLegalInfo2ViewModel
+    private lateinit var vm: AuthentificationViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        toolsViewModel =
-            ViewModelProviders.of(this).get(ConsultantLegalInfo2ViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_consultant_legal_info2, container, false)
-        //val textView: TextView = root.findViewById(R.id.text_tools)
-        /*toolsViewModel.text.observe(this, Observer {
-            textView.text = it
-        })*/
-
-        return root
+        return inflater.inflate(R.layout.fragment_consultant_legal_info2, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val second = ""
+        val comp = ""
+        activity?.let { parent->
+            vm = ViewModelProviders.of(parent).get(AuthentificationViewModel::class.java)
+
+        }
 
         get_started_legal_cons.setOnClickListener {
             val nextAction = ConsultantLegalInfo2FragmentDirections.actionConsultantLegalInfo2FragmentToSplashScreen2()

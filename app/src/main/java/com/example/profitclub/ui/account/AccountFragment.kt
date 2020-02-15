@@ -2,8 +2,10 @@ package com.example.profitclub.ui.account
 
 import android.annotation.SuppressLint
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.text.InputType
 import android.view.LayoutInflater
@@ -17,9 +19,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.profitclub.MainActivity
-import com.example.profitclub.MyAlertDialogFragment
-import com.example.profitclub.R
+import com.example.profitclub.*
 import com.example.profitclub.ui.AuthentificationActivity
 import com.example.profitclub.ui.account.details.ProfileActivity
 import com.example.profitclub.ui.account.employees.EmployeesListActivity
@@ -28,6 +28,9 @@ import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
 import kotlinx.android.synthetic.main.fragment_account.*
 
 class AccountFragment : Fragment() {
+
+    private lateinit var preferences: SharedPreferences
+    private val APP_PREFERENCE = "MYSETTINGS"
 
     private lateinit var sendViewModel: AccountViewModel
     private lateinit var penalty: TextView
@@ -39,9 +42,9 @@ class AccountFragment : Fragment() {
     ): View? {
         val activity = activity as MainActivity?
         val myDataFromActivity = activity!!.getMyData()
-
+        preferences = context!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         sendViewModel =
-            ViewModelProviders.of(this).get(AccountViewModel::class.java)
+           ViewModelProviders.of(this, AccountViewModelFactory(preferences)).get(AccountViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_account, container, false)
         //val textView: TextView = root.findViewById(R.id.text_send)
         /*sendViewModel.text.observe(this, Observer {
@@ -94,10 +97,12 @@ class AccountFragment : Fragment() {
             // on success
             //setUserLoggedOut()
             // findNavController().popBackStack(R.id.loginFragment, false)
-            var intent: Intent = Intent(context, AuthentificationActivity::class.java)
+            /*var intent: Intent = Intent(context, AuthentificationActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
             startActivity(intent)
-            activity!!.finishAffinity()
+            activity!!.finishAffinity()*/
+            sendViewModel.logout()
+
         })
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert), DialogInterface.OnClickListener { dialog, which ->
             dialog?.dismiss()

@@ -21,9 +21,6 @@ import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_splash.*
 import kotlin.system.exitProcess
 
-
-
-
 fun log(message: String, TAG: String = "MyTagCheck") {
     Log.d(TAG, message)
 }
@@ -165,32 +162,8 @@ fun Context.setLanguage(language: String) {
     val mPrefs = this.getSharedPreferences("profitclub", Context.MODE_PRIVATE)
     mPrefs.edit().putString("lang", language).commit()
 }
-//
-//fun Context.updateBaseContextLocale(context: Context) : Context {
-//    val language = context.getLanguage() // Helper method to get saved language from SharedPreferences
-//    val locale = Locale(language)
-//    Locale.setDefault(locale)
-//
-//    return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-//        updateResourcesLocale(context, locale)
-//    } else updateResourcesLocaleLegacy(context, locale)
-//
-//}
-//
-//@TargetApi(Build.VERSION_CODES.N)
-//private fun updateResourcesLocale(context: Context, locale: Locale): Context {
-//    val configuration = context.resources.configuration
-//    configuration.setLocale(locale)
-//    return context.createConfigurationContext(configuration)
-//}
-//
-//private fun updateResourcesLocaleLegacy(context: Context, locale: Locale): Context {
-//    val resources = context.resources
-//    val configuration = resources.configuration
-//    configuration.locale = locale
-//    resources.updateConfiguration(configuration, resources.displayMetrics)
-//    return context
-//}
+
+
 /**
  * Hide the view. (visibility = View.INVISIBLE)
  */

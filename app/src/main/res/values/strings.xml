@@ -186,5 +186,11 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="penalty_desc">Percent of the PENALTY</string>
     <string name="penalty">PENALTY (%)</string>
     <string name="percentage" translatable="false">%</string>
+    <string name="connect_to_internet">Please connect to the Internet!</string>
+    <string name="retry">Retry</string>
+    <string name="password_repeat">Repeat the password</string>
+    <string name="country">Country</string>
+    <string name="region">Region</string>
+    <string name="city">City</string>
 
 </resources>

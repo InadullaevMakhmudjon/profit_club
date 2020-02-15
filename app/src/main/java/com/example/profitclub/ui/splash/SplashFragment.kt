@@ -9,13 +9,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
-import com.example.profitclub.R
-import com.example.profitclub.chooseLanguage
+import com.example.profitclub.*
 import kotlinx.android.synthetic.main.activity_splash_screen.*
 import kotlinx.android.synthetic.main.fragment_splash.*
 import kotlinx.android.synthetic.main.fragment_splash.account
 import kotlinx.android.synthetic.main.fragment_splash.fullscreen_content
 import kotlinx.android.synthetic.main.fragment_splash.fullscreen_content_controls
+import kotlinx.android.synthetic.main.no_internet_layout.*
 
 class SplashFragment : Fragment() {
 
@@ -43,12 +43,35 @@ class SplashFragment : Fragment() {
 
         chooseLanguage()
 
+        retryClick()
+
         create_button.setOnClickListener {
+            if (isNetworkAvailable())
             Navigation.findNavController(it).navigate(R.id.optionAction)
+            else {
+                frame_layout.hide()
+                layout_no_connection.show()
+            }
         }
 
         account.setOnClickListener {
+            if(isNetworkAvailable())
             Navigation.findNavController(it).navigate(R.id.loginAction)
+            else
+                frame_layout.hide()
+            layout_no_connection.show()
+        }
+    }
+
+    private fun retryClick() {
+        retry.setOnClickListener {
+            if (isNetworkAvailable()){
+                layout_no_connection.hide()
+                frame_layout.show()
+                //requestIfUserAlreadyLoggedIn()
+            }
+            else
+                toast(getString(R.string.connect_to_internet))
         }
     }
 }
