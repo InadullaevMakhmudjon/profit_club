@@ -18,5 +18,5 @@ data class QuestionConsultantData(
 
 data class QuestionConsultantView(
     val count: Int,
-    val data: QuestionConsultantData
+    val data: ArrayList<QuestionConsultantData>
 )
