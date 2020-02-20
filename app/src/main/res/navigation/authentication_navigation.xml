@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/authentication_navigation"
-    app:startDestination="@+id/share">
+    app:startDestination="@id/share">
 
     <fragment
         android:id="@+id/share"
@@ -27,6 +27,7 @@
             android:id="@+id/accountCreateAction"
             app:destination="@id/creationAccFragment" />
     </fragment>
+
     <fragment
         android:id="@+id/toolsFragment"
         android:name="com.example.profitclub.ui.login.LoginFragment"
@@ -68,6 +69,10 @@
         <action
             android:id="@+id/action_emailCheckFragment_to_consultantLegalInfoFragment"
             app:destination="@id/consultantLegalInfoFragment" />
+        <argument
+            android:name="loginId"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
     <fragment
@@ -78,6 +83,10 @@
         <action
             android:id="@+id/splashScreeen2Action"
             app:destination="@id/splash_screen2" />
+        <argument
+            android:name="login_id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
     <fragment
@@ -92,6 +101,9 @@
             android:name="RoleNum"
             app:argType="integer"
             android:defaultValue="1" />
+        <action
+            android:id="@+id/loginAction"
+            app:destination="@id/toolsFragment" />
     </fragment>
 
     <fragment

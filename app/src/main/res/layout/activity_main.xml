@@ -25,7 +25,6 @@
             android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="parent"
             app:menu="@menu/bottom_nav_view"
-            app:labelVisibilityMode="labeled"
             app:itemTextColor="@color/bottom_nav_icon_color_selector"
             app:itemIconTint="@color/bottom_nav_icon_color_selector"
             android:background="@color/white"/>

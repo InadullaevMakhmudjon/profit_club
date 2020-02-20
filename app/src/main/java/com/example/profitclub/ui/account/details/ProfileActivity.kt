@@ -27,6 +27,7 @@ class ProfileActivity : AppCompatActivity() {
     private lateinit var appBarLayout: AppBarLayout
     private lateinit var notificationManager: NotificationManagerCompat
 
+
     private var mSectionPageAdapter: SectionPageAdapter? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {

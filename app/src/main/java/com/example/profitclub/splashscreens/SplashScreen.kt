@@ -1,19 +1,11 @@
 package com.example.profitclub.splashscreens
 
 import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.view.View
-import android.widget.Toast
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import com.example.profitclub.MainActivity
-import com.example.profitclub.MainActivityViewModel
-import com.example.profitclub.MainActivityViewModelFactory
 import com.example.profitclub.R
 import com.example.profitclub.ui.AuthentificationActivity
 import kotlinx.android.synthetic.main.activity_splash_screen.*
