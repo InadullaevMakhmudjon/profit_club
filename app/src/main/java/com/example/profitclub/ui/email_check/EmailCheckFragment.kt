@@ -16,6 +16,7 @@ import androidx.navigation.Navigation
 import com.example.profitclub.R
 import com.example.profitclub.toast
 import com.example.profitclub.ui.create_account.CreationAcoountFragment
+import com.example.profitclub.ui.create_account.CreationAcoountFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_email_check.*
 
@@ -26,6 +27,7 @@ class EmailCheckFragment : Fragment() {
 
     private lateinit var preferences: SharedPreferences
     private val APP_PREFERENCE = "MYSETTINGS"
+    var loginId: Int? = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,7 +45,7 @@ class EmailCheckFragment : Fragment() {
         val confirm = view.findViewById<Button>(R.id.confirm)
         val emailConfirm = view.findViewById<AutoCompleteTextView>(R.id.confirm_email)
 
-        val timer = object: CountDownTimer(20000, 1000) {
+        val timer = object: CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                timerText.text = (millisUntilFinished/1000).toString()
             }
@@ -59,12 +61,14 @@ class EmailCheckFragment : Fragment() {
             //email_check.text = "Role number: ${safeArgs.clientRole}"
             role = safeArgs.clientRole
             emailCheck.text = safeArgs.loginId.toString()
+            loginId = safeArgs.loginId
     }
 
         activity?.let { it ->
             preferences = it.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             viewModel = ViewModelProviders.of(this, EmailCheckViewModelFactory(preferences)).get(EmailCheckViewModel::class.java)
 
+            val userInfoAction = EmailCheckFragmentDirections.clientIndividualInfoAction()
             confirm.setOnClickListener {
                 viewModel.emailVerify(emailConfirm.text.toString())
                 /*if (viewModel.status.value == true){
@@ -91,8 +95,9 @@ class EmailCheckFragment : Fragment() {
             })
 
             viewModel.status.observe(activity!!, Observer { status ->
+                loginId?.let { it1 -> userInfoAction.setLoginId(it1) }
                 when(status){
-                    true -> Navigation.findNavController(confirm).navigate(R.id.clientIndividualInfoAction)
+                    true -> Navigation.findNavController(confirm).navigate(userInfoAction)
                 }
             })
         }

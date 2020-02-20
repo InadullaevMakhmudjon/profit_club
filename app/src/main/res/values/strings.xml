@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ProfitClub</string>
+    <string name="app_name">Online Sovetnik</string>
     <string name="navigation_drawer_open" translatable="false">Open navigation drawer</string>
     <string name="navigation_drawer_close" translatable="false">Close navigation drawer</string>
     <string name="nav_header_title" translatable="false">Android Studio</string>
@@ -152,7 +152,7 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="completed_alert_message">The consultant have completed your work!</string>
     <string name="language_title">language</string>
     <string name="bids">Bids</string>
-    <string name="forgot">I Forgot my password</string>
+    <string name="forgot">I forgot my password</string>
     <string name="manager">Manager</string>
     <string name="bid_title">Bid details</string>
     <string name="approved">Approve</string>
@@ -192,5 +192,6 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="country">Country</string>
     <string name="region">Region</string>
     <string name="city">City</string>
+    <string name="uzbekistan">Uzbekistan</string>
 
 </resources>

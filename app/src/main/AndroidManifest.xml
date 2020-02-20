@@ -10,13 +10,14 @@
         android:name=".App"
         android:usesCleartextTraffic="true"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/sovetnik"
         android:label="@string/app_name"
         android:windowSoftInputMode="adjustResize"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/sovetnik_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.bids.BidDetailActivity"></activity>
+        <activity android:name=".ui.bids.BidDetailActivity">
+        </activity>
         <activity android:name=".ui.chats.ChatViewActivity" />
         <activity android:name=".ui.account.employees.EmployeesListActivity" />
         <activity android:name=".ui.account.details.ProfileActivity" />

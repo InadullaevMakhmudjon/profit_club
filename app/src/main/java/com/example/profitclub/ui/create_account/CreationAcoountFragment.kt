@@ -7,10 +7,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.Toast
+import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -48,6 +45,28 @@ class CreationAcoountFragment : Fragment() {
         val password = view.findViewById<AutoCompleteTextView>(R.id.password)
         val passwordRepeat = view.findViewById<AutoCompleteTextView>(R.id.password_repeat)
         val create = view.findViewById<Button>(R.id.create)
+        val individual = view.findViewById<CheckBox>(R.id.individual)
+        val individualText = view.findViewById<TextView>(R.id.individual_text)
+        val legalEntity = view.findViewById<CheckBox>(R.id.legal_entity)
+        val legalEntityText = view.findViewById<TextView>(R.id.legal_entity_text)
+
+        individual.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                individualText.setTextColor(resources.getColor(android.R.color.black))
+                legalEntity.isChecked = false
+                // Code to display your message.
+            } else
+                individualText.setTextColor(resources.getColor(android.R.color.darker_gray))
+        }
+
+        legalEntity.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                individualText.setTextColor(resources.getColor(android.R.color.black))
+                individual.isChecked = false
+                // Code to display your message.
+            } else
+                legalEntityText.setTextColor(resources.getColor(android.R.color.darker_gray))
+        }
 
         arguments?.let {
             val safeArgs = CreationAcoountFragmentArgs.fromBundle(it)
@@ -109,7 +128,7 @@ class CreationAcoountFragment : Fragment() {
         }
     }
 
-    private fun onCheckboxClicked(v: View){
+/*    private fun onCheckboxClicked(v: View){
         val checkBox: CheckBox = v.findViewById(R.id.individual) as CheckBox
         val checkBox2: CheckBox = v.findViewById(R.id.legal_entity) as CheckBox
         when(v.id){
@@ -127,5 +146,5 @@ class CreationAcoountFragment : Fragment() {
                 checkBox.isEnabled = true
             }
         }
-    }
+    }*/
 }

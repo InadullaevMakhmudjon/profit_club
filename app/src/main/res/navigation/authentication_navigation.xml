@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/authentication_navigation"
-    app:startDestination="@+id/share">
+    app:startDestination="@id/share">
 
     <fragment
         android:id="@+id/share"
@@ -83,6 +83,10 @@
         <action
             android:id="@+id/splashScreeen2Action"
             app:destination="@id/splash_screen2" />
+        <argument
+            android:name="login_id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 
     <fragment
@@ -97,6 +101,9 @@
             android:name="RoleNum"
             app:argType="integer"
             android:defaultValue="1" />
+        <action
+            android:id="@+id/loginAction"
+            app:destination="@id/toolsFragment" />
     </fragment>
 
     <fragment

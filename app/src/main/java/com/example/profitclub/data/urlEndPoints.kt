@@ -21,4 +21,4 @@ const val USER_INFO = "user/add-info"
 const val QUESTIONCONSULTANTVIEW = "main/question-consultant-view"
 
 // Cities, Regions and Categories
-const val GETALLFILTERED = "http://87.237.236.184/auto/list"
+const val GETALLFILTERED = "auto/list"

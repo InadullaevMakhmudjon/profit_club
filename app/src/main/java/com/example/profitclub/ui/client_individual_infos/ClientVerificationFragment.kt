@@ -16,15 +16,15 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 class ClientVerificationFragment : Fragment() {
     private var role = 1
-    private lateinit var toolsViewModel: ClientIndividualInfoViewModel
+    //private lateinit var toolsViewModel: ClientIndividualInfoViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        toolsViewModel =
-            ViewModelProviders.of(this).get(ClientIndividualInfoViewModel::class.java)
+      //  toolsViewModel =
+         //   ViewModelProviders.of(this).get(ClientIndividualInfoViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_client_verification, container, false)
         //val textView: TextView = root.findViewById(R.id.text_tools)
         /*toolsViewModel.text.observe(this, Observer {

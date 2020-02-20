@@ -52,8 +52,8 @@ class SplashScreen2Fragment : Fragment() {
             }
 
             else{
-                val nextAction = SplashScreen2FragmentDirections.clientIndividualVerificationAction()
-                nextAction.setRoleNum(role)
+                val nextAction = SplashScreen2FragmentDirections.loginAction()
+                //nextAction.setRoleNum(role)
                 Navigation.findNavController(it).navigate(nextAction)
             }
 

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ProfitClub</string>
+    <string name="app_name">Online Sovetnik</string>
     <string name="your_info">Информация о вас</string>
     <string name="yes">Да</string>
     <string name="withdraw">Вывести</string>
@@ -13,7 +13,7 @@
     <string name="user_patronymic">Отчество</string>
     <string name="user_name">Имя</string>
     <string name="user_address">Адрес</string>
-    <string name="transaction">Транзакции</string>
+    <string name="transaction">Транзакция</string>
     <string name="total">Всего предложений</string>
     <string name="top_up">Пополнить</string>
     <string name="title_activity_login">Войти в систему</string>
@@ -59,7 +59,7 @@
     <string name="name_of_legal">Наименование юридического лица</string>
     <string name="name">Имя</string>
     <string name="My_Questions">Вопросы</string>
-    <string name="My_Messages">Сообщении</string>
+    <string name="My_Messages">Сообщения</string>
     <string name="menu_questions">Вопросы</string>
     <string name="menu_chat">Переписки</string>
     <string name="manager">Менеджер</string>
@@ -158,4 +158,5 @@
     <string name="city">Город</string>
     <string name="country">Страна</string>
     <string name="region">Регион</string>
+    <string name="uzbekistan">Узбекистан</string>
 </resources>
