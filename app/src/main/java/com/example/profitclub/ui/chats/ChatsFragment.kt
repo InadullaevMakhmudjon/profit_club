@@ -1,8 +1,8 @@
 package com.example.profitclub.ui.chats
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -13,15 +13,14 @@ import com.example.profitclub.R
 import com.example.profitclub.adapters.ChatListAdapter
 import com.example.profitclub.databinding.FragmentChatsBinding
 import com.example.profitclub.model.ChatQuestion
-import com.example.profitclub.ui.questions.SectionPageAdapter2
-import kotlinx.android.synthetic.main.fragment_chats.*
+import com.example.profitclub.toast
 import kotlinx.android.synthetic.main.fragment_questions.*
-import kotlinx.android.synthetic.main.fragment_questions.toolbar
 
 class ChatsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var homeViewModel: ChatsViewModel
     private lateinit var binding: FragmentChatsBinding
+    private val APP_PREFERENCE = "MYSETTINGS"
 
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: ChatListAdapter? = null
@@ -50,19 +49,33 @@ class ChatsFragment : Fragment(), View.OnClickListener {
             activity?.customActionBarTitle("chats")
         }
 
-        homeViewModel =
-            ViewModelProviders.of(this).get(ChatsViewModel::class.java)
-        binding = FragmentChatsBinding.inflate(layoutInflater)
+        activity?.let {activity ->
+            val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 
-        adapter = ChatListAdapter(this.context!!, list, this)
-        layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
-        binding.chatList.layoutManager = layoutManager
-        binding.chatList.adapter = adapter
-        adapter!!.notifyDataSetChanged()
+            homeViewModel =
+                ViewModelProviders.of(this, ChatsViewModelFactory(preferences)).get(ChatsViewModel::class.java)
+            binding = FragmentChatsBinding.inflate(layoutInflater)
 
-        homeViewModel.text.observe(this, Observer {
-            binding.textHome.text = it
-        })
+            adapter = ChatListAdapter(this.context!!, list, this)
+            layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
+            binding.chatList.layoutManager = layoutManager
+            binding.chatList.adapter = adapter
+            adapter!!.notifyDataSetChanged()
+
+            homeViewModel.text.observe(viewLifecycleOwner, Observer {
+                binding.textHome.text = it
+            })
+
+            homeViewModel.data.observe(viewLifecycleOwner, Observer { data ->
+                if(data != null) {
+                    toast("come data")
+                }
+            })
+
+            homeViewModel.error.observe(viewLifecycleOwner, Observer { message ->
+                toast("Error: $message")
+            })
+        }
 
         return binding.root
     }

@@ -7,5 +7,5 @@ import retrofit2.http.Header
 
 interface QuestionService {
     @GET(QUESTIONCONSULTANTVIEW)
-    fun getQuestionConsultantView(@Header("authorization") auth: String?): Response<QuestionConsultantView>
+    suspend fun getQuestionConsultantView(@Header("authorization") auth: String?): Response<QuestionConsultantView>
 }
