@@ -7,11 +7,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.profitclub.R
 import com.example.profitclub.databinding.ActivityChatViewBinding
+import com.example.profitclub.ui.chats.adapters.SectionPageAdapter4
 import kotlinx.android.synthetic.main.activity_chat_view.*
 import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
 
@@ -38,7 +38,10 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         /*val activity = callingActivity as MainActivity?
         val role = activity!!.getMyData()
 */
-        mSectionPageAdapter = SectionPageAdapter4(supportFragmentManager)
+        mSectionPageAdapter =
+            SectionPageAdapter4(
+                supportFragmentManager
+            )
         binding.viewPager.adapter = mSectionPageAdapter
         binding.pagerHeader.setupWithViewPager(binding.viewPager)
         role =  this.intent.getIntExtra("role",1)

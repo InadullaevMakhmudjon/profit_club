@@ -67,5 +67,6 @@ class AuthRepository(private val retrofit: AuthService, private val preference: 
     // Initial token value
     init {
         token = preference.getString("token", null)
+        role = preference.getInt("role", 0)
     }
 }
