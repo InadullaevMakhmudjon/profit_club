@@ -5,6 +5,10 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.AttributeSet
+import android.view.LayoutInflater
+import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.snackbar.Snackbar
@@ -23,13 +27,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.*
 import com.example.profitclub.databinding.ActivityMainBinding
 import com.example.profitclub.splashscreens.SplashScreen
+import com.example.profitclub.ui.AuthentificationActivity
+import kotlinx.android.synthetic.main.activity_chat_view.*
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main.toolbar
+import kotlinx.android.synthetic.main.fragment_splash.*
+import kotlinx.android.synthetic.main.main_custom_bar.*
+import kotlinx.android.synthetic.main.main_custom_bar.view.*
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var mainViewModel: MainActivityViewModel
     private lateinit var preferences: SharedPreferences
     private val APP_PREFERENCE = "MYSETTINGS"
+    private lateinit var titleView: TextView
 
     //private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -40,6 +51,21 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+
+        setSupportActionBar(toolbar)
+        val actionBar = this.supportActionBar
+
+        actionBar?.setDisplayShowCustomEnabled(true)
+
+        val mLayoutInflater: LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+        val actionBarView: View = mLayoutInflater.inflate(R.layout.main_custom_bar, null)
+
+        actionBar?.customView = actionBarView
+        titleView = actionBar?.customView?.findViewById<TextView>(R.id.title)!!
+        customActionBarTitle(titleView.text.toString())
+
+        //chooseLanguage()
+
         preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         mainViewModel = ViewModelProviders.of(this, MainActivityViewModelFactory(preferences)).get(MainActivityViewModel::class.java)
 
@@ -50,7 +76,7 @@ class MainActivity : AppCompatActivity() {
                 if(isRoleExist != null) role = isRoleExist
             } else {
                 Toast.makeText(this, "Token is not exist", Toast.LENGTH_LONG)
-                startActivity(Intent(this, SplashScreen::class.java))
+                startActivity(Intent(this, AuthentificationActivity::class.java))
                 this.finish()
             }
         })
@@ -90,13 +116,24 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
     fun getMyData(): Int {
         return role
+    }
+
+    override fun onResume() {
+        val icon = getLanguageDrawable(this.getLanguage())
+        choose_main_language.setImageDrawable(icon)
+        super.onResume()
     }
 
     @Override
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(LocaleManager.setLocale(base))
+    }
+
+    fun customActionBarTitle(title: String){
+        titleView.text = title
     }
 
    /* override fun onCreateOptionsMenu(menu: Menu?): Boolean {

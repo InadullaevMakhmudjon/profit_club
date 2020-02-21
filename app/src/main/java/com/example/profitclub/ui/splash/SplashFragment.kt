@@ -74,4 +74,10 @@ class SplashFragment : Fragment() {
                 toast(getString(R.string.connect_to_internet))
         }
     }
+
+    override fun onResume() {
+        val icon = getLanguageDrawable(context?.getLanguage()!!)
+        choose_language.setImageDrawable(icon)
+        super.onResume()
+    }
 }

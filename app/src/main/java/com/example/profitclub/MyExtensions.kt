@@ -19,6 +19,7 @@ import androidx.fragment.app.FragmentActivity
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_splash.*
+import kotlinx.android.synthetic.main.main_custom_bar.*
 import kotlin.system.exitProcess
 
 fun log(message: String, TAG: String = "MyTagCheck") {
@@ -123,6 +124,35 @@ fun Fragment.chooseLanguage() {
 
 }
 
+fun Activity.chooseLanguage() {
+    val mBottomSheetDialog = BottomSheetDialog(applicationContext!!)
+
+    val sheetView = layoutInflater.inflate(R.layout.bottom_sheet, null)
+    mBottomSheetDialog.setContentView(sheetView)
+
+    choose_main_language.setOnClickListener(View.OnClickListener { mBottomSheetDialog.show() })
+
+    val english = sheetView.findViewById<RelativeLayout>(R.id.rl_english)
+    val uzbek = sheetView.findViewById<RelativeLayout>(R.id.rl_uzbek)
+    val russian = sheetView.findViewById<RelativeLayout>(R.id.rl_russian)
+
+    english.setOnClickListener(View.OnClickListener {
+        mBottomSheetDialog.hide()
+        setNewLocaleActivity(LANGUAGE_ENGLISH, true, applicationContext)
+    })
+
+    uzbek.setOnClickListener(View.OnClickListener {
+        mBottomSheetDialog.hide()
+        setNewLocaleActivity(LANGUAGE_UZBEK, true, applicationContext)
+    })
+
+    russian.setOnClickListener(View.OnClickListener {
+        mBottomSheetDialog.hide()
+        setNewLocaleActivity(LANGUAGE_RUSSIAN, true, applicationContext)
+    })
+
+}
+
 fun Fragment.getLanguageDrawable(language: String): Drawable? {
     return when (language) {
         LANGUAGE_ENGLISH -> ContextCompat.getDrawable(activity!!,
@@ -141,7 +171,37 @@ fun Fragment.getLanguageDrawable(language: String): Drawable? {
     }
 }
 
+fun Activity.getLanguageDrawable(language: String): Drawable? {
+    return when (language) {
+        LANGUAGE_ENGLISH -> ContextCompat.getDrawable(applicationContext!!,
+            R.drawable.ic_united_kingdom
+        )
+        LANGUAGE_UZBEK -> ContextCompat.getDrawable(applicationContext!!,
+            R.drawable.ic_uzbekistan
+        )
+        LANGUAGE_RUSSIAN -> ContextCompat.getDrawable(applicationContext!!,
+            R.drawable.ic_russia
+        )
+        else -> {
+            log("Unsupported language")
+            null
+        }
+    }
+}
+
 private fun setNewLocale(language: String, restartProcess: Boolean, activity: FragmentActivity): Boolean {
+//    LocaleHelper.setLocale(activity.applicationContext, language)
+    LocaleManager.setNewLocale(activity, language)
+    activity.setLanguage(language)
+    val i = Intent(activity, MainActivity::class.java)
+    activity.startActivity(i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NEW_TASK))
+
+    exitProcess(0)
+
+    return true
+}
+
+private fun setNewLocaleActivity(language: String, restartProcess: Boolean, activity: Context): Boolean {
 //    LocaleHelper.setLocale(activity.applicationContext, language)
     LocaleManager.setNewLocale(activity, language)
     activity.setLanguage(language)

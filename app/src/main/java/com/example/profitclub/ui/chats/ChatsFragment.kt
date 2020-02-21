@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.adapters.ChatListAdapter
 import com.example.profitclub.databinding.FragmentChatsBinding
@@ -44,6 +45,10 @@ class ChatsFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        val activity = activity as MainActivity?
+        activity.let {
+            activity?.customActionBarTitle("chats")
+        }
 
         homeViewModel =
             ViewModelProviders.of(this).get(ChatsViewModel::class.java)
