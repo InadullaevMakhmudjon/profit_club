@@ -1,7 +1,5 @@
 package com.example.profitclub.data.registration
 
-import java.sql.Timestamp
-
 data class SetRegionId(
     val region_id: Int
 )
