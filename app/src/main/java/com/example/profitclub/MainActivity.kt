@@ -45,7 +45,6 @@ class MainActivity : AppCompatActivity() {
     //private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
-    private var role: Int = 0
 
     @SuppressLint("ShowToast")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,11 +69,7 @@ class MainActivity : AppCompatActivity() {
         mainViewModel = ViewModelProviders.of(this, MainActivityViewModelFactory(preferences)).get(MainActivityViewModel::class.java)
 
         mainViewModel.token.observe(this, Observer {token ->
-            // TODO Logic here whether token is exist or no
-            if(token != null) {
-                val isRoleExist = mainViewModel.role.value
-                if(isRoleExist != null) role = isRoleExist
-            } else {
+            if(token == null) {
                 Toast.makeText(this, "Token is not exist", Toast.LENGTH_LONG)
                 startActivity(Intent(this, AuthentificationActivity::class.java))
                 this.finish()
@@ -89,36 +84,40 @@ class MainActivity : AppCompatActivity() {
         })
 
         //setSupportActionBar(binding.toolbar)
-        this.role = this.intent.getIntExtra("role", 1)
+        // this.role = this.intent.getIntExtra("role", 1)
 
         val myNavHostFragment: NavHostFragment = face as NavHostFragment
         val inflater = myNavHostFragment.navController.navInflater
         navController = Navigation.findNavController(this, R.id.face)
 
-        if (role == 5){
-            val graph = inflater.inflate(R.navigation.mobile_navigation_manager)
-            myNavHostFragment.navController.graph = graph
-            binding.bottomBar.menu.clear() //clear old inflated items.
-            binding.bottomBar.inflateMenu(R.menu.bottom_nav_view_manager)
-            NavigationUI.setupWithNavController(binding.bottomBar, navController)
+        mainViewModel.role.observe(this, Observer { role ->
+            if(role != null) {
+                if (role == 6){
+                    val graph = inflater.inflate(R.navigation.mobile_navigation_manager)
+                    myNavHostFragment.navController.graph = graph
+                    binding.bottomBar.menu.clear() //clear old inflated items.
+                    binding.bottomBar.inflateMenu(R.menu.bottom_nav_view_manager)
+                    NavigationUI.setupWithNavController(binding.bottomBar, navController)
 
-        } else{
-            val graph = inflater.inflate(R.navigation.mobile_navigation)
-            myNavHostFragment.navController.graph = graph
-            NavigationUI.setupWithNavController(binding.bottomBar, navController)
-            //binding.bottomBarManager.isVisible = false
+                } else{
+                    val graph = inflater.inflate(R.navigation.mobile_navigation)
+                    myNavHostFragment.navController.graph = graph
+                    NavigationUI.setupWithNavController(binding.bottomBar, navController)
+                    //binding.bottomBarManager.isVisible = false
 
-            if(role == 1 || role == 2){
-                bottom_bar.menu.removeItem(R.id.bids)
+                    if(role == 5 || role == 7){
+                        bottom_bar.menu.removeItem(R.id.bids)
+                    }
+                    if(role == 2 || role == 4){
+                        bottom_bar.menu.removeItem(R.id.questions)
+                    }
+                }
             }
-            if(role == 3 || role == 4){
-                bottom_bar.menu.removeItem(R.id.questions)
-            }
-        }
+        })
     }
 
-    fun getMyData(): Int {
-        return role
+    fun getMyData(): Int? {
+        return mainViewModel.role.value
     }
 
     override fun onResume() {

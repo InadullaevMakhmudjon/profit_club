@@ -102,6 +102,8 @@ class AccountFragment : Fragment() {
             startActivity(intent)
             activity!!.finishAffinity()*/
             sendViewModel.logout()
+            startActivity(Intent(context!!, AuthentificationActivity::class.java))
+            activity?.finish()
 
         })
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert), DialogInterface.OnClickListener { dialog, which ->
