@@ -1,6 +1,5 @@
 package com.example.profitclub.data.questions
 
-
 import RequestQuestionConsultantClose
 import RequestQuestionConsultantEnd
 import RequestQuestionConsultantPreview
@@ -24,7 +23,7 @@ interface QuestionService {
     suspend fun postQuestionConsultantEnd(@Header("authorization") auth: String?, @Body body: RequestQuestionConsultantEnd): Response<ResponseQuestionConsultantEnd>
 
     @POST(QUESTION_CONSULTANT_CLOSE)
-    suspend fun postQuestionConsultantClose(@Header("authorization") auth: String?, @Body body: RequestQuestionConsultantClose): Response<ArrayList<ResponseQuestionConsultantClose>>
+    suspend fun postQuestionConsultantClose(@Header("authorization") auth: String?, @Body body: RequestQuestionConsultantClose): Response<ResponseQuestionConsultantClose>
 
     // Client
     @GET(QUESTION_CLIENT_VIEW)

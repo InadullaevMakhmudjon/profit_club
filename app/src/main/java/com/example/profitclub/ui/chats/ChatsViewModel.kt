@@ -3,6 +3,7 @@ package com.example.profitclub.ui.chats
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.profitclub.data.questions.QuestionConsultantData
 import com.example.profitclub.data.questions.QuestionConsultantView
 import com.example.profitclub.data.bids.BidsRepository
 import kotlinx.coroutines.launch

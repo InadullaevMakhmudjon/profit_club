@@ -41,6 +41,10 @@ class AccountFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val activity = activity as MainActivity?
+        activity.let {
+            activity?.customActionBarTitle(getString(R.string.Account))
+        }
+
         val myDataFromActivity = activity!!.getMyData()
         preferences = context!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         sendViewModel =
@@ -90,6 +94,7 @@ class AccountFragment : Fragment() {
 
         return root
     }
+
     private fun alertDialog(){
         val alertDialogBuilder = AlertDialog.Builder(context!!)
         alertDialogBuilder.setMessage(getString(R.string.log_out_desc))
@@ -102,6 +107,8 @@ class AccountFragment : Fragment() {
             startActivity(intent)
             activity!!.finishAffinity()*/
             sendViewModel.logout()
+            startActivity(Intent(context!!, AuthentificationActivity::class.java))
+            activity?.finish()
 
         })
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert), DialogInterface.OnClickListener { dialog, which ->

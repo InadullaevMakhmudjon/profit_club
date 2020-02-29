@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
         titleView = actionBar?.customView?.findViewById<TextView>(R.id.title)!!
         customActionBarTitle(titleView.text.toString())
 
-        //chooseLanguage()
+        chooseLanguage()
 
         preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         mainViewModel = ViewModelProviders.of(this, MainActivityViewModelFactory(preferences)).get(MainActivityViewModel::class.java)
@@ -92,7 +92,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.role.observe(this, Observer { role ->
             if(role != null) {
-                if (role == 5){
+                if (role == 6){
                     val graph = inflater.inflate(R.navigation.mobile_navigation_manager)
                     myNavHostFragment.navController.graph = graph
                     binding.bottomBar.menu.clear() //clear old inflated items.
