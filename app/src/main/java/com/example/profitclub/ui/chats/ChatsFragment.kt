@@ -55,6 +55,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 ViewModelProviders.of(this, ChatsViewModelFactory(preferences)).get(ChatsViewModel::class.java)
             binding = FragmentChatsBinding.inflate(layoutInflater)
 
+
             if (activityMain?.getMyData() == 2 || activityMain?.getMyData() == 4){
                 adapter = ChatListAdapter(this.context!!, null, this)
                 layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)

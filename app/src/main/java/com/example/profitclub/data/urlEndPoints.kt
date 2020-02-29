@@ -20,7 +20,7 @@ const val USER_INFO = "user/add-info"
 // Cities, Regions and Categories
 const val GET_ALL_FILTERED = "auto/list"
 
-// Question consultant view
+// Question for consultant
 const val QUESTION_CONSULTANT_VIEW = "main/question-consultant-view"
 
 const val QUESTION_CONSULTANT_PREVIEW = "main/question-consultant-preview"
@@ -28,3 +28,13 @@ const val QUESTION_CONSULTANT_PREVIEW = "main/question-consultant-preview"
 const val QUESTION_CONSULTANT_END = "main/question-consultant-end"
 
 const val QUESTION_CONSULTANT_CLOSE = "main/question-consultant-close"
+
+// Question for client
+const val QUESTION_CLIENT_VIEW = "main/question-client-view"
+
+const val QUESTION_CLIENT_PREVIEW = "main/question-client-preview"
+
+const val QUESTION_CLIENT_END = "main/question-client-end"
+
+const val QUESTION_CLIENT_CLOSE = "main/question-client-close"
+
