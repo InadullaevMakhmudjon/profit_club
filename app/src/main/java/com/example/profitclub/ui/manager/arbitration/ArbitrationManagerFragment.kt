@@ -2,7 +2,6 @@ package com.example.profitclub.ui.manager.arbitration
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -11,7 +10,6 @@ import com.example.profitclub.R
 import com.example.profitclub.adapters.ArbitrationManagerListAdapter
 import com.example.profitclub.databinding.FragmentManagerArbitrationBinding
 import com.example.profitclub.model.Chat_M
-import kotlinx.android.synthetic.main.fragment_questions.toolbar
 
 class ArbitrationManagerFragment : Fragment(), View.OnClickListener {
 
@@ -39,7 +37,7 @@ class ArbitrationManagerFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         homeViewModel =
             ViewModelProviders.of(this).get(ArbitrationManagerViewModel::class.java)

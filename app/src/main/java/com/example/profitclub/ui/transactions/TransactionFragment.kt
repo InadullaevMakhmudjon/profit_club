@@ -21,6 +21,7 @@ import android.content.Intent
 import android.content.ActivityNotFoundException
 import android.content.Context
 import androidx.core.content.ContextCompat.startActivity
+import com.example.profitclub.R
 
 class TransactionFragment : Fragment(), View.OnClickListener {
 
@@ -49,11 +50,16 @@ class TransactionFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
+        val activity = activity as MainActivity?
+        activity.let {
+            activity?.customActionBarTitle(getString(R.string.transaction))
+        }
+
         homeViewModel =
             ViewModelProviders.of(this).get(TransactionViewModel::class.java)
         binding = FragmentTransactionBinding.inflate(layoutInflater)
 
-        val activity = activity as MainActivity?
         val myDataFromActivity = activity!!.getMyData()
 
         if(myDataFromActivity == 3 || myDataFromActivity == 4){

@@ -9,29 +9,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ui.questions.BidsFragment">
-
-
-
-            <com.google.android.material.appbar.AppBarLayout
-                android:id="@+id/appBarLayout"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:id="@+id/toolbar"
-                    android:layout_width="match_parent"
-                    android:layout_height="?attr/actionBarSize"
-                    app:title="@string/bids"
-                    android:textAlignment="center"
-                    app:layout_scrollFlags="scroll|enterAlways|snap"
-                    app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
-
-            </com.google.android.material.appbar.AppBarLayout>
+    tools:context=".ui.bids.BidsFragment">
 
             <androidx.core.widget.NestedScrollView
                 android:layout_width="match_parent"

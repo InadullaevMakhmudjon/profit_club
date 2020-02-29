@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import kotlinx.android.synthetic.main.fragment_questions.*
 import com.example.profitclub.adapters.QuestionsAdapter
@@ -24,9 +25,13 @@ class BidsFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
        // (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val activity = activity as MainActivity?
+        activity.let {
+            activity?.customActionBarTitle(getString(R.string.bids))
+        }
         galleryViewModel =
             ViewModelProviders.of(this).get(BidsViewModel::class.java)
        // val root = inflater.inflate(R.layout.fragment_questions, container, false)

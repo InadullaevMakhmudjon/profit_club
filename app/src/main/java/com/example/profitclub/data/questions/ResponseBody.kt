@@ -1,5 +1,7 @@
 package com.example.profitclub.data.questions
 
+import java.io.Serializable
+
 data class QuestionConsultantData(
     val question_id: Int,
     val client_id: Int,
@@ -17,7 +19,7 @@ data class QuestionConsultantData(
     val answer_end_date: String,
     val status: Int,
     val createdate: String
-)
+) : Serializable
 
 data class QuestionConsultantView(
     val count: Int,
