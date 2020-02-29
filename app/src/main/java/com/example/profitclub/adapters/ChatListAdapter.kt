@@ -1,37 +1,23 @@
 package com.example.profitclub.adapters
 
-
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
+import com.example.profitclub.data.questions.QuestionConsultantData
+import com.example.profitclub.data.questions.QuestionConsultantView
 import com.example.profitclub.databinding.ChatItemBinding
-import com.example.profitclub.model.ChatQuestion
+import com.example.profitclub.ui.bids.BidDetailActivity
 import com.example.profitclub.ui.chats.ChatViewActivity
 
-
-class ChatListAdapter(context: Context, items: List<ChatQuestion>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
-    private val inflater: LayoutInflater
-    private val TYPE_FEED = 1
-    private lateinit var context: Context
-    private var items: List<ChatQuestion> = ArrayList()
-    private lateinit var listener: View.OnClickListener
-
-    init {
-        this.context = context
-        this.items =  items
-        this.listener = listener
-        this.inflater = LayoutInflater.from(context)
-    }
-
-
-    override fun getItemViewType(position: Int): Int {
-        return TYPE_FEED
-    }
+class ChatListAdapter(private val context: Context, private val items: ArrayList<QuestionConsultantData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
 //        if (viewType == TYPE_FEED) {
@@ -43,32 +29,38 @@ class ChatListAdapter(context: Context, items: List<ChatQuestion>, listener: Vie
     }
     
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = items[position]
+        val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.chatQuestion = item
-            binding!!.questionText.text = item.description
-            binding!!.questionId.text = item.questionId
 
-            when {
+         /*   when {
                 item.status == "Open" -> binding.status.setBackgroundResource(R.drawable.bc_status_open)
                 item.status == "Rejected" -> binding.status.setBackgroundResource(R.drawable.bc_status_rejected)
                 item.status == "Arbitration" -> binding.status.setBackgroundResource(R.drawable.bc_status_in_arbitration)
                 item.status == "Progress" -> binding.status.setBackgroundResource(R.drawable.bc_status_in_progress)
-            }
+            }*/
 
             /* Picasso.get()
                      .load(item.phost_photo)
                      .into(binding.imageActual)*/
-
-            binding?.container.tag = item
-            binding?.container.setOnClickListener(this)
+            binding.questionId.text = item?.question_id.toString()
+            binding.status.text = item?.status.toString()
+            binding.container.tag = item
+            binding.container.setOnClickListener(this)
 
         }
     }
 
-    override fun getItemCount(): Int {
-        return items.size
+    /*private val <T> MutableLiveData<T>.size: Int
+        get() {
+            observe(lifecycleowner: LifecycleOwner, Observer { data ->
+
+            })
+        }*/
+
+    override fun getItemCount(): Int{
+        return items?.size ?: 0
     }
 
     private inner class EventFeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -85,8 +77,10 @@ class ChatListAdapter(context: Context, items: List<ChatQuestion>, listener: Vie
               //  val item = p0?.getTag() as Questions
                // val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
                 //intent.putExtra(Const.EVENT_EXTRA, item)
-               context.startActivity(Intent(context, ChatViewActivity::class.java))
+               context.startActivity(Intent(context, BidDetailActivity::class.java))
             }
         }
     }
 }
+
+private operator fun <T> MutableLiveData<T>.get(position: Int): QuestionConsultantData = get(position)

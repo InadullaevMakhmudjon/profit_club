@@ -65,7 +65,7 @@
     <string name="question_deadline">TAP HERE to select a deadline</string>
     <string name="condition_of_work">Condition of work</string>
     <string name="language">Language</string>
-    <string name="price">Price</string>
+    <string name="price">Price:</string>
     <string name="category_">Category</string>
     <string name="become_a_bid">Become a bid</string>
     <string name="brief">Brief info of the consulting strategy</string>
@@ -193,5 +193,7 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="region">Region</string>
     <string name="city">City</string>
     <string name="uzbekistan">Uzbekistan</string>
+    <string name="day">Day:</string>
+    <string name="hour">hour:</string>
 
 </resources>

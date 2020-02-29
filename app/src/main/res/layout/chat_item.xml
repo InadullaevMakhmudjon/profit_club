@@ -8,7 +8,7 @@
 
         <variable
             name="chat_question"
-            type="com.example.profitclub.model.ChatQuestion" />
+            type="com.example.profitclub.data.questions.QuestionConsultantData"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -41,7 +41,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
-                android:text="@string/question"
+                android:text="@{chat_question.title}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -68,7 +68,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto_bold"
-                android:text="@{chat_question.status}"
                 android:textColor="@color/white"
                 android:textSize="12sp"
                 android:textAlignment="center"

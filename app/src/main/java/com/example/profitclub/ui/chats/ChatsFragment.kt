@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.fragment_questions.*
 
 class ChatsFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var homeViewModel: ChatsViewModel
+    private lateinit var viewmodel: ChatsViewModel
     private lateinit var binding: FragmentChatsBinding
     private val APP_PREFERENCE = "MYSETTINGS"
 
@@ -37,45 +37,51 @@ class ChatsFragment : Fragment(), View.OnClickListener {
         ChatQuestion("I am looking for app (android and IOS) expert.", "6542413", "Open")
     )
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
-        val activity = activity as MainActivity?
+        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
+        val activityMain = activity as MainActivity?
         activity.let {
-            activity?.customActionBarTitle("chats")
+            activityMain?.customActionBarTitle(getString(R.string.My_Messages))
         }
 
         activity?.let {activity ->
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 
-            homeViewModel =
+            viewmodel =
                 ViewModelProviders.of(this, ChatsViewModelFactory(preferences)).get(ChatsViewModel::class.java)
             binding = FragmentChatsBinding.inflate(layoutInflater)
 
-            adapter = ChatListAdapter(this.context!!, list, this)
-            layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
-            binding.chatList.layoutManager = layoutManager
-            binding.chatList.adapter = adapter
-            adapter!!.notifyDataSetChanged()
 
-            homeViewModel.text.observe(viewLifecycleOwner, Observer {
-                binding.textHome.text = it
-            })
+            if (activityMain?.getMyData() == 2 || activityMain?.getMyData() == 4){
+                adapter = ChatListAdapter(this.context!!, null, this)
+                layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
+                binding.chatList.layoutManager = layoutManager
+                binding.chatList.adapter = adapter
+                adapter!!.notifyDataSetChanged()
 
-            homeViewModel.data.observe(viewLifecycleOwner, Observer { data ->
-                if(data != null) {
-                    toast("come data")
-                    toast(data.data[0].title)
-                }
-            })
+                viewmodel.text.observe(viewLifecycleOwner, Observer {
+                    binding.textHome.text = it
+                })
 
-            homeViewModel.error.observe(viewLifecycleOwner, Observer { message ->
-                toast("Error: $message")
-            })
+                viewmodel.data.observe(viewLifecycleOwner, Observer { data ->
+
+                    if(data != null) {
+                        toast("come data")
+                        adapter = ChatListAdapter(this.context!!, data.data, this)
+                        binding.chatList.adapter = adapter
+                    }
+                })
+
+                viewmodel.error.observe(viewLifecycleOwner, Observer { message ->
+                    toast("Error: $message")
+                })
+            } else {
+
+            }
         }
 
         return binding.root

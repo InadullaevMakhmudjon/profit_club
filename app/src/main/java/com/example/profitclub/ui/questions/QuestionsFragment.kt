@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.databinding.FragmentQuestionsBinding
 import com.example.profitclub.model.Questions
@@ -29,8 +30,13 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+       // (activity as AppCompatActivity).setSupportActionBar(toolbar)
        // (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        val activity = activity as MainActivity?
+        activity.let {
+            activity?.customActionBarTitle(getString(R.string.My_Questions))
+        }
 
         galleryViewModel =
             ViewModelProviders.of(this).get(QuestionsViewModel::class.java)

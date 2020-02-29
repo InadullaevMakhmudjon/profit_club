@@ -21,7 +21,26 @@
             android:hint="@string/comment"
             android:backgroundTint="@color/black"
             android:inputType="text"
-            android:maxLines="3"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/review_container_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@color/black"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/review_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/comment"
+            android:backgroundTint="@color/black"
+            android:inputType="text"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>

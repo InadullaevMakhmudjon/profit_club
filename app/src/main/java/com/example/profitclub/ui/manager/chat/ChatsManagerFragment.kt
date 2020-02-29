@@ -11,7 +11,6 @@ import com.example.profitclub.R
 import com.example.profitclub.adapters.ChatManagerListAdapter
 import com.example.profitclub.databinding.FragmentManagerChatsBinding
 import com.example.profitclub.model.Chat_M
-import kotlinx.android.synthetic.main.fragment_questions.toolbar
 
 class ChatsManagerFragment : Fragment(), View.OnClickListener {
 
@@ -39,7 +38,7 @@ class ChatsManagerFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        (activity as AppCompatActivity).setSupportActionBar(toolbar)
+        //(activity as AppCompatActivity).setSupportActionBar(toolbar)
 
         homeViewModel =
             ViewModelProviders.of(this).get(ChatsManagerViewModel::class.java)

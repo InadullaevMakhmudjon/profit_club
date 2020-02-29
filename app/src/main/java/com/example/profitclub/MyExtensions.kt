@@ -125,7 +125,7 @@ fun Fragment.chooseLanguage() {
 }
 
 fun Activity.chooseLanguage() {
-    val mBottomSheetDialog = BottomSheetDialog(applicationContext!!)
+    val mBottomSheetDialog = BottomSheetDialog(this)
 
     val sheetView = layoutInflater.inflate(R.layout.bottom_sheet, null)
     mBottomSheetDialog.setContentView(sheetView)
@@ -138,17 +138,17 @@ fun Activity.chooseLanguage() {
 
     english.setOnClickListener(View.OnClickListener {
         mBottomSheetDialog.hide()
-        setNewLocaleActivity(LANGUAGE_ENGLISH, true, applicationContext)
+        setNewLocaleActivity(LANGUAGE_ENGLISH, true, this)
     })
 
     uzbek.setOnClickListener(View.OnClickListener {
         mBottomSheetDialog.hide()
-        setNewLocaleActivity(LANGUAGE_UZBEK, true, applicationContext)
+        setNewLocaleActivity(LANGUAGE_UZBEK, true, this)
     })
 
     russian.setOnClickListener(View.OnClickListener {
         mBottomSheetDialog.hide()
-        setNewLocaleActivity(LANGUAGE_RUSSIAN, true, applicationContext)
+        setNewLocaleActivity(LANGUAGE_RUSSIAN, true, this)
     })
 
 }

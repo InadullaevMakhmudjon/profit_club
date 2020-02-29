@@ -44,7 +44,7 @@
     <string name="prompt_email">Электронная почта</string>
     <string name="privacy_desc">Открыть нашу политику конфиденциальности</string>
     <string name="privacy">Политика конфиденциальности</string>
-    <string name="price">Цена</string>
+    <string name="price">Цена:</string>
     <string name="post_question">Опубликовать вопрос</string>
     <string name="post">Опубликовать</string>
     <string name="place_a_bid">Оставить предложения</string>
@@ -120,7 +120,7 @@
     <string name="client_id_approve">ID клиента:</string>
     <string name="client_">Клиент</string>
     <string name="client">Я хочу нанять</string>
-    <string name="choose">Выбирать</string>
+    <string name="choose">Выбрать</string>
     <string name="Chats">Сообщения</string>
     <string name="category_id_approve">Категория:</string>
     <string name="category_alert">Выберите, к какому вопросу относится ваш вопрос</string>
@@ -159,4 +159,6 @@
     <string name="country">Страна</string>
     <string name="region">Регион</string>
     <string name="uzbekistan">Узбекистан</string>
+    <string name="day">День:</string>
+    <string name="hour">час:</string>
 </resources>
