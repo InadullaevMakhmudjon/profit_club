@@ -55,14 +55,13 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 ViewModelProviders.of(this, ChatsViewModelFactory(preferences)).get(ChatsViewModel::class.java)
             binding = FragmentChatsBinding.inflate(layoutInflater)
 
+            adapter = ChatListAdapter(this.context!!, null, this)
+            layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
+            binding.chatList.layoutManager = layoutManager
+            binding.chatList.adapter = adapter
+            adapter!!.notifyDataSetChanged()
 
             if (activityMain?.getMyData() == 2 || activityMain?.getMyData() == 4){
-                adapter = ChatListAdapter(this.context!!, null, this)
-                layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
-                binding.chatList.layoutManager = layoutManager
-                binding.chatList.adapter = adapter
-                adapter!!.notifyDataSetChanged()
-
                 viewmodel.text.observe(viewLifecycleOwner, Observer {
                     binding.textHome.text = it
                 })
@@ -80,7 +79,18 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                     toast("Error: $message")
                 })
             } else {
+                viewmodel.dataClient.observe(viewLifecycleOwner, Observer { data ->
 
+                    if(data != null) {
+                        toast("come dataClient")
+                        adapter = ChatListAdapter(this.context!!, data.data, this)
+                        binding.chatList.adapter = adapter
+                    }
+                })
+
+                viewmodel.error.observe(viewLifecycleOwner, Observer { message ->
+                    toast("Error: $message")
+                })
             }
         }
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.profitclub.data.questions.*
 import kotlinx.coroutines.launch
+import java.util.ArrayList
 import java.lang.Exception
 
 class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
@@ -24,14 +25,17 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
         value = null
     }
 
-    val statusComplete = MutableLiveData<ResponseQuestionConsultantEnd>().apply {
+    val dataClient = MutableLiveData<ArrayList<ResponseQuestionConsultantPreview>>().apply {
         value = null
     }
 
-    val statusCancel = MutableLiveData<ResponseQuestionConsultantClose>().apply {
+    val statusComplete = MutableLiveData<ResponseQuestionConsultantEnd>()?.apply {
         value = null
     }
 
+    val statusCancel = MutableLiveData<ArrayList<ResponseQuestionConsultantClose>>().apply {
+        value = null
+    }
 
     val postPreview = fun(question_id: Int, lang: String?){
       viewModelScope.launch {
@@ -44,6 +48,19 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
               error.apply { value = e.message.toString() }
           }
       }
+    }
+
+    val postPreviewClient = fun(question_id: Int, lang: String?){
+        viewModelScope.launch {
+            try {
+                val response = repository.postClientQuestionPreview(RequestQuestionConsultantPreview(question_id, lang))
+                if (response.isSuccessful){
+                    dataClient.apply { value = response.body() as ArrayList<ResponseQuestionConsultantPreview> }
+                }
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
+            }
+        }
     }
 
     val postComplete = fun(question_id: Int, description_answer: String,
@@ -66,7 +83,7 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
             try {
                 val response = repository.postQuestionConsultantClose(RequestQuestionConsultantClose(RequestQuestionConsultantCloseItem(question_id)))
                 if (response.isSuccessful){
-                    statusCancel.apply { value = response.body() }
+                    statusCancel.apply { value = response.body() as ArrayList<ResponseQuestionConsultantClose> }
                 }
             } catch (e: Exception){
                 error.apply { value = e.message.toString() }

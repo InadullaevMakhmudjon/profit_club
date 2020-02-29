@@ -7,14 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.data.questions.QuestionConsultantData
-import com.example.profitclub.data.questions.QuestionConsultantView
 import com.example.profitclub.databinding.ChatItemBinding
 import com.example.profitclub.ui.bids.BidDetailActivity
-import com.example.profitclub.ui.chats.ChatViewActivity
 
 class ChatListAdapter(private val context: Context, private val items: ArrayList<QuestionConsultantData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -44,6 +41,7 @@ class ChatListAdapter(private val context: Context, private val items: ArrayList
             /* Picasso.get()
                      .load(item.phost_photo)
                      .into(binding.imageActual)*/
+            binding.questionText.text = item?.title
             binding.questionId.text = item?.question_id.toString()
             binding.status.text = item?.status.toString()
             binding.container.tag = item

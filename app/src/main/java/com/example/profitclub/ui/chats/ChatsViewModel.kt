@@ -21,12 +21,27 @@ class ChatsViewModel(val repository: BidsRepository) : ViewModel() {
         value = null
     }
 
+    val dataClient = MutableLiveData<QuestionConsultantView>().apply {
+        value = null
+    }
+
     init {
         viewModelScope.launch {
             try {
                 val res = repository.getConsultantQuestionView()
                 if(res.isSuccessful) {
                     data.apply { value = res.body() }
+                }
+            } catch (e: Exception) {
+                error.apply { value = e.message }
+            }
+        }
+
+        viewModelScope.launch {
+            try {
+                val res = repository.getClientQuestionView()
+                if(res.isSuccessful) {
+                    dataClient.apply { value = res.body() }
                 }
             } catch (e: Exception) {
                 error.apply { value = e.message }

@@ -1,4 +1,5 @@
 package com.example.profitclub.data.questions
+import java.util.ArrayList
 
 import java.io.Serializable
 
@@ -36,6 +37,15 @@ data class Message(
     val date: String
 )
 
+data class QuestionClientFile(
+    val file_id: Int,
+    val question_id: Int,
+    val user_id: Int,
+    val original_name: String,
+    val url: String,
+    val createdate: String
+)
+
 data class ResponseQuestionConsultantPreview(
     val question_id: Int,
     val client_id: Int,
@@ -53,11 +63,11 @@ data class ResponseQuestionConsultantPreview(
     val hour_deadline: Int,
     val price: Float,
     val categories: ArrayList<String>,
-    // val answer_end_description: String -> null on response
-    // val answer_end_date: String -> null on response
+    val answer_end_description: String = "",
+    val answer_end_date: String = "",
     val messages: ArrayList<Message>,
-    // val client_files: String, -> null on response
-    // val consultant_files: String, -> null on response
+    val client_files: ArrayList<QuestionClientFile>,
+    val consultant_files: ArrayList<QuestionClientFile>,
     val status: Int
 )
 

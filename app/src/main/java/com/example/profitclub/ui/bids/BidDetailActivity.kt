@@ -53,7 +53,6 @@ class BidDetailActivity : AppCompatActivity() {
         vm.postPreview(questionId, "ru")
 
         vm.data.observe(this, Observer { data ->
-
             if(data != null) {
                 toast("come data")
                 bid_title.text = data.title
@@ -61,8 +60,34 @@ class BidDetailActivity : AppCompatActivity() {
                 deadline.text = resources.getString(R.string.day) + " " + data.day_deadline.toString() + " " + resources.getString(R.string.hour) + " " + data.hour_deadline
                 price_question.text = resources.getString(R.string.price) + " " + data.price.toString()
                 // var item = ArrayList<String>(data.categories)
+                skills.text = data.categories.reduce{a, b -> "$a/$b"}
+                question_id_desc.text = data.question_id.toString()
+                name_client.text = data.client_fullname
+                stars_client.rating = data.client_rate
+                price.text = data.client_rate.toString()
+                if(data.client_avatar != null){
+                    Picasso.get().load(BASE_URL + data.client_avatar + "sm_avatar.jpg").fit().into(avatar_client)
+                }
 
-                skills.text = arrayListOf(data.categories).toString()
+                name_consultant.text = data.consultant_fullname
+                stars_consultant.rating = data.consultant_rate
+                price_consultant.text = data.consultant_rate.toString()
+                if(data.consultant_avatar != null){
+                    Picasso.get().load(BASE_URL + data.consultant_avatar + "sm_avatar.jpg").fit().into(avatar_consultant)
+                }
+            }
+        })
+
+        vm.dataClient.observe(this, Observer { result ->
+            if(result != null && result.size > 0) {
+                val data = result[0]
+                toast("come data")
+                bid_title.text = data.title
+                bid_detail.text = data.description
+                deadline.text = resources.getString(R.string.day) + " " + data.day_deadline.toString() + " " + resources.getString(R.string.hour) + " " + data.hour_deadline
+                price_question.text = resources.getString(R.string.price) + " " + data.price.toString()
+                // var item = ArrayList<String>(data.categories)
+                skills.text = data.categories.reduce{a, b -> "$a/$b"}
                 question_id_desc.text = data.question_id.toString()
                 name_client.text = data.client_fullname
                 stars_client.rating = data.client_rate
@@ -89,25 +114,32 @@ class BidDetailActivity : AppCompatActivity() {
 
         }
 
-        vm.statusCancel.observe(this, Observer { status ->
+        /*vm.statusCancel.observe(this, Observer { status ->
             if(status.question_consultant_end == 1){
                 toast("Completed successfully :-)")
             } else {
                 toast("Error was occur")
             }
-        })
+            *//*if(status.size > 0){
+                if(status[0].question_consultant_end == 1){
+                    toast("Completed successfully :-)")
+                } else {
+                    toast("Error was occur")
+                }
+            }*//*
+        })*/
 
         close.setOnClickListener {
             alertDialog()
         }
 
-        vm.statusComplete.observe(this, Observer { status ->
+        /*vm.statusComplete.observe(this, Observer { status ->
             if (status.question_consultant_end == 1){
                 toast("Completed successfully :-)")
             } else {
                 toast("Error was occur")
             }
-        })
+        })*/
 
         float_btn.setOnClickListener {
             startActivity(Intent(this, ChatViewActivity::class.java))
