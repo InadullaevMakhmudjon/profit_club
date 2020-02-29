@@ -38,3 +38,11 @@ const val QUESTION_CLIENT_END = "main/question-client-end"
 
 const val QUESTION_CLIENT_CLOSE = "main/question-client-close"
 
+// Bids for Consultant
+const val BIDS_CONSULTANT_VIEW = "main/bids-consultant-view"
+
+const val BIDS_CONSULTANT_CLICK_VIEW = "main/bids-consultant-click-view"
+
+const val BIDS_CONSULTANT_PREVIEW_CLIENT = "main/bids-consultant-preview-client"
+
+const val BIDS_CONSULTANT_BID = "main/bids-consultant-bid"

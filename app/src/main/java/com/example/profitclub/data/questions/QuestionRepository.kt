@@ -4,8 +4,9 @@ import RequestQuestionConsultantClose
 import RequestQuestionConsultantEnd
 import RequestQuestionConsultantPreview
 import android.content.SharedPreferences
+import com.example.profitclub.data.bids.BidsService
 
-class QuestionRepository(private val retrofit: QuestionService, private val preference: SharedPreferences) {
+class QuestionRepository(private val retrofit: BidsService, private val preference: SharedPreferences) {
     private var token: String? = preference.getString("token", null)
 
     suspend fun getConsultantQuestionView() = retrofit.getQuestionConsultantView("JWT $token")
