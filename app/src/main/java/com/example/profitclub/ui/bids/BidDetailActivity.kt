@@ -51,6 +51,7 @@ class BidDetailActivity : AppCompatActivity() {
             }
         }*/
         vm.postPreview(questionId, "ru")
+        vm.postPreviewClient(questionId, "ru")
 
         vm.data.observe(this, Observer { data ->
             if(data != null) {
