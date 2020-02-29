@@ -39,5 +39,4 @@ interface QuestionService {
 
     @POST(QUESTION_CLIENT_CLOSE)
     suspend fun postQuestionClientClose(@Header("authorization") auth: String?, @Body body: RequestQuestionConsultantClose): Response<ArrayList<ResponseQuestionConsultantClose>>
-
 }
