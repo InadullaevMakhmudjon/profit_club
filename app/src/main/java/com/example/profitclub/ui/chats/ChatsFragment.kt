@@ -69,6 +69,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
             homeViewModel.data.observe(viewLifecycleOwner, Observer { data ->
                 if(data != null) {
                     toast("come data")
+                    toast(data.data[0].title)
                 }
             })
 
