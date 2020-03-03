@@ -6,10 +6,11 @@ import androidx.lifecycle.viewModelScope
 import com.example.profitclub.data.questions.QuestionConsultantData
 import com.example.profitclub.data.questions.QuestionConsultantView
 import com.example.profitclub.data.bids.BidsRepository
+import com.example.profitclub.data.questions.QuestionRepository
 import kotlinx.coroutines.launch
 import java.lang.Exception
 
-class ChatsViewModel(val repository: BidsRepository) : ViewModel() {
+class ChatsViewModel(val repository: QuestionRepository) : ViewModel() {
 
     val error = MutableLiveData<String>()
 
