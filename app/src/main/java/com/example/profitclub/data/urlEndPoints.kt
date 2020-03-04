@@ -41,8 +41,17 @@ const val QUESTION_CLIENT_CLOSE = "main/question-client-close"
 // Bids for Consultant
 const val BIDS_CONSULTANT_VIEW = "main/bids-consultant-view"
 
-const val BIDS_CONSULTANT_CLICK_VIEW = "main/bids-consultant-click-view"
+const val BIDS_CONSULTANT_CLICK_VIEW = "main/bids-consultant-click-view?lang={lang}"
 
 const val BIDS_CONSULTANT_PREVIEW_CLIENT = "main/bids-consultant-preview-client"
 
 const val BIDS_CONSULTANT_BID = "main/bids-consultant-bid"
+
+// Bids for Client
+const val BIDS_CLIENT_VIEW = "main/bids-client-view?lang={lang}"
+
+const val BIDS_CLIENT_CLICK_VIEW = "main/bids-click-view?question_id={id}"
+
+const val BIDS_CLIENT_UPDATE = "main/bids-client-update"
+
+const val BIDS_CLIENT_ADD = "main/bids-client-add"
