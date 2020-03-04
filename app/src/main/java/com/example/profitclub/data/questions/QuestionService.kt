@@ -17,10 +17,10 @@ import java.util.ArrayList
 interface QuestionService {
 
     @POST(QUESTION_DISPUTE_OPEN)
-    suspend fun postQuestionDisputeOpen(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeOpenItem>): Response<ResponseQuestionConsultantPreview>
+    suspend fun postQuestionDisputeOpen(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeOpenItem>)
 
     @POST(QUESTION_DISPUTE_CLOSE)
-    suspend fun postQuestionDisputeClose(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeCloseItem>): Response<ResponseQuestionConsultantEnd>
+    suspend fun postQuestionDisputeClose(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeCloseItem>)
 
     // Consultant
     @GET(QUESTION_CONSULTANT_VIEW)
