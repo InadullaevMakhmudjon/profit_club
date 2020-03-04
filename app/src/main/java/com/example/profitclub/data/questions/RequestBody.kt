@@ -10,14 +10,21 @@ data class RequestQuestionConsultantEndItem(
     val rate: Float
 )
 
-data class RequestQuestionConsultantEnd(
-    val item: RequestQuestionConsultantEndItem
-)
-
 data class RequestQuestionConsultantCloseItem(
     val question_id: Int
 )
 
-data class RequestQuestionConsultantClose(
-    val item: RequestQuestionConsultantCloseItem
+data class RequestQuestionDisputeOpenItem(
+    val question_id: Int,
+    val description: String
+)
+
+data class RequestQuestionDisputeCloseItem(
+    val question_id: Int,
+    val true_user_id: Int,
+    val answer: String
+)
+
+data class GenericRequest<GenericType>(
+    val item: GenericType
 )
