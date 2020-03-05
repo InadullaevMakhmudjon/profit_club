@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.MessageListAdapter
 import com.example.profitclub.databinding.FragmentChatsView1Binding
 import com.example.profitclub.model.Messages
+import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.ChatViewActivity
 
 class ChatsView1Fragment : Fragment(), View.OnClickListener {
@@ -46,16 +47,15 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         val activity = activity as ChatViewActivity?
         val myDataFromActivity = activity!!.getMyDataChat()
 
+        val questionId = activity.getMyQusetionId()
+
+        toast("question_id: $questionId")
+
         if(myDataFromActivity == 2 || myDataFromActivity == 3){
             binding.linearLayout.isVisible = false
         }
 
         return binding.root
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
     }
     
     override fun onClick(p0: View?) {

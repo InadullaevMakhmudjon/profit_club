@@ -38,7 +38,6 @@ const val QUESTION_CLIENT_END = "main/question-client-end"
 
 const val QUESTION_CLIENT_CLOSE = "main/question-client-close"
 
-
 // For Client and Consultants
 const val QUESTION_DISPUTE_OPEN = "main/question-dispute-open"
 const val QUESTION_DISPUTE_CLOSE = "main/question-dispute-close"
