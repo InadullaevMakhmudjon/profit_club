@@ -150,7 +150,7 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
             Toast.makeText(this, """You put rating: ${ratingBar.rating}""", Toast.LENGTH_SHORT).show()
             buttons_container.isVisible = false
-            notification()
+           // notification()
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
@@ -161,7 +161,7 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
         alertDialogBuilder.show()
     }
 
-    private fun notification(){
+   /* private fun notification(){
 
         val notification = NotificationCompat.Builder(this, App.CHANNEL_1_ID)
             .setSmallIcon(R.drawable.profile_user)
@@ -172,6 +172,6 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
             .build()
 
         notificationManager.notify(1, notification)
-    }
+    }*/
 
 }

@@ -62,9 +62,6 @@ class ChatsFragment : Fragment(), View.OnClickListener {
             adapter!!.notifyDataSetChanged()
 
             if (activityMain?.getMyData() == 2 || activityMain?.getMyData() == 4){
-                viewmodel.text.observe(viewLifecycleOwner, Observer {
-                    binding.textHome.text = it
-                })
 
                 viewmodel.data.observe(viewLifecycleOwner, Observer { data ->
 
@@ -78,6 +75,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 viewmodel.error.observe(viewLifecycleOwner, Observer { message ->
                     toast("Error: $message")
                 })
+
             } else {
                 viewmodel.dataClient.observe(viewLifecycleOwner, Observer { data ->
 
@@ -91,6 +89,10 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 viewmodel.error.observe(viewLifecycleOwner, Observer { message ->
                     toast("Error: $message")
                 })
+/*
+                viewmodel.text.observe(viewLifecycleOwner, Observer {
+                    binding.textHome.text = adapter!!.itemCount.toString()
+                })*/
             }
         }
 
