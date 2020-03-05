@@ -1,16 +1,9 @@
 package com.example.profitclub.data.bids
 
 import BidsClientUpdate
-import BidsConsultantBid
 import BidsConsultantPreviewClient
-import ClientClickView
-import ConsultantBidsClickData
-import ConsultantBidsData
 import RequestBidsClientAdd
 import RequestBidsConsultantBidItem
-import ResponseBidsClientUpdate
-import ResponseBidsConsultantPreviewClient
-import ResponseGeneric
 import com.example.profitclub.data.*
 import retrofit2.Response
 import retrofit2.http.*
