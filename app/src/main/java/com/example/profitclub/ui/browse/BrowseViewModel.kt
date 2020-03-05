@@ -1,13 +1,30 @@
 package com.example.profitclub.ui.browse
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.profitclub.data.bids.BidsRepository
+import com.example.profitclub.data.bids.ResponseBidsConsultant
+import kotlinx.coroutines.launch
 
-class BrowseViewModel : ViewModel() {
+class BrowseViewModel(val repository: BidsRepository) : ViewModel() {
 
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is send Fragment"
+    val bidsConsView = MutableLiveData<ResponseBidsConsultant>().apply {
+        value = null
     }
-    val text: LiveData<String> = _text
+
+    val error = MutableLiveData<String>()
+
+    init {
+        viewModelScope.launch {
+            try {
+                val response = repository.getConsultantBidsView()
+                if (response.isSuccessful){
+                    bidsConsView.apply { value = response.body() }
+                }
+            } catch ( e: Exception){
+                error.apply { value = e.message }
+            }
+        }
+    }
 }

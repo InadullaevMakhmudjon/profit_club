@@ -3,6 +3,7 @@ package com.example.profitclub.ui.bids
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -10,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.toast
@@ -29,86 +31,86 @@ class BidDetailActivity : AppCompatActivity() {
     private lateinit var vm:BidDetailViewModel
     private val APP_PREFERENCE = "MYSETTINGS"
     private var questionId: Int = 0
+    private var role: Int = 0
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_bid_detail)
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        role = preferences.getInt("role", 0)
         vm = ViewModelProviders.of(this, BidDetailViewModelFactory(preferences)).get(BidDetailViewModel::class.java)
 
         questionId = intent.getIntExtra("question_id",1)
-        /*when (questionId) {
-            1 -> {
-
+        when (role) {
+            2, 4 -> {
+                vm.postPreview(questionId, "ru")
             }
-            2 -> {
-                buttons_container.isVisible = false
+            5, 7 -> {
+                vm.postPreviewClient(questionId, "ru")
             }
-        }*/
-        vm.postPreview(questionId, "ru")
-        vm.postPreviewClient(questionId, "ru")
+        }
+                vm.data.observe(this, Observer { data ->
+                    if(data != null) {
+                        toast("come data")
+                        bid_title.text = data.title
+                        bid_detail.text = data.description
+                        deadline.text = resources.getString(R.string.day) + " " + data.day_deadline.toString() + " " + resources.getString(R.string.hour) + " " + data.hour_deadline
+                        price_question.text = resources.getString(R.string.price) + " " + data.price.toString()
+                        // var item = ArrayList<String>(data.categories)
+                        skills.text = data.categories.reduce{a, b -> "$a/$b"}
+                        question_id_desc.text = data.question_id.toString()
+                        name_client.text = data.client_fullname
+                        stars_client.rating = data.client_rate
+                        price.text = data.client_rate.toString()
+                        if(data.client_avatar != null){
+                            Picasso.get().load(BASE_URL + data.client_avatar + "sm_avatar.jpg").fit().into(avatar_client)
+                        }
 
-        vm.data.observe(this, Observer { data ->
-            if(data != null) {
-                toast("come data")
-                bid_title.text = data.title
-                bid_detail.text = data.description
-                deadline.text = resources.getString(R.string.day) + " " + data.day_deadline.toString() + " " + resources.getString(R.string.hour) + " " + data.hour_deadline
-                price_question.text = resources.getString(R.string.price) + " " + data.price.toString()
-                // var item = ArrayList<String>(data.categories)
-                skills.text = data.categories.reduce{a, b -> "$a/$b"}
-                question_id_desc.text = data.question_id.toString()
-                name_client.text = data.client_fullname
-                stars_client.rating = data.client_rate
-                price.text = data.client_rate.toString()
-                if(data.client_avatar != null){
-                    Picasso.get().load(BASE_URL + data.client_avatar + "sm_avatar.jpg").fit().into(avatar_client)
-                }
+                        name_consultant.text = data.consultant_fullname
+                        stars_consultant.rating = data.consultant_rate
+                        price_consultant.text = data.consultant_rate.toString()
+                        if(data.consultant_avatar != null){
+                            Picasso.get().load(BASE_URL + data.consultant_avatar + "sm_avatar.jpg").fit().into(avatar_consultant)
+                        }
+                    }
+                })
 
-                name_consultant.text = data.consultant_fullname
-                stars_consultant.rating = data.consultant_rate
-                price_consultant.text = data.consultant_rate.toString()
-                if(data.consultant_avatar != null){
-                    Picasso.get().load(BASE_URL + data.consultant_avatar + "sm_avatar.jpg").fit().into(avatar_consultant)
-                }
-            }
-        })
+                vm.dataClient.observe(this, Observer { result ->
+                    if(result != null && result.size > 0) {
+                        val data = result[0]
+                        toast("come dataClient")
+                        bid_title.text = data.title
+                        bid_detail.text = data.description
+                        deadline.text = resources.getString(R.string.day) + " " + data.day_deadline.toString() + " " + resources.getString(R.string.hour) + " " + data.hour_deadline
+                        price_question.text = resources.getString(R.string.price) + " " + data.price.toString()
+                        // var item = ArrayList<String>(data.categories)
+                        skills.text = data.categories.reduce{a, b -> "$a/$b"}
+                        question_id_desc.text = data.question_id.toString()
+                        name_client.text = data.client_fullname
+                        stars_client.rating = data.client_rate
+                        price.text = data.client_rate.toString()
+                        if(data.client_avatar != null){
+                            Picasso.get().load(BASE_URL + data.client_avatar + "sm_avatar.jpg").fit().into(avatar_client)
+                        }
 
-        vm.dataClient.observe(this, Observer { result ->
-            if(result != null && result.size > 0) {
-                val data = result[0]
-                toast("come data")
-                bid_title.text = data.title
-                bid_detail.text = data.description
-                deadline.text = resources.getString(R.string.day) + " " + data.day_deadline.toString() + " " + resources.getString(R.string.hour) + " " + data.hour_deadline
-                price_question.text = resources.getString(R.string.price) + " " + data.price.toString()
-                // var item = ArrayList<String>(data.categories)
-                skills.text = data.categories.reduce{a, b -> "$a/$b"}
-                question_id_desc.text = data.question_id.toString()
-                name_client.text = data.client_fullname
-                stars_client.rating = data.client_rate
-                price.text = data.client_rate.toString()
-                if(data.client_avatar != null){
-                    Picasso.get().load(BASE_URL + data.client_avatar + "sm_avatar.jpg").fit().into(avatar_client)
-                }
+                        name_consultant.text = data.consultant_fullname
+                        stars_consultant.rating = data.consultant_rate
+                        price_consultant.text = data.consultant_rate.toString()
+                        if(data.consultant_avatar != null){
+                            Picasso.get().load(BASE_URL + data.consultant_avatar + "sm_avatar.jpg").fit().into(avatar_consultant)
+                        }
+                    }
+                })
 
-                name_consultant.text = data.consultant_fullname
-                stars_consultant.rating = data.consultant_rate
-                price_consultant.text = data.consultant_rate.toString()
-                if(data.consultant_avatar != null){
-                    Picasso.get().load(BASE_URL + data.consultant_avatar + "sm_avatar.jpg").fit().into(avatar_consultant)
-                }
-            }
-        })
-
-        vm.error.observe(this, Observer { error ->
-            toast("Error: $error")
-        })
+                vm.error.observe(this, Observer { error ->
+                    toast("Error: $error")
+                })
+           // }
+        //}
 
         reject.setOnClickListener {
             vm.postCancel(questionId)

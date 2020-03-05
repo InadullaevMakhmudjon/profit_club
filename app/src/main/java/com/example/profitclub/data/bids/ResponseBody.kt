@@ -1,3 +1,7 @@
+package com.example.profitclub.data.bids
+
+import java.util.ArrayList
+
 data class ConsultantBidsData(
     val question_id: Int,
     val qlang: String,
