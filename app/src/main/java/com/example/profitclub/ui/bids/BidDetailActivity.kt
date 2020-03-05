@@ -32,6 +32,10 @@ class BidDetailActivity : AppCompatActivity() {
     private val APP_PREFERENCE = "MYSETTINGS"
     private var questionId: Int = 0
     private var role: Int = 0
+    private var clientAvatar: String? = null
+    private var consultantAvatar: String? = null
+    private var nameClient: String? = null
+    private var nameConsultant: String? = null
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,17 +67,20 @@ class BidDetailActivity : AppCompatActivity() {
                         // var item = ArrayList<String>(data.categories)
                         skills.text = data.categories.reduce{a, b -> "$a/$b"}
                         question_id_desc.text = data.question_id.toString()
-                        name_client.text = data.client_fullname
+                        nameClient = data.client_fullname
+                        name_client.text = nameClient
                         stars_client.rating = data.client_rate
                         price.text = data.client_rate.toString()
-                        if(data.client_avatar != null){
+                        clientAvatar = data.client_avatar
+                        if(clientAvatar != null){
                             Picasso.get().load(BASE_URL + data.client_avatar + "sm_avatar.jpg").fit().into(avatar_client)
                         }
-
-                        name_consultant.text = data.consultant_fullname
+                        nameConsultant = data.consultant_fullname
+                        name_consultant.text = nameConsultant
                         stars_consultant.rating = data.consultant_rate
                         price_consultant.text = data.consultant_rate.toString()
-                        if(data.consultant_avatar != null){
+                        consultantAvatar = data.consultant_avatar
+                        if(consultantAvatar != null){
                             Picasso.get().load(BASE_URL + data.consultant_avatar + "sm_avatar.jpg").fit().into(avatar_consultant)
                         }
                     }
@@ -90,17 +97,20 @@ class BidDetailActivity : AppCompatActivity() {
                         // var item = ArrayList<String>(data.categories)
                         skills.text = data.categories.reduce{a, b -> "$a/$b"}
                         question_id_desc.text = data.question_id.toString()
-                        name_client.text = data.client_fullname
+                        nameClient = data.client_fullname
+                        name_client.text = nameClient
                         stars_client.rating = data.client_rate
                         price.text = data.client_rate.toString()
-                        if(data.client_avatar != null){
+                        clientAvatar = data.client_avatar
+                        if(clientAvatar != null){
                             Picasso.get().load(BASE_URL + data.client_avatar + "sm_avatar.jpg").fit().into(avatar_client)
                         }
-
-                        name_consultant.text = data.consultant_fullname
+                        nameConsultant = data.consultant_fullname
+                        name_consultant.text = nameConsultant
                         stars_consultant.rating = data.consultant_rate
                         price_consultant.text = data.consultant_rate.toString()
-                        if(data.consultant_avatar != null){
+                        consultantAvatar = data.consultant_avatar
+                        if(consultantAvatar != null){
                             Picasso.get().load(BASE_URL + data.consultant_avatar + "sm_avatar.jpg").fit().into(avatar_consultant)
                         }
                     }
@@ -113,27 +123,26 @@ class BidDetailActivity : AppCompatActivity() {
         //}
 
         reject.setOnClickListener {
-            vm.postCancel(questionId)
-
+           alertDialogCancel()
         }
 
-        /*vm.statusCancel.observe(this, Observer { status ->
-            if(status.question_consultant_end == 1){
-                toast("Completed successfully :-)")
-            } else {
-                toast("Error was occur")
-            }
-            *//*if(status.size > 0){
-                if(status[0].question_consultant_end == 1){
+            vm.statusCancel.observe(this, Observer { status ->
+                /*if(status.question_consultant_end == 1){
                     toast("Completed successfully :-)")
                 } else {
                     toast("Error was occur")
+                }*/
+                if(status.size > 0){
+                    if(status[0].question_consultant_end == 1){
+                        toast("Completed successfully :-)")
+                    } else {
+                        toast("Error was occur")
+                    }
                 }
-            }*//*
-        })*/
+            })
 
         close.setOnClickListener {
-            alertDialog()
+            alertDialogComplete()
         }
 
         /*vm.statusComplete.observe(this, Observer { status ->
@@ -145,11 +154,13 @@ class BidDetailActivity : AppCompatActivity() {
         })*/
 
         float_btn.setOnClickListener {
-            startActivity(Intent(this, ChatViewActivity::class.java))
+            val intent: Intent = Intent(this, ChatViewActivity::class.java)
+            intent.putExtra("question_id", questionId)
+            startActivity(intent)
         }
     }
 
-    private fun alertDialog(){
+    private fun alertDialogComplete(){
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(R.string.completed_alert_title)
         alertDialogBuilder.setMessage(getString(R.string.completed_alert_message))
@@ -184,7 +195,11 @@ class BidDetailActivity : AppCompatActivity() {
             Toast.makeText(this, """You put rating: ${ratingBar.rating}""", Toast.LENGTH_SHORT).show()
             buttons_container.isVisible = false
             if(description != "" && description2 != "" && !ratingBar.rating.equals(0)){
-                vm.postComplete(questionId, description, description2, ratingBar.rating)
+                when(role){
+                    2, 4 -> vm.postComplete(questionId, description, description2, ratingBar.rating)
+                    5, 7 -> vm.postCompleteClient(questionId, description, description2, ratingBar.rating)
+                }
+
             } else{
                 toast("All fields should be filled in order to finish the process")
                 return@setPositiveButton
@@ -197,6 +212,23 @@ class BidDetailActivity : AppCompatActivity() {
             dialog?.dismiss()
         }
 
+        alertDialogBuilder.show()
+    }
+
+    private fun alertDialogCancel(){
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle(R.string.completed_alert_title)
+        alertDialogBuilder.setMessage(getString(R.string.completed_alert_message))
+        alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
+            when (role){
+                2, 4 ->  vm.postCancel(questionId)
+                5, 7 -> vm.postCancelClient(questionId)
+            }
+        }
+        alertDialogBuilder.setNegativeButton(getString(R.string.cancel)) { dialog, which ->
+            Toast.makeText(this, "Your request directed to the Manager", Toast.LENGTH_SHORT).show()
+            dialog?.dismiss()
+        }
         alertDialogBuilder.show()
     }
 

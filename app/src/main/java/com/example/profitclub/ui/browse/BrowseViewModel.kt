@@ -4,12 +4,13 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.profitclub.data.bids.BidsRepository
-import com.example.profitclub.data.bids.ResponseBidsConsultant
+import com.example.profitclub.data.bids.ConsultantBidsData
+import com.example.profitclub.data.bids.ResponseGeneric
 import kotlinx.coroutines.launch
 
 class BrowseViewModel(val repository: BidsRepository) : ViewModel() {
 
-    val bidsConsView = MutableLiveData<ResponseBidsConsultant>().apply {
+    val bidsConsView = MutableLiveData<ResponseGeneric<ConsultantBidsData>>().apply {
         value = null
     }
 

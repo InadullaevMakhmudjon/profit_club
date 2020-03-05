@@ -6,6 +6,7 @@
     android:background="@color/colorPrimary">
 
     <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_image"
         android:layout_width="36dp"
         android:layout_height="36dp"
         android:src="@drawable/profile_user"
@@ -14,7 +15,7 @@
         android:layout_alignParentEnd="true"/>
 
     <TextView
-        android:id="@+id/consultant_name"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="18sp"
@@ -24,11 +25,12 @@
         android:text="@string/jason"/>
 
     <TextView
+        android:id="@+id/question_id"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="13sp"
-        android:textColor="@color/white"
+        android:layout_below="@+id/name"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/consultant_name"
-        android:text="1231217"/>
+        android:text="1231217"
+        android:textColor="@color/white"
+        android:textSize="13sp" />
 </RelativeLayout>
