@@ -1,28 +1,34 @@
 package com.example.profitclub.data.questions
 
-import RequestQuestionConsultantClose
-import RequestQuestionConsultantEnd
+import GenericRequest
+import RequestQuestionConsultantCloseItem
+import RequestQuestionConsultantEndItem
 import RequestQuestionConsultantPreview
+import RequestQuestionDisputeCloseItem
+import RequestQuestionDisputeOpenItem
 import android.content.SharedPreferences
-import com.example.profitclub.data.bids.BidsService
 
 class QuestionRepository(private val retrofit: QuestionService, private val preference: SharedPreferences) {
     private var token: String? = preference.getString("token", null)
+
+    suspend fun postQuestionDisputeOpen(body: RequestQuestionDisputeOpenItem) = retrofit.postQuestionDisputeOpen("JWT $token", GenericRequest(body))
+
+    suspend fun postQuestionDisputeClose(body: RequestQuestionDisputeCloseItem) = retrofit.postQuestionDisputeClose("JWT $token", GenericRequest(body))
 
     suspend fun getConsultantQuestionView() = retrofit.getQuestionConsultantView("JWT $token")
 
     suspend fun postConsultantQuestionPreview(body: RequestQuestionConsultantPreview) = retrofit.postQuestionConsultantPreview("JWT $token", body)
 
-    suspend fun postQuestionConsultantEnd(body: RequestQuestionConsultantEnd) = retrofit.postQuestionConsultantEnd("JWT $token", body)
+    suspend fun postQuestionConsultantEnd(body: RequestQuestionConsultantEndItem) = retrofit.postQuestionConsultantEnd("JWT $token", GenericRequest(body))
 
-    suspend fun postQuestionConsultantClose(body: RequestQuestionConsultantClose) = retrofit.postQuestionConsultantClose("JWT $token", body)
+    suspend fun postQuestionConsultantClose(body: RequestQuestionConsultantCloseItem) = retrofit.postQuestionConsultantClose("JWT $token", GenericRequest(body))
 
     suspend fun getClientQuestionView() = retrofit.getQuestionClientView("JWT $token")
 
     suspend fun postClientQuestionPreview(body: RequestQuestionConsultantPreview) = retrofit.postQuestionClientPreview("JWT $token", body)
 
-    suspend fun postQuestionClientEnd(body: RequestQuestionConsultantEnd) = retrofit.postQuestionClientEnd("JWT $token", body)
+    suspend fun postQuestionClientEnd(body: RequestQuestionConsultantEndItem) = retrofit.postQuestionClientEnd("JWT $token", GenericRequest(body))
 
-    suspend fun postQuestionClientClose(body: RequestQuestionConsultantClose) = retrofit.postQuestionClientClose("JWT $token", body)
+    suspend fun postQuestionClientClose(body: RequestQuestionConsultantCloseItem) = retrofit.postQuestionClientClose("JWT $token", GenericRequest(body))
 
 }

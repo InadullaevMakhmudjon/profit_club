@@ -1,17 +1,17 @@
 package com.example.profitclub.ui.bids
 
-import RequestQuestionConsultantClose
 import RequestQuestionConsultantCloseItem
-import RequestQuestionConsultantEnd
 import RequestQuestionConsultantEndItem
 import RequestQuestionConsultantPreview
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.profitclub.data.questions.*
+import com.example.profitclub.data.questions.QuestionRepository
+import com.example.profitclub.data.questions.ResponseQuestionConsultantClose
+import com.example.profitclub.data.questions.ResponseQuestionConsultantEnd
+import com.example.profitclub.data.questions.ResponseQuestionConsultantPreview
 import kotlinx.coroutines.launch
-import java.util.ArrayList
-import java.lang.Exception
+import java.util.*
 
 class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
 
@@ -67,8 +67,7 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
                            description_rate: String, rate: Float){
         viewModelScope.launch {
             try {
-                val response = repository.postQuestionConsultantEnd(RequestQuestionConsultantEnd(RequestQuestionConsultantEndItem(question_id, description_answer,
-                    description_rate, rate)))
+                val response = repository.postQuestionConsultantEnd(RequestQuestionConsultantEndItem(question_id, description_answer, description_rate, rate))
                 if (response.isSuccessful){
                     statusComplete.apply { value = response.body() }
                 }
@@ -81,7 +80,7 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
     val postCancel = fun(question_id: Int){
         viewModelScope.launch {
             try {
-                val response = repository.postQuestionConsultantClose(RequestQuestionConsultantClose(RequestQuestionConsultantCloseItem(question_id)))
+                val response = repository.postQuestionConsultantClose(RequestQuestionConsultantCloseItem(question_id))
                 if (response.isSuccessful){
                     statusCancel.apply { value = response.body() as ArrayList<ResponseQuestionConsultantClose> }
                 }
