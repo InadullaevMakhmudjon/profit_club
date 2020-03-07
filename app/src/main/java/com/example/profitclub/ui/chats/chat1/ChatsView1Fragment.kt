@@ -1,8 +1,9 @@
 package com.example.profitclub.ui.chats.chat1
 
-import android.content.Context
 import android.os.Bundle
-import android.view.*
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -12,10 +13,9 @@ import com.example.profitclub.adapters.MessageListAdapter
 import com.example.profitclub.data.Service
 import com.example.profitclub.databinding.FragmentChatsView1Binding
 import com.example.profitclub.model.Messages
+import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.ChatViewActivity
 import com.github.nkzawa.emitter.Emitter
-import com.google.gson.JsonObject
-import org.json.JSONObject
 
 class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
@@ -52,13 +52,16 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         val activity = activity as ChatViewActivity?
         val myDataFromActivity = activity!!.getMyDataChat()
 
+        val questionId = activity.getMyQusetionId()
+
+        toast("question_id: $questionId")
+
         if(myDataFromActivity == 2 || myDataFromActivity == 3){
             binding.linearLayout.isVisible = false
         }
 
         return binding.root
     }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         socket?.on("", Emitter.Listener { args ->

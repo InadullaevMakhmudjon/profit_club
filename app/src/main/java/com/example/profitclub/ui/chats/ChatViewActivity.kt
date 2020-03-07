@@ -14,16 +14,20 @@ import com.example.profitclub.databinding.ActivityChatViewBinding
 import com.example.profitclub.ui.chats.adapters.SectionPageAdapter4
 import kotlinx.android.synthetic.main.activity_chat_view.*
 import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
+import kotlinx.android.synthetic.main.chat_custom_bar.view.*
 
 class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
     private lateinit var binding: ActivityChatViewBinding
     private var mSectionPageAdapter: SectionPageAdapter4? = null
     private var role: Int = 0
+    private var question_id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_view)
+
+        question_id = this.intent.getIntExtra("question_id", 0)
 
         setSupportActionBar(toolbar)
         val actionBar = this.supportActionBar
@@ -34,6 +38,8 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         val mLayoutInflater: LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val actionBarView: View = mLayoutInflater.inflate(R.layout.chat_custom_bar, null)
         actionBar?.customView = actionBarView
+        actionBarView.question_id.text = question_id.toString()
+
         //val role = MainActivity().run { getMyData() }
         /*val activity = callingActivity as MainActivity?
         val role = activity!!.getMyData()
@@ -84,6 +90,10 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
     fun getMyDataChat(): Int {
         return role
+    }
+
+    fun getMyQusetionId(): Int {
+        return question_id
     }
 
    /* private fun alertDialog(){

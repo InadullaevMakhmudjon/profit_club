@@ -30,11 +30,11 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
     }
 
     val statusComplete = MutableLiveData<ResponseQuestionConsultantEnd>()?.apply {
-        value = null
+
     }
 
     val statusCancel = MutableLiveData<ArrayList<ResponseQuestionConsultantClose>>().apply {
-        value = null
+
     }
 
     val postPreview = fun(question_id: Int, lang: String?){
@@ -77,10 +77,37 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
         }
     }
 
+    val postCompleteClient = fun(question_id: Int, description_answer: String,
+                           description_rate: String, rate: Float){
+        viewModelScope.launch {
+            try {
+                val response = repository.postQuestionClientEnd(RequestQuestionConsultantEndItem(question_id, description_answer, description_rate, rate))
+                if (response.isSuccessful){
+                    statusComplete.apply { value = response.body() }
+                }
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
+            }
+        }
+    }
+
     val postCancel = fun(question_id: Int){
         viewModelScope.launch {
             try {
                 val response = repository.postQuestionConsultantClose(RequestQuestionConsultantCloseItem(question_id))
+                if (response.isSuccessful){
+                    statusCancel.apply { value = response.body() as ArrayList<ResponseQuestionConsultantClose> }
+                }
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
+            }
+        }
+    }
+
+    val postCancelClient = fun(question_id: Int){
+        viewModelScope.launch {
+            try {
+                val response = repository.postQuestionClientClose(RequestQuestionConsultantCloseItem(question_id))
                 if (response.isSuccessful){
                     statusCancel.apply { value = response.body() as ArrayList<ResponseQuestionConsultantClose> }
                 }

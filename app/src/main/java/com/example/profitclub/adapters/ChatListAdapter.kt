@@ -72,10 +72,10 @@ class ChatListAdapter(private val context: Context, private val items: ArrayList
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.container -> {
-              //  val item = p0?.getTag() as Questions
-               // val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
-                //intent.putExtra(Const.EVENT_EXTRA, item)
-               context.startActivity(Intent(context, BidDetailActivity::class.java))
+                val item = p0.tag as QuestionConsultantData
+                val intent: Intent = Intent(context, BidDetailActivity::class.java)
+                intent.putExtra("question_id", item.question_id)
+                context.startActivity(intent)
             }
         }
     }
