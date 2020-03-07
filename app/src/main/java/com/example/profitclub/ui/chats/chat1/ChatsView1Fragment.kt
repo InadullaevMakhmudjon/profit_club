@@ -1,15 +1,21 @@
 package com.example.profitclub.ui.chats.chat1
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.MessageListAdapter
+import com.example.profitclub.data.Service
 import com.example.profitclub.databinding.FragmentChatsView1Binding
 import com.example.profitclub.model.Messages
 import com.example.profitclub.ui.chats.ChatViewActivity
+import com.github.nkzawa.emitter.Emitter
+import com.google.gson.JsonObject
+import org.json.JSONObject
 
 class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
@@ -17,6 +23,7 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
     private lateinit var binding: FragmentChatsView1Binding
     private var adapter: MessageListAdapter? = null
     private var layoutManager: LinearLayoutManager? = null
+    private val socket = Service.socket
 
     val list = listOf(
         Messages("Hello there. How Can I help you?", "14:51", 2),
@@ -32,7 +39,6 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         homeViewModel =
             ViewModelProviders.of(this).get(ChatsView1Model::class.java)
         binding = FragmentChatsView1Binding.inflate(layoutInflater)
@@ -55,9 +61,18 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        socket?.on("", Emitter.Listener { args ->
+            Toast.makeText(activity, args[0].toString(), Toast.LENGTH_LONG).show()
+        })
+        socket?.connect()
     }
-    
+
+    override fun onDestroy() {
+        super.onDestroy()
+        socket?.disconnect()
+        socket?.off("")
+    }
+
     override fun onClick(p0: View?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
