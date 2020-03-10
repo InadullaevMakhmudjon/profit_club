@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.questions.QuestionDetailActivity">
+    tools:context=".ui.questions.open.QuestionDetailActivity">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -55,9 +55,8 @@
                         android:layout_weight="1"
                         android:textColor="@color/white"
                         android:text="@string/reject"
-                        style="?attr/buttonBarButtonStyle"
                         android:textAlignment="center"
-                        android:background="@drawable/bc_status_rejected"
+                        android:background="@android:color/holo_red_light"
                         android:layout_height="match_parent"/>
 
                     <Button
@@ -65,10 +64,9 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:textColor="@color/white"
-                        android:text="@string/delay"
-                        style="?attr/buttonBarButtonStyle"
+                        android:text="@string/arbitration"
                         android:textAlignment="center"
-                        android:background="@drawable/bc_status_in_arbitration"
+                        android:background="@color/cardview_dark_background"
                         android:layout_height="match_parent"/>
 
                     <Button
@@ -76,10 +74,9 @@
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:textColor="@color/white"
-                        style="?attr/buttonBarButtonStyle"
                         android:text="@string/close"
                         android:textAlignment="center"
-                        android:background="@drawable/bc_status"
+                        android:background="@color/accent2"
                         android:layout_height="match_parent"/>
 
                 </LinearLayout>
@@ -93,7 +90,7 @@
             android:paddingTop="8dp">
 
             <TextView
-                android:id="@+id/transactions"
+                android:id="@+id/title_"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
@@ -105,7 +102,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/transactions_desc"
+                android:id="@+id/description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -114,8 +111,8 @@
                 android:textColor="@android:color/tertiary_text_light"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/transactions"
-                app:layout_constraintTop_toBottomOf="@+id/transactions"
+                app:layout_constraintStart_toStartOf="@+id/title_"
+                app:layout_constraintTop_toBottomOf="@+id/title_"
                 app:layout_constraintVertical_bias="0.0" />
 
             <TextView
@@ -128,8 +125,8 @@
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="20sp"
                 app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintStart_toStartOf="@id/transactions_desc"
-                app:layout_constraintTop_toBottomOf="@id/transactions_desc" />
+                app:layout_constraintStart_toStartOf="@id/description"
+                app:layout_constraintTop_toBottomOf="@id/description" />
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -152,7 +149,7 @@
                     android:paddingTop="8dp">
 
                     <TextView
-                        android:id="@+id/privacy"
+                        android:id="@+id/skills"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
@@ -164,7 +161,7 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/privacy_desc"
+                        android:id="@+id/skills_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
@@ -173,8 +170,8 @@
                         android:textColor="@android:color/tertiary_text_light"
                         android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/privacy"
-                        app:layout_constraintTop_toBottomOf="@+id/privacy"
+                        app:layout_constraintStart_toStartOf="@+id/skills"
+                        app:layout_constraintTop_toBottomOf="@+id/skills"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <RelativeLayout
@@ -182,7 +179,7 @@
                         android:layout_height="1dp"
                         android:background="@android:color/darker_gray"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/privacy_desc"
+                        app:layout_constraintTop_toBottomOf="@+id/skills_desc"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginBottom="8dp"
@@ -440,12 +437,11 @@
             android:text="@string/total"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycler"
+            android:id="@+id/recycler_bids"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
         </androidx.recyclerview.widget.RecyclerView>
-
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
@@ -472,7 +468,6 @@
         android:layout_marginBottom="0dp"
         android:layout_gravity="bottom"
         android:background="@color/colorAccent2"
-        android:textAlignment="center"
         android:text="@string/place_a_bid"
         android:textColor="@color/white">
 

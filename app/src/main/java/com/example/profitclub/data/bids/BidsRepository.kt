@@ -10,7 +10,7 @@ class BidsRepository(private val retrofit: BidsService, private val preference: 
     private var token: String? = preference.getString("token", null)
 
     // Consultant
-    suspend fun getConsultantBidsView() = retrofit.getBidsConsultantView("JWT $token")
+    suspend fun getConsultantBidsView(lang: String? = "") = retrofit.getBidsConsultantView("JWT $token", lang)
     suspend fun getBidsConsultantClickView(lang: String?) = retrofit.getBidsConsultantClickView("JWT $token", lang)
     suspend fun postBidsConsultantPreviewClient(body: BidsConsultantPreviewClient) = retrofit.postBidsConsultantPreviewClient("JWT $token", body)
     suspend fun postBidsConsultantBid(body: RequestBidsConsultantBidItem) = retrofit.postBidsConsultantBid("JWT $token", body)

@@ -1,4 +1,4 @@
-package com.example.profitclub.ui.questions
+package com.example.profitclub.ui.questions.open
 
 import android.annotation.SuppressLint
 import android.content.Context
@@ -8,32 +8,30 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AlertDialog.*
-import androidx.core.app.NotificationCompat
-import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.isVisible
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.profitclub.App
 import com.example.profitclub.R
 import com.example.profitclub.adapters.BidsAdapter
+import com.example.profitclub.data.bids.ConsultantBidsData
+import com.example.profitclub.model.Bid
 import com.example.profitclub.model.Bids
-import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_question_creation.*
+import com.example.profitclub.toast
+import com.example.profitclub.ui.browse.BrowseQuestionViewModel
+import com.example.profitclub.ui.questions.QuestionCreationActivity
 import kotlinx.android.synthetic.main.activity_question_detail.*
 import kotlinx.android.synthetic.main.activity_question_detail.toolbar
 import kotlinx.android.synthetic.main.review_alert_dialog.view.*
 
 class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var notificationManager: NotificationManagerCompat
+    //private lateinit var notificationManager: NotificationManagerCompat
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: BidsAdapter? = null
-
-    val list = listOf(Bids("Jason", "$100,00 USD in 9 days", 1),
-        Bids("William", "$200,00 USD in 7 days", 2),
-        Bids("William", "$200,00 USD in 7 days", 2),
-                Bids("Jason", "$100,00 USD in 9 days", 2))
+    private val APP_PREFERENCE = "MYSETTINGS"
+    private lateinit var vm: QuestionDetailViewModel
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,12 +42,20 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         when (this.intent.getIntExtra("role",1)) {
             1 -> {
+                val item = intent.getSerializableExtra("item_open") as ConsultantBidsData
                 place_bid.isVisible = false
                 date_container.isVisible = false
                 container_chosen_consultant.isVisible = false
+                title_.text = item.title
+                description.text = item.description
+                deadline.text = item.click_count
+                skills_desc.text = item.categories.reduce { a, b -> "$a/$b" }
+                question_id_desc.text = item.question_id.toString()
+
+
             }
             2 -> {
-                recycler.isVisible = false
+                recycler_bids.isVisible = false
                 total_bids.isVisible = false
                 date_container.isVisible = false
                 container_chosen_consultant.isVisible = false
@@ -57,27 +63,43 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
                 buttons_container.isVisible = false
             }
             3 -> {
-                recycler.isVisible = false
+                recycler_bids.isVisible = false
                 total_bids.isVisible = false
                 date_container.isVisible = false
                 place_bid.isVisible = false
                 container_chosen_consultant.isEnabled = false
             }
             4 -> {
-                recycler.isVisible = false
+                recycler_bids.isVisible = false
                 total_bids.isVisible = false
                 place_bid.isVisible = false
                 buttons_container.isVisible = false
             }
         }
 
-        adapter = BidsAdapter(this.applicationContext, list, this)
-        layoutManager = LinearLayoutManager(this.applicationContext, LinearLayoutManager.VERTICAL, false)
-        this.recycler.layoutManager = layoutManager
-        this.recycler.adapter = adapter
+        val preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        vm = ViewModelProviders.of(this, QuestionsDetailViewModelFactory(preferences)).get(QuestionDetailViewModel::class.java)
+
+        adapter = BidsAdapter(this.applicationContext, null, this)
+        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        this.recycler_bids.layoutManager = layoutManager
+        this.recycler_bids.adapter = adapter
         adapter?.notifyDataSetChanged()
 
-        notificationManager = NotificationManagerCompat.from(this)
+        if (vm.data.value != null){
+            vm.data.observe(this, Observer { data ->
+                if (data != null){
+                    adapter = BidsAdapter(this, data.data, this)
+                    this.recycler_bids.adapter = adapter
+                }
+            })
+
+            vm.error.observe(this, Observer { error ->
+                if (error != null)
+                toast("Error: $error")
+            })
+        }
+        //notificationManager = NotificationManagerCompat.from(this)
 
         place_bid.setOnClickListener {
             val intent = Intent(applicationContext, QuestionCreationActivity::class.java)
@@ -93,7 +115,7 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        if(total_bids != null && recycler != null){
+        if(total_bids != null && recycler_bids != null){
             val size = adapter!!.itemCount.toString()
             total_bids.text = "Total bids: $size"
         }

@@ -3,25 +3,27 @@ package com.example.profitclub.ui.questions
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.widget.DatePicker
+import android.widget.AutoCompleteTextView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
+import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.R
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_question_creation.*
-import kotlinx.android.synthetic.main.category_alert_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_client_individual_infos.*
-import kotlinx.android.synthetic.main.question_item.*
 import java.util.*
 
 class QuestionCreationActivity : AppCompatActivity() {
+    private lateinit var viewModel: QuestionCreationViewModel
+    private val APP_PREFERENCE = "MYSETTINGS"
+    private var user_id: Int? = null
+    private var deadline_final: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,22 +31,31 @@ class QuestionCreationActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        val role = this.intent.getIntExtra("role",1)
+        val preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        user_id = preferences.getInt("user_id", 0)
+        viewModel = ViewModelProviders.of(this, QuestionCreationViewModelFactory(preferences)).get(QuestionCreationViewModel::class.java)
 
-        if(role == 2){
+
+        val title = findViewById<AutoCompleteTextView>(R.id.title_question_creation)
+        val description = findViewById<AutoCompleteTextView>(R.id.description_question_creation)
+        val price = findViewById<AutoCompleteTextView>(R.id.price_question_creation)
+        val deadline = findViewById<TextView>(R.id.question_deadline)
+        //val role = this.intent.getIntExtra("role",1)
+
+       /* if(role == 2){
             supportActionBar?.title = "Place a bid"
 
             language_container.isVisible = false
-            category.isVisible = false
+            category_question_creation.isVisible = false
             title_255.isVisible = false
             description.isVisible = false
         } else{
 
             price_container.isVisible = false
             brief.isVisible = false
-        }
+        }*/
 
-        category.setOnClickListener {
+        category_question_creation.setOnClickListener {
             this.alertDialog()
         }
 
@@ -57,22 +68,21 @@ class QuestionCreationActivity : AppCompatActivity() {
             //showDatePickerDialog()
             val dpd = DatePickerDialog(this, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
                 // Display Selected date in TextView
-                question_deadline.text = ("Deadline: " + dayOfMonth + "/" + monthOfYear + 1 + "/" + year)
+                val month = monthOfYear + 1
+                question_deadline.text = ("Deadline: $dayOfMonth/$month/$year")
+                deadline_final = "$dayOfMonth/$month/$year"
             }, year, month, day)
             dpd.show()
 
         }
 
         post.setOnClickListener {
-            Snackbar.make(it, "Your question posted successfully", Snackbar.LENGTH_LONG)
+            /*Snackbar.make(it, "Your question posted successfully", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            finish()
+            finish()*/
+            viewModel.postQuestion(user_id!!, arrayListOf(1,2), title.text.toString(), description.text.toString(),
+                1, deadline_final.toString())
         }
-    }
-
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return super.onCreateView(name, context, attrs)
-
     }
 
     override fun onSupportNavigateUp(): Boolean {

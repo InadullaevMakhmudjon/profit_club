@@ -21,7 +21,7 @@
         <activity android:name=".ui.chats.ChatViewActivity" />
         <activity android:name=".ui.account.employees.EmployeesListActivity" />
         <activity android:name=".ui.account.details.ProfileActivity" />
-        <activity android:name=".ui.questions.QuestionDetailActivity" />
+        <activity android:name=".ui.questions.open.QuestionDetailActivity" />
         <activity android:name=".ui.browse.BrowseQuestionsActivity" />
         <activity android:name=".ui.questions.QuestionCreationActivity" />
         <activity android:name=".ui.AuthentificationActivity"

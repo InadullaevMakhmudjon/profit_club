@@ -7,6 +7,9 @@ class AuthRepository(private val retrofit: AuthService, private val preference: 
     // Global token value
     var token: String? = null
 
+    // Global token value
+    var userId: Int? = null
+
     // Global role value
     var role: Int? = null
 
@@ -58,8 +61,10 @@ class AuthRepository(private val retrofit: AuthService, private val preference: 
             val editor = preference.edit()
             editor.putString("token", userToken.token)
             editor.putInt("role", userToken.type)
+            editor.putInt("user_id", userToken.user_id)
             token = userToken.token
             role = userToken.type
+            userId = userToken.user_id
             editor.apply()
         }
     }
@@ -68,5 +73,6 @@ class AuthRepository(private val retrofit: AuthService, private val preference: 
     init {
         token = preference.getString("token", null)
         role = preference.getInt("role", 0)
+        userId = preference.getInt("user_id", 0)
     }
 }

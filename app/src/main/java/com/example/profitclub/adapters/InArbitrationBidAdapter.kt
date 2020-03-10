@@ -8,48 +8,29 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
+import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.databinding.InArbitrationBidItemBinding
-import com.example.profitclub.model.Bid
 import com.example.profitclub.ui.bids.BidDetailActivity
 
-
-class InArbitrationBidAdapter(context: Context, items: List<Bid>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
-    private val inflater: LayoutInflater
-    private val TYPE_FEED = 1
-    private  var context: Context
-    private var items: List<Bid> = ArrayList()
-    private  var listener: View.OnClickListener
-
-    init {
-        this.context = context
-        this.items =  items
-        this.listener = listener
-        this.inflater = LayoutInflater.from(context)
-    }
-
-
-    override fun getItemViewType(position: Int): Int {
-        return TYPE_FEED
-    }
+class InArbitrationBidAdapter(private val context: Context, private val items: ArrayList<QuestionConsultantDisputeData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        if (viewType == TYPE_FEED) {
         val binding = InArbitrationBidItemBinding.inflate(inflater, parent, false)
         return EventFeedHolder(binding.root)
-//        }
-//        return null
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = items[position]
+        val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
-            binding!!.bid = item
+            binding!!.arbitration = item
 
-            /* Picasso.get()
-                     .load(item.phost_photo)
-                     .into(binding.imageActual)*/
+            binding.questionText.text = item?.title
+            binding.questionId.text = item?.question_id.toString()
+            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
+            binding.price.text = item?.price.toString()
+            binding.status.text = item?.status.toString()
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)
@@ -58,7 +39,7 @@ class InArbitrationBidAdapter(context: Context, items: List<Bid>, listener: View
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return items?.size ?: 0
     }
 
     private inner class EventFeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {

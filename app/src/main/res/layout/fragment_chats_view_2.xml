@@ -17,7 +17,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"/>
+        android:layout_above="@+id/attach"/>
 
     <Button
         android:id="@+id/attach"
@@ -27,7 +27,6 @@
         android:layout_marginBottom="0dp"
         android:layout_gravity="bottom"
         android:background="@color/colorAccent2"
-        android:textAlignment="center"
         android:text="@string/attach_file"
         android:textColor="@color/white"/>
 

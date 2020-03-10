@@ -3,6 +3,7 @@ package com.example.profitclub.ui.bids
 import RequestQuestionConsultantCloseItem
 import RequestQuestionConsultantEndItem
 import RequestQuestionConsultantPreview
+import RequestQuestionDisputeOpenItem
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -17,10 +18,6 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
 
     val error = MutableLiveData<String>()
 
-   /* val data = MutableLiveData<QuestionConsultantView>().apply {
-        value = null
-    }*/
-
     val data = MutableLiveData<ResponseQuestionConsultantPreview>().apply {
         value = null
     }
@@ -29,13 +26,9 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
         value = null
     }
 
-    val statusComplete = MutableLiveData<ResponseQuestionConsultantEnd>()?.apply {
+    val statusComplete = MutableLiveData<ResponseQuestionConsultantEnd>()
 
-    }
-
-    val statusCancel = MutableLiveData<ArrayList<ResponseQuestionConsultantClose>>().apply {
-
-    }
+    val statusCancel = MutableLiveData<ArrayList<ResponseQuestionConsultantClose>>()
 
     val postPreview = fun(question_id: Int, lang: String?){
       viewModelScope.launch {
@@ -117,16 +110,14 @@ class BidDetailViewModel(val repository: QuestionRepository): ViewModel() {
         }
     }
 
- /*   init {
+    val postDisputeOpen = fun(question_id: Int, description: String){
         viewModelScope.launch {
             try {
-                val res = repository.getConsultantQuestionView()
-                if(res.isSuccessful) {
-                    data.apply { value = res.body() }
-                }
-            } catch (e: Exception) {
-                error.apply { value = e.message }
+                val response = repository.postQuestionDisputeOpen(RequestQuestionDisputeOpenItem(question_id, description))
+
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
             }
         }
-    }*/
+    }
 }
