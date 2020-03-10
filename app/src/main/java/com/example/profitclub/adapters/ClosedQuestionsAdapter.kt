@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.databinding.ClosedQuestionItemBinding
 import com.example.profitclub.model.Questions
-import com.example.profitclub.ui.questions.QuestionDetailActivity
+import com.example.profitclub.ui.questions.open.QuestionDetailActivity
 
 
 class ClosedQuestionsAdapter(context: Context, items: List<Questions>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {

@@ -14,6 +14,7 @@ import com.example.profitclub.data.questions.QuestionConsultantData
 import com.example.profitclub.databinding.BrowseItemBinding
 import com.example.profitclub.databinding.ChatItemBinding
 import com.example.profitclub.ui.bids.BidDetailActivity
+import com.example.profitclub.ui.browse.BrowseQuestionsActivity
 
 class BrowseListAdapter(private val context: Context, private val items: ArrayList<ConsultantBidsData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -76,10 +77,10 @@ class BrowseListAdapter(private val context: Context, private val items: ArrayLi
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.container -> {
-              //  val item = p0?.getTag() as Questions
-               // val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
-                //intent.putExtra(Const.EVENT_EXTRA, item)
-               context.startActivity(Intent(context, BidDetailActivity::class.java))
+                val item = p0?.tag as ConsultantBidsData
+                val intent: Intent = Intent(context, BrowseQuestionsActivity::class.java)
+                intent.putExtra("item", item)
+               context.startActivity(intent)
             }
         }
     }

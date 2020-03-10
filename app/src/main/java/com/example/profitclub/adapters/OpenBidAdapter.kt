@@ -9,19 +9,16 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
-import com.example.profitclub.data.questions.QuestionConsultantData
+import com.example.profitclub.data.bids.ConsultantBidsClickData
 import com.example.profitclub.databinding.OpenBidItemBinding
-import com.example.profitclub.ui.bids.BidDetailActivity
+import com.example.profitclub.ui.browse.BrowseQuestionsActivity
 
-class OpenBidAdapter(private val context: Context, private val items: ArrayList<QuestionConsultantData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+class OpenBidAdapter(private val context: Context, private val items: ArrayList<ConsultantBidsClickData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        if (viewType == TYPE_FEED) {
         val binding = OpenBidItemBinding.inflate(inflater, parent, false)
         return EventFeedHolder(binding.root)
-//        }
-//        return null
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -33,10 +30,14 @@ class OpenBidAdapter(private val context: Context, private val items: ArrayList<
             /* Picasso.get()
                      .load(item.phost_photo)
                      .into(binding.imageActual)*/
+            binding.questionText.text = item?.title
+            binding.questionId.text = item?.bid_id.toString()
+            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
+            binding.price.text = item?.price
+            binding.status.text = item?.deadline
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)
-
         }
     }
 
@@ -55,13 +56,14 @@ class OpenBidAdapter(private val context: Context, private val items: ArrayList<
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.container -> {
-                val item = p0.tag as QuestionConsultantData
-                val intent: Intent = Intent(context, BidDetailActivity::class.java)
-                intent.putExtra("question_id", item.question_id)
+                val item = p0.tag as ConsultantBidsClickData
+                val intent: Intent = Intent(context, BrowseQuestionsActivity::class.java)
+                intent.putExtra("key", 1)
+                intent.putExtra("item_open", item)
                 context.startActivity(intent)
             }
         }
     }
 
-    private operator fun <T> MutableLiveData<T>.get(position: Int): QuestionConsultantData = get(position)
+    private operator fun <T> MutableLiveData<T>.get(position: Int): ConsultantBidsClickData = get(position)
 }

@@ -25,7 +25,6 @@ data class BidsClientAddItem(
     val deadline: String
 )
 
-
 data class RequestBidsClientAdd(
     val  item: BidsClientAddItem
 )

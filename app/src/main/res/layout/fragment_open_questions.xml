@@ -9,10 +9,10 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.questions.OpenQuestionsFragment">
+    tools:context=".ui.questions.open.OpenQuestionsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_completed"
+        android:id="@+id/recycler_open"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 

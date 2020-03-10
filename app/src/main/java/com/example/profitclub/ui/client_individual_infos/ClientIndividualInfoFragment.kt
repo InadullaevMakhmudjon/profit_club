@@ -13,6 +13,7 @@ import androidx.navigation.Navigation
 import com.example.profitclub.R
 import kotlinx.android.synthetic.main.fragment_client_individual_infos.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListener  {
 
@@ -110,18 +111,19 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
            viewModel =
                ViewModelProviders.of(this, ClientindividualViewModelFactory()).get(ClientIndividualInfoViewModel::class.java)
 
-           viewModel.regions.observe(this, androidx.lifecycle.Observer {allRegions->
+           viewModel.regions.observe(viewLifecycleOwner, androidx.lifecycle.Observer {allRegions->
                if(allRegions.size > 0) {
                    regionDropDown.adapter = ArrayAdapter(it!!.baseContext, R.layout.support_simple_spinner_dropdown_item, allRegions.map { region -> region.name })
                }
            })
-           viewModel.cities.observe(this, androidx.lifecycle.Observer { allCities ->
+           viewModel.cities.observe(viewLifecycleOwner, androidx.lifecycle.Observer { allCities ->
                if(allCities.size > 0) {
                    //city_text.visibility = INVISIBLE
                   // city_text.isVisible = false
                    citiesDropDown.adapter = ArrayAdapter(it!!.baseContext, R.layout.support_simple_spinner_dropdown_item, allCities.map { region -> region.name })
                }
            })
+           val categories = ArrayList<Int>()
 
            regionDropDown.onItemSelectedListener = object :
                AdapterView.OnItemSelectedListener {
@@ -129,6 +131,7 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
                                            view: View, position: Int, id: Long) {
                    viewModel.getCity(viewModel.regions.value!![position].id)
                    regionId = viewModel.regions.value!![position].id
+                   categories.add(viewModel.regions.value!![position].id)
                }
 
                override fun onNothingSelected(parent: AdapterView<*>) {

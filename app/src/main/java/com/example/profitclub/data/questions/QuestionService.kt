@@ -8,19 +8,16 @@ import RequestQuestionDisputeCloseItem
 import RequestQuestionDisputeOpenItem
 import com.example.profitclub.data.*
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 import java.util.ArrayList
 
 interface QuestionService {
 
     @POST(QUESTION_DISPUTE_OPEN)
-    suspend fun postQuestionDisputeOpen(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeOpenItem>)
+    suspend fun postQuestionDisputeOpen(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeOpenItem>): Response<Unit>
 
     @POST(QUESTION_DISPUTE_CLOSE)
-    suspend fun postQuestionDisputeClose(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeCloseItem>)
+    suspend fun postQuestionDisputeClose(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeCloseItem>): Response<Unit>
 
     // Consultant
     @GET(QUESTION_CONSULTANT_VIEW)
@@ -33,8 +30,10 @@ interface QuestionService {
     suspend fun postQuestionConsultantEnd(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionConsultantEndItem>): Response<ResponseQuestionConsultantEnd>
 
     @POST(QUESTION_CONSULTANT_CLOSE)
-
     suspend fun postQuestionConsultantClose(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionConsultantCloseItem>): Response<ArrayList<ResponseQuestionConsultantClose>>
+
+    @GET(QUESTION_CONSULTANT_DISPUTE_VIEW)
+    suspend fun getQuestionConsultantDisputeView(@Header("authorization") auth: String?, @Query("lang") lang: String?): Response<QuestionConsultantDisputeView>
 
     // Client
     @GET(QUESTION_CLIENT_VIEW)

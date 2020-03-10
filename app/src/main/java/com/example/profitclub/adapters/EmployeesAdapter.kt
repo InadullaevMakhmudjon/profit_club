@@ -1,7 +1,6 @@
 package com.example.profitclub.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +8,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.databinding.EmployeesItemBinding
-import com.example.profitclub.databinding.UserItemBinding
 import com.example.profitclub.model.Bids
-import com.example.profitclub.ui.account.details.ProfileActivity
-import com.example.profitclub.ui.questions.QuestionDetailActivity
 
 
 class EmployeesAdapter(context: Context, items: List<Bids>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {

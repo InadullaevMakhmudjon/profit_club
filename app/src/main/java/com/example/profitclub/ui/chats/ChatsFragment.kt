@@ -48,6 +48,10 @@ class ChatsFragment : Fragment(), View.OnClickListener {
             activityMain?.customActionBarTitle(getString(R.string.My_Messages))
         }
 
+        var clicked: (() -> Unit)
+
+        
+
         activity?.let {activity ->
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 

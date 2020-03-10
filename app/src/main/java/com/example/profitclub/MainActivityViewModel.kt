@@ -39,6 +39,7 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
 
                 token.apply { value = Token?.token }
                 role.apply { value = Token?.type }
+
                 loading.apply { value = false }
             } catch (e: Exception) {
                 error.apply { value = e.toString() }
