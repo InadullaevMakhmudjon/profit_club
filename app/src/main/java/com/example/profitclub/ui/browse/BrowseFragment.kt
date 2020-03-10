@@ -42,7 +42,6 @@ class BrowseFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-
         activity?.let {activity ->
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             viewModel =
@@ -65,7 +64,6 @@ class BrowseFragment : Fragment(), View.OnClickListener {
             viewModel.error.observe(viewLifecycleOwner, Observer { message ->
                 toast("Error: $message")
             })
-
         }
     }
 

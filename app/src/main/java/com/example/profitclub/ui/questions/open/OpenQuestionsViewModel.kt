@@ -1,15 +1,16 @@
-package com.example.profitclub.ui.bids
+package com.example.profitclub.ui.questions.open
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.profitclub.data.questions.QuestionConsultantDisputeView
-import com.example.profitclub.data.questions.QuestionRepository
+import com.example.profitclub.data.bids.BidsRepository
+import com.example.profitclub.data.bids.ConsultantBidsData
+import com.example.profitclub.data.bids.ResponseGeneric
 import kotlinx.coroutines.launch
 
-class InArbitrationBidsViewModel(val repository: QuestionRepository) : ViewModel() {
+class OpenQuestionsViewModel(val repository: BidsRepository) : ViewModel() {
 
-    val data = MutableLiveData<QuestionConsultantDisputeView>().apply {
+    val data = MutableLiveData<ResponseGeneric<ConsultantBidsData>>().apply {
         value = null
     }
 
@@ -18,7 +19,7 @@ class InArbitrationBidsViewModel(val repository: QuestionRepository) : ViewModel
     init {
         viewModelScope.launch {
             try {
-                val response = repository.getQuestionConsultantDisputeView("ru")
+                val response = repository.getBidsClientView("ru")
                 if (response.isSuccessful){
                     data.apply { value = response.body() }
                 }
@@ -27,4 +28,5 @@ class InArbitrationBidsViewModel(val repository: QuestionRepository) : ViewModel
             }
         }
     }
+
 }

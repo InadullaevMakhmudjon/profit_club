@@ -1,32 +1,25 @@
 package com.example.profitclub.ui.bids
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.profitclub.data.questions.QuestionConsultantView
-import com.example.profitclub.data.questions.QuestionRepository
+import com.example.profitclub.data.bids.BidsRepository
+import com.example.profitclub.data.bids.ConsultantBidsClickData
+import com.example.profitclub.data.bids.ResponseGeneric
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
-class OpenBidsViewModel(val repository: QuestionRepository) : ViewModel() {
-
-    private val _text = MutableLiveData<String>().apply {
-        value = "This is gallery Fragment"
-    }
-
-    val text: LiveData<String> = _text
+class OpenBidsViewModel(val repository: BidsRepository) : ViewModel() {
 
     val error = MutableLiveData<String>()
 
-    val data = MutableLiveData<QuestionConsultantView>().apply {
+    val data = MutableLiveData<ResponseGeneric<ConsultantBidsClickData>>().apply {
         value = null
     }
 
     init {
         viewModelScope.launch {
             try {
-                val res = repository.getConsultantQuestionView()
+                val res = repository.getBidsConsultantClickView("ru")
                 if(res.isSuccessful) {
                     data.apply { value = res.body() }
                 }

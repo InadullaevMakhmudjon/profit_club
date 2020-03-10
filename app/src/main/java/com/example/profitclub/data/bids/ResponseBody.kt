@@ -1,5 +1,6 @@
 package com.example.profitclub.data.bids
 
+import java.io.Serializable
 import java.util.ArrayList
 
 data class ConsultantBidsData(
@@ -14,7 +15,7 @@ data class ConsultantBidsData(
     val click_count: String,
     val click_status: String,
     val createdate: String
-)
+) : Serializable
 
 data class ConsultantBidsClickData(
     val bid_id: Int,
@@ -26,7 +27,7 @@ data class ConsultantBidsClickData(
     val price: String,
     val consultant_id: Int,
     val createdate: String
-)
+) : Serializable
 
 data class ClientClickView(
     val bid_id: Int,

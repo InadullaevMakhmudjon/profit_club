@@ -9,10 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.databinding.InarbitrationQuestionItemBinding
-import com.example.profitclub.databinding.InprogressQuestionItemBinding
-import com.example.profitclub.databinding.QuestionItemBinding
 import com.example.profitclub.model.Questions
-import com.example.profitclub.ui.questions.QuestionDetailActivity
+import com.example.profitclub.ui.questions.open.QuestionDetailActivity
 
 
 class InArbitrationQuestionsAdapter(context: Context, items: List<Questions>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
@@ -56,7 +54,9 @@ class InArbitrationQuestionsAdapter(context: Context, items: List<Questions>, li
                      .into(binding.imageActual)*/
 
             binding?.container.tag = item
-            binding?.container.setOnClickListener(this)
+            binding?.container.setOnClickListener{
+                items[position].callBack?.invoke("CLicked ${item.num_bids}")
+            }
 
         }
     }
@@ -74,6 +74,8 @@ class InArbitrationQuestionsAdapter(context: Context, items: List<Questions>, li
     }
 
     override fun onClick(p0: View?) {
+
+        /*
         when(p0?.id){
             R.id.container -> {
               //  val item = p0?.getTag() as Questions
@@ -82,5 +84,6 @@ class InArbitrationQuestionsAdapter(context: Context, items: List<Questions>, li
                 context.startActivity(intent)
             }
         }
+         */
     }
 }

@@ -1,3 +1,4 @@
+/*
 package uz.abubakrr.eventme.adapters
 
 import android.content.Context
@@ -10,8 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.databinding.QuestionItemBinding
 import com.example.profitclub.model.Questions
-import com.example.profitclub.ui.questions.QuestionDetailActivity
-
+import com.example.profitclub.ui.questions.open.QuestionDetailActivity
 
 class QuestionsInBrowseAdapter(context: Context, items: List<Questions>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater
@@ -50,9 +50,11 @@ class QuestionsInBrowseAdapter(context: Context, items: List<Questions>, listene
             binding!!.bidText.text = item.num_bids.toString()
             binding!!.sawText.text = item.num_saw.toString()
 
-            /* Picasso.get()
+            */
+/* Picasso.get()
                      .load(item.phost_photo)
-                     .into(binding.imageActual)*/
+                     .into(binding.imageActual)*//*
+
 
             binding?.container.setTag(item)
             binding?.container.setOnClickListener(this)
@@ -82,4 +84,4 @@ class QuestionsInBrowseAdapter(context: Context, items: List<Questions>, listene
             }
         }
     }
-}
+}*/

@@ -8,12 +8,9 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
-import com.example.profitclub.databinding.InarbitrationQuestionItemBinding
-import com.example.profitclub.databinding.InprogressQuestionItemBinding
-import com.example.profitclub.databinding.QuestionItemBinding
 import com.example.profitclub.databinding.RejectedQuestionItemBinding
 import com.example.profitclub.model.Questions
-import com.example.profitclub.ui.questions.QuestionDetailActivity
+import com.example.profitclub.ui.questions.open.QuestionDetailActivity
 
 
 class RejectedQuestionsAdapter(context: Context, items: List<Questions>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
