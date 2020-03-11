@@ -1,3 +1,7 @@
+data class RequestChatSocket(
+    val user: Int = 1
+)
+
 data class RequestQuestionConsultantPreview(
     val question_id: Int,
     val lang: String?

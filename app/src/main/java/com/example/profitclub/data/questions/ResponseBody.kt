@@ -31,10 +31,10 @@ data class Message(
     val user: String,
     val avatar: String,
     val to: String,
-    val iduser: Int,
-    val idother: Int,
-    val content: String,
-    val date: String
+    val iduser: Int, // Sender
+    val idother: Int, // You
+    val content: String, // message
+    val date: String // time
 )
 
 data class QuestionClientFile(

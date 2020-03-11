@@ -23,7 +23,7 @@ const val GET_ALL_FILTERED = "auto/list"
 // Question for consultant
 const val QUESTION_CONSULTANT_VIEW = "main/question-consultant-view"
 
-const val QUESTION_CONSULTANT_PREVIEW = "main/question-consultant-preview"
+const val QUESTION_CONSULTANT_PREVIEW = "main/question-preview"
 
 const val QUESTION_CONSULTANT_END = "main/question-consultant-end"
 

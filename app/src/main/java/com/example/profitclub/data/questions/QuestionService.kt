@@ -21,7 +21,7 @@ interface QuestionService {
 
     // Consultant
     @GET(QUESTION_CONSULTANT_VIEW)
-    suspend fun getQuestionConsultantView(@Header("authorization") auth: String?): Response<QuestionConsultantView>
+    suspend fun getQuestionConsultantView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<QuestionConsultantView>
 
     @POST(QUESTION_CONSULTANT_PREVIEW)
     suspend fun postQuestionConsultantPreview(@Header("authorization") auth: String?, @Body body: RequestQuestionConsultantPreview): Response<ResponseQuestionConsultantPreview>
@@ -37,7 +37,7 @@ interface QuestionService {
 
     // Client
     @GET(QUESTION_CLIENT_VIEW)
-    suspend fun getQuestionClientView(@Header("authorization") auth: String?): Response<QuestionConsultantView>
+    suspend fun getQuestionClientView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<QuestionConsultantView>
 
     @POST(QUESTION_CLIENT_PREVIEW)
     suspend fun postQuestionClientPreview(@Header("authorization") auth: String?, @Body body: RequestQuestionConsultantPreview): Response<ArrayList<ResponseQuestionConsultantPreview>>

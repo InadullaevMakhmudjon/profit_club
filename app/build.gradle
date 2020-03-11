@@ -6,7 +6,6 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'androidx.navigation.safeargs'
 
-
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.2"
@@ -75,5 +74,8 @@ dependencies {
 
     //picasso
     implementation 'com.squareup.picasso:picasso:2.71828'
+
+    //Socketio
+    implementation 'com.github.nkzawa:socket.io-client:0.6.0'
 
 }

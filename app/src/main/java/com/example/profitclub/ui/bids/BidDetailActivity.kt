@@ -50,12 +50,9 @@ class BidDetailActivity : AppCompatActivity() {
         questionId = intent.getIntExtra("question_id",0)
         if (questionId != 0){
             when (role) {
-                2, 4 -> {
+                2, 4, 5,7 -> {
                    // vm.postPreview(questionId, "ru")
-                    vm.postPreviewClient(questionId, "ru")
-                }
-                5, 7 -> {
-                    vm.postPreviewClient(questionId, "ru")
+                    vm.postPreview(questionId, "ru")
                 }
                 else -> toast("Errored...")
             }

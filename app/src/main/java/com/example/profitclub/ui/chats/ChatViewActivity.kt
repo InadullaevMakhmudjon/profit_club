@@ -1,5 +1,6 @@
 package com.example.profitclub.ui.chats
 
+import RequestChatSocket
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,10 +12,15 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.profitclub.R
 import com.example.profitclub.databinding.ActivityChatViewBinding
+import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.adapters.SectionPageAdapter4
+import com.github.nkzawa.socketio.client.IO
+import com.github.nkzawa.socketio.client.Socket
+import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_chat_view.*
 import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
 import kotlinx.android.synthetic.main.chat_custom_bar.view.*
+import java.lang.Exception
 
 class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -22,11 +28,32 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
     private var mSectionPageAdapter: SectionPageAdapter4? = null
     private var role: Int = 0
     private var question_id: Int = 0
+    private lateinit var socket: Socket
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_view)
 
+        try {
+            socket = IO.socket("http://87.237.236.184")
+
+            socket.on(Socket.EVENT_CONNECT) {
+                runOnUiThread {
+                    toast("Connected")
+                }
+            }
+
+            socket.on("new-connection") {
+                runOnUiThread{
+                        socket.emit("connect-user", Gson().toJson(RequestChatSocket()))
+                    toast("Server connected")
+                }
+            }
+            socket.connect()
+        }catch (e: Exception) {
+            toast(e.message.toString())
+        }
+
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_view)
         question_id = this.intent.getIntExtra("question_id", 0)
 
         setSupportActionBar(toolbar)
@@ -75,6 +102,9 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         }*/
     }
 
+    val getSocket: Socket
+        get() = socket
+
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
@@ -111,6 +141,11 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
         alertDialogBuilder.show()
     }*/
+
+    override fun onDestroy() {
+        super.onDestroy()
+        socket.disconnect()
+    }
 
     private fun alertDialogReview(){
         val alertDialogBuilder = AlertDialog.Builder(this)
