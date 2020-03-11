@@ -10,12 +10,15 @@ import android.content.SharedPreferences
 
 class QuestionRepository(private val retrofit: QuestionService, private val preference: SharedPreferences) {
     private var token: String? = preference.getString("token", null)
+    private var _userId: Int = preference.getInt("user_id", 0)
+
+    val userId: Int get() = _userId
 
     suspend fun postQuestionDisputeOpen(body: RequestQuestionDisputeOpenItem) = retrofit.postQuestionDisputeOpen("JWT $token", GenericRequest(body))
 
     suspend fun postQuestionDisputeClose(body: RequestQuestionDisputeCloseItem) = retrofit.postQuestionDisputeClose("JWT $token", GenericRequest(body))
 
-    suspend fun getConsultantQuestionView() = retrofit.getQuestionConsultantView("JWT $token")
+    suspend fun getConsultantQuestionView(status: Int) = retrofit.getQuestionConsultantView("JWT $token", status)
 
     suspend fun postConsultantQuestionPreview(body: RequestQuestionConsultantPreview) = retrofit.postQuestionConsultantPreview("JWT $token", body)
 
@@ -26,7 +29,7 @@ class QuestionRepository(private val retrofit: QuestionService, private val pref
     suspend fun getQuestionConsultantDisputeView(lang: String? = "") = retrofit.getQuestionConsultantDisputeView("JWT $token", lang)
 
 
-    suspend fun getClientQuestionView() = retrofit.getQuestionClientView("JWT $token")
+    suspend fun getClientQuestionView(status: Int) = retrofit.getQuestionClientView("JWT $token", status)
 
     suspend fun postClientQuestionPreview(body: RequestQuestionConsultantPreview) = retrofit.postQuestionClientPreview("JWT $token", body)
 

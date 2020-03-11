@@ -1,21 +1,21 @@
 package com.example.profitclub.ui.chats.chat1
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.MessageListAdapter
 import com.example.profitclub.data.Service
 import com.example.profitclub.databinding.FragmentChatsView1Binding
-import com.example.profitclub.model.Messages
 import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.ChatViewActivity
-import com.github.nkzawa.emitter.Emitter
+import com.google.gson.Gson
 
 class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
@@ -24,14 +24,10 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
     private var adapter: MessageListAdapter? = null
     private var layoutManager: LinearLayoutManager? = null
     private val socket = Service.socket
-
-    val list = listOf(
-        Messages("Hello there. How Can I help you?", "14:51", 2),
-        Messages("I need your help in order to make my website attractive", "14:59", 1),
-        Messages("Oh! I have 10 years experience in this field", "15:03", 2),
-        Messages("I wish you make your best!", "15:11", 1),
-        Messages("I give you feedback as soon as possible", "15:21", 2),
-        Messages("Okay", "16:40", 1)
+    private var questionId: Int = 0
+    private val APP_PREFERENCE = "MYSETTINGS"
+    data class Message(
+        val data: com.example.profitclub.data.questions.Message
     )
 
     override fun onCreateView(
@@ -39,41 +35,58 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        var allMessages:ArrayList<Message> = arrayListOf()
+
         homeViewModel =
-            ViewModelProviders.of(this).get(ChatsView1Model::class.java)
+            ViewModelProviders.of(this, ChatsView1ModelFactory(preferences)).get(ChatsView1Model::class.java)
         binding = FragmentChatsView1Binding.inflate(layoutInflater)
 
-        adapter = MessageListAdapter(this.context!!, list, this)
+        // adapter = MessageListAdapter(this.context!!, list, )
         layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
         binding.messagesList.layoutManager = layoutManager
-        binding.messagesList.adapter = adapter
-        adapter?.notifyDataSetChanged()
 
         val activity = activity as ChatViewActivity?
         val myDataFromActivity = activity!!.getMyDataChat()
 
-        val questionId = activity.getMyQusetionId()
-
-        toast("question_id: $questionId")
+        questionId = activity.getMyQusetionId()
 
         if(myDataFromActivity == 2 || myDataFromActivity == 3){
             binding.linearLayout.isVisible = false
         }
 
+        activity.getSocket.on("update_chat_${questionId}") { arg ->
+            activity.runOnUiThread {
+                toast(arg[0].toString())
+            }
+        }
+        homeViewModel.getData(questionId)
+        /*
+        homeViewModel.messages.observe(viewLifecycleOwner, Observer {messages ->
+            toast("Message come")
+            if(messages.size > 0) {
+                allMessages = messages
+                adapter = MessageListAdapter(this.context!!,allMessages, homeViewModel.userId)
+                binding.messagesList.adapter = adapter
+                adapter?.notifyDataSetChanged()
+            }
+        })
+*/
+        homeViewModel.error.observe(viewLifecycleOwner, Observer {message ->
+            toast(message)
+        })
         return binding.root
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        socket?.on("", Emitter.Listener { args ->
-            Toast.makeText(activity, args[0].toString(), Toast.LENGTH_LONG).show()
-        })
+
         socket?.connect()
     }
 
     override fun onDestroy() {
         super.onDestroy()
         socket?.disconnect()
-        socket?.off("")
+        socket?.off("update_chat_$questionId")
     }
 
     override fun onClick(p0: View?) {

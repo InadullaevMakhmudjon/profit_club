@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-
     <data>
-
         <variable
             name="messages"
-            type="com.example.profitclub.model.Messages" />
+            type="com.example.profitclub.data.questions.Message" />
     </data>
 
 <RelativeLayout
@@ -41,7 +39,7 @@
             android:layout_height="wrap_content"
             android:textSize="16sp"
             android:textColor="@color/white"
-            android:text="asdjjkfjka ajfjkadf afk"/>
+            android:text="helloWorldasdasdasdas"/>
 
         <TextView
             android:id="@+id/time"
