@@ -1,4 +1,4 @@
-package com.example.profitclub.ui.bids
+package com.example.profitclub.ui.bids.open
 
 import android.content.Context
 import android.os.Bundle
@@ -9,10 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.profitclub.adapters.ChatListAdapter
 import com.example.profitclub.adapters.OpenBidAdapter
 import com.example.profitclub.databinding.FragmentOpenBidsBinding
-import com.example.profitclub.model.Bid
 import com.example.profitclub.toast
 
 class OpenBidsFragment : Fragment(), View.OnClickListener {
@@ -34,7 +32,11 @@ class OpenBidsFragment : Fragment(), View.OnClickListener {
             val preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 
             viewModel =
-                ViewModelProviders.of(this, BidsViewModelFactory(preferences)).get(OpenBidsViewModel::class.java)
+                ViewModelProviders.of(this,
+                    BidsViewModelFactory(
+                        preferences
+                    )
+                ).get(OpenBidsViewModel::class.java)
             // val root = inflater.inflate(R.layout.fragment_questions, container, false)
             binding = FragmentOpenBidsBinding.inflate(layoutInflater)
             adapter = OpenBidAdapter(this.context!!, null, this)

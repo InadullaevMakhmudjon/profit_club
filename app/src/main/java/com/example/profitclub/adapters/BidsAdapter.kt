@@ -41,11 +41,11 @@ class BidsAdapter(private val context: Context, private val items: ArrayList<Cli
                     .into(binding.imageConsultant)
 
             //Flag activity new task needed here
-            binding.hire.setOnClickListener {
+           /* binding.hire.setOnClickListener {
                 val intent = Intent(context, ProfileActivity::class.java)
                 intent.putExtra("role", 2)
                 context.startActivity(intent)
-            }
+            }*/
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)

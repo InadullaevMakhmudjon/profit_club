@@ -1,4 +1,4 @@
-package com.example.profitclub.ui.bids
+package com.example.profitclub.ui.bids.open
 
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel

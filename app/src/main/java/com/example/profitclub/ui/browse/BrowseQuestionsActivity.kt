@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.view.View
+import android.view.View.INVISIBLE
 import android.widget.AutoCompleteTextView
 import android.widget.CalendarView
 import android.widget.DatePicker
@@ -16,6 +17,7 @@ import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.data.bids.ConsultantBidsClickData
 import com.example.profitclub.data.bids.ConsultantBidsData
+import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.textfield.TextInputLayout
@@ -29,6 +31,7 @@ import java.text.SimpleDateFormat
 class BrowseQuestionsActivity : AppCompatActivity() {
     private lateinit var data: ConsultantBidsData
     private lateinit var item: ConsultantBidsClickData
+    private lateinit var dispute: QuestionConsultantDisputeData
     private lateinit var vm: BrowseQuestionViewModel
     private val APP_PREFERENCE = "MYSETTINGS"
 
@@ -36,39 +39,63 @@ class BrowseQuestionsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_browse_questions)
 
-        val key = intent.getIntExtra("key", 0)
-        if (key == 1){
-           item = intent.getSerializableExtra("item_open") as ConsultantBidsClickData
-        } else {
-            data = intent.getSerializableExtra("item") as ConsultantBidsData
-        }
-
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         vm = ViewModelProviders.of(this, BrowseQuestionViewModelFactory(preferences)).get(BrowseQuestionViewModel::class.java)
 
-        if (key == 1){
-            bid_title.text = item.title
-            bid_detail.text = item.description
-            price_question.text = item.price
-            deadline.text = item.deadline
-            skills.text = item.categories.reduce {a, b -> "$a/$b"}
-            question_id.text = "Bid_id"
-            question_id_desc.text = item.bid_id.toString()
-            name_client.text = item.consultant_id.toString()
-            client.visibility = View.INVISIBLE
-            place_bid.visibility = View.INVISIBLE
-        } else {
-            bid_title.text = data.title
-            bid_detail.text = data.description
-            price_question.text = data.question_date
-            deadline.text = data.click_count
-            skills.text = data.categories.reduce {a, b -> "$a/$b"}
-            question_id_desc.text = data.question_id.toString()
-            name_client.text = data.client_id.toString()
+
+        when (intent.getIntExtra("key", 0)){
+            1 -> {
+               item = intent.getSerializableExtra("item_open") as ConsultantBidsClickData
+                client.visibility = View.INVISIBLE
+                place_bid.visibility = View.INVISIBLE
+
+                bid_title.text = item.title
+                bid_detail.text = item.description
+                price_question.text = item.price
+                deadline.text = item.deadline
+                skills.text = item.categories.reduce {a, b -> "$a/$b"}
+                question_id.text = "Bid_id"
+                question_id_desc.text = item.bid_id.toString()
+              //  name_client.text = item.consultant_id.toString()
+
+           }
+            2 -> {
+                data = intent.getSerializableExtra("item_browse") as ConsultantBidsData
+                buttons_container.visibility = INVISIBLE
+
+                bid_title.text = data.title
+                bid_detail.text = data.description
+                price_question.text = data.question_date
+                deadline.text = data.click_count
+                skills.text = data.categories.reduce {a, b -> "$a/$b"}
+                question_id_desc.text = data.question_id.toString()
+                //name_client.text = data.client_id.toString()
+
+            }
+            3 -> {
+                dispute = intent.getSerializableExtra("item_dispute") as QuestionConsultantDisputeData
+                buttons_container.visibility = INVISIBLE
+                place_bid.visibility = INVISIBLE
+                client.visibility = INVISIBLE
+
+                bid_title.text = dispute.title
+                bid_detail.text = dispute.description
+                price_question.text = dispute.price.toString()
+                deadline.text = dispute.dayhour
+                skills.text = dispute.categories.reduce { a, b -> "$a/$b" }
+                question_id_desc.text = dispute.question_id.toString()
+            }
         }
+
+
+      /*  if (key == 1){
+
+        } else {
+
+        }*/
 
         client.setOnClickListener {
             vm.previewClient(data.question_id.toString())

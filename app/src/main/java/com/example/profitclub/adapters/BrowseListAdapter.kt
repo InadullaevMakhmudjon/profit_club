@@ -79,7 +79,8 @@ class BrowseListAdapter(private val context: Context, private val items: ArrayLi
             R.id.container -> {
                 val item = p0?.tag as ConsultantBidsData
                 val intent: Intent = Intent(context, BrowseQuestionsActivity::class.java)
-                intent.putExtra("item", item)
+                intent.putExtra("key", 2)
+                intent.putExtra("item_browse", item)
                context.startActivity(intent)
             }
         }

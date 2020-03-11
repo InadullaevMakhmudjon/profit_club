@@ -96,7 +96,7 @@ data class QuestionConsultantDisputeData(
     val true_user_fullname: String,
     val status: Int,
     val createdate: String
-)
+): Serializable
 
 data class QuestionConsultantDisputeView(
     val count: Int,

@@ -34,4 +34,5 @@ class QuestionRepository(private val retrofit: QuestionService, private val pref
 
     suspend fun postQuestionClientClose(body: RequestQuestionConsultantCloseItem) = retrofit.postQuestionClientClose("JWT $token", GenericRequest(body))
 
+    suspend fun getQuestionClientDisputeView(lang: String? = "") = retrofit.getQuestionClientDisputeView("JWT $token", lang)
 }

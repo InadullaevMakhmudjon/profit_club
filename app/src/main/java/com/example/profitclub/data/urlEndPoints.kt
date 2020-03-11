@@ -29,7 +29,7 @@ const val QUESTION_CONSULTANT_END = "main/question-consultant-end"
 
 const val QUESTION_CONSULTANT_CLOSE = "main/question-consultant-close"
 
-// For Client Dispute View
+// For Consultant Dispute View
 const val QUESTION_CONSULTANT_DISPUTE_VIEW = "main/question-consultant-dispute-view"
 
 // Question for client

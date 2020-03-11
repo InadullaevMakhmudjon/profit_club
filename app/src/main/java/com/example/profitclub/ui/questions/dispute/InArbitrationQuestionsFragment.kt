@@ -1,30 +1,27 @@
-package com.example.profitclub.ui.questions
+package com.example.profitclub.ui.questions.dispute
 
-import android.content.Intent
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.InArbitrationQuestionsAdapter
-import com.example.profitclub.databinding.FragmentInprogressQuestionsBinding
 import com.example.profitclub.model.Questions
 
-import com.example.profitclub.adapters.InProgressQuestionsAdapter
 import com.example.profitclub.databinding.FragmentArbitrationQuestionsBinding
 import com.example.profitclub.toast
 
 class InArbitrationQuestionsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var binding: FragmentArbitrationQuestionsBinding
-    private lateinit var galleryViewModel: InArbitrationQuestionsViewModel
+    private lateinit var vm: InArbitrationQuestionsViewModel
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: InArbitrationQuestionsAdapter? = null
+    private val APP_PREFERENCE = "MYSETTINGS"
 
         val list = listOf(
             Questions("I need en expert who will help me putting my website into a domain", 5, 15) { msg -> toast(msg) },
@@ -45,28 +42,36 @@ class InArbitrationQuestionsFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-       // (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
-
-        galleryViewModel =
-            ViewModelProviders.of(this).get(InArbitrationQuestionsViewModel::class.java)
-       // val root = inflater.inflate(R.layout.fragment_questions, container, false)
         binding = FragmentArbitrationQuestionsBinding.inflate(layoutInflater)
-        adapter = InArbitrationQuestionsAdapter(this.context!!, list, this)
-        layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
-        binding.recyclerCompleted.layoutManager = layoutManager
-        binding.recyclerCompleted.adapter = adapter
-        adapter?.notifyDataSetChanged()
-        /*val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(this, Observer {
-            textView.text = it
-        })*/
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        activity?.let { activity ->
+            val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+            vm =
+                ViewModelProviders.of(this, ArbitrationQuestionsViewModelFactory(preferences)).get(InArbitrationQuestionsViewModel::class.java)
+            adapter = InArbitrationQuestionsAdapter(this.context!!, null, this)
+            layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
+            binding.recyclerArbitration.layoutManager = layoutManager
+            binding.recyclerArbitration.adapter = adapter
+            adapter?.notifyDataSetChanged()
+
+            vm.data.observe(viewLifecycleOwner, Observer { data ->
+                if (data != null){
+                    adapter = InArbitrationQuestionsAdapter(this.context!!, data.data, this)
+                    binding.recyclerArbitration.adapter = adapter
+                    adapter?.notifyDataSetChanged()
+                }
+            })
+
+            vm.error.observe(viewLifecycleOwner, Observer { message ->
+                toast("$message")
+            })
+
+        }
     }
 
     override fun onResume() {
@@ -75,7 +80,6 @@ class InArbitrationQuestionsFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(p0: View?) {
-
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

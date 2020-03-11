@@ -14,7 +14,7 @@
     tools:context="ui.questions.InProgressQuestionsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_completed"
+        android:id="@+id/recycler_arbitration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
