@@ -26,7 +26,6 @@ class QuestionRepository(private val retrofit: QuestionService, private val pref
 
     suspend fun getConsultantQuestionClosedView(status: Int) = retrofit.getQuestionConsultantClosedView("JWT $token", status)
 
-
     suspend fun postConsultantQuestionPreview(body: RequestQuestionConsultantPreview) = retrofit.postQuestionConsultantPreview("JWT $token", body)
 
     suspend fun postQuestionConsultantEnd(body: RequestQuestionConsultantEndItem) = retrofit.postQuestionConsultantEnd("JWT $token", GenericRequest(body))
@@ -43,7 +42,6 @@ class QuestionRepository(private val retrofit: QuestionService, private val pref
     suspend fun getClientQuestionCancelledView(status: Int) = retrofit.getQuestionClientCancelledView("JWT $token", status)
 
     suspend fun getClientQuestionClosedView(status: Int) = retrofit.getQuestionClientClosedView("JWT $token", status)
-
 
     suspend fun postClientQuestionPreview(body: RequestQuestionConsultantPreview) = retrofit.postQuestionClientPreview("JWT $token", body)
 
