@@ -35,6 +35,19 @@ interface QuestionService {
     @GET(QUESTION_CONSULTANT_DISPUTE_VIEW)
     suspend fun getQuestionConsultantDisputeView(@Header("authorization") auth: String?, @Query("lang") lang: String?): Response<QuestionConsultantDisputeView>
 
+    //Closed
+    @GET(QUESTION_CONSULTANT_VIEW)
+    suspend fun getQuestionConsultantClosedView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<ResponseGeneric<QuestionConsultantClosedData>>
+
+    //Cancelled
+    @GET(QUESTION_CONSULTANT_VIEW)
+    suspend fun getQuestionConsultantCancelledView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<ResponseGeneric<QuestionConsultantCancelledData>>
+
+    //Client Approving
+    @GET(QUESTION_CONSULTANT_VIEW)
+    suspend fun getQuestionConsultantApproveView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<ResponseGeneric<QuestionConsultantApproveData>>
+
+
     // Client
     @GET(QUESTION_CLIENT_VIEW)
     suspend fun getQuestionClientView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<QuestionConsultantView>
@@ -50,5 +63,17 @@ interface QuestionService {
 
     @GET(QUESTION_CLIENT_DISPUTE_VIEW)
     suspend fun getQuestionClientDisputeView(@Header("authorization") auth: String?, @Query("lang") lang: String?): Response<QuestionConsultantDisputeView>
+
+    //Closed
+    @GET(QUESTION_CLIENT_VIEW)
+    suspend fun getQuestionClientClosedView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<ResponseGeneric<QuestionConsultantClosedData>>
+
+    //Cancelled
+    @GET(QUESTION_CLIENT_VIEW)
+    suspend fun getQuestionClientCancelledView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<ResponseGeneric<QuestionConsultantCancelledData>>
+
+    //Client Approving
+    @GET(QUESTION_CLIENT_VIEW)
+    suspend fun getQuestionClientApproveView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<QuestionConsultantApproveData>
 
 }

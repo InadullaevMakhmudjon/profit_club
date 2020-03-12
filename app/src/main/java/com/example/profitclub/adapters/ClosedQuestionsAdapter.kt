@@ -8,67 +8,37 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
+import com.example.profitclub.data.questions.QuestionConsultantClosedData
 import com.example.profitclub.databinding.ClosedQuestionItemBinding
-import com.example.profitclub.model.Questions
 import com.example.profitclub.ui.questions.open.QuestionDetailActivity
 
-
-class ClosedQuestionsAdapter(context: Context, items: List<Questions>, listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
-    private val inflater: LayoutInflater
-    private val TYPE_FEED = 1
-    private var context: Context = context
-    private var items: List<Questions> = ArrayList()
-    private var listener: View.OnClickListener
-
-    init {
-        this.items =  items
-        this.listener = listener
-        this.inflater = LayoutInflater.from(context)
-    }
-
-
-    override fun getItemViewType(position: Int): Int {
-        return TYPE_FEED
-    }
+class ClosedQuestionsAdapter(private val context: Context, private val items: ArrayList<QuestionConsultantClosedData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+    private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        if (viewType == TYPE_FEED) {
         val binding = ClosedQuestionItemBinding.inflate(inflater, parent, false)
         return EventFeedHolder(binding.root)
-//        }
-//        return null
-
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        val item = items[position]
+        val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
-            if (binding != null) {
-                binding.question = item
-            }
-            if (binding != null) {
-                binding.questionText.text = item.question
-            }
-            if (binding != null) {
-                binding.bidText.text = item.num_bids.toString()
-            }
-            if (binding != null) {
-                binding.sawText.text = item.num_saw.toString()
-            }
+                binding!!.close = item
 
-            /* Picasso.get()
-                     .load(item.phost_photo)
-                     .into(binding.imageActual)*/
+            binding.questionText.text = item?.title
+            binding.questionId.text = item?.question_id.toString()
+            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
+            binding.price.text = item?.price.toString()
+            binding.status.text = item?.status.toString()
 
             binding?.container?.tag = item
             binding?.container?.setOnClickListener(this)
-
         }
     }
 
     override fun getItemCount(): Int {
-        return items.size
+        return items?.size?: 0
     }
 
     private inner class EventFeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -82,9 +52,10 @@ class ClosedQuestionsAdapter(context: Context, items: List<Questions>, listener:
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.container -> {
-              //  val item = p0?.getTag() as Questions
+                val item = p0.tag as QuestionConsultantClosedData
                 val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
-                intent.putExtra("role", 4)
+                intent.putExtra("role", 3)
+                intent.putExtra("item_close", item)
                 context.startActivity(intent)
             }
         }
