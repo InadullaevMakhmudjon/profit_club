@@ -162,7 +162,8 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
 
            viewModel.userId.observe(activity!!, androidx.lifecycle.Observer { userId ->
                if (userId != 0){
-                   Navigation.findNavController(getStart).navigate(R.id.splashScreeen2Action)
+                   Navigation.findNavController(getStart).navigate(R.id.actionToLogin)
+                   activity!!.supportFragmentManager.popBackStack()
                }
            })
 

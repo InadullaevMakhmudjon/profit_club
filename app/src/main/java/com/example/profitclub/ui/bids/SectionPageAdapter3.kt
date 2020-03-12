@@ -4,7 +4,8 @@ package com.example.profitclub.ui.bids
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.example.profitclub.R
+import com.example.profitclub.ui.bids.dispute.InArbitrationBidsFragment
+import com.example.profitclub.ui.bids.open.OpenBidsFragment
 import com.example.profitclub.ui.browse.BrowseFragment
 
 class SectionPageAdapter3(fm: FragmentManager) : FragmentPagerAdapter(fm) {

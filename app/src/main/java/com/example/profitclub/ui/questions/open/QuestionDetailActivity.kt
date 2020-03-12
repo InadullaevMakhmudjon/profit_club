@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.R
 import com.example.profitclub.adapters.BidsAdapter
 import com.example.profitclub.data.bids.ConsultantBidsData
+import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.model.Bid
 import com.example.profitclub.model.Bids
 import com.example.profitclub.toast
@@ -32,6 +33,7 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
     private var adapter: BidsAdapter? = null
     private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var vm: QuestionDetailViewModel
+    private var questionId: Int = 0
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -40,27 +42,66 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
+        val preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        vm = ViewModelProviders.of(this, QuestionsDetailViewModelFactory(preferences)).get(QuestionDetailViewModel::class.java)
+
         when (this.intent.getIntExtra("role",1)) {
             1 -> {
                 val item = intent.getSerializableExtra("item_open") as ConsultantBidsData
                 place_bid.isVisible = false
                 date_container.isVisible = false
                 container_chosen_consultant.isVisible = false
+
+                //adapter = BidsAdapter(this.applicationContext, null, this)
+                layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+                this.recycler_bids.layoutManager = layoutManager
+               // this.recycler_bids.adapter = adapter
+                //adapter?.notifyDataSetChanged()
+
                 title_.text = item.title
                 description.text = item.description
                 deadline.text = item.click_count
                 skills_desc.text = item.categories.reduce { a, b -> "$a/$b" }
                 question_id_desc.text = item.question_id.toString()
+                questionId = item.question_id
+
+                vm.previewBids(questionId)
+
+                    vm.data.observe(this, Observer { data ->
+                        if (data != null){
+                            adapter = BidsAdapter(this, data.data, this)
+                            this.recycler_bids.adapter = adapter
+                        }
+                    })
+
+                    vm.error.observe(this, Observer { error ->
+                        if (error != null)
+                            toast("Error: $error")
+                    })
+
+                if (vm.data.value != null){
+                    if(total_bids != null && recycler_bids != null){
+                        val size = vm.data.value!!.count.toString()
+                        total_bids.text = "Total bids: $size"
+                    }
+                }
 
 
             }
             2 -> {
+                val item = intent.getSerializableExtra("item_dispute") as QuestionConsultantDisputeData
                 recycler_bids.isVisible = false
                 total_bids.isVisible = false
                 date_container.isVisible = false
                 container_chosen_consultant.isVisible = false
                 delay.isVisible = false
                 buttons_container.isVisible = false
+                place_bid.isVisible = false
+                title_.text = item.title
+                description.text = item.description
+                deadline.text = item.dayhour
+                skills_desc.text = item.categories.reduce { a, b -> "$a/$b" }
+                question_id_desc.text = item.question_id.toString()
             }
             3 -> {
                 recycler_bids.isVisible = false
@@ -77,28 +118,7 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        val preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
-        vm = ViewModelProviders.of(this, QuestionsDetailViewModelFactory(preferences)).get(QuestionDetailViewModel::class.java)
 
-        adapter = BidsAdapter(this.applicationContext, null, this)
-        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-        this.recycler_bids.layoutManager = layoutManager
-        this.recycler_bids.adapter = adapter
-        adapter?.notifyDataSetChanged()
-
-        if (vm.data.value != null){
-            vm.data.observe(this, Observer { data ->
-                if (data != null){
-                    adapter = BidsAdapter(this, data.data, this)
-                    this.recycler_bids.adapter = adapter
-                }
-            })
-
-            vm.error.observe(this, Observer { error ->
-                if (error != null)
-                toast("Error: $error")
-            })
-        }
         //notificationManager = NotificationManagerCompat.from(this)
 
         place_bid.setOnClickListener {
@@ -115,7 +135,7 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
             }
         }
 
-        if(total_bids != null && recycler_bids != null){
+      /*  if(total_bids != null && recycler_bids != null){
             val size = adapter!!.itemCount.toString()
             total_bids.text = "Total bids: $size"
         }
@@ -123,12 +143,7 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
         if(date_container != null){
             start_date.text = "Started date: 18/01/2020"
             finished_date.text = "Finished date: 29/01/2020"
-        }
-    }
-
-    override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
-        return super.onCreateView(name, context, attrs)
-
+        }*/
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -1,4 +1,4 @@
-package com.example.profitclub.ui.bids
+package com.example.profitclub.ui.questions.dispute
 
 import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
@@ -9,11 +9,11 @@ import com.example.profitclub.data.bids.BidsService
 import com.example.profitclub.data.questions.QuestionRepository
 import com.example.profitclub.data.questions.QuestionService
 
-class BidsArbitrationViewModelFactory(val preference: SharedPreferences): ViewModelProvider.Factory {
+class ArbitrationQuestionsViewModelFactory(val preference: SharedPreferences): ViewModelProvider.Factory {
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if(modelClass.isAssignableFrom(InArbitrationBidsViewModel::class.java)) {
-            return InArbitrationBidsViewModel(
+        if(modelClass.isAssignableFrom(InArbitrationQuestionsViewModel::class.java)) {
+            return InArbitrationQuestionsViewModel(
                 repository = QuestionRepository(
                     retrofit = Service.createService(QuestionService::class.java),
                     preference = preference

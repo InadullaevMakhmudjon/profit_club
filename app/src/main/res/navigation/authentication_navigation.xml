@@ -87,6 +87,9 @@
             android:name="login_id"
             app:argType="integer"
             android:defaultValue="0" />
+        <action
+            android:id="@+id/actionToLogin"
+            app:destination="@id/toolsFragment" />
     </fragment>
 
     <fragment

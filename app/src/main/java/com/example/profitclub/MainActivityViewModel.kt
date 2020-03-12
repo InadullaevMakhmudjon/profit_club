@@ -24,9 +24,7 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
         value = false
     }
 
-    val error = MutableLiveData<String>().apply {
-        value = ""
-    }
+    val error = MutableLiveData<String>()
 
     val login = fun(email: String, password: String) {
         viewModelScope.launch {

@@ -47,4 +47,8 @@ interface QuestionService {
 
     @POST(QUESTION_CLIENT_CLOSE)
     suspend fun postQuestionClientClose(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionConsultantCloseItem>): Response<ArrayList<ResponseQuestionConsultantClose>>
+
+    @GET(QUESTION_CLIENT_DISPUTE_VIEW)
+    suspend fun getQuestionClientDisputeView(@Header("authorization") auth: String?, @Query("lang") lang: String?): Response<QuestionConsultantDisputeView>
+
 }

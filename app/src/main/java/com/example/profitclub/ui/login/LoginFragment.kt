@@ -12,10 +12,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.profitclub.MainActivity
-import com.example.profitclub.MainActivityViewModel
-import com.example.profitclub.MainActivityViewModelFactory
-import com.example.profitclub.R
+import com.example.profitclub.*
 
 class LoginFragment : Fragment() {
 
@@ -47,12 +44,13 @@ class LoginFragment : Fragment() {
             viewModel.token.observe(activity!!, Observer { token ->
                 if(token != null) {
                     startActivity(Intent(activity, MainActivity::class.java))
+                    activity!!.finish();
                 }
             })
 
             viewModel.error.observe(activity!!, Observer { error ->
                 if(error.isNotEmpty()) {
-                    Toast.makeText(activity!!, error, Toast.LENGTH_LONG).show()
+                    toast("$error")
                 }
             })
 

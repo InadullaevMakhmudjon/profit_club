@@ -32,7 +32,7 @@ class SplashFragment : Fragment() {
         //val textView: TextView = root.findViewById(R.id.text_share)
        // var bundle = Bundle()
        // val navController = findNavController()
-        shareViewModel.text.observe(this, Observer {
+        shareViewModel.text.observe(viewLifecycleOwner, Observer {
            // textView.text = it
         })
         return root
@@ -46,12 +46,15 @@ class SplashFragment : Fragment() {
         retryClick()
 
         create_button.setOnClickListener {
-            if (isNetworkAvailable())
-            Navigation.findNavController(it).navigate(R.id.optionAction)
-            else {
-                frame_layout.hide()
-                layout_no_connection.show()
+            when (isNetworkAvailable()){
+                true -> Navigation.findNavController(it).navigate(R.id.optionAction)
+                false -> {
+                    frame_layout.hide()
+                    layout_no_connection.show()
+                }
             }
+
+
         }
 
         account.setOnClickListener {

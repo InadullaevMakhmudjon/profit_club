@@ -1,4 +1,4 @@
-package com.example.profitclub.ui.bids
+package com.example.profitclub.ui.bids.open
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel

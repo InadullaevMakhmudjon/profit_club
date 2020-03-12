@@ -3,6 +3,7 @@ package com.example.profitclub.ui.questions
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.profitclub.ui.questions.dispute.InArbitrationQuestionsFragment
 import com.example.profitclub.ui.questions.open.OpenQuestionsFragment
 
 class SectionPageAdapter2(fm: FragmentManager) : FragmentPagerAdapter(fm) {

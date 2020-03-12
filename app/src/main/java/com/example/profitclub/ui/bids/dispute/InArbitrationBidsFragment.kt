@@ -1,4 +1,4 @@
-package com.example.profitclub.ui.bids
+package com.example.profitclub.ui.bids.dispute
 
 import android.content.Context
 import android.os.Bundle
@@ -42,7 +42,11 @@ class InArbitrationBidsFragment : Fragment(), View.OnClickListener {
 
         activity?.let {
             val preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
-            vm = ViewModelProviders.of(this, BidsArbitrationViewModelFactory(preferences)).get(InArbitrationBidsViewModel::class.java)
+            vm = ViewModelProviders.of(this,
+                BidsArbitrationViewModelFactory(
+                    preferences
+                )
+            ).get(InArbitrationBidsViewModel::class.java)
             adapter = InArbitrationBidAdapter(this.context!!, null, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.recyclerInArbitrationBids.layoutManager = layoutManager

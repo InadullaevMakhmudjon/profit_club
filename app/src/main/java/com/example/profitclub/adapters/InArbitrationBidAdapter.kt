@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.databinding.InArbitrationBidItemBinding
-import com.example.profitclub.ui.bids.BidDetailActivity
+import com.example.profitclub.ui.browse.BrowseQuestionsActivity
 
 class InArbitrationBidAdapter(private val context: Context, private val items: ArrayList<QuestionConsultantDisputeData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -53,9 +53,10 @@ class InArbitrationBidAdapter(private val context: Context, private val items: A
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.container -> {
-              //  val item = p0?.getTag() as Questions
-                val intent: Intent = Intent(context, BidDetailActivity::class.java)
-                intent.putExtra("role", 2)
+                val item = p0.tag as QuestionConsultantDisputeData
+                val intent: Intent = Intent(context, BrowseQuestionsActivity::class.java)
+                intent.putExtra("key", 3)
+                intent.putExtra("item_dispute", item)
                 context.startActivity(intent)
             }
         }

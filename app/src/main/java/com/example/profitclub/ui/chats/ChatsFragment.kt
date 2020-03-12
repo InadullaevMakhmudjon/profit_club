@@ -81,7 +81,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 })
 
             } else {
-                viewmodel.dataClient.observe(viewLifecycleOwner, Observer { data ->
+                viewmodel.data.observe(viewLifecycleOwner, Observer { data ->
 
                     if(data != null) {
                         toast("come dataClient")
