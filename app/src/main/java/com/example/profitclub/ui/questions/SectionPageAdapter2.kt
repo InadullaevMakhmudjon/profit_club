@@ -3,6 +3,9 @@ package com.example.profitclub.ui.questions
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.profitclub.ui.questions.approve.InApprovingQuestionsFragment
+import com.example.profitclub.ui.questions.cancel.RejectedQuestionsFragment
+import com.example.profitclub.ui.questions.close.CompletedQuestionsFragment
 import com.example.profitclub.ui.questions.dispute.InArbitrationQuestionsFragment
 import com.example.profitclub.ui.questions.open.OpenQuestionsFragment
 

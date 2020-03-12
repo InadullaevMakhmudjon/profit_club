@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.view.View.INVISIBLE
 import android.widget.AutoCompleteTextView
-import android.widget.CalendarView
 import android.widget.DatePicker
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -20,13 +19,9 @@ import com.example.profitclub.data.bids.ConsultantBidsData
 import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.toast
 import com.google.android.material.bottomsheet.BottomSheetDialog
-import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_browse_questions.*
-import kotlinx.android.synthetic.main.bid_post_dialog.view.*
 import kotlinx.android.synthetic.main.bottom_sheet_client_preview.view.*
-import java.lang.NumberFormatException
-import java.text.SimpleDateFormat
 
 class BrowseQuestionsActivity : AppCompatActivity() {
     private lateinit var data: ConsultantBidsData

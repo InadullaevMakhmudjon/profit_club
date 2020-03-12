@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.bids.InApprovingBidsFragment">
+    tools:context=".ui.bids.approve.InApprovingBidsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_approving_bids"

@@ -2,8 +2,9 @@ package com.example.profitclub.ui.chats
 
 import android.content.Context
 import android.os.Bundle
-import android.view.*
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -12,30 +13,15 @@ import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.adapters.ChatListAdapter
 import com.example.profitclub.databinding.FragmentChatsBinding
-import com.example.profitclub.model.ChatQuestion
 import com.example.profitclub.toast
-import kotlinx.android.synthetic.main.fragment_questions.*
 
 class ChatsFragment : Fragment(), View.OnClickListener {
 
     private lateinit var viewmodel: ChatsViewModel
     private lateinit var binding: FragmentChatsBinding
     private val APP_PREFERENCE = "MYSETTINGS"
-
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: ChatListAdapter? = null
-
-    val list = listOf(ChatQuestion("Hi. I am looking for a consultant for my mobile app to modify and improve UI design and development of a CMS Portal", "22967117", "Completed"),
-        ChatQuestion("I am looking for app (android and IOS) expert.", "6542413", "Rejected"),
-        ChatQuestion("Hi. I am looking for a consultant for my mobile app to modify and improve UI design and development of a CMS Portal", "22967117", "Progress"),
-        ChatQuestion("I am looking for app (android and IOS) expert.", "6542413", "Completed"),
-        ChatQuestion("Hi. I am looking for a consultant for my mobile app to modify and improve UI design and development of a CMS Portal", "22967117", "Open"),
-        ChatQuestion("I am looking for app (android and IOS) expert.", "6542413","Arbitration"),
-        ChatQuestion("Hi. I am looking for a consultant for my mobile app to modify and improve UI design and development of a CMS Portal", "22967117", "Rejected"),
-        ChatQuestion("I am looking for app (android and IOS) expert.", "6542413", "Progress"),
-        ChatQuestion("Hi. I am looking for a consultant for my mobile app to modify and improve UI design and development of a CMS Portal", "22967117", "Arbitration"),
-        ChatQuestion("I am looking for app (android and IOS) expert.", "6542413", "Open")
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,15 +36,12 @@ class ChatsFragment : Fragment(), View.OnClickListener {
 
         var clicked: (() -> Unit)
 
-        
-
         activity?.let {activity ->
-            val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 
+            val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             viewmodel =
                 ViewModelProviders.of(this, ChatsViewModelFactory(preferences)).get(ChatsViewModel::class.java)
             binding = FragmentChatsBinding.inflate(layoutInflater)
-
             adapter = ChatListAdapter(this.context!!, null, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.chatList.layoutManager = layoutManager
@@ -81,7 +64,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 })
 
             } else {
-                viewmodel.data.observe(viewLifecycleOwner, Observer { data ->
+                viewmodel.dataClient.observe(viewLifecycleOwner, Observer { data ->
 
                     if(data != null) {
                         toast("come dataClient")
@@ -93,26 +76,22 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 viewmodel.error.observe(viewLifecycleOwner, Observer { message ->
                     toast("Error: $message")
                 })
-/*
-                viewmodel.text.observe(viewLifecycleOwner, Observer {
-                    binding.textHome.text = adapter!!.itemCount.toString()
-                })*/
             }
         }
 
         return binding.root
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+  /*  override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
-    }
+    }*/
     
     override fun onClick(p0: View?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+    /*override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater!!.inflate(R.menu.language_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
     }
@@ -125,5 +104,5 @@ class ChatsFragment : Fragment(), View.OnClickListener {
             else -> super.onOptionsItemSelected(item)
         }
         return false
-    }
+    }*/
 }

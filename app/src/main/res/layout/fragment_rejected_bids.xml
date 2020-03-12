@@ -9,7 +9,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="ui.bids.RejectedBidsFragment">
+    tools:context=".ui.bids.cancel.RejectedBidsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_rejected_bids"
