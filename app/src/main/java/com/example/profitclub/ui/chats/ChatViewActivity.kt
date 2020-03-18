@@ -43,14 +43,12 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
             socket.on(Socket.EVENT_CONNECT) {
                 runOnUiThread {
-                    toast("Connected")
                 }
             }
 
             socket.on("new-connection") {
                 runOnUiThread{
                         socket.emit("connect-user", Gson().toJson(RequestChatSocket()))
-                    toast("Server connected")
                 }
             }
             socket.connect()
@@ -75,7 +73,7 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         actionBar?.customView = actionBarView
         actionBarView.question_id.text = question_id.toString()
 
-        toast("client id: $client_id, consultant_id: $consultant_id")
+        // toast("client id: $client_id, consultant_id: $consultant_id")
 
         //val role = MainActivity().run { getMyData() }
         /*val activity = callingActivity as MainActivity?
