@@ -73,7 +73,7 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
                 val message = Gson().fromJson(arg[0].toString(), MessageListener::class.java)
                 allMessages.add(message.data)
                 adapter?.notifyDataSetChanged()
-                binding.messagesList.smoothScrollToPosition(adapter!!.itemCount - 1)
+                binding.messagesList.smoothScrollToPosition(allMessages.lastIndex - 1)
                 mpIn.start()
             }
         }
@@ -83,7 +83,7 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
             if(messages != null) {
                 allMessages.addAll(messages)
                 adapter?.notifyDataSetChanged()
-                binding.messagesList.smoothScrollToPosition(adapter!!.itemCount - 1)
+                binding.messagesList.smoothScrollToPosition(allMessages.lastIndex - 1)
             }
         })
 

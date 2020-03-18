@@ -34,7 +34,6 @@ class ChatsView1Model(application: Application, private val repository: Question
     val messages = MutableLiveData<ArrayList<Message>>().apply { value = arrayListOf() }
 
     fun sendBtn(v: View) {
-        if(messages.value!!.size > 0) {
             viewModelScope.launch {
                 try {
                     val request = RequestQuestionMessage(
@@ -48,8 +47,6 @@ class ChatsView1Model(application: Application, private val repository: Question
                     error.apply { value = e.message.toString() }
                 }
             }
-
-        }
     }
 
     val getData = fun(questionId: Int) {
