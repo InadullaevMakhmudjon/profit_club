@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.MessageListAdapter
 import com.example.profitclub.data.Service
+import com.example.profitclub.data.questions.Message
+import com.example.profitclub.data.questions.MessageListener
 import com.example.profitclub.databinding.FragmentChatsView1Binding
 import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.ChatViewActivity
@@ -26,9 +28,6 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
     private val socket = Service.socket
     private var questionId: Int = 0
     private val APP_PREFERENCE = "MYSETTINGS"
-    data class Message(
-        val data: com.example.profitclub.data.questions.Message
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -48,6 +47,8 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
         val activity = activity as ChatViewActivity?
         val myDataFromActivity = activity!!.getMyDataChat()
+        adapter = MessageListAdapter(this.context!!,allMessages, homeViewModel.userId)
+        binding.messagesList.adapter = adapter
 
         questionId = activity.getMyQusetionId()
 
@@ -57,21 +58,20 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
         activity.getSocket.on("update_chat_${questionId}") { arg ->
             activity.runOnUiThread {
-                toast(arg[0].toString())
+                val message = Gson().fromJson(arg[0].toString(), MessageListener::class.java)
+                allMessages.add(message.data)
+                adapter?.notifyDataSetChanged()
             }
         }
         homeViewModel.getData(questionId)
-        /*
+
         homeViewModel.messages.observe(viewLifecycleOwner, Observer {messages ->
-            toast("Message come")
-            if(messages.size > 0) {
-                allMessages = messages
-                adapter = MessageListAdapter(this.context!!,allMessages, homeViewModel.userId)
-                binding.messagesList.adapter = adapter
+            if(messages != null) {
+                allMessages.addAll(messages)
                 adapter?.notifyDataSetChanged()
             }
         })
-*/
+
         homeViewModel.error.observe(viewLifecycleOwner, Observer {message ->
             toast(message)
         })
@@ -79,7 +79,6 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         socket?.connect()
     }
 

@@ -164,3 +164,6 @@ data class ResponseGeneric<GenericType>(
     val count: Int,
     val data: ArrayList<GenericType>
 )
+data class MessageListener(
+    val data: Message
+)
