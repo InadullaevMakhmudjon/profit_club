@@ -29,6 +29,12 @@ data class RequestQuestionDisputeCloseItem(
     val answer: String
 )
 
+data class RequestQuestionMessage(
+    val question_id: Int,
+    val content: String?,
+    val idother: Int
+)
+
 data class GenericRequest<GenericType>(
     val item: GenericType
 )

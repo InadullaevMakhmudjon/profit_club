@@ -6,6 +6,7 @@ import RequestQuestionConsultantEndItem
 import RequestQuestionConsultantPreview
 import RequestQuestionDisputeCloseItem
 import RequestQuestionDisputeOpenItem
+import RequestQuestionMessage
 import android.content.SharedPreferences
 
 class QuestionRepository(private val retrofit: QuestionService, private val preference: SharedPreferences) {
@@ -13,6 +14,8 @@ class QuestionRepository(private val retrofit: QuestionService, private val pref
     private var _userId: Int = preference.getInt("user_id", 0)
 
     val userId: Int get() = _userId
+
+    suspend fun postQuestionSendMessage(body: RequestQuestionMessage) = retrofit.postQuestionSendMessage("JWT $token", GenericRequest(body))
 
     suspend fun postQuestionDisputeOpen(body: RequestQuestionDisputeOpenItem) = retrofit.postQuestionDisputeOpen("JWT $token", GenericRequest(body))
 

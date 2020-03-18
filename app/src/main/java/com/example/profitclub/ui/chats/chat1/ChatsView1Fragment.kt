@@ -38,8 +38,10 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         var allMessages:ArrayList<Message> = arrayListOf()
 
         homeViewModel =
-            ViewModelProviders.of(this, ChatsView1ModelFactory(preferences)).get(ChatsView1Model::class.java)
+            ViewModelProviders.of(this, ChatsView1ModelFactory(activity!!.application, preferences)).get(ChatsView1Model::class.java)
         binding = FragmentChatsView1Binding.inflate(layoutInflater)
+        binding.viewModel = homeViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         // adapter = MessageListAdapter(this.context!!, list, )
         layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
@@ -50,8 +52,8 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         adapter = MessageListAdapter(this.context!!,allMessages, homeViewModel.userId)
         binding.messagesList.adapter = adapter
 
+        homeViewModel.questionId.apply { value = activity.getMyQusetionId() }
         questionId = activity.getMyQusetionId()
-
         if(myDataFromActivity == 2 || myDataFromActivity == 3){
             binding.linearLayout.isVisible = false
         }
