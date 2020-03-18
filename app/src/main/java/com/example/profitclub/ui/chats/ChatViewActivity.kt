@@ -2,6 +2,7 @@ package com.example.profitclub.ui.chats
 
 import RequestChatSocket
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -24,6 +25,8 @@ import java.lang.Exception
 
 class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var preferences: SharedPreferences
+    private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var binding: ActivityChatViewBinding
     private var mSectionPageAdapter: SectionPageAdapter4? = null
     private var role: Int = 0
@@ -34,7 +37,7 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         try {
             socket = IO.socket("http://87.237.236.184")
 
@@ -127,6 +130,11 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
     fun getMyDataChat(): Int {
         return role
+    }
+
+    val getOtherId get(): Int {
+        val userId = preferences.getInt("user_id", 0)
+        return if(userId == client_id) consultant_id else client_id
     }
 
     fun getMyQusetionId(): Int {

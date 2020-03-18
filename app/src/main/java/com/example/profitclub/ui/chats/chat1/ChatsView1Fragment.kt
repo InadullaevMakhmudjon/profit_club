@@ -1,6 +1,7 @@
 package com.example.profitclub.ui.chats.chat1
 
 import android.content.Context
+import android.media.MediaPlayer
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.profitclub.R
 import com.example.profitclub.adapters.MessageListAdapter
 import com.example.profitclub.data.Service
 import com.example.profitclub.data.questions.Message
@@ -44,7 +46,8 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         binding = FragmentChatsView1Binding.inflate(layoutInflater)
         binding.viewModel = homeViewModel
         binding.lifecycleOwner = viewLifecycleOwner
-
+        val mpIn = MediaPlayer.create(this.activity, R.raw.sound_in)
+        val mpOut = MediaPlayer.create(this.activity, R.raw.sound_out)
         // adapter = MessageListAdapter(this.context!!, list, )
         layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
         binding.messagesList.layoutManager = layoutManager
@@ -55,6 +58,7 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         binding.messagesList.adapter = adapter
 
         homeViewModel.questionId.apply { value = activity.getMyQusetionId() }
+        homeViewModel.receiverId.apply { value = activity.getOtherId }
         questionId = activity.getMyQusetionId()
 
         clientId = activity.getClientConsultantId().first
@@ -69,6 +73,8 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
                 val message = Gson().fromJson(arg[0].toString(), MessageListener::class.java)
                 allMessages.add(message.data)
                 adapter?.notifyDataSetChanged()
+                binding.messagesList.smoothScrollToPosition(adapter!!.itemCount - 1)
+                mpIn.start()
             }
         }
         homeViewModel.getData(questionId)
@@ -77,6 +83,7 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
             if(messages != null) {
                 allMessages.addAll(messages)
                 adapter?.notifyDataSetChanged()
+                binding.messagesList.smoothScrollToPosition(adapter!!.itemCount - 1)
             }
         })
 

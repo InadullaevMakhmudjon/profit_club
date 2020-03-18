@@ -29,6 +29,8 @@ class ChatsView1Model(application: Application, private val repository: Question
 
     val userId = repository.userId
 
+    val receiverId = MutableLiveData<Int>().apply { value = 0 }
+
     val messages = MutableLiveData<ArrayList<Message>>().apply { value = arrayListOf() }
 
     fun sendBtn(v: View) {
@@ -38,7 +40,7 @@ class ChatsView1Model(application: Application, private val repository: Question
                     val request = RequestQuestionMessage(
                         question_id = questionId.value!!,
                         content = messageText.value,
-                        idother = 2)
+                        idother = receiverId.value!!)
                     repository.postQuestionSendMessage(request)
                     messageText.apply { value = "" }
                     v.hideKeyboard()
