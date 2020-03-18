@@ -29,6 +29,8 @@ const val QUESTION_CONSULTANT_END = "main/question-consultant-end"
 
 const val QUESTION_CONSULTANT_CLOSE = "main/question-consultant-close"
 
+const val QUESTION_SEND_MESSAGE = "main/question-chat-sendmsg"
+
 // For Consultant Dispute View
 const val QUESTION_CONSULTANT_DISPUTE_VIEW = "main/question-consultant-dispute-view"
 

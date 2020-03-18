@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.MessageListAdapter
 import com.example.profitclub.data.Service
+import com.example.profitclub.data.questions.Message
+import com.example.profitclub.data.questions.MessageListener
 import com.example.profitclub.databinding.FragmentChatsView1Binding
 import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.ChatViewActivity
@@ -27,9 +29,6 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
     private var clientId: Int = 0
     private var consultantId: Int = 0
     private val APP_PREFERENCE = "MYSETTINGS"
-    data class Message(
-        val data: com.example.profitclub.data.questions.Message
-    )
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +39,10 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         var allMessages:ArrayList<Message> = arrayListOf()
 
         homeViewModel =
-            ViewModelProviders.of(this, ChatsView1ModelFactory(preferences)).get(ChatsView1Model::class.java)
+            ViewModelProviders.of(this, ChatsView1ModelFactory(activity!!.application, preferences)).get(ChatsView1Model::class.java)
         binding = FragmentChatsView1Binding.inflate(layoutInflater)
+        binding.viewModel = homeViewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         // adapter = MessageListAdapter(this.context!!, list, )
         layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
@@ -49,33 +50,38 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
         val activity = activity as ChatViewActivity?
         val myDataFromActivity = activity!!.getMyDataChat()
+        adapter = MessageListAdapter(this.context!!,allMessages, homeViewModel.userId)
+        binding.messagesList.adapter = adapter
 
+        homeViewModel.questionId.apply { value = activity.getMyQusetionId() }
         questionId = activity.getMyQusetionId()
+<<<<<<< HEAD
         clientId = activity.getClientConsultantId().first
         consultantId = activity.getClientConsultantId().second
 
 
+=======
+>>>>>>> 654d6b4ff9b20b2e834aa1a3577413c9b1717535
         if(myDataFromActivity == 2 || myDataFromActivity == 3){
             binding.linearLayout.isVisible = false
         }
 
         activity.getSocket.on("update_chat_${questionId}") { arg ->
             activity.runOnUiThread {
-                toast(arg[0].toString())
+                val message = Gson().fromJson(arg[0].toString(), MessageListener::class.java)
+                allMessages.add(message.data)
+                adapter?.notifyDataSetChanged()
             }
         }
         homeViewModel.getData(questionId)
-        /*
+
         homeViewModel.messages.observe(viewLifecycleOwner, Observer {messages ->
-            toast("Message come")
-            if(messages.size > 0) {
-                allMessages = messages
-                adapter = MessageListAdapter(this.context!!,allMessages, homeViewModel.userId)
-                binding.messagesList.adapter = adapter
+            if(messages != null) {
+                allMessages.addAll(messages)
                 adapter?.notifyDataSetChanged()
             }
         })
-*/
+
         homeViewModel.error.observe(viewLifecycleOwner, Observer {message ->
             toast(message)
         })
@@ -83,7 +89,6 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         socket?.connect()
     }
 

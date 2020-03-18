@@ -6,12 +6,15 @@ import RequestQuestionConsultantEndItem
 import RequestQuestionConsultantPreview
 import RequestQuestionDisputeCloseItem
 import RequestQuestionDisputeOpenItem
+import RequestQuestionMessage
 import com.example.profitclub.data.*
 import retrofit2.Response
 import retrofit2.http.*
 import java.util.ArrayList
 
 interface QuestionService {
+    @POST(QUESTION_SEND_MESSAGE)
+    suspend fun postQuestionSendMessage(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionMessage>)
 
     @POST(QUESTION_DISPUTE_OPEN)
     suspend fun postQuestionDisputeOpen(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeOpenItem>): Response<Unit>
