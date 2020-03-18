@@ -123,6 +123,7 @@
                     android:fontFamily="@font/roboto_bold"
                     android:layout_marginTop="8dp"
                     android:text="@string/deadline_"
+                    android:drawableStart="@drawable/ic_event_black_24dp"
                     android:textColor="@android:color/holo_red_light"
                     android:textSize="20sp"
                     app:layout_constraintVertical_bias="0.0"
@@ -135,6 +136,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
                     android:layout_marginTop="8dp"
+                    android:drawableStart="@drawable/ic_monetization_on_black_24dp"
                     android:text="@string/deadline_"
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
@@ -167,7 +169,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_bold"
-                    android:text="@string/skills"
+                    android:text="@string/category_"
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:layout_constraintVertical_bias="0.0"
@@ -248,18 +250,150 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <Button
-                android:id="@+id/client"
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/answer_conteiner"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold"
-                android:text="@string/client_"
-                android:textColor="@color/black"
-                android:textSize="16sp"
-                android:layout_marginStart="15dp"
-                app:layout_constraintVertical_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:layout_marginTop="13dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:id="@+id/answer_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/answer_desc"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/answer"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/id"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/answer_desc"
+                    app:layout_constraintTop_toBottomOf="@+id/answer_desc"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/answer"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/dispute_manager_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:id="@+id/dispute_manager_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/dispute_manager"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/dispute_manager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/id"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/dispute_manager_desc"
+                    app:layout_constraintTop_toBottomOf="@+id/dispute_manager_desc"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/dispute_manager"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/winner_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:paddingStart="15dp"
+                android:paddingEnd="15dp"
+                android:paddingTop="8dp">
+
+                <TextView
+                    android:id="@+id/winner_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="@string/winner_desc"
+                    android:textColor="@color/black"
+                    android:textSize="16sp"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/winner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:fontFamily="@font/roboto_medium"
+                    android:text="@string/id"
+                    android:textColor="@android:color/tertiary_text_light"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/winner_desc"
+                    app:layout_constraintTop_toBottomOf="@+id/winner_desc"
+                    app:layout_constraintVertical_bias="0.0" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@android:color/darker_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/winner"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginTop="8dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
@@ -272,6 +406,20 @@
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_email_black_24dp"/>-->
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/client"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/colorAccent"
+        android:layout_above="@id/place_bid"
+        android:src="@drawable/ic_remove_red_eye_black_24dp"
+        android:tint="@color/white">
+
+    </com.google.android.material.floatingactionbutton.FloatingActionButton>
 
     <Button
         android:id="@+id/place_bid"

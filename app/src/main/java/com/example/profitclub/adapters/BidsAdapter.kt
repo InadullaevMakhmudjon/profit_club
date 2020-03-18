@@ -1,11 +1,9 @@
 package com.example.profitclub.adapters
 
 import android.content.Context
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +11,7 @@ import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.data.bids.ClientClickView
 import com.example.profitclub.databinding.UserItemBinding
-import com.example.profitclub.model.Bids
-import com.example.profitclub.ui.account.details.ProfileActivity
 import com.squareup.picasso.Picasso
-
 
 class BidsAdapter(private val context: Context, private val items: ArrayList<ClientClickView>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)

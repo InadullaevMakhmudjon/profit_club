@@ -11,7 +11,6 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.RejectedQuestionsAdapter
 import com.example.profitclub.databinding.FragmentRejectedQuestionsBinding
-import com.example.profitclub.model.Questions
 import com.example.profitclub.toast
 
 class RejectedQuestionsFragment : Fragment(), View.OnClickListener {
@@ -47,7 +46,7 @@ class RejectedQuestionsFragment : Fragment(), View.OnClickListener {
 
             vm.data.observe(viewLifecycleOwner, Observer { data ->
                 if (data != null){
-                    adapter = RejectedQuestionsAdapter(this.context!!, null, this)
+                    adapter = RejectedQuestionsAdapter(this.context!!, data.data, this)
                     binding.recyclerCompleted.adapter = adapter
                 }
             })

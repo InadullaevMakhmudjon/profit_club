@@ -312,7 +312,7 @@
                     android:textSize="16sp"
                     android:text="@string/language"/>
 
-                <TextView
+               <!-- <TextView
                     android:id="@+id/category_text"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
@@ -320,7 +320,7 @@
                     android:layout_marginTop="10dp"
                     android:textColor="@android:color/darker_gray"
                     android:textSize="16sp"
-                    android:text="@string/category_"/>
+                    android:text="@string/category_"/>-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/about_container"

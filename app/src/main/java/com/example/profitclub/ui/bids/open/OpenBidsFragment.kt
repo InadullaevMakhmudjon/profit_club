@@ -48,7 +48,7 @@ class OpenBidsFragment : Fragment(), View.OnClickListener {
             viewModel.data.observe(viewLifecycleOwner, Observer { data ->
 
                 if(data != null) {
-                    toast("come data")
+                    //toast("come data")
                     adapter = OpenBidAdapter(this.context!!, data.data, this)
                     binding.recyclerOpenBids.adapter = adapter
                 }

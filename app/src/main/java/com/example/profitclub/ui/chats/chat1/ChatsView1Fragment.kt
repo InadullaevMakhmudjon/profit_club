@@ -17,7 +17,6 @@ import com.example.profitclub.data.questions.MessageListener
 import com.example.profitclub.databinding.FragmentChatsView1Binding
 import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.ChatViewActivity
-import com.google.gson.Gson
 
 class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
@@ -27,6 +26,8 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
     private var layoutManager: LinearLayoutManager? = null
     private val socket = Service.socket
     private var questionId: Int = 0
+    private var clientId: Int = 0
+    private var consultantId: Int = 0
     private val APP_PREFERENCE = "MYSETTINGS"
 
     override fun onCreateView(
@@ -54,6 +55,13 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
         homeViewModel.questionId.apply { value = activity.getMyQusetionId() }
         questionId = activity.getMyQusetionId()
+<<<<<<< HEAD
+        clientId = activity.getClientConsultantId().first
+        consultantId = activity.getClientConsultantId().second
+
+
+=======
+>>>>>>> 654d6b4ff9b20b2e834aa1a3577413c9b1717535
         if(myDataFromActivity == 2 || myDataFromActivity == 3){
             binding.linearLayout.isVisible = false
         }

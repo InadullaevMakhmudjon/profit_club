@@ -29,7 +29,7 @@
             android:id="@+id/price_alert"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/deadline"
+            android:hint="@string/price"
             android:backgroundTint="@color/black"
             android:inputType="text"
             android:singleLine="true" />

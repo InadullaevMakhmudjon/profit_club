@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.data.questions.QuestionConsultantCancelledData
 import com.example.profitclub.databinding.RejectedQuestionItemBinding
-import com.example.profitclub.model.Questions
 import com.example.profitclub.ui.questions.open.QuestionDetailActivity
 
 class RejectedQuestionsAdapter(private val context: Context, private val items: ArrayList<QuestionConsultantCancelledData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
@@ -53,7 +52,11 @@ class RejectedQuestionsAdapter(private val context: Context, private val items: 
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.container -> {
-
+                val item = p0.tag as QuestionConsultantCancelledData
+                val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
+                intent.putExtra("role", 4)
+                intent.putExtra("item_cancel", item)
+                context.startActivity(intent)
             }
         }
     }

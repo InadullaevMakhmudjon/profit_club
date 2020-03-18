@@ -55,7 +55,7 @@ class BrowseFragment : Fragment(), View.OnClickListener {
 
             viewModel.bidsConsView.observe(viewLifecycleOwner, Observer {data ->
                 if (data != null){
-                    toast("come bid data")
+                   // toast("come bid data")
                     adapter = BrowseListAdapter(this.context!!, data.data, this)
                     binding.browseList.adapter = adapter
                 }

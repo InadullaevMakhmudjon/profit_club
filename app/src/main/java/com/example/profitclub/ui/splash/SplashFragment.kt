@@ -1,7 +1,6 @@
 package com.example.profitclub.ui.splash
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,11 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.profitclub.*
-import kotlinx.android.synthetic.main.activity_splash_screen.*
 import kotlinx.android.synthetic.main.fragment_splash.*
-import kotlinx.android.synthetic.main.fragment_splash.account
-import kotlinx.android.synthetic.main.fragment_splash.fullscreen_content
-import kotlinx.android.synthetic.main.fragment_splash.fullscreen_content_controls
 import kotlinx.android.synthetic.main.no_internet_layout.*
 
 class SplashFragment : Fragment() {
@@ -58,11 +53,11 @@ class SplashFragment : Fragment() {
         }
 
         account.setOnClickListener {
-            if(isNetworkAvailable())
+           // if(isNetworkAvailable())
             Navigation.findNavController(it).navigate(R.id.loginAction)
-            else
+            /*else
                 frame_layout.hide()
-            layout_no_connection.show()
+            layout_no_connection.show()*/
         }
     }
 
