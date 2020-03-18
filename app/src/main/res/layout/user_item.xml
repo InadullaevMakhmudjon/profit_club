@@ -52,16 +52,17 @@
             android:id="@+id/hire"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
+            android:background="@color/colorAccent"
             android:fontFamily="@font/roboto"
-            android:text="@string/choose"
             android:padding="6dp"
-            android:background="@drawable/custom_border"
-            android:textColor="@color/black"
+            android:text="@string/choose"
+            android:textColor="@color/white"
             android:textSize="16sp"
-            app:layout_constraintVertical_bias="0.0"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintVertical_bias="0.9"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
         <RatingBar
             android:id="@+id/rating_desc"
@@ -80,6 +81,7 @@
             android:layout_height="wrap_content"
             android:textColor="@color/black"
             android:textSize="14sp"
+            android:drawableStart="@drawable/ic_monetization_on_black_24dp"
             android:layout_marginTop="5dp"
             android:text="@string/sum"
             app:layout_constraintTop_toBottomOf="@id/rating_desc"

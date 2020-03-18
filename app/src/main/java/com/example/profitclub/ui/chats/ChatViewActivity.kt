@@ -28,6 +28,8 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
     private var mSectionPageAdapter: SectionPageAdapter4? = null
     private var role: Int = 0
     private var question_id: Int = 0
+    private var client_id: Int = 0
+    private var consultant_id: Int = 0
     private lateinit var socket: Socket
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,6 +57,9 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_view)
         question_id = this.intent.getIntExtra("question_id", 0)
+        client_id = this.intent.getIntExtra("client_id", 0)
+        consultant_id = this.intent.getIntExtra("consultant_id", 0)
+
 
         setSupportActionBar(toolbar)
         val actionBar = this.supportActionBar
@@ -66,6 +71,8 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         val actionBarView: View = mLayoutInflater.inflate(R.layout.chat_custom_bar, null)
         actionBar?.customView = actionBarView
         actionBarView.question_id.text = question_id.toString()
+
+        toast("client id: $client_id, consultant_id: $consultant_id")
 
         //val role = MainActivity().run { getMyData() }
         /*val activity = callingActivity as MainActivity?
@@ -126,6 +133,9 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         return question_id
     }
 
+    fun getClientConsultantId(): Pair<Int, Int>{
+        return Pair(client_id, consultant_id)
+    }
    /* private fun alertDialog(){
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(R.string.completed_alert_title)

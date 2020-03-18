@@ -21,7 +21,7 @@ class RejectedQuestionsViewModel(val repository: QuestionRepository) : ViewModel
             try {
                 val response = repository.getClientQuestionCancelledView(4)
                 if (response.isSuccessful){
-                   // data.apply { value = response.body() }
+                    data.apply { value = response.body() as ResponseGeneric<QuestionConsultantCancelledData> }
                 }
             } catch (e: Exception){
                 error.apply { value = e.message.toString() }

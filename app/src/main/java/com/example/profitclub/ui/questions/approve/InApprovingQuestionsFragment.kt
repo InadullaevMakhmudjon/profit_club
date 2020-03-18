@@ -12,7 +12,6 @@ import com.example.profitclub.adapters.ApprovingQuestionsAdapter
 import com.example.profitclub.databinding.FragmentApprovingQuestionsBinding
 import com.example.profitclub.model.Questions
 import com.example.profitclub.toast
-import com.example.profitclub.ui.questions.dispute.ArbitrationQuestionsViewModelFactory
 
 class InApprovingQuestionsFragment : Fragment(), View.OnClickListener {
 

@@ -28,8 +28,9 @@
     <string name="setting">Настройки</string>
     <string name="selection">Выберите свой аккаунт</string>
     <string name="review_example">" Очень полезно. Лучший консультант, с которым я когда-либо работал. Спасибо!!!"</string>
-    <string name="review_desc">Оставить комментарий к работе консультанта</string>
-    <string name="review_alert">Отзыв</string>
+    <string name="review_desc_client">Оставить комментарий к работе консультанта</string>
+    <string name="review_desc_consultant">Оставить комментарий к работе клиента</string>
+    <string name="review_alert">Закрыть работу</string>
     <string name="review">Мои отзывы</string>
     <string name="reject">Отклонить</string>
     <string name="rating">"Дать оценку "</string>
@@ -47,7 +48,7 @@
     <string name="price">Цена:</string>
     <string name="post_question">Опубликовать вопрос</string>
     <string name="post">Опубликовать</string>
-    <string name="place_a_bid">Оставить предложения</string>
+    <string name="place_a_bid">Зделать ставку</string>
     <string name="phone_number">Номер телефона</string>
     <string name="payment_verification">Подтверждение оплаты</string>
     <string name="patronymic">Отчество</string>
@@ -132,7 +133,8 @@
     <string name="by">по</string>
     <string name="browse">Просмотр</string>
     <string name="brief">Краткая информация о консалтинговой стратегии</string>
-    <string name="bids">Заявки</string>
+    <string name="bids">Ставки</string>
+    <string name="bids_consultant">Ставки консультанта</string>
     <string name="bid_title">Детали заявки</string>
     <string name="become_a_bid">Создать предложение</string>
     <string name="balance">Доступные средства</string>
@@ -161,4 +163,20 @@
     <string name="uzbekistan">Узбекистан</string>
     <string name="day">День:</string>
     <string name="hour">час:</string>
+    <string name="open">Открытые</string>
+    <string name="approve">Подтвержденные клиентом</string>
+    <string name="bids_client">Ставки клиента</string>
+    <string name="successfully">Успешно завершено</string>
+    <string name="send_to_manager">"Ваш запрос направлен менеджеру "</string>
+    <string name="are_you_agree">Вы согласны отменить?</string>
+    <string name="all_fiels">"Все поля должны быть заполнены, чтобы завершить процесс "</string>
+    <string name="bid_creation">"Создание ставок"</string>
+    <string name="answer">Ответ</string>
+    <string name="closed">Закрытые</string>
+    <string name="cancelled">Отмененные</string>
+    <string name="reason">Указать причину...</string>
+    <string name="review_desc">Give a comment to the client</string>
+    <string name="answer_desc">Ответ на вопрос</string>
+    <string name="winner_desc">Победитель</string>
+    <string name="dispute_manager">Ответ менеджера по спору</string>
 </resources>

@@ -15,7 +15,6 @@ import com.example.profitclub.data.Service
 import com.example.profitclub.databinding.FragmentChatsView1Binding
 import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.ChatViewActivity
-import com.google.gson.Gson
 
 class ChatsView1Fragment : Fragment(), View.OnClickListener {
 
@@ -25,6 +24,8 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
     private var layoutManager: LinearLayoutManager? = null
     private val socket = Service.socket
     private var questionId: Int = 0
+    private var clientId: Int = 0
+    private var consultantId: Int = 0
     private val APP_PREFERENCE = "MYSETTINGS"
     data class Message(
         val data: com.example.profitclub.data.questions.Message
@@ -50,6 +51,9 @@ class ChatsView1Fragment : Fragment(), View.OnClickListener {
         val myDataFromActivity = activity!!.getMyDataChat()
 
         questionId = activity.getMyQusetionId()
+        clientId = activity.getClientConsultantId().first
+        consultantId = activity.getClientConsultantId().second
+
 
         if(myDataFromActivity == 2 || myDataFromActivity == 3){
             binding.linearLayout.isVisible = false

@@ -5,19 +5,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.databinding.FragmentQuestionsBinding
-import com.example.profitclub.model.Questions
 import kotlinx.android.synthetic.main.fragment_questions.*
-import kotlinx.android.synthetic.main.fragment_questions.view.*
-import com.example.profitclub.adapters.QuestionsAdapter
 
 class QuestionsFragment : Fragment(), View.OnClickListener {
 
@@ -43,19 +36,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
        // val root = inflater.inflate(R.layout.fragment_questions, container, false)
         binding = FragmentQuestionsBinding.inflate(layoutInflater)
 
-        mSectionPageAdapter = SectionPageAdapter2(childFragmentManager)
+        mSectionPageAdapter = SectionPageAdapter2(childFragmentManager, activity!!)
         binding.viewPager.adapter = mSectionPageAdapter
         binding.pagerHeader.setTabIndicatorColorResource(R.color.colorAccent2)
-
-        /*adapter = QuestionsAdapter(this.context!!, list, this)
-        layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
-        binding.recycler.layoutManager = layoutManager
-        binding.recycler.adapter = adapter
-        adapter?.notifyDataSetChanged()*/
-        /*val textView: TextView = root.findViewById(R.id.text_gallery)
-        galleryViewModel.text.observe(this, Observer {
-            textView.text = it
-        })*/
 
         return binding.root
     }

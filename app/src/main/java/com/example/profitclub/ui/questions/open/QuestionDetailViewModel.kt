@@ -5,7 +5,6 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.profitclub.data.bids.BidsRepository
 import com.example.profitclub.data.bids.ClientClickView
-import com.example.profitclub.data.bids.ConsultantBidsData
 import com.example.profitclub.data.bids.ResponseGeneric
 import kotlinx.coroutines.launch
 

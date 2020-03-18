@@ -30,13 +30,9 @@ class ApprovingBidAdapter(private val context: Context, private val items: Array
             binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
             binding.price.text = item?.price.toString()
             binding.status.text = item?.status.toString()
-            /* Picasso.get()
-                     .load(item.phost_photo)
-                     .into(binding.imageActual)*/
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)
-
         }
     }
 

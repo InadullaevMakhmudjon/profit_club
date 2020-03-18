@@ -37,7 +37,7 @@ class BidsFragment : Fragment(), View.OnClickListener {
        // val root = inflater.inflate(R.layout.fragment_questions, container, false)
         binding = FragmentBidsBinding.inflate(layoutInflater)
 
-        mSectionPageAdapter = SectionPageAdapter3(childFragmentManager)
+        mSectionPageAdapter = SectionPageAdapter3(childFragmentManager, activity!!)
         binding.viewPager.adapter = mSectionPageAdapter
         binding.pagerHeader.setTabIndicatorColorResource(R.color.colorAccent2)
 

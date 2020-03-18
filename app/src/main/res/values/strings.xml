@@ -144,7 +144,7 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="it">IT &amp; Software</string>
     <string name="accounting">Accounting</string>
     <string name="category_alert">Choose which your question relates to</string>
-    <string name="review_alert">Review</string>
+    <string name="review_alert">Close the work</string>
     <string name="review_desc">Give a comment to the work of the consultant</string>
     <string name="comment">Write a comment…</string>
     <string name="rating">Give a rating</string>
@@ -156,15 +156,12 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="manager">Manager</string>
     <string name="bid_title">Bid details</string>
     <string name="approved">Approve</string>
-    <string name="arbitration">Arbitration</string>
     <string name="setting">Settings</string>
     <string name="question_id_approve">Question id:</string>
     <string name="client_id_approve">Client id:</string>
     <string name="category_id_approve">Category:</string>
     <string name="consultant_id_approve">Consultant id:</string>
     <string name="space" translatable="false">\u0020</string>
-    <string name="reject">Reject</string>
-    <string name="close">Close</string>
     <string name="deadline_">Deadline:  18/01/2020</string>
     <string name="client_">Client</string>
     <string name="alisa">Alisa</string>
@@ -195,5 +192,27 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="uzbekistan">Uzbekistan</string>
     <string name="day">Day:</string>
     <string name="hour">hour:</string>
+    <string name="open">Open</string>
+    <string name="approve">Client confirm</string>
+    <string name="arbitration">Arbitration</string>
+    <string name="reject">Canceled</string>
+    <string name="close">Closed</string>
+    <string name="bids_consultant">Consultant\'s bids</string>
+    <string name="bids_client">Client\'s bids</string>
+
+    <string name="successfully">Completed Successfully</string>
+    <string name="send_to_manager">Your request directed to the Manager</string>
+    <string name="are_you_agree">Are you really agree to cancel?</string>
+    <string name="all_fiels">All fields should be filled in order to finish the process</string>
+    <string name="bid_creation">Bid creation</string>
+    <string name="answer">Answer</string>
+    <string name="closed">Closed</string>
+    <string name="cancelled">Cancelled</string>
+    <string name="reason">Write the reason...</string>
+    <string name="review_desc_consultant">Give a comment to the client</string>
+    <string name="answer_desc">Answer to the question</string>
+    <string name="review_desc_client">Give a comment to the work of the consultant</string>
+    <string name="winner_desc">Winner</string>
+    <string name="dispute_manager">Answer of the manager</string>
 
 </resources>

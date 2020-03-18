@@ -79,7 +79,7 @@ class MainActivity : AppCompatActivity() {
         // Error Observer
         mainViewModel.error.observe(this, Observer {error ->
             if(error.isNotEmpty()) {
-                Toast.makeText(this, error, Toast.LENGTH_LONG).show()
+                //Toast.makeText(this, error, Toast.LENGTH_LONG).show()
             }
         })
 

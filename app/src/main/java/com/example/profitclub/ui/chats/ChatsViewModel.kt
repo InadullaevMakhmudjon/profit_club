@@ -40,7 +40,7 @@ class ChatsViewModel(val repository: QuestionRepository) : ViewModel() {
 
         viewModelScope.launch {
             try {
-                val res = repository.getClientQuestionView(1)
+                val res = repository.getClientQuestionView(arrayOf(1, 2))
                 if(res.isSuccessful) {
                     dataClient.apply { value = res.body() }
                 }

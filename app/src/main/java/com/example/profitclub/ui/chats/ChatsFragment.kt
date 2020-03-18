@@ -53,7 +53,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 viewmodel.data.observe(viewLifecycleOwner, Observer { data ->
 
                     if(data != null) {
-                        toast("come data")
+                        //toast("come data")
                         adapter = ChatListAdapter(this.context!!, data.data, this)
                         binding.chatList.adapter = adapter
                     }
@@ -67,7 +67,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 viewmodel.dataClient.observe(viewLifecycleOwner, Observer { data ->
 
                     if(data != null) {
-                        toast("come dataClient")
+                        //toast("come dataClient")
                         adapter = ChatListAdapter(this.context!!, data.data, this)
                         binding.chatList.adapter = adapter
                     }

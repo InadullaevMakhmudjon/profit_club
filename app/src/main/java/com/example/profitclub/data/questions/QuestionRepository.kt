@@ -36,7 +36,7 @@ class QuestionRepository(private val retrofit: QuestionService, private val pref
     suspend fun getQuestionConsultantDisputeView(lang: String? = "") = retrofit.getQuestionConsultantDisputeView("JWT $token", lang)
 
 
-    suspend fun getClientQuestionView(status: Int) = retrofit.getQuestionClientView("JWT $token", status)
+    suspend fun getClientQuestionView(status: Array<Int>) = retrofit.getQuestionClientView("JWT $token", status)
 
     suspend fun getClientQuestionApproveView(status: Int) = retrofit.getQuestionClientApproveView("JWT $token", status)
 

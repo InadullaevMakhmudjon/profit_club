@@ -50,7 +50,7 @@
                     android:orientation="horizontal">
 
                     <Button
-                        android:id="@+id/reject"
+                        android:id="@+id/reject_question_detail"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:textColor="@color/white"
@@ -60,7 +60,7 @@
                         android:layout_height="match_parent"/>
 
                     <Button
-                        android:id="@+id/delay"
+                        android:id="@+id/arbitration_question_detail"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:textColor="@color/white"
@@ -122,6 +122,7 @@
                 android:fontFamily="@font/roboto_bold"
                 android:layout_marginTop="8dp"
                 android:text="@string/deadline_"
+                android:drawableStart="@drawable/ic_event_black_24dp"
                 android:textColor="@android:color/holo_red_light"
                 android:textSize="20sp"
                 app:layout_constraintVertical_bias="0.0"
@@ -153,7 +154,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="@string/skills"
+                        android:text="@string/category_"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintVertical_bias="0.0"
@@ -235,7 +236,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/date_container"
+                    android:id="@+id/answer_container_client"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="13dp"
@@ -244,11 +245,11 @@
                     android:paddingTop="8dp">
 
                     <TextView
-                        android:id="@+id/start_date"
+                        android:id="@+id/answer_desc"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/roboto_bold"
-                        android:text="@string/question_id"
+                        android:text="@string/answer_desc"
                         android:textColor="@color/black"
                         android:textSize="16sp"
                         app:layout_constraintVertical_bias="0.0"
@@ -256,17 +257,17 @@
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
-                        android:id="@+id/finished_date"
+                        android:id="@+id/answer_"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="4dp"
                         android:fontFamily="@font/roboto_medium"
                         android:text="@string/id"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="14sp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintStart_toStartOf="@+id/start_date"
-                        app:layout_constraintTop_toBottomOf="@+id/start_date"
+                        app:layout_constraintStart_toStartOf="@+id/answer_desc"
+                        app:layout_constraintTop_toBottomOf="@+id/answer_desc"
                         app:layout_constraintVertical_bias="0.0" />
 
                     <RelativeLayout
@@ -274,7 +275,7 @@
                         android:layout_height="1dp"
                         android:background="@android:color/darker_gray"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintTop_toBottomOf="@+id/finished_date"
+                        app:layout_constraintTop_toBottomOf="@+id/answer_"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginBottom="8dp"
@@ -283,6 +284,102 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/dispute_manager_container_client"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/dispute_manager_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/dispute_manager"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/dispute_manager_"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/id"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/dispute_manager_desc"
+                        app:layout_constraintTop_toBottomOf="@+id/dispute_manager_desc"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/dispute_manager_"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/winner_container_client"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="13dp"
+                    android:paddingStart="15dp"
+                    android:paddingEnd="15dp"
+                    android:paddingTop="8dp">
+
+                    <TextView
+                        android:id="@+id/winner_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/roboto_bold"
+                        android:text="@string/winner_desc"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        app:layout_constraintVertical_bias="0.0"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/winner_"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="@string/id"
+                        android:textColor="@android:color/tertiary_text_light"
+                        android:textSize="14sp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="@+id/winner_desc"
+                        app:layout_constraintTop_toBottomOf="@+id/winner_desc"
+                        app:layout_constraintVertical_bias="0.0" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@android:color/darker_gray"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/winner_"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginTop="8dp"/>
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+               <!-- <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/container_chosen_consultant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -424,7 +521,7 @@
                         app:layout_constraintEnd_toEndOf="parent"/>
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
-
+-->
         <TextView
             android:id="@+id/total_bids"
             android:layout_width="wrap_content"
