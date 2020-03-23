@@ -1,12 +1,12 @@
 package com.example.profitclub.adapters
 
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
@@ -14,6 +14,8 @@ import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.data.questions.Message
 import com.example.profitclub.databinding.MessageItemBinding
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class MessageListAdapter(
@@ -40,9 +42,11 @@ class MessageListAdapter(
             } else {
                 binding!!.container.setBackgroundResource(R.drawable.message_text_border)
                 binding.messageText.setTextColor(Color.WHITE)
+                binding.time.setTextColor(Color.WHITE)
             }
             binding.messageText.text = item.content
-            binding.time.text = item.date
+            binding.time.text = date(item.date)
+            //binding.time.text = item.date
             Picasso.get()
                 .load("$BASE_URL${item.avatar}")
                 .into(binding.profileImage)
@@ -74,5 +78,15 @@ class MessageListAdapter(
               // context.startActivity(Intent(context, ChatViewActivity::class.java))
             }
         }
+    }
+
+    @SuppressLint("SimpleDateFormat")
+    fun date(string: String): String{
+        val readDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S")
+        readDate.timeZone = TimeZone.getTimeZone("GMT") // missing line
+        val date = readDate.parse(string)
+        val writeDate = SimpleDateFormat("dd.MM.yyyy, HH:mm")
+        writeDate.timeZone = TimeZone.getTimeZone("GMT+04:00")
+        return writeDate.format(date)
     }
 }

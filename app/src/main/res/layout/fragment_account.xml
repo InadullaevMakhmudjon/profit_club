@@ -414,20 +414,19 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-        <TextView
+        <Button
             android:id="@+id/log_out"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="@android:color/holo_red_light"
-            android:textSize="20sp"
-            android:focusable="true"
-            android:clickable="true"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
             android:textAlignment="center"
             android:fontFamily="@font/roboto_bold"
             android:layout_marginStart="15dp"
             android:layout_marginEnd="15dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
+            android:background="@drawable/bc_status_rejected"
             android:text="@string/log_out"/>
 
     </LinearLayout>

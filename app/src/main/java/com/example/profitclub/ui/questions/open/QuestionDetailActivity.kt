@@ -111,6 +111,7 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
                 dispute_manager_container_client.isVisible = false
                 winner_container_client.isVisible = false
                 deadline.isVisible = false
+                answer_container_client.isVisible = false
 
                 title_.text = close.title
                 description.text = close.description
@@ -125,7 +126,6 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
                 buttons_container.isVisible = false
                 dispute_manager_container_client.isVisible = false
                 winner_container_client.isVisible = false
-                answer_container_client.isVisible = false
 
                 title_.text = cancel.title
                 description.text = cancel.description

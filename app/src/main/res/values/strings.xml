@@ -58,7 +58,7 @@
     <string name="card_number">Card number</string>
     <string name="passport_series">Passport series and numbers</string>
     <string name="skip">SKIP</string>
-    <string name="title" translatable="false">Title / 255</string>
+    <string name="title">Title</string>
     <string name="description">Full Description</string>
     <string name="verify">Verify</string>
     <string name="deadline">Deadline</string>
@@ -214,5 +214,12 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="review_desc_client">Give a comment to the work of the consultant</string>
     <string name="winner_desc">Winner</string>
     <string name="dispute_manager">Answer of the manager</string>
+    <string name="check_box">Check one of these checkboxes only</string>
+    <string name="mail_already_registered">This e-mail already registered</string>
+    <string name="account_not_activated">The account not activated</string>
+    <string name="account_not_verified">The account not verified</string>
+    <string name="info_not_completed">Info about user not completed</string>
+    <string name="password_does_not_match">Password does not match with repeated password</string>
+    <string name="server_error">Server error</string>
 
 </resources>

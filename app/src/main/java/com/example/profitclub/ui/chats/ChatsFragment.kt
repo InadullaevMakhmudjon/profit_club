@@ -13,7 +13,6 @@ import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.adapters.ChatListAdapter
 import com.example.profitclub.databinding.FragmentChatsBinding
-import com.example.profitclub.toast
 
 class ChatsFragment : Fragment(), View.OnClickListener {
 
@@ -60,7 +59,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 })
 
                 viewmodel.error.observe(viewLifecycleOwner, Observer { message ->
-                    toast("Error: $message")
+                    //toast("Error: $message")
                 })
 
             } else {
@@ -74,7 +73,7 @@ class ChatsFragment : Fragment(), View.OnClickListener {
                 })
 
                 viewmodel.error.observe(viewLifecycleOwner, Observer { message ->
-                    toast("Error: $message")
+                    //toast("Error: $message")
                 })
             }
         }

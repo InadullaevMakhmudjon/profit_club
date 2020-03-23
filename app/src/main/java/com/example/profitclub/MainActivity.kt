@@ -5,35 +5,22 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-import com.google.android.material.snackbar.Snackbar
-import androidx.navigation.findNavController
-import androidx.drawerlayout.widget.DrawerLayout
-import com.google.android.material.navigation.NavigationView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.*
+import androidx.navigation.ui.NavigationUI
 import com.example.profitclub.databinding.ActivityMainBinding
-import com.example.profitclub.splashscreens.SplashScreen
 import com.example.profitclub.ui.AuthentificationActivity
-import kotlinx.android.synthetic.main.activity_chat_view.*
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.activity_main.toolbar
-import kotlinx.android.synthetic.main.fragment_splash.*
 import kotlinx.android.synthetic.main.main_custom_bar.*
-import kotlinx.android.synthetic.main.main_custom_bar.view.*
 
 class MainActivity : AppCompatActivity() {
 
@@ -70,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.token.observe(this, Observer {token ->
             if(token == null) {
-                Toast.makeText(this, "Token is not exist", Toast.LENGTH_LONG)
+                //Toast.makeText(this, "Token is not exist", Toast.LENGTH_LONG)
                 startActivity(Intent(this, AuthentificationActivity::class.java))
                 this.finish()
             }

@@ -48,7 +48,7 @@
     <string name="price">Цена:</string>
     <string name="post_question">Опубликовать вопрос</string>
     <string name="post">Опубликовать</string>
-    <string name="place_a_bid">Зделать ставку</string>
+    <string name="place_a_bid">Сделать ставку</string>
     <string name="phone_number">Номер телефона</string>
     <string name="payment_verification">Подтверждение оплаты</string>
     <string name="patronymic">Отчество</string>
@@ -84,7 +84,7 @@
     <string name="info_company">Информация о компании</string>
     <string name="info">Информация о вас</string>
     <string name="individual_verification">Индивидуальная проверка</string>
-    <string name="individual">Индивидуальный</string>
+    <string name="individual">Физическое лицо</string>
     <string name="history">История</string>
     <string name="hire">Выбирать</string>
     <string name="get_started">НАЧАТЬ</string>
@@ -151,7 +151,7 @@
     <string name="action_settings">Настройки</string>
     <string name="accounting">Бухгалтерия</string>
     <string name="Account">Аккаунт</string>
-    <string name="about">Об</string>
+    <string name="about">Обо мне</string>
     <string name="penalty">ШТРАФ (%)</string>
     <string name="penalty_desc">Процент ШТРАФА</string>
     <string name="retry">повторить попытку</string>
@@ -165,7 +165,7 @@
     <string name="hour">час:</string>
     <string name="open">Открытые</string>
     <string name="approve">Подтвержденные клиентом</string>
-    <string name="bids_client">Ставки клиента</string>
+    <string name="bids_client">Новые вопросы</string>
     <string name="successfully">Успешно завершено</string>
     <string name="send_to_manager">"Ваш запрос направлен менеджеру "</string>
     <string name="are_you_agree">Вы согласны отменить?</string>
@@ -179,4 +179,12 @@
     <string name="answer_desc">Ответ на вопрос</string>
     <string name="winner_desc">Победитель</string>
     <string name="dispute_manager">Ответ менеджера по спору</string>
+    <string name="check_box">Отметьте только один из вариантов</string>
+    <string name="mail_already_registered">E-mail уже зарегистрирован</string>
+    <string name="account_not_activated">Учётная запись не активирована</string>
+    <string name="account_not_verified">Учётная запись не подтверждена</string>
+    <string name="info_not_completed">Информация о пользователе неполная</string>
+    <string name="password_does_not_match">Пароли не совпадают</string>
+    <string name="server_error">Ошибка сервера</string>
+    <string name="title">Заголовок</string>
 </resources>

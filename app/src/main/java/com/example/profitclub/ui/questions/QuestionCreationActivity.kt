@@ -4,18 +4,14 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
 import android.view.Menu
 import android.view.MenuItem
-import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.R
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.activity_question_creation.*
 import java.util.*
 

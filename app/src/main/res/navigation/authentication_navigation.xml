@@ -25,7 +25,9 @@
         tools:layout="@layout/fragment_options">
         <action
             android:id="@+id/accountCreateAction"
-            app:destination="@id/creationAccFragment" />
+            app:destination="@id/creationAccFragment"
+            app:popUpTo="@+id/creationAccFragment"
+            app:popUpToInclusive="false"/>
     </fragment>
 
     <fragment
@@ -80,16 +82,15 @@
         android:name="com.example.profitclub.ui.client_individual_infos.ClientIndividualInfoFragment"
         android:label="fragment_client_individual_info"
         tools:layout="@layout/fragment_client_individual_infos">
-        <action
-            android:id="@+id/splashScreeen2Action"
-            app:destination="@id/splash_screen2" />
+
         <argument
             android:name="login_id"
             app:argType="integer"
             android:defaultValue="0" />
         <action
             android:id="@+id/actionToLogin"
-            app:destination="@id/toolsFragment" />
+            app:destination="@id/toolsFragment"
+            />
     </fragment>
 
     <fragment

@@ -212,7 +212,7 @@ private fun setNewLocaleActivity(language: String, restartProcess: Boolean, acti
 
 fun Context.getLanguage(): String{
     val mPrefs = this.getSharedPreferences("profitclub", Context.MODE_PRIVATE)
-    return mPrefs.getString("lang", LANGUAGE_ENGLISH)!!
+    return mPrefs.getString("lang", LANGUAGE_RUSSIAN)!!
 }
 
 fun Context.setLanguage(language: String) {
@@ -240,5 +240,3 @@ fun Context.isNetworkAvailable(): Boolean {
 fun Fragment.isNetworkAvailable(): Boolean {
     return activity!!.isNetworkAvailable()
 }
-
-
