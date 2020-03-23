@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         mainViewModel.token.observe(this, Observer {token ->
             if(token == null) {
-                Toast.makeText(this, "Token is not exist", Toast.LENGTH_LONG)
+                //Toast.makeText(this, "Token is not exist", Toast.LENGTH_LONG)
                 startActivity(Intent(this, AuthentificationActivity::class.java))
                 this.finish()
             }

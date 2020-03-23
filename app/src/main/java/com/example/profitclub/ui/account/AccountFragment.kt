@@ -11,6 +11,7 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -54,7 +55,7 @@ class AccountFragment : Fragment() {
         /*sendViewModel.text.observe(this, Observer {
            // textView.text = it
         })*/
-        val logOut: TextView = root.findViewById(R.id.log_out)
+        val logOut: Button = root.findViewById(R.id.log_out)
         this.penalty = root.findViewById(R.id.num_penalty)
         val employeeList: ConstraintLayout = root.findViewById(R.id.employees_container)
         val viewContainer: ConstraintLayout = root.findViewById(R.id.view_container)
@@ -80,14 +81,14 @@ class AccountFragment : Fragment() {
         }
 
         when (myDataFromActivity) {
-            1, 3 -> {
+            5, 7 -> {
                 employeeList.isVisible = false
                 penaltyContainer.isVisible = false
             }
             2, 4 -> {
                 penaltyContainer.isVisible = false
             }
-            5 -> {
+            6 -> {
                 employeeList.isVisible = false
             }
         }

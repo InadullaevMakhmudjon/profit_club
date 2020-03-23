@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import com.example.profitclub.R
+import com.example.profitclub.toast
 import kotlinx.android.synthetic.main.fragment_client_individual_infos.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -38,11 +39,6 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        //val textView: TextView = root.findViewById(R.id.text_tools)
-        /*toolsViewModel.text.observe(this, Observer {
-            textView.text = it
-        })*/
 
         return inflater.inflate(R.layout.fragment_client_individual_infos, container, false)
     }
@@ -104,7 +100,7 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
             val safeArgs = ClientIndividualInfoFragmentArgs.fromBundle(it)
             //email_check.text = "Role number: ${safeArgs.clientRole}"
             loginId = safeArgs.loginId
-            header.text = loginId.toString()
+            //header.text = loginId.toString()
         }
 
        activity.let {
@@ -153,30 +149,27 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
            }
 
            getStart.setOnClickListener {
-               viewModel.userInfo(
-                   this.loginId!!, mNameText!!,
-                   lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
-                   regionId!!, cityId!!, addressText!!, passportNoText!!, intArrayOf(1), intArrayOf(1), aboutText!!
-               )
+               if (mNameText != null && lNameText != null && fNameText != null && genderId != 0 && date != null
+                   && phoneText != null && addressText != null && passportNoText != null && aboutText != null){
+                   viewModel.userInfo(
+                       this.loginId!!, mNameText!!,
+                       lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
+                       regionId!!, cityId!!, addressText!!, passportNoText!!, intArrayOf(1), intArrayOf(1), aboutText!!)
+               } else {
+                   toast(getString(R.string.all_fiels))
+               }
            }
 
-           viewModel.userId.observe(activity!!, androidx.lifecycle.Observer { userId ->
-               if (userId != 0){
+           viewModel.userId.observe(activity!!, Observer{ userId ->
+               if (userId != 0) {
+                   val fragment = ClientIndividualInfoFragment()
+                   // val emailAction = ClientIndividualInfoFragmentDirections.actionToLogin()
                    Navigation.findNavController(getStart).navigate(R.id.actionToLogin)
-                   activity!!.supportFragmentManager.popBackStack()
+                  // activity!!.fragmentManager.beginTransaction().remove(this).hashCode()
                }
+
            })
-
-         /*  viewModel.userId.observe(activity!!, Observer { userId ->
-               if (userId != null){
-                   //Navigation.findNavController(getStart).navigate(R.id.splashScreeen2Action)
-               }
-           })*/
        }
-
-        /*get_started.setOnClickListener {
-
-        }*/
     }
 
     private fun showDatePickerDialog() {
@@ -191,8 +184,7 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
     }
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-            date = "Date of birth: " + p1 + "/" + p2 + 1 + "/" + p3
+            date = "Date of birth: " + p1 + "/" + (p2 + 1) + "/" + p3
             date_of_birth.text = date
         }
     }
-

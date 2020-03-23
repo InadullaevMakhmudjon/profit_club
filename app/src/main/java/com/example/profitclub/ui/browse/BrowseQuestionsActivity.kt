@@ -11,6 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
+import com.example.profitclub.data.Service.socket
 import com.example.profitclub.data.bids.ConsultantBidsClickData
 import com.example.profitclub.data.bids.ConsultantBidsData
 import com.example.profitclub.data.questions.QuestionConsultantApproveData
@@ -18,6 +19,7 @@ import com.example.profitclub.data.questions.QuestionConsultantCancelledData
 import com.example.profitclub.data.questions.QuestionConsultantClosedData
 import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.toast
+import com.github.nkzawa.emitter.Emitter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_browse_questions.*
@@ -203,8 +205,11 @@ class BrowseQuestionsActivity : AppCompatActivity() {
             val price = priceView.text.toString()
             if(date != "" && price != ""){
                 vm.placeBid(data.question_id, date, price.toFloat())
+                /*socket!!.on("update_add_bids", Emitter.Listener {
+
+                })*/
             } else{
-                //toast("comment should be given")
+                toast("comment should be given")
             }
         }
 
