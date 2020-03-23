@@ -93,9 +93,11 @@ class MainActivity : AppCompatActivity() {
                     //binding.bottomBarManager.isVisible = false
 
                     if(role == 5 || role == 7){
+                        // Client
                         bottom_bar.menu.removeItem(R.id.bids)
                     }
                     if(role == 2 || role == 4){
+                        // Consultant
                         bottom_bar.menu.removeItem(R.id.questions)
                     }
                 }
