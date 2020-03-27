@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.R
+import com.example.profitclub.toast
 import kotlinx.android.synthetic.main.activity_question_creation.*
 import java.util.*
 
@@ -66,19 +67,25 @@ class QuestionCreationActivity : AppCompatActivity() {
                 // Display Selected date in TextView
                 val month = monthOfYear + 1
                 question_deadline.text = ("Deadline: $dayOfMonth/$month/$year")
-                deadline_final = "$dayOfMonth/$month/$year"
+                deadline_final = "$year-$month-$dayOfMonth"
             }, year, month, day)
             dpd.show()
-
         }
 
         post.setOnClickListener {
             /*Snackbar.make(it, "Your question posted successfully", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
-            finish()*/
+            */
             viewModel.postQuestion(user_id!!, arrayListOf(1,2), title.text.toString(), description.text.toString(),
                 1, deadline_final.toString())
         }
+
+        this.viewModel.error.observe(this, androidx.lifecycle.Observer {
+            toast(it)
+        })
+        this.viewModel.data.observe(this, androidx.lifecycle.Observer {
+            this.finish()
+        })
     }
 
     override fun onSupportNavigateUp(): Boolean {

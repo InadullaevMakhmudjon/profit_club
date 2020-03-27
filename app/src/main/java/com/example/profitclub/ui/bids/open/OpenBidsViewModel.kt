@@ -16,7 +16,7 @@ class OpenBidsViewModel(val repository: BidsRepository) : ViewModel() {
         value = null
     }
 
-    init {
+    val getData = fun() {
         viewModelScope.launch {
             try {
                 val res = repository.getBidsConsultantClickView("ru")
