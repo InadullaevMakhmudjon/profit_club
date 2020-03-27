@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.toast
@@ -256,6 +257,11 @@ class BidDetailActivity : AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         finish()
         return true
+    }
+
+    @Override
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleManager.setLocale(base))
     }
 }
 

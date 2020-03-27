@@ -11,6 +11,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import kotlinx.android.synthetic.main.activity_question_creation.*
 import java.util.*
@@ -133,5 +134,9 @@ class QuestionCreationActivity : AppCompatActivity() {
         datePickerDialog?.show()
     }*/
 
+    @Override
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleManager.setLocale(base))
+    }
 
 }

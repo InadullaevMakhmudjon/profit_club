@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.databinding.ActivityChatViewBinding
 import com.example.profitclub.toast
@@ -177,5 +178,10 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         alertDialogBuilder.show()
+    }
+
+    @Override
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleManager.setLocale(base))
     }
 }

@@ -1,6 +1,7 @@
 package com.example.profitclub.ui.account.details
 
 import android.app.Notification
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
@@ -11,6 +12,7 @@ import androidx.core.app.NotificationManagerCompat
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.profitclub.App
+import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.adapters.BidsAdapter
 import com.example.profitclub.databinding.ActivityProfileBinding
@@ -116,5 +118,10 @@ class ProfileActivity : AppCompatActivity() {
             .build()
 
         notificationManager.notify(1, notification)
+    }
+
+    @Override
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleManager.setLocale(base))
     }
 }
