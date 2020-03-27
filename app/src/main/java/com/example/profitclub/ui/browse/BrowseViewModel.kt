@@ -16,7 +16,7 @@ class BrowseViewModel(val repository: BidsRepository) : ViewModel() {
 
     val error = MutableLiveData<String>()
 
-    init {
+    val getData = fun() {
         viewModelScope.launch {
             try {
                 val response = repository.getConsultantBidsView()

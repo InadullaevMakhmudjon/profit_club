@@ -11,6 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
+import com.example.profitclub.App
 import com.example.profitclub.R
 import com.example.profitclub.databinding.ActivityChatViewBinding
 import com.example.profitclub.toast
@@ -38,24 +39,8 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
-        try {
-            socket = IO.socket("http://87.237.236.184")
 
-            socket.on(Socket.EVENT_CONNECT) {
-                runOnUiThread {
-                }
-            }
-
-            socket.on("new-connection") {
-                runOnUiThread{
-                        socket.emit("connect-user", Gson().toJson(RequestChatSocket()))
-                }
-            }
-            socket.connect()
-        }catch (e: Exception) {
-            toast(e.message.toString())
-        }
-
+        socket = (application as App).getSocket
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_view)
         question_id = this.intent.getIntExtra("question_id", 0)
         client_id = this.intent.getIntExtra("client_id", 0)
