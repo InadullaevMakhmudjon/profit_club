@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/price"
             android:backgroundTint="@color/black"
-            android:inputType="text"
+            android:inputType="number"
             android:singleLine="true" />
 
     </com.google.android.material.textfield.TextInputLayout>
