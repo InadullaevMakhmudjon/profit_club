@@ -15,7 +15,7 @@ class InArbitrationQuestionsViewModel(val repository: QuestionRepository) : View
 
     val error = MutableLiveData<String>()
 
-    init {
+    val getData = fun() {
         viewModelScope.launch {
             try {
                 val response = repository.getQuestionClientDisputeView("ru")
