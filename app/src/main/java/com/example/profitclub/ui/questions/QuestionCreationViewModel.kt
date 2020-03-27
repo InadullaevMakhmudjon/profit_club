@@ -12,9 +12,7 @@ import kotlinx.coroutines.launch
 
 class QuestionCreationViewModel(val repository: BidsRepository) : ViewModel() {
 
-    val data = MutableLiveData<String>().apply {
-        value = null
-    }
+    val data = MutableLiveData<String>()
 
     val error = MutableLiveData<String>()
 

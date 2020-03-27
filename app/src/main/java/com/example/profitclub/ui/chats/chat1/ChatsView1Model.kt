@@ -29,16 +29,17 @@ class ChatsView1Model(application: Application, private val repository: Question
 
     val userId = repository.userId
 
+    val receiverId = MutableLiveData<Int>().apply { value = 0 }
+
     val messages = MutableLiveData<ArrayList<Message>>().apply { value = arrayListOf() }
 
     fun sendBtn(v: View) {
-        if(messages.value!!.size > 0) {
             viewModelScope.launch {
                 try {
                     val request = RequestQuestionMessage(
                         question_id = questionId.value!!,
                         content = messageText.value,
-                        idother = 2)
+                        idother = receiverId.value!!)
                     repository.postQuestionSendMessage(request)
                     messageText.apply { value = "" }
                     v.hideKeyboard()
@@ -46,8 +47,6 @@ class ChatsView1Model(application: Application, private val repository: Question
                     error.apply { value = e.message.toString() }
                 }
             }
-
-        }
     }
 
     val getData = fun(questionId: Int) {

@@ -10,10 +10,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.InArbitrationQuestionsAdapter
+import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.model.Questions
 
 import com.example.profitclub.databinding.FragmentArbitrationQuestionsBinding
 import com.example.profitclub.toast
+import java.util.ArrayList
 
 class InArbitrationQuestionsFragment : Fragment(), View.OnClickListener {
 
@@ -48,12 +50,12 @@ class InArbitrationQuestionsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val dataHolder = ArrayList<QuestionConsultantDisputeData>()
         activity?.let { activity ->
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             vm =
                 ViewModelProviders.of(this, ArbitrationQuestionsViewModelFactory(preferences)).get(InArbitrationQuestionsViewModel::class.java)
-            adapter = InArbitrationQuestionsAdapter(this.context!!, null, this)
+            adapter = InArbitrationQuestionsAdapter(this.context!!, dataHolder, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.recyclerArbitration.layoutManager = layoutManager
             binding.recyclerArbitration.adapter = adapter
@@ -61,22 +63,21 @@ class InArbitrationQuestionsFragment : Fragment(), View.OnClickListener {
 
             vm.data.observe(viewLifecycleOwner, Observer { data ->
                 if (data != null){
-                    adapter = InArbitrationQuestionsAdapter(this.context!!, data.data, this)
-                    binding.recyclerArbitration.adapter = adapter
+                    dataHolder.clear()
+                    dataHolder.addAll(data.data)
                     adapter?.notifyDataSetChanged()
                 }
             })
 
             vm.error.observe(viewLifecycleOwner, Observer { message ->
-                toast("$message")
+                toast(message)
             })
-
         }
     }
 
     override fun onResume() {
         super.onResume()
-        adapter?.notifyDataSetChanged()
+        vm.getData()
     }
 
     override fun onClick(p0: View?) {

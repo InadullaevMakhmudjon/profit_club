@@ -9,7 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.profitclub.App
 import com.example.profitclub.adapters.OpenBidAdapter
+import com.example.profitclub.data.bids.ConsultantBidsClickData
+import com.example.profitclub.data.bids.ConsultantBidsData
 import com.example.profitclub.databinding.FragmentOpenBidsBinding
 import com.example.profitclub.toast
 
@@ -28,8 +31,8 @@ class OpenBidsFragment : Fragment(), View.OnClickListener {
     ): View? {
        // (activity as AppCompatActivity).supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        activity?.let {
-            val preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        activity?.let {activity ->
+            val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 
             viewModel =
                 ViewModelProviders.of(this,
@@ -37,26 +40,36 @@ class OpenBidsFragment : Fragment(), View.OnClickListener {
                         preferences
                     )
                 ).get(OpenBidsViewModel::class.java)
+
+            val dataAdapter = ArrayList<ConsultantBidsClickData>()
             // val root = inflater.inflate(R.layout.fragment_questions, container, false)
             binding = FragmentOpenBidsBinding.inflate(layoutInflater)
-            adapter = OpenBidAdapter(this.context!!, null, this)
+            adapter = OpenBidAdapter(this.context!!, dataAdapter, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.recyclerOpenBids.layoutManager = layoutManager
             binding.recyclerOpenBids.adapter = adapter
-            adapter?.notifyDataSetChanged()
+
 
             viewModel.data.observe(viewLifecycleOwner, Observer { data ->
-
                 if(data != null) {
                     //toast("come data")
-                    adapter = OpenBidAdapter(this.context!!, data.data, this)
-                    binding.recyclerOpenBids.adapter = adapter
+                    dataAdapter.clear()
+                    dataAdapter.addAll(data.data)
+                    adapter?.notifyDataSetChanged()
                 }
             })
 
             viewModel.error.observe(viewLifecycleOwner, Observer { message ->
                 toast("Error: $message")
             })
+
+            (activity.application as App).getSocket.on("update_add_bids") {
+                activity.runOnUiThread {
+                    viewModel.getData()
+                }
+            }
+
+            viewModel.getData()
         }
 
         return binding.root

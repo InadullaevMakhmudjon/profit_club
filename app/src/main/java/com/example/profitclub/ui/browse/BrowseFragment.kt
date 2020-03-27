@@ -8,13 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.GridLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.cardview.widget.CardView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.profitclub.App
 import com.example.profitclub.R
 import com.example.profitclub.adapters.BrowseListAdapter
+import com.example.profitclub.data.bids.ConsultantBidsData
 import com.example.profitclub.databinding.FragmentBrowseBinding
 import com.example.profitclub.toast
 
@@ -46,24 +49,31 @@ class BrowseFragment : Fragment(), View.OnClickListener {
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             viewModel =
                 ViewModelProviders.of(this, BrowseViewModelFactory(preferences)).get(BrowseViewModel::class.java)
-
-            adapter = BrowseListAdapter(this.context!!, null, this)
+            val adapterData = ArrayList<ConsultantBidsData>()
+            adapter = BrowseListAdapter(this.context!!, adapterData, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.browseList.layoutManager = layoutManager
             binding.browseList.adapter = adapter
-            adapter!!.notifyDataSetChanged()
 
             viewModel.bidsConsView.observe(viewLifecycleOwner, Observer {data ->
                 if (data != null){
                    // toast("come bid data")
-                    adapter = BrowseListAdapter(this.context!!, data.data, this)
-                    binding.browseList.adapter = adapter
+                    adapterData.clear()
+                    adapterData.addAll(data.data)
+                    adapter!!.notifyDataSetChanged()
                 }
             })
 
             viewModel.error.observe(viewLifecycleOwner, Observer { message ->
                 toast("Error: $message")
             })
+
+            (activity.application as App).getSocket.on("update_add_bids") {
+                activity.runOnUiThread {
+                    viewModel.getData()
+                }
+            }
+            viewModel.getData()
         }
     }
 

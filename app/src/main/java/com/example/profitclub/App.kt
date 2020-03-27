@@ -1,5 +1,6 @@
 package com.example.profitclub
 
+import RequestChatSocket
 import android.app.Application
 import android.app.NotificationManager
 import androidx.core.content.ContextCompat.getSystemService
@@ -7,15 +8,41 @@ import android.app.NotificationChannel
 import android.content.Context
 import android.content.res.Configuration
 import android.os.Build
+import com.github.nkzawa.socketio.client.IO
+import com.github.nkzawa.socketio.client.Socket
+import com.google.gson.Gson
+import java.lang.Exception
+import kotlin.concurrent.thread
 
 class App : Application() {
+    private lateinit var socket: Socket
 
     override fun onCreate() {
         super.onCreate()
         LocaleManager.setLocale(this)
         //MultiDex.install(this)
         createNotificationChannels()
+        try {
+            socket = IO.socket("http://87.237.236.184")
+
+            socket.on(Socket.EVENT_CONNECT) {
+                thread {
+                }
+            }
+
+            socket.on("new-connection") {
+                thread {
+                    socket.emit("connect-user", Gson().toJson(RequestChatSocket()))
+                }
+            }
+            socket.connect()
+        }catch (e: Exception) {
+            toast(e.message.toString())
+        }
     }
+
+    val getSocket: Socket
+        get() = socket
 
     //Setup Locale manager with context
     override fun attachBaseContext(base: Context) {

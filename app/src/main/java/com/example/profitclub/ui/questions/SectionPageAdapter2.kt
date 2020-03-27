@@ -11,10 +11,7 @@ import com.example.profitclub.ui.questions.dispute.InArbitrationQuestionsFragmen
 import com.example.profitclub.ui.questions.open.OpenQuestionsFragment
 
 class SectionPageAdapter2(fm: FragmentManager, context: Context) : FragmentPagerAdapter(fm) {
-    lateinit var context: Context
-    init {
-        this.context = context
-    }
+    var context: Context = context
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {

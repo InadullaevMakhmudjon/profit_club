@@ -202,7 +202,7 @@ class BrowseQuestionsActivity : AppCompatActivity() {
         val priceView = customLayout.findViewById<AutoCompleteTextView>(R.id.price_alert)
 
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
-            val date: String = deadlineCalendarView.dayOfMonth.toString() + "-" + (deadlineCalendarView.month + 1).toString() + "-" + deadlineCalendarView.year.toString()
+            val date: String = "${deadlineCalendarView.year}-${(deadlineCalendarView.month + 1)}-${deadlineCalendarView.dayOfMonth}"
             val price = priceView.text.toString()
             if(date != "" && price != ""){
                 vm.placeBid(data.question_id, date, price.toFloat())

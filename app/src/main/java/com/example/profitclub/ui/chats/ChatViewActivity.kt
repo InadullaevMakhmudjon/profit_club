@@ -2,6 +2,7 @@ package com.example.profitclub.ui.chats
 
 import RequestChatSocket
 import android.content.Context
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,7 +11,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
-import com.example.profitclub.LocaleManager
+import com.example.profitclub.App
 import com.example.profitclub.R
 import com.example.profitclub.databinding.ActivityChatViewBinding
 import com.example.profitclub.toast
@@ -25,6 +26,8 @@ import java.lang.Exception
 
 class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
+    private lateinit var preferences: SharedPreferences
+    private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var binding: ActivityChatViewBinding
     private var mSectionPageAdapter: SectionPageAdapter4? = null
     private var role: Int = 0
@@ -35,27 +38,9 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 
-        try {
-            socket = IO.socket("http://87.237.236.184")
-
-            socket.on(Socket.EVENT_CONNECT) {
-                runOnUiThread {
-                    toast("Connected")
-                }
-            }
-
-            socket.on("new-connection") {
-                runOnUiThread{
-                        socket.emit("connect-user", Gson().toJson(RequestChatSocket()))
-                    toast("Server connected")
-                }
-            }
-            socket.connect()
-        }catch (e: Exception) {
-            toast(e.message.toString())
-        }
-
+        socket = (application as App).getSocket
         binding = DataBindingUtil.setContentView(this, R.layout.activity_chat_view)
         question_id = this.intent.getIntExtra("question_id", 0)
         client_id = this.intent.getIntExtra("client_id", 0)
@@ -73,7 +58,7 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         actionBar?.customView = actionBarView
         actionBarView.question_id.text = question_id.toString()
 
-        toast("client id: $client_id, consultant_id: $consultant_id")
+        // toast("client id: $client_id, consultant_id: $consultant_id")
 
         //val role = MainActivity().run { getMyData() }
         /*val activity = callingActivity as MainActivity?
@@ -130,6 +115,11 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         return role
     }
 
+    val getOtherId get(): Int {
+        val userId = preferences.getInt("user_id", 0)
+        return if(userId == client_id) consultant_id else client_id
+    }
+
     fun getMyQusetionId(): Int {
         return question_id
     }
@@ -178,10 +168,5 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         }
 
         alertDialogBuilder.show()
-    }
-
-    @Override
-    override fun attachBaseContext(base: Context) {
-        super.attachBaseContext(LocaleManager.setLocale(base))
     }
 }

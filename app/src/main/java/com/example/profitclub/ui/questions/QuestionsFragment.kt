@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.databinding.FragmentQuestionsBinding
+import com.example.profitclub.toast
 import kotlinx.android.synthetic.main.fragment_questions.*
 
 class QuestionsFragment : Fragment(), View.OnClickListener {
@@ -45,7 +46,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         post_question.setOnClickListener {
             startActivity(Intent(context, QuestionCreationActivity::class.java))
         }
