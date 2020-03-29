@@ -16,7 +16,7 @@ class OpenQuestionsViewModel(val repository: BidsRepository) : ViewModel() {
 
     val error = MutableLiveData<String>()
 
-    init {
+    val fetchData = fun() {
         viewModelScope.launch {
             try {
                 val response = repository.getBidsClientView("ru")

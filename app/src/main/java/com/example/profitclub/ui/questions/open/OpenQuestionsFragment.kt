@@ -50,18 +50,21 @@ class OpenQuestionsFragment : Fragment(), View.OnClickListener {
                if (data != null){
                    adapter = QuestionsAdapter(this.context!!, data.data, this)
                    binding.recyclerOpen.adapter = adapter
+                   adapter?.notifyDataSetChanged()
                }
            })
 
            viewModel.error.observe(viewLifecycleOwner, Observer { message ->
                toast("Error: $message")
            })
+
+           viewModel.fetchData()
        }
     }
 
     override fun onResume() {
         super.onResume()
-        adapter?.notifyDataSetChanged()
+        viewModel.fetchData()
     }
 
     override fun onClick(p0: View?) {
