@@ -10,6 +10,7 @@ import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.adapters.BidsAdapter
 import com.example.profitclub.data.bids.ConsultantBidsData
@@ -270,5 +271,10 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
 
         notificationManager.notify(1, notification)
     }*/
+
+    @Override
+    override fun attachBaseContext(base: Context) {
+        super.attachBaseContext(LocaleManager.setLocale(base))
+    }
 
 }
