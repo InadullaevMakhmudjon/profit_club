@@ -1,10 +1,9 @@
 package com.example.profitclub.data.registration
 
-import retrofit2.Retrofit
-import java.sql.Timestamp
+import android.content.SharedPreferences
 
-class RegistrationRepository(private val retrofit: RegistrationService){
-
+class RegistrationRepository(private val retrofit: RegistrationService, private val preference: SharedPreferences){
+    private var token: String? = preference.getString("token", null)
     // All regions
     suspend fun getRegions() = retrofit.getRegions()
 
@@ -22,5 +21,8 @@ class RegistrationRepository(private val retrofit: RegistrationService){
             = retrofit.getUserInfo(
         UserInfoBody(login_id, lname, fname, mname, gender_id, date, phone, country_id,
             region_id, city_id, address, passport_no, languages, categories, about))
+
+    // UserGetInfo
+    suspend fun getUserInfo() = retrofit.userGetInfo("JWT $token")
 
 }

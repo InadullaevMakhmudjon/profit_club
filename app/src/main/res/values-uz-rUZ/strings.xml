@@ -186,4 +186,5 @@
     <string name="info_not_completed">Foydalanuvchi haqida ma\'lumot tugallanmagan</string>
     <string name="password_does_not_match">Parol takrorlangan parol bilan mos kelmadi</string>
     <string name="server_error">Server xatoligi</string>
+    <string name="bid_toast">Muddat ko\'rsatilmadi</string>
 </resources>

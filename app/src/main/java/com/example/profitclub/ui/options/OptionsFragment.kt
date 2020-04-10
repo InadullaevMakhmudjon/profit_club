@@ -44,11 +44,11 @@ class OptionsFragment : Fragment() {
             Navigation.findNavController(it).navigate(nextAction)
         }
 
-        manager.setOnClickListener {
+       /* manager.setOnClickListener {
             val intent = Intent(context, MainActivity::class.java)
             intent.putExtra("role", 5)
             context!!.startActivity(intent)
             activity!!.finishAffinity()
-        }
+        }*/
     }
 }

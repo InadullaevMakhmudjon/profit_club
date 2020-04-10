@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
-import com.example.profitclub.data.Service.socket
 import com.example.profitclub.data.bids.ConsultantBidsClickData
 import com.example.profitclub.data.bids.ConsultantBidsData
 import com.example.profitclub.data.questions.QuestionConsultantApproveData
@@ -20,18 +19,9 @@ import com.example.profitclub.data.questions.QuestionConsultantCancelledData
 import com.example.profitclub.data.questions.QuestionConsultantClosedData
 import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.toast
-import com.github.nkzawa.emitter.Emitter
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_browse_questions.*
-import kotlinx.android.synthetic.main.activity_browse_questions.buttons_container
-import kotlinx.android.synthetic.main.activity_browse_questions.deadline
-import kotlinx.android.synthetic.main.activity_browse_questions.place_bid
-import kotlinx.android.synthetic.main.activity_browse_questions.question_id
-import kotlinx.android.synthetic.main.activity_browse_questions.question_id_desc
-import kotlinx.android.synthetic.main.activity_browse_questions.skills
-import kotlinx.android.synthetic.main.activity_browse_questions.toolbar
-import kotlinx.android.synthetic.main.activity_question_detail.*
 import kotlinx.android.synthetic.main.bottom_sheet_client_preview.view.*
 
 class BrowseQuestionsActivity : AppCompatActivity() {
@@ -204,13 +194,10 @@ class BrowseQuestionsActivity : AppCompatActivity() {
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
             val date: String = "${deadlineCalendarView.year}-${(deadlineCalendarView.month + 1)}-${deadlineCalendarView.dayOfMonth}"
             val price = priceView.text.toString()
-            if(date != "" && price != ""){
+            if(date.trim() != "" && price.trim() != ""){
                 vm.placeBid(data.question_id, date, price.toFloat())
-                /*socket!!.on("update_add_bids", Emitter.Listener {
-
-                })*/
             } else{
-                toast("comment should be given")
+                toast(resources.getString(R.string.bid_toast))
             }
         }
 

@@ -48,6 +48,9 @@
             android:name="Role"
             app:argType="integer"
             android:defaultValue="1" />
+        <action
+            android:id="@+id/infoAction"
+            app:destination="@id/client_individual_info" />
     </fragment>
 
     <fragment

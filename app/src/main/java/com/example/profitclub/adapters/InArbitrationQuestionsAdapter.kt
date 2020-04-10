@@ -53,8 +53,6 @@ class InArbitrationQuestionsAdapter(private val context: Context, private val it
     }
 
     override fun onClick(p0: View?) {
-
-
         when(p0?.id){
             R.id.container -> {
               val item = p0.tag as QuestionConsultantDisputeData
@@ -64,6 +62,5 @@ class InArbitrationQuestionsAdapter(private val context: Context, private val it
                 context.startActivity(intent)
             }
         }
-
     }
 }

@@ -70,7 +70,7 @@ class CreationAcoountFragment : Fragment() {
             preferences = it.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             val viewModel = ViewModelProviders.of(it, CreationAccountViewModelFactory(preferences)).get(CreationAccountViewModel::class.java)
             val emailAction = CreationAcoountFragmentDirections.emailCheckAction()
-
+            val infoAction = CreationAcoountFragmentDirections.infoAction()
             create.setOnClickListener {
                 if(role == 1 && legal_entity.isChecked){
                     role = 7
@@ -89,11 +89,15 @@ class CreationAcoountFragment : Fragment() {
                     emailAction.setClientRole(role)
                 }
 
-                if(password.text.toString() == password_repeat.text.toString() && individual.isChecked ||
-                    legal_entity.isChecked){
-                    viewModel.register(email.text.toString(), password.text.toString(),
-                        passwordRepeat.text.toString(), role)
-                } else {
+                if (individual.isChecked || legal_entity.isChecked){
+                    if (email.text.toString() != "" && password.text.toString() != "" && passwordRepeat.text.toString() != ""){
+                        viewModel.register(email.text.toString(), password.text.toString(),
+                            passwordRepeat.text.toString(), role)
+                    } else {
+                        Snackbar.make(it, context!!.getString(R.string.all_fiels), Snackbar.LENGTH_LONG)
+                            .setAction("Action", null).show()
+                    }
+                }  else {
                     Snackbar.make(it, context!!.getString(R.string.check_box), Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show()
                 }
@@ -105,21 +109,27 @@ class CreationAcoountFragment : Fragment() {
                 }
             })
 
-            viewModel.loading.observe(activity!!, Observer {isLoading ->
+            viewModel.loading.observe(activity!!, Observer { isLoading ->
 
             })
 
             viewModel.status.observe(activity!!, Observer { status ->
-                viewModel.loginId.value?.toInt()?.let { it1 -> emailAction.setLoginId(it1) }
+
                 when (status) {
-                    0 -> Navigation.findNavController(create).navigate(emailAction)
+                    0, 2 -> {
+                        viewModel.loginId.value?.toInt()?.let { it1 -> emailAction.setLoginId(it1) }
+                        Navigation.findNavController(create).navigate(emailAction)
+                    }
                     -1 -> toast(getString(R.string.mail_already_registered))
                     1 -> toast(getString(R.string.account_not_activated))
-                    2 -> toast(getString(R.string.account_not_verified))
-                    3 -> toast(getString(R.string.info_not_completed))
+                   // 2 -> toast(getString(R.string.account_not_verified))
+                    3 -> {
+                        viewModel.loginId.value?.toInt()?.let { it1 -> infoAction.setLoginId(it1) }
+                        Navigation.findNavController(create).navigate(infoAction)
+                        toast(getString(R.string.info_not_completed))
+                    }
                     5 -> toast(getString(R.string.password_does_not_match))
                     9 -> toast(getString(R.string.server_error))
-                   // else -> toast("Async is not implemented")
                 }
             })
         }

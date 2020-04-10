@@ -221,5 +221,6 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="info_not_completed">Info about user not completed</string>
     <string name="password_does_not_match">Password does not match with repeated password</string>
     <string name="server_error">Server error</string>
+    <string name="bid_toast">Did not mention a deadline</string>
 
 </resources>

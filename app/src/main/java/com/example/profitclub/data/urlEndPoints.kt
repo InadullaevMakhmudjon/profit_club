@@ -67,3 +67,9 @@ const val BIDS_CLIENT_CLICK_VIEW = "main/bids-click-view"
 const val BIDS_CLIENT_UPDATE = "main/bids-client-update"
 
 const val BIDS_CLIENT_ADD = "main/bids-client-add"
+
+// File upload && download
+const val FILE_UPLOAD = "main/question-file-upload"
+
+// User Info
+const val GET_USER_INFO = "user/info"
