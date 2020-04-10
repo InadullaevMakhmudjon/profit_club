@@ -35,6 +35,12 @@ data class RequestQuestionMessage(
     val idother: Int
 )
 
+data class RequestUploadFile(
+    val question_id: Int,
+    val content: String?,
+    val idother: Int
+)
+
 data class GenericRequest<GenericType>(
     val item: GenericType
 )

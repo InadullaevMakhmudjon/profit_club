@@ -16,7 +16,7 @@ import kotlinx.android.synthetic.main.fragment_client_individual_infos.*
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListener  {
+class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListener{
 
     private lateinit var viewModel: ClientIndividualInfoViewModel
 

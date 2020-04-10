@@ -11,11 +11,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.InArbitrationQuestionsAdapter
 import com.example.profitclub.data.questions.QuestionConsultantDisputeData
-import com.example.profitclub.model.Questions
-
 import com.example.profitclub.databinding.FragmentArbitrationQuestionsBinding
+import com.example.profitclub.model.Questions
 import com.example.profitclub.toast
-import java.util.ArrayList
+import java.util.*
 
 class InArbitrationQuestionsFragment : Fragment(), View.OnClickListener {
 
