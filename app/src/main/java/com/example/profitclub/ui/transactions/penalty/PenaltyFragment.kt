@@ -1,4 +1,4 @@
-package com.example.profitclub.ui.transactions
+package com.example.profitclub.ui.transactions.penalty
 
 import android.annotation.SuppressLint
 import android.content.ActivityNotFoundException
@@ -16,16 +16,18 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.MainActivity
 import com.example.profitclub.R
-import com.example.profitclub.adapters.TransactionAdapter
-import com.example.profitclub.databinding.FragmentTransactionBinding
+import com.example.profitclub.adapters.TransactionAdapter2
+import com.example.profitclub.databinding.FragmentPenaltyBinding
+import com.example.profitclub.ui.transactions.TransactionViewModel
+import com.example.profitclub.ui.transactions.TransactionViewModelFactory
 
-class TransactionFragment : Fragment(), View.OnClickListener {
+class PenaltyFragment : Fragment(), View.OnClickListener {
     private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var preferences: SharedPreferences
     private lateinit var vm: TransactionViewModel
-    private lateinit var binding: FragmentTransactionBinding
+    private lateinit var binding: FragmentPenaltyBinding
     private var layoutManager: LinearLayoutManager? = null
-    private var adapter: TransactionAdapter? = null
+    private var adapter: TransactionAdapter2? = null
 
    // val list = listOf(TransactionResponseBody(22, "Doxod", 1, 0f, "asdasd", "asdasdf", "asdasf", "asddfga" ))
     override fun onCreateView(
@@ -33,7 +35,7 @@ class TransactionFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentTransactionBinding.inflate(layoutInflater)
+        binding = FragmentPenaltyBinding.inflate(layoutInflater)
         return binding.root
     }
 
@@ -61,19 +63,19 @@ class TransactionFragment : Fragment(), View.OnClickListener {
                 binding.transactionList2.isVisible = false
                 binding.withdraw.isVisible = false
             }*/
-            adapter = TransactionAdapter(this.context!!, null, this)
+            adapter = TransactionAdapter2(this.context!!, null, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.transactionList.layoutManager = layoutManager
             binding.transactionList.adapter = adapter
             adapter?.notifyDataSetChanged()
 
-            val bill = preferences.getString("bill", null)
+         /*   val bill = preferences.getString("bill", null)
             val sum = resources.getString(R.string.sum_balance)
-            binding.balance.text = "$bill $sum"
+            binding.balance.text = "$bill $sum"*/
 
-            vm.transactionBody.observe(viewLifecycleOwner, Observer {data ->
+            vm.penaltyBody.observe(viewLifecycleOwner, Observer {data ->
                 if (data != null){
-                    adapter = TransactionAdapter(this.context!!, data.data, this)
+                    adapter = TransactionAdapter2(this.context!!, data.data, this)
                     binding.transactionList.adapter = adapter
                 }
             })

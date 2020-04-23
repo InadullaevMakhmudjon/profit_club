@@ -62,6 +62,7 @@ class AuthRepository(private val retrofit: AuthService, private val preference: 
             editor.putString("token", userToken.token)
             editor.putInt("role", userToken.type)
             editor.putInt("user_id", userToken.user_id)
+            editor.putString("bill", userToken.bill)
             token = userToken.token
             role = userToken.type
             userId = userToken.user_id

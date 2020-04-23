@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.profitclub.data.Service
+import com.example.profitclub.data.registration.AboutMeRepository
 import com.example.profitclub.data.registration.RegistrationRepository
 import com.example.profitclub.data.registration.RegistrationService
 
@@ -12,7 +13,7 @@ class ProfileDetailsViewModelFactory(val preference: SharedPreferences): ViewMod
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if(modelClass.isAssignableFrom(ProfileDetailsViewModel::class.java)) {
             return ProfileDetailsViewModel(
-                repository = RegistrationRepository(
+                repository = AboutMeRepository(
                     retrofit = Service.createService(RegistrationService::class.java),
                     preference = preference
                 )

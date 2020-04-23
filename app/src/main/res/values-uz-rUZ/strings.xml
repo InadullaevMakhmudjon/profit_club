@@ -187,4 +187,19 @@
     <string name="password_does_not_match">Parol takrorlangan parol bilan mos kelmadi</string>
     <string name="server_error">Server xatoligi</string>
     <string name="bid_toast">Muddat ko\'rsatilmadi</string>
+    <string name="save">Saqlash</string>
+    <string name="owner">Egasi:</string>
+    <string name="type">Turi:</string>
+    <string name="amount">Miqdori:</string>
+    <string name="date">Sana:</string>
+    <string name="information_transaction">Ma\'lumot:</string>
+    <string name="sum_balance">SO\'M</string>
+    <string name="penalty_">Jarima</string>
+    <string name="penalty_date">Jarima sanasi:</string>
+    <string name="penalty_value">Jarima miqdori:</string>
+    <string name="penalty_type">Jarima turi:</string>
+    <string name="penalty_status">Jarima statusi:</string>
+    <string name="penalty_cancel_question">Savolni rad etish</string>
+    <string name="penalty_status_0">To\'lanmagan</string>
+    <string name="penalty_title">Sarlavha:</string>
 </resources>

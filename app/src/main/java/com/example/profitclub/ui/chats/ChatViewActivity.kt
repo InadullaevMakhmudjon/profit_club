@@ -1,28 +1,23 @@
 package com.example.profitclub.ui.chats
 
-import RequestChatSocket
 import android.content.Context
 import android.content.SharedPreferences
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.profitclub.App
 import com.example.profitclub.R
 import com.example.profitclub.databinding.ActivityChatViewBinding
-import com.example.profitclub.toast
 import com.example.profitclub.ui.chats.adapters.SectionPageAdapter4
-import com.github.nkzawa.socketio.client.IO
 import com.github.nkzawa.socketio.client.Socket
-import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_chat_view.*
 import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
 import kotlinx.android.synthetic.main.chat_custom_bar.view.*
-import java.lang.Exception
 
 class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
 

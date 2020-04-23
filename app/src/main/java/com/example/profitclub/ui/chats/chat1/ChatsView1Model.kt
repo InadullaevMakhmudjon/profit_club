@@ -6,14 +6,12 @@ import android.app.Application
 import android.view.View
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.profitclub.data.questions.Message
 import com.example.profitclub.data.questions.QuestionRepository
 import com.example.profitclub.hideKeyboard
 import com.example.profitclub.utils.ObservableViewModel
 import kotlinx.coroutines.launch
-import java.lang.Exception
 
 class ChatsView1Model(application: Application, private val repository: QuestionRepository) : ObservableViewModel(application) {
     private val _text = MutableLiveData<String>().apply {

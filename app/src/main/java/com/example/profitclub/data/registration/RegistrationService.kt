@@ -1,8 +1,6 @@
 package com.example.profitclub.data.registration
 
-import com.example.profitclub.data.GET_ALL_FILTERED
-import com.example.profitclub.data.GET_USER_INFO
-import com.example.profitclub.data.USER_INFO
+import com.example.profitclub.data.*
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.GET
@@ -24,4 +22,13 @@ interface RegistrationService {
 
     @GET(GET_USER_INFO)
     suspend fun userGetInfo(@Header("authorization") auth: String?): Response<GetUserInfoBody>
+
+    @POST(DELETE_PHOTO)
+    suspend fun deletePhoto(@Header("authorization") auth: String?, @Body body: DeleteUploadPhotoBody): Response<Unit>
+
+    @POST(UPLOAD_PHOTO)
+    suspend fun uploadPhoto(@Header("authorization") auth: String?, @Body body: DeleteUploadPhotoBody): Response<UploadPhotoResponse>
+
+    @POST(SAVE)
+    suspend fun save(@Header("authorization") auth: String?, @Body body: PostUserInfoBody): Response<UploadPhotoResponse>
 }

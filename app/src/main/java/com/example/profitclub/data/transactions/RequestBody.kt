@@ -1,4 +1,4 @@
-package com.example.profitclub.data.registration
+package com.example.profitclub.data.transactions
 
 data class SetRegionId(
     val region_id: Int
@@ -54,6 +54,7 @@ data class DeleteUploadPhotoBody(
 
 data class PostUserInfoBody(
     val user_id: Int,
+    val media_url: String?,
     val lname: String,
     val fname: String,
     val mname: String,
@@ -64,8 +65,7 @@ data class PostUserInfoBody(
     val region_id: Int,
     val city_id: Int,
     val address: String,
-    val info: InfoUser,
-    val lang: String
+    val info: InfoUser
 )
 
 data class InfoUser(
