@@ -53,7 +53,7 @@ class TransactionManagerFragment : Fragment(), View.OnClickListener {
         binding = FragmentManagerTransactionBinding.inflate(layoutInflater)
 
 
-        adapter = TransactionAdapter(this.context!!, list, this)
+        adapter = TransactionAdapter(this.context!!, null, this)
         layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
         binding.transactionList.layoutManager = layoutManager
         binding.transactionList.adapter = adapter

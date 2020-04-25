@@ -3,27 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_gravity="center"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/colorAccent2"
     tools:context="ui.account.details.ProfileDetailsFragment">
 
-    <TextView
-        android:id="@+id/text_home"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:gravity="center"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/message_image" />
-
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/info_form"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -37,16 +23,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:fontFamily="@font/roboto_medium"
-                android:text="@string/info"/>
 
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
@@ -328,25 +304,6 @@
                          android:textSize="16sp"
                          android:text="@string/category_"/>-->
 
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/about_container_detail"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:textColorHint="@android:color/darker_gray">
-
-                        <AutoCompleteTextView
-                            android:id="@+id/about_detail"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:backgroundTint="@android:color/darker_gray"
-                            android:hint="@string/about"
-                            android:inputType="text"
-                            android:maxLines="1"
-                            android:singleLine="true" />
-
-                    </com.google.android.material.textfield.TextInputLayout>
-
                     <Button
                         android:id="@+id/save_detail"
                         style="?android:textAppearanceSmall"
@@ -356,11 +313,11 @@
                         android:textColor="@color/white"
                         android:layout_marginTop="22dp"
                         android:layout_gravity="end"
-                        android:text="@string/get_started"
+                        android:text="@string/save"
                         android:textStyle="bold" />
 
                 </LinearLayout>
             </androidx.cardview.widget.CardView>
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -108,7 +108,7 @@
     <string name="settings_desc">Theme / Language </string>
     <string name="transaction">Transactions</string>
     <string name="settings">Settings</string>
-    <string name="usd_50" translatable="false">50.00 USD</string>
+    <string name="usd_50" translatable="false">0.00 SUM</string>
     <string name="balance">Available Balance</string>
     <string name="someone">Someone</string>
     <string name="jason">Jason</string>
@@ -222,5 +222,20 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="password_does_not_match">Password does not match with repeated password</string>
     <string name="server_error">Server error</string>
     <string name="bid_toast">Did not mention a deadline</string>
+    <string name="save">Save</string>
+    <string name="owner">Owner:</string>
+    <string name="type">Type:</string>
+    <string name="amount">Amount:</string>
+    <string name="date">Date:</string>
+    <string name="information_transaction">Info:</string>
+    <string name="sum_balance">SUM</string>
+    <string name="penalty_">Penalty</string>
+    <string name="penalty_title">Title:</string>
+    <string name="penalty_date">Penalty date:</string>
+    <string name="penalty_value">Penalty value:</string>
+    <string name="penalty_type">Penalty type:</string>
+    <string name="penalty_status">Penalty status:</string>
+    <string name="penalty_cancel_question">Cancel question</string>
+    <string name="penalty_status_0">Not paid</string>
 
 </resources>

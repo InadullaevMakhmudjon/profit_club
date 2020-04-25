@@ -11,7 +11,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.R
-import kotlinx.android.synthetic.main.fragment_client_individual_infos.*
+import kotlinx.android.synthetic.main.fragment_profile_details.*
+import java.text.SimpleDateFormat
 import java.util.*
 
 class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
@@ -24,12 +25,15 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     var addressText: String? = null
     var passportNoText: String? = null
     var aboutText: String? = null
-    var userId: Int? = 0
+    var userId: Int = 0
     var date: String? = null
     val countryId: Int? = 1
     var regionId: Int? = null
     var cityId: Int? = null
     var genderId: Int? = null
+    var media: String? = null
+    var image: String? = null
+    var idRegion: Int = 1
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,14 +46,17 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+       // val activityProfile = activity as ProfileActivity
+
+
         val lname = view.findViewById<AutoCompleteTextView>(R.id.name_detail)
         val fname = view.findViewById<AutoCompleteTextView>(R.id.last_name_detail)
         val mname = view.findViewById<AutoCompleteTextView>(R.id.patronymic_detail)
         val phone = view.findViewById<AutoCompleteTextView>(R.id.phone_number_detail)
         val passportNo = view.findViewById<AutoCompleteTextView>(R.id.passport_no_detail)
-        val about = view.findViewById<AutoCompleteTextView>(R.id.about_detail)
         val address = view.findViewById<AutoCompleteTextView>(R.id.address_detail)
         val dateOfBirth = view.findViewById<TextView>(R.id.date_of_birth_detail)
+        val save = view.findViewById<Button>(R.id.save_detail)
 
         val male = view.findViewById<CheckBox>(R.id.male_detail)
         val maleText = view.findViewById<TextView>(R.id.male_text_detail)
@@ -59,6 +66,28 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         val regionDropDown = view.findViewById<Spinner>(R.id.regions_detail)
         val citiesDropDown = view.findViewById<Spinner>(R.id.cities_detail)
 
+
+
+        male.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                maleText.setTextColor(resources.getColor(android.R.color.black))
+                female.isChecked = false
+                genderId = 2
+                // Code to display your message.
+            } else
+                maleText.setTextColor(resources.getColor(android.R.color.darker_gray))
+        }
+
+        female.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                femaleText.setTextColor(resources.getColor(android.R.color.black))
+                male.isChecked = false
+                genderId = 1
+                // Code to display your message.
+            } else
+                femaleText.setTextColor(resources.getColor(android.R.color.darker_gray))
+        }
+
         activity.let { activity ->
             val preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             vm =
@@ -66,21 +95,98 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
             vm.getUserInfo()
 
+            vm.regions.observe(viewLifecycleOwner, androidx.lifecycle.Observer {allRegions->
+                if(allRegions.size > 0) {
+                    regionDropDown.adapter = ArrayAdapter(activity!!.baseContext, R.layout.support_simple_spinner_dropdown_item, allRegions.map { region -> region.name })
+                }
+            })
+            vm.cities.observe(viewLifecycleOwner, androidx.lifecycle.Observer { allCities ->
+                if(allCities.size > 0) {
+                    //city_text.visibility = INVISIBLE
+                    // city_text.isVisible = false
+                    citiesDropDown.adapter = ArrayAdapter(activity!!.baseContext, R.layout.support_simple_spinner_dropdown_item, allCities.map { region -> region.name })
+                }
+            })
+            val categories = ArrayList<Int>()
+
+            regionDropDown.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
+                    vm.getCity(vm.regions.value!![position].id)
+                    regionId = vm.regions.value!![position].id
+                    categories.add(vm.regions.value!![position].id)
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
+
+            citiesDropDown.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(parent: AdapterView<*>,
+                                            view: View, position: Int, id: Long) {
+                    cityId = vm.cities.value!![position].id
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+                    // write code to perform some action
+                }
+            }
         }
 
         vm.userInfo.observe(viewLifecycleOwner, Observer { data ->
-            lname.hint = data.lname
-            fname.hint = data.fname
-            mname.hint = data.mname
-            phone.hint = data.phone
-            passportNo.hint = data.passport_no
-            address.setText(data.address)
-
+            if (data != null){
+                userId = data.user_id
+                media = data.media_url
+                lname.setText(data.lname)
+                fname.setText(data.fname)
+                mname.setText(data.mname)
+                phone.setText(data.phone)
+                passportNo.setText(data.info.passport_no)
+                address.setText(data.address)
+                vm.getCity(data.region_id)
+               if (data.gender_id == 1){
+                   male.isChecked = true
+               } else{
+                   female.isChecked = true
+               }
+                dateOfBirth.text = date(data.bdate)
+            }
         })
 
         dateOfBirth.setOnClickListener {
             showDatePickerDialog()
         }
+
+        save.setOnClickListener {
+
+            lNameText = lname.text.toString()
+            fNameText = fname.text.toString()
+            mNameText = mname.text.toString()
+            phoneText = phone.text.toString()
+            passportNoText = passportNo.text.toString()
+            addressText = address.text.toString()
+            date = dateOfBirth.text.toString()
+
+             // Get a picture from activity
+
+            if (userId != 0){
+                vm.save(userId, mNameText!!,
+                    lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
+                    regionId!!, cityId!!, addressText!!, passportNoText!!, "about",  intArrayOf(1), intArrayOf(1))
+            }
+
+           // toast("$userId, $image, $mNameText, $lNameText, $fNameText, $genderId, $date, $phoneText, $countryId, $regionId, $cityId, $addressText, $passportNoText")
+        }
+
+        vm.status.observe(viewLifecycleOwner, Observer { status ->
+            if (status.status == 0){
+                activity!!.finish()
+            }
+        })
     }
 
     private fun showDatePickerDialog() {
@@ -96,6 +202,15 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
         date = "Date of birth: " + p1 + "/" + (p2 + 1) + "/" + p3
-        date_of_birth.text = date
+        date_of_birth_detail.text = date.toString()
+    }
+
+    fun date(string: String): String{
+        val readDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S")
+        readDate.timeZone = TimeZone.getTimeZone("GMT") // missing line
+        val date = readDate.parse(string)
+        val writeDate = SimpleDateFormat("dd.MM.yyyy")
+        writeDate.timeZone = TimeZone.getTimeZone("GMT+04:00")
+        return writeDate.format(date)
     }
 }

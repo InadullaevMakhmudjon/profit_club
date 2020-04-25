@@ -3,7 +3,8 @@ package com.example.profitclub.data.auth
 data class Token(
     val user_id: Int,
     val type: Int,
-    val token: String
+    val token: String,
+    val bill: String
 )
 
 data class UserSignIn(

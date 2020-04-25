@@ -1,5 +1,9 @@
 package com.example.profitclub.data.registration
 
+import java.io.ObjectOutput
+import java.io.ObjectStreamField
+import java.util.*
+
 data class Data(
     val id: Int,
     val name:String
@@ -26,5 +30,17 @@ data class GetUserInfoBody(
     val passport_no: String,
     val languages: IntArray,
     val categories: IntArray,
-    val about: String
+    val about: String,
+    val info: Info
+)
+
+data class Info(
+    val about: String,
+    val languages: IntArray,
+    val categories: IntArray,
+    val passport_no: String
+)
+
+data class UploadPhotoResponse(
+    val status: Int
 )

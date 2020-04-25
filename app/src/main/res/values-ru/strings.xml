@@ -188,4 +188,19 @@
     <string name="server_error">Ошибка сервера</string>
     <string name="title">Заголовок</string>
     <string name="bid_toast">Не указан срок выполненыя</string>
+    <string name="save">Сохранить</string>
+    <string name="owner">Владелец:</string>
+    <string name="type">Тип:</string>
+    <string name="amount">Количество:</string>
+    <string name="date">Дата:</string>
+    <string name="information_transaction">Информация:</string>
+    <string name="sum_balance">СУМ</string>
+    <string name="penalty_">Удержания</string>
+    <string name="penalty_date">Дата удержания:</string>
+    <string name="penalty_value">Размер удержания:</string>
+    <string name="penalty_type">Тип удержания:</string>
+    <string name="penalty_status">Статус удержания:</string>
+    <string name="penalty_cancel_question">Отменить вопросы</string>
+    <string name="penalty_status_0">Не оплачен</string>
+    <string name="penalty_title">Наименование:</string>
 </resources>

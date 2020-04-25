@@ -1,4 +1,4 @@
-package com.example.profitclub.ui.bids
+package com.example.profitclub.ui.transactions
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,12 +9,13 @@ import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.databinding.FragmentBidsBinding
+import com.example.profitclub.databinding.FragmentTransactionContainerBinding
 
-class BidsFragment : Fragment(), View.OnClickListener {
+class TransactionContainerFragment : Fragment(), View.OnClickListener {
 
-    private lateinit var binding: FragmentBidsBinding
-    private lateinit var galleryViewModel: BidsViewModel
-    private var mSectionPageAdapter: SectionPageAdapter3? = null
+    private lateinit var binding: FragmentTransactionContainerBinding
+    //private lateinit var galleryViewModel: BidsViewModel
+    private var mSectionPageAdapter: SectionPageAdapter5? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,12 +29,12 @@ class BidsFragment : Fragment(), View.OnClickListener {
         activity.let {
             activity?.customActionBarTitle(getString(R.string.bids))
         }
-        galleryViewModel =
-            ViewModelProviders.of(this).get(BidsViewModel::class.java)
+        /*galleryViewModel =
+            ViewModelProviders.of(this).get(BidsViewModel::class.java)*/
        // val root = inflater.inflate(R.layout.fragment_questions, container, false)
-        binding = FragmentBidsBinding.inflate(layoutInflater)
+        binding = FragmentTransactionContainerBinding.inflate(layoutInflater)
 
-        mSectionPageAdapter = SectionPageAdapter3(childFragmentManager, activity!!)
+        mSectionPageAdapter = SectionPageAdapter5(childFragmentManager, activity!!)
         binding.viewPager.adapter = mSectionPageAdapter
         binding.pagerHeader.setTabIndicatorColorResource(R.color.colorAccent2)
 

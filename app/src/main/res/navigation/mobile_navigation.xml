@@ -25,13 +25,12 @@
 
     <fragment
         android:id="@+id/transaction"
-        android:name="com.example.profitclub.ui.transactions.TransactionFragment"
-        tools:layout="@layout/fragment_transaction"/>
+        android:name="com.example.profitclub.ui.transactions.TransactionContainerFragment"
+        tools:layout="@layout/fragment_transaction_container"/>
 
     <fragment
         android:id="@+id/account"
         android:name="com.example.profitclub.ui.account.AccountFragment"
         android:label="@string/fragment_account"
         tools:layout="@layout/fragment_account" />
-m
 </navigation>

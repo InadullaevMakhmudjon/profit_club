@@ -73,3 +73,18 @@ const val FILE_UPLOAD = "main/question-file-upload"
 
 // User Info
 const val GET_USER_INFO = "user/info"
+
+//Delete Photo
+const val DELETE_PHOTO = "user/delete-image"
+
+// Upload Photo
+const val UPLOAD_PHOTO = "user/upload"
+
+// Save Info
+const val SAVE = "user/save"
+
+// Transactions
+const val TRANSACTION = "system/transactions"
+
+// Penalty
+const val PENALTY = "main/penalty"
