@@ -3,6 +3,7 @@ package com.example.profitclub.ui.account.details
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
@@ -25,6 +26,7 @@ import kotlin.math.abs
 
 class ProfileActivity : AppCompatActivity() {
     //private lateinit var notificationManager: NotificationManagerCompat
+    private lateinit var preferences: SharedPreferences
     private lateinit var binding: ActivityProfileBinding
     private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var vm: ProfileDetailsViewModel
@@ -44,12 +46,13 @@ class ProfileActivity : AppCompatActivity() {
         if(supportActionBar != null)
             supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
-        mSectionPageAdapter = SectionPageAdapter(supportFragmentManager!!)
+        preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+
+        mSectionPageAdapter = SectionPageAdapter(supportFragmentManager)
         binding.viewPager!!.adapter = mSectionPageAdapter
         binding.pagerHeader.setTabIndicatorColorResource(R.color.colorAccent2)
         //notificationManager = NotificationManagerCompat.from(this)
 
-        val preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         vm = ViewModelProviders.of(this, ProfileDetailsViewModelFactory(preferences)).get(ProfileDetailsViewModel::class.java)
 
         vm.getUserInfo()

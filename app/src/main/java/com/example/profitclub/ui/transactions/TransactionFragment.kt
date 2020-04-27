@@ -77,34 +77,10 @@ class TransactionFragment : Fragment(), View.OnClickListener {
                     binding.transactionList.adapter = adapter
                 }
             })
-
-            binding.topUp.setOnClickListener {
-                context?.let { it1 -> openApp(it1, "uz.dida.payme") }
-            }
-
-            binding.withdraw.setOnClickListener {
-                context?.let { it1 -> openApp(it1, "uz.dida.payme") }
-            }
         }
     }
 
     override fun onClick(p0: View?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    private fun openApp(context: Context, packageName: String): Boolean {
-        val manager = context.packageManager
-        try {
-            val i = manager.getLaunchIntentForPackage(packageName)
-                if (i == null){
-                    return false
-                    throw PackageManager.NameNotFoundException()
-                }
-            i.addCategory(Intent.CATEGORY_LAUNCHER)
-            context.startActivity(i)
-            return true
-        } catch (e: ActivityNotFoundException) {
-            return false
-        }
     }
 }

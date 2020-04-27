@@ -20,4 +20,7 @@ class BidsRepository(private val retrofit: BidsService, private val preference: 
     suspend fun getBidsClientClickView(question_id: Int?) = retrofit.getBidsClientClickView("JWT $token", question_id)
     suspend fun postBidsClientUpdate(body: BidsClientUpdate) = retrofit.postBidsClientUpdate("JWT $token", body)
     suspend fun postBidsClientAdd(body: RequestBidsClientAdd) = retrofit.postBidsClientAdd("JWT $token", body)
+
+    // All categories
+    suspend fun getCategories() = retrofit.getCategories()
 }

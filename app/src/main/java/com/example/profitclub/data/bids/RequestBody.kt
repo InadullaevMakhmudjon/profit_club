@@ -1,3 +1,4 @@
+
 data class BidsConsultantPreviewClient(
     val question_id: String
 )
@@ -27,4 +28,9 @@ data class BidsClientAddItem(
 
 data class RequestBidsClientAdd(
     val  item: BidsClientAddItem
+)
+
+data class PostCategoryBodyBid(
+    val lang: String = "en",
+    private val token: String = "249340fe"
 )

@@ -2,6 +2,7 @@ package com.example.profitclub.data.bids
 
 import BidsClientUpdate
 import BidsConsultantPreviewClient
+import PostCategoryBodyBid
 import RequestBidsClientAdd
 import RequestBidsConsultantBidItem
 import com.example.profitclub.data.*
@@ -35,4 +36,7 @@ interface BidsService {
 
     @POST(BIDS_CLIENT_ADD)
     suspend fun postBidsClientAdd(@Header("authorization") auth: String?, @Body body: RequestBidsClientAdd): Response<Unit>
+
+    @POST(GET_ALL_FILTERED)
+    suspend fun getCategories(@Body body: PostCategoryBodyBid = PostCategoryBodyBid()): Response<ArrayList<DataBid>>
 }

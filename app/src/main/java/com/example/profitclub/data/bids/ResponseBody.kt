@@ -64,3 +64,8 @@ data class ResponseBidsConsultantPreviewClient(
     val rate: Float,
     val deadline: String
 )
+
+data class DataBid(
+    val id: Int,
+    val name:String
+)

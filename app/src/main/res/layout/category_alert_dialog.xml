@@ -5,80 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:orientation="horizontal"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/category_list"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingStart="8dp"
-        android:paddingEnd="8dp"
-        android:weightSum="10">
-
-    <CheckBox
-        android:id="@+id/law_radio"
-        android:layout_marginStart="16dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="8"
-        android:text="@string/law"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:padding="10dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:weightSum="10">
-
-        <CheckBox
-            android:id="@+id/accounting_radio"
-            android:layout_marginStart="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:text="@string/accounting"
-            android:textColor="@color/black"
-            android:textSize="18sp"
-            android:padding="10dp"/>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="8dp"
-        android:weightSum="10">
-
-        <CheckBox
-            android:id="@+id/it_radio"
-            android:layout_marginStart="16dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            />
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="8"
-            android:text="@string/it"
-            android:textColor="@color/black"
-            android:background="@color/white"
-            android:textSize="18sp"
-            android:padding="10dp"/>
-
-    </LinearLayout>
+        android:layout_height="wrap_content"/>
 </LinearLayout>

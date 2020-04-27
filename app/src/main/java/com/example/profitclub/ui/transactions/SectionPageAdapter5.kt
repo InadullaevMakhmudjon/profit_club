@@ -8,7 +8,7 @@ import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.ui.transactions.penalty.PenaltyFragment
 
-class SectionPageAdapter5(fm: FragmentManager, context: Context) : FragmentPagerAdapter(fm) {
+class SectionPageAdapter5(fm: FragmentManager, context: Context, val slideCount: Int) : FragmentPagerAdapter(fm) {
     lateinit var context: Context
 
     init {
@@ -29,7 +29,7 @@ class SectionPageAdapter5(fm: FragmentManager, context: Context) : FragmentPager
     }
 
     override fun getCount(): Int {
-        return 2
+        return slideCount
     }
 
     override fun getPageTitle(position: Int): CharSequence? {

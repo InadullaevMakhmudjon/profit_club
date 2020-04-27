@@ -77,37 +77,6 @@
                 android:layout_height="wrap_content"/>
 
         </LinearLayout>
-
-
     </androidx.core.widget.NestedScrollView>
-
-
-    <Button
-        android:id="@+id/top_up"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:layout_gravity="bottom"
-        android:background="@color/colorAccent2"
-        android:text="@string/top_up"
-        android:textColor="@color/white">
-
-    </Button>
-
-    <Button
-        android:id="@+id/withdraw"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="0dp"
-        android:layout_gravity="bottom"
-        android:background="@color/colorAccent2"
-        android:text="@string/withdraw"
-        android:textColor="@color/white">
-
-    </Button>
-
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
 </layout>
