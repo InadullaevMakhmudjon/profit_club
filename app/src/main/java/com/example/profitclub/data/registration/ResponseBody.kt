@@ -1,9 +1,5 @@
 package com.example.profitclub.data.registration
 
-import java.io.ObjectOutput
-import java.io.ObjectStreamField
-import java.util.*
-
 data class Data(
     val id: Int,
     val name:String

@@ -11,10 +11,14 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
+import com.example.profitclub.adapters.CategoryAdapter
 import com.example.profitclub.toast
 import kotlinx.android.synthetic.main.activity_question_creation.*
+import kotlinx.android.synthetic.main.category_alert_dialog.view.*
 import java.util.*
 
 class QuestionCreationActivity : AppCompatActivity() {
@@ -94,7 +98,7 @@ class QuestionCreationActivity : AppCompatActivity() {
         return true
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.checkable_menu, menu)
 
         return true
@@ -108,13 +112,31 @@ class QuestionCreationActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
-    }
+    }*/
 
     private fun alertDialog(){
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Categories")
         val customLayout = layoutInflater.inflate(R.layout.category_alert_dialog, null)
         alertDialogBuilder.setView(customLayout)
+        val recycler = customLayout.findViewById<RecyclerView>(R.id.category_list)
+
+        var layoutManager: LinearLayoutManager? = null
+        var adapter: CategoryAdapter? = null
+
+        adapter = CategoryAdapter(this, null)
+        layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+        recycler.layoutManager = layoutManager
+        recycler.adapter = adapter
+        adapter.notifyDataSetChanged()
+
+        viewModel.categories.observe(this, androidx.lifecycle.Observer { data ->
+            if (data != null){
+                adapter = CategoryAdapter(this, data)
+                recycler.adapter = adapter
+            }
+        })
+
         alertDialogBuilder.setMessage(getString(R.string.category_alert))
 
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
@@ -145,5 +167,4 @@ class QuestionCreationActivity : AppCompatActivity() {
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(LocaleManager.setLocale(base))
     }
-
 }
