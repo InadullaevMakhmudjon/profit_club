@@ -1,11 +1,10 @@
 package com.example.profitclub.data.registration
 
 import com.example.profitclub.data.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
-import retrofit2.http.Body
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 
 interface RegistrationService {
     @POST(GET_ALL_FILTERED)
@@ -31,4 +30,8 @@ interface RegistrationService {
 
     @POST(SAVE)
     suspend fun save(@Header("authorization") auth: String?, @Body body: PostUserInfoBody): Response<UploadPhotoResponse>
+
+    @Multipart
+    @POST(UPLOAD_IMAGE)
+    suspend fun upload(@Part file: MultipartBody.Part, @Part("id") id: RequestBody, @Part("type") type: RequestBody): Response<Unit>
 }

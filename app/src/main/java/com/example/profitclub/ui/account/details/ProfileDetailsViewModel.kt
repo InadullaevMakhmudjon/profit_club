@@ -5,6 +5,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.profitclub.data.registration.*
 import kotlinx.coroutines.launch
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class ProfileDetailsViewModel(val repository: AboutMeRepository) : ViewModel() {
 
@@ -93,13 +95,25 @@ class ProfileDetailsViewModel(val repository: AboutMeRepository) : ViewModel() {
         }
     }
 
+    val upload = fun(file: MultipartBody.Part, id: RequestBody, type: RequestBody, callBack: (String) -> Unit) {
+        viewModelScope.launch {
+            try {
+                repository.uploadDemo(file, id, type)
+                callBack.invoke("Res send")
+            } catch (e: java.lang.Exception) {
+                error.apply { value = e.message.toString() }
+                callBack.invoke(e.message.toString())
+            }
+        }
+    }
+
     init {
         viewModelScope.launch {
             try {
                 val response = repository.getRegions()
                 regions.apply { value = response.body() }
             } catch (e: Exception){
-                error.apply { e.message.toString() }
+                error.apply { value = e.message.toString() }
             }
         }
     }

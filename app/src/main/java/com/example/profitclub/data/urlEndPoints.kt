@@ -88,3 +88,5 @@ const val TRANSACTION = "system/transactions"
 
 // Penalty
 const val PENALTY = "main/penalty"
+
+const val UPLOAD_IMAGE = "/user/upload"
