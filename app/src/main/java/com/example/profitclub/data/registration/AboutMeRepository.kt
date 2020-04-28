@@ -1,6 +1,8 @@
 package com.example.profitclub.data.registration
 
 import android.content.SharedPreferences
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 
 class AboutMeRepository(private val retrofit: RegistrationService, private val preference: SharedPreferences){
     private var token: String? = preference.getString("token", null)
@@ -33,4 +35,6 @@ class AboutMeRepository(private val retrofit: RegistrationService, private val p
 
     // Save
     suspend fun save(body: PostUserInfoBody) = retrofit.save("JWT $token", body)
+
+    suspend fun uploadDemo(file: MultipartBody.Part, id: RequestBody, type: RequestBody) = retrofit.upload(file, id, type)
 }

@@ -18,10 +18,18 @@ import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.databinding.ActivityProfileBinding
+import com.example.profitclub.getImagePath
 import com.example.profitclub.toast
 import com.google.android.material.appbar.AppBarLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
+import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 import kotlin.math.abs
 
 class ProfileActivity : AppCompatActivity() {
@@ -184,9 +192,26 @@ class ProfileActivity : AppCompatActivity() {
 
     companion object {
         //image pick code
-        private val IMAGE_PICK_CODE = 1000;
+        private const val IMAGE_PICK_CODE = 1000;
         //Permission code
-        private val PERMISSION_CODE = 1001;
+        private const val PERMISSION_CODE = 1001;
+    }
+
+    private fun upload(path: String?) {
+        if(path != null) {
+            val file = File(path)
+            val reqFile = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val body = MultipartBody.Part.createFormData("file", file.name, reqFile)
+            val id = "$userId".toRequestBody("multipart/form-data".toMediaTypeOrNull())
+            val type = "1".toRequestBody("multipart/form-data".toMediaTypeOrNull())
+
+            // Simple Callback example
+            val making = {st: String->
+                toast(st)
+            }
+
+            vm.upload(body, id, type, making)
+        }
     }
 
     //handle result of picked image
@@ -197,8 +222,11 @@ class ProfileActivity : AppCompatActivity() {
             val image = data?.data
             binding.logo.setImageURI(image)
             vm.uploadPhoto(userId, 1)
-            toast(image.toString())
             picture = image.toString() // Set value to picture from gallery
+            if(image != null) {
+                val path = getImagePath(image)
+                upload(path)
+            }
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
+import android.net.Uri
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -14,6 +15,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.example.profitclub.utils.ImageFilePath
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_splash.*
 import kotlinx.android.synthetic.main.main_custom_bar.*
@@ -184,6 +186,10 @@ fun Activity.getLanguageDrawable(language: String): Drawable? {
             null
         }
     }
+}
+
+fun Activity.getImagePath(uri: Uri): String? {
+    return ImageFilePath.getPath(this, uri)
 }
 
 private fun setNewLocale(language: String, restartProcess: Boolean, activity: FragmentActivity): Boolean {
