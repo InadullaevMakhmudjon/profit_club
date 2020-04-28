@@ -13,7 +13,7 @@ import com.example.profitclub.data.transactions.TransactionResponseBody
 import com.example.profitclub.databinding.CategoryListItemBinding
 import com.example.profitclub.databinding.TransactionItemBinding
 
-class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid>?) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid>?, val categories: ArrayList<Int>, val callBack: (Int, Boolean) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = CategoryListItemBinding.inflate(inflater, parent, false)
@@ -28,10 +28,16 @@ class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid
             binding!!.category = item
             binding.nameCategory.text = item?.name
             val color = context.resources.getColor(R.color.colorAccent)
+            val black = context.resources.getColor(R.color.black)
+            binding.checkboxCategory.isChecked = categories.contains(item!!.id)
+
             binding.checkboxCategory.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
                     binding.nameCategory.setTextColor(color)
+                } else {
+                    binding.nameCategory.setTextColor(black)
                 }
+                callBack.invoke(item!!.id, isChecked)
             }
 
             binding.container.tag = item

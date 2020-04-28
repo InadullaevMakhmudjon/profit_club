@@ -16,16 +16,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.adapters.CategoryAdapter
+import com.example.profitclub.data.bids.DataBid
 import com.example.profitclub.toast
 import kotlinx.android.synthetic.main.activity_question_creation.*
 import kotlinx.android.synthetic.main.category_alert_dialog.view.*
 import java.util.*
+import kotlin.collections.ArrayList
 
 class QuestionCreationActivity : AppCompatActivity() {
     private lateinit var viewModel: QuestionCreationViewModel
     private val APP_PREFERENCE = "MYSETTINGS"
     private var user_id: Int? = null
     private var deadline_final: String? = null
+    val categoryIds = ArrayList<Int>()
+    val allCategories = ArrayList<DataBid>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,8 +85,12 @@ class QuestionCreationActivity : AppCompatActivity() {
             /*Snackbar.make(it, "Your question posted successfully", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
             */
-            viewModel.postQuestion(user_id!!, arrayListOf(1,2), title.text.toString(), description.text.toString(),
-                1, deadline_final.toString())
+            toast(categoryIds.toString())
+
+            if(categoryIds.size > 0) {
+                viewModel.postQuestion(user_id!!, categoryIds, title.text.toString(), description.text.toString(),
+                    1, deadline_final.toString())
+            } else toast("Please select any category")
         }
 
         this.viewModel.error.observe(this, androidx.lifecycle.Observer {
@@ -122,9 +130,16 @@ class QuestionCreationActivity : AppCompatActivity() {
         val recycler = customLayout.findViewById<RecyclerView>(R.id.category_list)
 
         var layoutManager: LinearLayoutManager? = null
-        var adapter: CategoryAdapter? = null
 
-        adapter = CategoryAdapter(this, null)
+        val itemCallBack = {id: Int, checked: Boolean ->
+            if(checked) {
+                categoryIds.add(id)
+            } else {
+                categoryIds.remove(id)
+            }
+        }
+
+        val adapter = CategoryAdapter(this, allCategories, categoryIds, itemCallBack)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter
@@ -132,8 +147,9 @@ class QuestionCreationActivity : AppCompatActivity() {
 
         viewModel.categories.observe(this, androidx.lifecycle.Observer { data ->
             if (data != null){
-                adapter = CategoryAdapter(this, data)
-                recycler.adapter = adapter
+                allCategories.clear()
+                allCategories.addAll(data)
+                adapter.notifyDataSetChanged()
             }
         })
 
