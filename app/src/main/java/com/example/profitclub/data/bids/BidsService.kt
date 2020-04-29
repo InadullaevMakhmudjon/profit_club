@@ -31,8 +31,9 @@ interface BidsService {
     @GET(BIDS_CLIENT_CLICK_VIEW)
     suspend fun getBidsClientClickView(@Header("authorization") auth: String?, @Query("question_id") question_id: Int?): Response<ResponseGeneric<ClientClickView>>
 
+    // Client chooses respect consultant
     @POST(BIDS_CLIENT_UPDATE)
-    suspend fun postBidsClientUpdate(@Header("authorization") auth: String?, @Body body: BidsClientUpdate): Response<ArrayList<ResponseBidsClientUpdate>>
+    suspend fun postBidsClientUpdate(@Header("authorization") auth: String?, @Body body: BidsClientUpdate)
 
     @POST(BIDS_CLIENT_ADD)
     suspend fun postBidsClientAdd(@Header("authorization") auth: String?, @Body body: RequestBidsClientAdd): Response<Unit>

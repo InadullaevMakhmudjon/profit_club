@@ -1,6 +1,7 @@
 package com.example.profitclub.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +12,15 @@ import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.data.bids.ClientClickView
 import com.example.profitclub.databinding.UserItemBinding
+import com.example.profitclub.ui.account.details.ProfileActivity
 import com.squareup.picasso.Picasso
 
-class BidsAdapter(private val context: Context, private val items: ArrayList<ClientClickView>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+class BidsAdapter(
+    private val context: Context,
+    private val items: ArrayList<ClientClickView>?,
+    private val listener: View.OnClickListener,
+    private val callBack: (Int) -> Unit
+) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -36,11 +43,9 @@ class BidsAdapter(private val context: Context, private val items: ArrayList<Cli
                     .into(binding.imageConsultant)
 
             //Flag activity new task needed here
-           /* binding.hire.setOnClickListener {
-                val intent = Intent(context, ProfileActivity::class.java)
-                intent.putExtra("role", 2)
-                context.startActivity(intent)
-            }*/
+            binding.hire.setOnClickListener {
+                callBack.invoke(item.bid_id)
+            }
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)

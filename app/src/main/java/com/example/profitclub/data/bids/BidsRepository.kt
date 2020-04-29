@@ -21,6 +21,7 @@ class BidsRepository(private val retrofit: BidsService, private val preference: 
     suspend fun postBidsClientUpdate(body: BidsClientUpdate) = retrofit.postBidsClientUpdate("JWT $token", body)
     suspend fun postBidsClientAdd(body: RequestBidsClientAdd) = retrofit.postBidsClientAdd("JWT $token", body)
 
+
     // All categories
     suspend fun getCategories() = retrofit.getCategories()
 }
