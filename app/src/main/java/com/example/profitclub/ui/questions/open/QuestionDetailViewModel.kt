@@ -1,5 +1,6 @@
 package com.example.profitclub.ui.questions.open
 
+import BidsClientUpdate
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -15,6 +16,17 @@ class QuestionDetailViewModel(val repository: BidsRepository) : ViewModel() {
     }
 
     val error = MutableLiveData<String>()
+
+    val postBid = fun(bidId: Int, notify: ()->Unit) {
+        viewModelScope.launch {
+            try {
+                repository.postBidsClientUpdate(BidsClientUpdate(bidId))
+                notify.invoke()
+            } catch (e: Exception) {
+                error.apply{ value = e.message.toString() }
+            }
+        }
+    }
 
     val previewBids = fun(question_id: Int){
         viewModelScope.launch {

@@ -14,6 +14,7 @@ import com.example.profitclub.R
 import kotlinx.android.synthetic.main.fragment_profile_details.*
 import java.text.SimpleDateFormat
 import java.util.*
+import kotlin.collections.ArrayList
 
 class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     private lateinit var vm: ProfileDetailsViewModel
@@ -95,9 +96,21 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
             vm.getUserInfo()
 
+            val items = ArrayList<String>()
+            val adapter = ArrayAdapter(activity.baseContext, R.layout.support_simple_spinner_dropdown_item, items)
+            regionDropDown.adapter = adapter
+
             vm.regions.observe(viewLifecycleOwner, androidx.lifecycle.Observer {allRegions->
                 if(allRegions.size > 0) {
-                    regionDropDown.adapter = ArrayAdapter(activity!!.baseContext, R.layout.support_simple_spinner_dropdown_item, allRegions.map { region -> region.name })
+                    items.clear()
+                    val userInfo = vm.userInfo.value
+                    if(userInfo != null) {
+                        val region = allRegions.find { reg -> reg.id == userInfo.region_id }
+                        allRegions.remove(region)
+                        if(region != null) allRegions.add(0, region)
+                    }
+                    items.addAll(allRegions.map { region -> region.name })
+                    adapter.notifyDataSetChanged()
                 }
             })
             vm.cities.observe(viewLifecycleOwner, androidx.lifecycle.Observer { allCities ->

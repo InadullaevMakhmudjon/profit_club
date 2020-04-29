@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.adapters.BidsAdapter
+import com.example.profitclub.data.bids.ClientClickView
 import com.example.profitclub.data.bids.ConsultantBidsData
 import com.example.profitclub.data.questions.QuestionConsultantCancelledData
 import com.example.profitclub.data.questions.QuestionConsultantClosedData
@@ -26,7 +27,6 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
 
     //private lateinit var notificationManager: NotificationManagerCompat
     private var layoutManager: LinearLayoutManager? = null
-    private var adapter: BidsAdapter? = null
     private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var vm: QuestionDetailViewModel
     private var questionId: Int = 0
@@ -54,9 +54,17 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
 
                 //adapter = BidsAdapter(this.applicationContext, null, this)
                 layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
-                this.recycler_bids.layoutManager = layoutManager
+                recycler_bids.layoutManager = layoutManager
                // this.recycler_bids.adapter = adapter
                 //adapter?.notifyDataSetChanged()
+                val items = ArrayList<ClientClickView>()
+
+                val adapter = BidsAdapter(this, items, this) {id:Int ->
+                    vm.postBid(id) {
+                        finish()
+                    }
+                }
+                recycler_bids.adapter = adapter
 
                 title_.text = item.title
                 description.text = item.description
@@ -68,8 +76,9 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
 
                     vm.data.observe(this, Observer { data ->
                         if (data != null){
-                            adapter = BidsAdapter(this, data.data, this)
-                            this.recycler_bids.adapter = adapter
+                            items.clear()
+                            items.addAll(data.data)
+                            adapter.notifyDataSetChanged()
                         }
                     })
 
