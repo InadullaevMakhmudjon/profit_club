@@ -46,9 +46,9 @@
     <string name="privacy_desc">Открыть нашу политику конфиденциальности</string>
     <string name="privacy">Политика конфиденциальности</string>
     <string name="price">Цена:</string>
-    <string name="post_question">Опубликовать вопрос</string>
+    <string name="post_question">Добавить вопрос</string>
     <string name="post">Опубликовать</string>
-    <string name="place_a_bid">Сделать ставку</string>
+    <string name="place_a_bid">Разместить ставку</string>
     <string name="phone_number">Номер телефона</string>
     <string name="payment_verification">Подтверждение оплаты</string>
     <string name="patronymic">Отчество</string>
@@ -133,7 +133,7 @@
     <string name="by">по</string>
     <string name="browse">Просмотр</string>
     <string name="brief">Краткая информация о консалтинговой стратегии</string>
-    <string name="bids">Ставки</string>
+    <string name="bids">Новые вопросы</string>
     <string name="bids_consultant">Ставки консультанта</string>
     <string name="bid_title">Детали заявки</string>
     <string name="become_a_bid">Создать предложение</string>
@@ -203,4 +203,9 @@
     <string name="penalty_cancel_question">Отменить вопросы</string>
     <string name="penalty_status_0">Не оплачен</string>
     <string name="penalty_title">Наименование:</string>
+    <string name="company_name">Наименование организации</string>
+    <string name="company_phone">Номер телефона</string>
+    <string name="company_addres">Адрес организации</string>
+    <string name="consultant_message">Ваш учетный запись еще не подтверждена, Для уточнения просим обратиться по телефону!</string>
+    <string name="call">Вызов</string>
 </resources>

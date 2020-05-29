@@ -88,7 +88,7 @@
             android:layout_height="wrap_content"
             android:hint="@string/confirmation_code"
             android:backgroundTint="@android:color/darker_gray"
-            android:inputType="textPassword"
+            android:inputType="number"
             android:maxLines="2"
             android:singleLine="true" />
 

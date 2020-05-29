@@ -51,10 +51,7 @@ class AccountFragment : Fragment() {
         sendViewModel =
            ViewModelProviders.of(this, AccountViewModelFactory(preferences)).get(AccountViewModel::class.java)
         val root = inflater.inflate(R.layout.fragment_account, container, false)
-        //val textView: TextView = root.findViewById(R.id.text_send)
-        /*sendViewModel.text.observe(this, Observer {
-           // textView.text = it
-        })*/
+
         val logOut: Button = root.findViewById(R.id.log_out)
         this.penalty = root.findViewById(R.id.num_penalty)
         val employeeList: ConstraintLayout = root.findViewById(R.id.employees_container)
@@ -81,11 +78,11 @@ class AccountFragment : Fragment() {
         }
 
         when (myDataFromActivity) {
-            5, 7 -> {
+            2, 5 -> {
                 employeeList.isVisible = false
                 penaltyContainer.isVisible = false
             }
-            2, 4 -> {
+            4, 7 -> {
                 penaltyContainer.isVisible = false
             }
             6 -> {

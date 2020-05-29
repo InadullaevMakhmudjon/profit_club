@@ -35,6 +35,9 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     var media: String? = null
     var image: String? = null
     var idRegion: Int = 1
+    var about: String = "about"
+    var language: IntArray = intArrayOf(1, 2)
+    var category: IntArray = intArrayOf(1, 2)
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -167,6 +170,9 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                    female.isChecked = true
                }
                 dateOfBirth.text = date(data.bdate)
+                this.about.apply { data.about }
+                this.language.apply { data.languages }
+                this.category.apply { data.categories }
             }
         })
 
@@ -189,7 +195,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             if (userId != 0){
                 vm.save(userId, mNameText!!,
                     lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
-                    regionId!!, cityId!!, addressText!!, passportNoText!!, "about",  intArrayOf(1), intArrayOf(1))
+                    regionId!!, cityId!!, addressText!!, passportNoText!!, about,  language, category, 1)
             }
 
            // toast("$userId, $image, $mNameText, $lNameText, $fNameText, $genderId, $date, $phoneText, $countryId, $regionId, $cityId, $addressText, $passportNoText")
@@ -214,7 +220,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     }
 
     override fun onDateSet(p0: DatePicker?, p1: Int, p2: Int, p3: Int) {
-        date = "Date of birth: " + p1 + "/" + (p2 + 1) + "/" + p3
+        date =  "$p1-${p2+1}-$p3"
         date_of_birth_detail.text = date.toString()
     }
 

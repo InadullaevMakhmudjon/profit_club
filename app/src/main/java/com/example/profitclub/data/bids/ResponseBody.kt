@@ -69,3 +69,14 @@ data class DataBid(
     val id: Int,
     val name:String
 )
+
+data class Language(
+    val id: Int,
+    val name: String
+)
+
+data class ResponseUserRating(
+    val cdate: String,
+    val description: String,
+    val createdate: String
+)

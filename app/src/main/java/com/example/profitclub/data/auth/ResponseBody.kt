@@ -4,7 +4,8 @@ data class Token(
     val user_id: Int,
     val type: Int,
     val token: String,
-    val bill: String
+    val bill: String,
+    val status: Int
 )
 
 data class UserSignIn(

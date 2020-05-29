@@ -90,3 +90,7 @@ const val TRANSACTION = "system/transactions"
 const val PENALTY = "main/penalty"
 
 const val UPLOAD_IMAGE = "/user/upload"
+
+const val USER_RATING = "main/userrating"
+
+const val USER_STAFF = "system/staff"

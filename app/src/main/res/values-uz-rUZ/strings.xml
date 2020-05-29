@@ -202,4 +202,9 @@
     <string name="penalty_cancel_question">Savolni rad etish</string>
     <string name="penalty_status_0">To\'lanmagan</string>
     <string name="penalty_title">Sarlavha:</string>
+    <string name="company_name">Tashkilot nomi</string>
+    <string name="company_phone">Telefon raqami</string>
+    <string name="company_addres">Tashkilot manzili</string>
+    <string name="consultant_message">Ma\'lumotingiz hali tasdiqlanmagan. Tafsilot uchun telefon orqali murojaat qiling!</string>
+    <string name="call">Qo\'ng\'iroq</string>
 </resources>

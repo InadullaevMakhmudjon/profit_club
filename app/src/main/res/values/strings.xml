@@ -237,5 +237,9 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="penalty_status">Penalty status:</string>
     <string name="penalty_cancel_question">Cancel question</string>
     <string name="penalty_status_0">Not paid</string>
-
+    <string name="company_name">Name of the company</string>
+    <string name="company_phone">Name of the company</string>
+    <string name="company_addres">Address of the company</string>
+    <string name="consultant_message">Your account has not yet been verified. For clarification, please contact by phone!</string>
+    <string name="call">Call</string>
 </resources>

@@ -9,11 +9,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
+import com.example.profitclub.adapters.ReviewsAdapter
 import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.data.bids.ConsultantBidsClickData
 import com.example.profitclub.data.bids.ConsultantBidsData
+import com.example.profitclub.data.bids.ResponseUserRating
 import com.example.profitclub.data.questions.QuestionConsultantApproveData
 import com.example.profitclub.data.questions.QuestionConsultantCancelledData
 import com.example.profitclub.data.questions.QuestionConsultantClosedData
@@ -31,7 +34,7 @@ class BrowseQuestionsActivity : AppCompatActivity() {
     private lateinit var approve: QuestionConsultantApproveData
     private lateinit var cancel: QuestionConsultantCancelledData
     private lateinit var close: QuestionConsultantClosedData
-
+    val reviews = ArrayList<ResponseUserRating>()
     private lateinit var vm: BrowseQuestionViewModel
     private val APP_PREFERENCE = "MYSETTINGS"
 
@@ -144,11 +147,6 @@ class BrowseQuestionsActivity : AppCompatActivity() {
             }
         }
 
-      /*  if (key == 1){
-
-        } else {
-
-        }*/
 
        if (client != null){
            client.setOnClickListener {
@@ -160,12 +158,26 @@ class BrowseQuestionsActivity : AppCompatActivity() {
             val bottomSheetDialog = BottomSheetDialog(this)
             val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_client_preview, null)
             bottomSheetDialog.setContentView(sheetView)
-
             Picasso.get().load(BASE_URL + response.media_url + "/sm_avatar.jpg").fit().into(sheetView.image_client)
             sheetView.fullname.text = response.fullname
             sheetView.rating_client.rating = response.rate
             sheetView.deadline_question.text = response.deadline
+            var layoutManager: LinearLayoutManager? = null
+            val adapter = ReviewsAdapter(this, reviews)
+            layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            sheetView.review_list.layoutManager = layoutManager
+            sheetView.review_list.adapter = adapter
+            adapter.notifyDataSetChanged()
 
+            vm.getUserRating(response.client_id)
+
+            vm.userRating.observe(this, Observer { data ->
+                if (data != null){
+                    reviews.clear()
+                    reviews.addAll(data.data)
+                    adapter.notifyDataSetChanged()
+                }
+            })
             bottomSheetDialog.show()
         })
 

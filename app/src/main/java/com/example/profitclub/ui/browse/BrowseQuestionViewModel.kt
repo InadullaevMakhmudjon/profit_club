@@ -19,6 +19,8 @@ class BrowseQuestionViewModel(val repository: BidsRepository) : ViewModel() {
 
     }
 
+    val userRating = MutableLiveData<ResponseGeneric<ResponseUserRating>>().apply { value = null }
+
     val error = MutableLiveData<String>()
 
     val placeBid = fun(question_id: Int, deadline: String, price: Float){
@@ -44,6 +46,19 @@ class BrowseQuestionViewModel(val repository: BidsRepository) : ViewModel() {
                 }
             } catch (e: Exception){
                 error.apply { value = e.message }
+            }
+        }
+    }
+
+    val getUserRating = fun (user_id: Int?){
+        viewModelScope.launch {
+            try {
+                val response = repository.getUserRating(user_id)
+                if (response.isSuccessful){
+                    userRating.apply { value = response.body() }
+                }
+            } catch (e:Exception){
+                error.apply { value = e.message.toString() }
             }
         }
     }

@@ -40,3 +40,32 @@ data class Info(
 data class UploadPhotoResponse(
     val status: Int
 )
+
+data class GetUserStaffInfoBody(
+    val user_id: Int,
+    val media_url: String,
+    val lname: String,
+    val fname: String,
+    val mname: String,
+    val gender_id: Int,
+    val bdate: String,
+    val info: InfoStuff,
+    val phone: String,
+    val role: String,
+    val isactive: Boolean,
+    val country_id: Int,
+    val region_id: Int,
+    val city_id: Int,
+    val address: String
+)
+
+data class InfoStuff(
+    val role: String,
+    val company_id: Int,
+    val passport_no: String
+)
+
+data class UserStaffResponse(
+    val count: Int,
+    val data: ArrayList<GetUserStaffInfoBody>
+)

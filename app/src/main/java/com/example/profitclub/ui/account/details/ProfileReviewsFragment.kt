@@ -1,5 +1,6 @@
 package com.example.profitclub.ui.account.details
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,45 +13,55 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.adapters.ReviewsAdapter
-import com.example.profitclub.model.Reviews
-import kotlinx.android.synthetic.main.activity_question_detail.*
-import kotlinx.android.synthetic.main.fragment_profile_reviews.*
+import com.example.profitclub.data.bids.ResponseUserRating
 
 class ProfileReviewsFragment : Fragment(), View.OnClickListener {
-
-
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: ReviewsAdapter? = null
-
-    val list = listOf(Reviews("Very helpful. Best consultant I have ever worked. Thank you!!!", 5.0, "William"),
-        Reviews("Very helpful. Best consultant I have ever worked. Thank you!!!", 5.0, "William"),
-        Reviews("Very helpful. Best consultant I have ever worked. Thank you!!!", 5.0, "William"),
-        Reviews("Very helpful. Best consultant I have ever worked. Thank you!!!", 5.0, "William"),
-        Reviews("Very helpful. Best consultant I have ever worked. Thank you!!!", 5.0, "William"))
-
-    private lateinit var homeViewModel: ProfileReviewsViewModel
+    val reviews = ArrayList<ResponseUserRating>()
+    private val APP_PREFERENCE = "MYSETTINGS"
+    private lateinit var vm: ProfileReviewsViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        homeViewModel =
-            ViewModelProviders.of(this).get(ProfileReviewsViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_profile_reviews, container, false)
-        val textView: TextView = root.findViewById(R.id.text_home)
-        homeViewModel.text.observe(this, Observer {
-            textView.text = it
-        })
 
-        val recyclerView: RecyclerView = root.findViewById(R.id.recycler_reviews)
-        adapter = ReviewsAdapter(context!!, list, this)
-        layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
-        recyclerView.layoutManager = layoutManager
-        recyclerView.adapter = adapter
-        adapter?.notifyDataSetChanged()
+        val root = inflater.inflate(R.layout.fragment_profile_reviews, container, false)
 
         return root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        activity.let { activity ->
+            val preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+            vm =
+                ViewModelProviders.of(this, ProfileReviewViewModelFactory(preferences)).get(ProfileReviewsViewModel::class.java)
+            val textView: TextView = view.findViewById(R.id.text_home)
+            vm.text.observe(viewLifecycleOwner, Observer {
+                textView.text = it
+            })
+
+            val recyclerView: RecyclerView = view.findViewById(R.id.recycler_reviews)
+            adapter = ReviewsAdapter(context!!, reviews)
+            layoutManager = LinearLayoutManager(context!!, LinearLayoutManager.VERTICAL, false)
+            recyclerView.layoutManager = layoutManager
+            recyclerView.adapter = adapter
+            adapter?.notifyDataSetChanged()
+            val userId = preferences.getInt("user_id", 0)
+            vm.getUserRating(userId)
+
+            vm.userRating.observe(viewLifecycleOwner, Observer { data ->
+                if (data != null){
+                    reviews.clear()
+                    reviews.addAll(data.data)
+                    adapter!!.notifyDataSetChanged()
+                }
+            })
+        }
     }
 
     override fun onClick(p0: View?) {
