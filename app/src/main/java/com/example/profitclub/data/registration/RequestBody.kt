@@ -20,7 +20,7 @@ data class PostCategoryBody(
     private val token: String = "249340fe"
 )
 
-data class UserInfoBody(
+data class UserInfoBodyClientIndividual(
     val login_id: Int,
     val lname: String,
     val fname: String,
@@ -32,13 +32,67 @@ data class UserInfoBody(
     val region_id: Int,
     val city_id: Int,
     val address: String,
-    val passport_no: String,
-    val languages: IntArray,
-    val categories: IntArray,
-    val about: String
+    val info: InfoIndividual
 )
 
-data class CompanyInfoBody(
+data class InfoIndividual(
+    val languages: ArrayList<Int>,
+    val passport_no: String
+)
+
+data class UserInfoBodyClientLegal(
+    val login_id: Int,
+    val lname: String,
+    val fname: String,
+    val mname: String,
+    val gender_id: Int,
+    val date: String,
+    val phone: String,
+    val country_id: Int,
+    val region_id: Int,
+    val city_id: Int,
+    val address: String,
+    val company: CompanyInfo
+)
+
+data class UserInfoBodyConsultantIndividual(
+    val login_id: Int,
+    val lname: String,
+    val fname: String,
+    val mname: String,
+    val gender_id: Int,
+    val date: String,
+    val phone: String,
+    val country_id: Int,
+    val region_id: Int,
+    val city_id: Int,
+    val address: String,
+    val info: UserInfo
+)
+
+data class UserInfoBodyConsultantLegal(
+    val login_id: Int,
+    val lname: String,
+    val fname: String,
+    val mname: String,
+    val gender_id: Int,
+    val date: String,
+    val phone: String,
+    val country_id: Int,
+    val region_id: Int,
+    val city_id: Int,
+    val address: String,
+    val company: CompanyInfo
+)
+
+data class UserInfo(
+    val about: String,
+    val languages: ArrayList<Int>,
+    val categories: ArrayList<Int>,
+    val passport_no: String
+)
+
+data class CompanyInfo(
     val name: String,
     val phone: String,
     val country_id: Int,
@@ -72,5 +126,6 @@ data class InfoUser(
     val about: String,
     val languages: IntArray,
     val categories: IntArray,
-    val passport_no: String
+    val passport_no: String,
+    val ispermitted: Int
 )

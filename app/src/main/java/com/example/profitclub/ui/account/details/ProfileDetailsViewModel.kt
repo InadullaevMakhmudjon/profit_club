@@ -79,12 +79,12 @@ class ProfileDetailsViewModel(val repository: AboutMeRepository) : ViewModel() {
     val save = fun(user_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
                        date: String, phone: String, country_id: Int, region_id: Int,
                        city_id: Int, address: String, passport_no: String, about: String, languages: IntArray,
-                       categories: IntArray){
+                       categories: IntArray, isPermitted: Int){
         viewModelScope.launch {
             try {
                 val response = repository.save(
                     PostUserInfoBody(user_id, lname, fname, mname, gender_id, date, phone, country_id,
-                        region_id, city_id, address, InfoUser(about, languages, categories, passport_no), "ru"))
+                        region_id, city_id, address, InfoUser(about, languages, categories, passport_no, isPermitted), "en"))
                 if (response.isSuccessful){
                     status.apply { value = response.body() }
                 }

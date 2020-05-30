@@ -41,5 +41,4 @@ class QuestionCreationViewModel(val repository: BidsRepository) : ViewModel() {
             }
         }
     }
-
 }

@@ -192,6 +192,10 @@ fun Activity.getImagePath(uri: Uri): String? {
     return ImageFilePath.getPath(this, uri)
 }
 
+fun Fragment.getImagePath(uri: Uri): String? {
+    return ImageFilePath.getPath(context!!, uri)
+}
+
 private fun setNewLocale(language: String, restartProcess: Boolean, activity: FragmentActivity): Boolean {
 //    LocaleHelper.setLocale(activity.applicationContext, language)
     LocaleManager.setNewLocale(activity, language)

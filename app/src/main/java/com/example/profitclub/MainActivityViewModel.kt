@@ -16,6 +16,8 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
         value = repository.token
     }
 
+    val status = MutableLiveData<Int?>()
+
     val isLoggedIn = MutableLiveData<Boolean>().apply {
         value = repository.isLoggedIn
     }
@@ -37,6 +39,7 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
 
                 token.apply { value = Token?.token }
                 role.apply { value = Token?.type }
+                status.apply { value = Token?.status }
 
                 loading.apply { value = false }
             } catch (e: Exception) {

@@ -65,4 +65,22 @@
         android:fontFamily="@font/roboto_bold"
         android:textColor="@android:color/holo_red_light"/>
 
+    <TextView
+        android:id="@+id/review"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/deadline_question"
+        android:layout_marginTop="15dp"
+        android:textSize="16sp"
+        android:text="@string/review"
+        android:fontFamily="@font/roboto_bold"
+        android:textColor="@android:color/black"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/review_list"
+        android:layout_below="@+id/review"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"/>
+
 </RelativeLayout>

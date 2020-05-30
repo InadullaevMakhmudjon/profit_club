@@ -1,5 +1,6 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
@@ -7,33 +8,34 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
-import com.example.profitclub.data.BASE_URL
-import com.example.profitclub.data.registration.GetUserStaffInfoBody
-import com.example.profitclub.databinding.EmployeesItemBinding
-import com.squareup.picasso.Picasso
+import com.example.profitclub.data.bids.Language
+import com.example.profitclub.databinding.LanguageListItemBinding
 
-class EmployeesAdapter(private val context: Context, val items: ArrayList<GetUserStaffInfoBody>?, val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+class LanguageAdapter(private val context: Context, val items: ArrayList<Language>?, val languages: ArrayList<Int>, private val callBack: (Int, Boolean) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        val binding = EmployeesItemBinding.inflate(inflater, parent, false)
+        val binding = LanguageListItemBinding.inflate(inflater, parent, false)
         return EventFeedHolder(binding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
-            binding!!.staff = item
-            binding.name.text = item?.lname
-            binding.surname.text = item?.fname
-            binding.patronymic.text =  item?.mname
-            binding.role.text = item?.role
+            binding!!.language = item
+            binding.nameLanguage.text = item?.name
+            val color = context.resources.getColor(R.color.colorAccent)
+            val black = context.resources.getColor(R.color.black)
+            binding.checkboxLanguage.isChecked = languages.contains(item!!.id)
 
-            if (item?.media_url != null){
-                Picasso.get()
-                    .load(BASE_URL + item.media_url + "/sm_avatar.jpg").fit()
-                    .into(binding.staffPhoto)
+            binding.checkboxLanguage.setOnCheckedChangeListener { buttonView, isChecked ->
+                if (isChecked) {
+                    binding.nameLanguage.setTextColor(color)
+                } else {
+                    binding.nameLanguage.setTextColor(black)
+                }
+                callBack.invoke(item.id, isChecked)
             }
 
             binding.container.tag = item
@@ -47,7 +49,7 @@ class EmployeesAdapter(private val context: Context, val items: ArrayList<GetUse
     }
 
     private inner class EventFeedHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        var binding: EmployeesItemBinding? = null
+        var binding: LanguageListItemBinding? = null
 
         init {
             binding = DataBindingUtil.bind(itemView)
@@ -61,7 +63,6 @@ class EmployeesAdapter(private val context: Context, val items: ArrayList<GetUse
                // val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
                 //intent.putExtra(Const.EVENT_EXTRA, item)
                // context.startActivity(intent)
-               // context.startActivity(Intent(context, ProfileActivity::class.java))
             }
         }
     }

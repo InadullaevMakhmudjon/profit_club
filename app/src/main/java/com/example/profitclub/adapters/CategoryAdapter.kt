@@ -9,9 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.data.bids.DataBid
-import com.example.profitclub.data.transactions.TransactionResponseBody
 import com.example.profitclub.databinding.CategoryListItemBinding
-import com.example.profitclub.databinding.TransactionItemBinding
 
 class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid>?, val categories: ArrayList<Int>, private val callBack: (Int, Boolean) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
@@ -37,7 +35,7 @@ class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid
                 } else {
                     binding.nameCategory.setTextColor(black)
                 }
-                callBack.invoke(item!!.id, isChecked)
+                callBack.invoke(item.id, isChecked)
             }
 
             binding.container.tag = item

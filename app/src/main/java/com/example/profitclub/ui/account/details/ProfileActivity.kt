@@ -229,9 +229,4 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
-
-    // Function returns picture
-    fun getPhoto(): String?{
-        return picture.toString()
-    }
 }

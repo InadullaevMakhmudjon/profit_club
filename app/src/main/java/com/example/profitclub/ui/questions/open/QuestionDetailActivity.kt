@@ -13,15 +13,24 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.adapters.BidsAdapter
+import com.example.profitclub.adapters.ReviewsAdapter
+import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.data.bids.ClientClickView
 import com.example.profitclub.data.bids.ConsultantBidsData
+import com.example.profitclub.data.bids.ResponseUserRating
 import com.example.profitclub.data.questions.QuestionConsultantCancelledData
 import com.example.profitclub.data.questions.QuestionConsultantClosedData
 import com.example.profitclub.data.questions.QuestionConsultantDisputeData
 import com.example.profitclub.toast
+import com.google.android.material.bottomsheet.BottomSheetDialog
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_question_detail.*
+import kotlinx.android.synthetic.main.activity_question_detail.deadline
+import kotlinx.android.synthetic.main.bottom_sheet_client_preview.view.*
 import kotlinx.android.synthetic.main.review_alert_dialog.view.*
+import kotlinx.android.synthetic.main.review_alert_dialog.view.review
 import kotlinx.android.synthetic.main.review_dispute_dialog.view.*
+import kotlinx.android.synthetic.main.user_item.*
 
 class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
 
@@ -30,6 +39,8 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
     private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var vm: QuestionDetailViewModel
     private var questionId: Int = 0
+
+    val reviews = ArrayList<ResponseUserRating>()
 
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -59,11 +70,12 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
                 //adapter?.notifyDataSetChanged()
                 val items = ArrayList<ClientClickView>()
 
-                val adapter = BidsAdapter(this, items, this) {id:Int ->
-                    vm.postBid(id) {
-                        finish()
-                    }
-                }
+                val adapter = BidsAdapter(this, items, this, {id:Int-> vm.postBid(id) {
+                    finish()
+                }}, {userId: Int -> vm.getUserRating(userId) {
+                    viewRating()
+                }})
+
                 recycler_bids.adapter = adapter
 
                 title_.text = item.title
@@ -268,22 +280,45 @@ class QuestionDetailActivity : AppCompatActivity(), View.OnClickListener {
         alertDialogBuilder.show()
     }
 
-   /* private fun notification(){
+    private fun viewRating (){
+            val bottomSheetDialog = BottomSheetDialog(this)
+            val sheetView = layoutInflater.inflate(R.layout.bottom_sheet_client_preview, null)
+            bottomSheetDialog.setContentView(sheetView)
+            sheetView.fullname.isVisible = false
+            sheetView.image_client.isVisible = false
+            sheetView.rating_client.isVisible = false
+            sheetView.deadline_question.isVisible = false
+            var layoutManager: LinearLayoutManager? = null
+            val adapter = ReviewsAdapter(this, reviews)
+            layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
+            sheetView.review_list.layoutManager = layoutManager
+            sheetView.review_list.adapter = adapter
+            adapter.notifyDataSetChanged()
 
-        val notification = NotificationCompat.Builder(this, App.CHANNEL_1_ID)
-            .setSmallIcon(R.drawable.profile_user)
-            .setContentTitle("Your bank have been increased!")
-            .setContentText("Your work successfully accepted by the client!")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-            .build()
-
-        notificationManager.notify(1, notification)
-    }*/
+            vm.userRating.observe(this, Observer { data ->
+                if (data != null){
+                    reviews.clear()
+                    reviews.addAll(data.data)
+                    adapter.notifyDataSetChanged()
+                }
+            })
+            bottomSheetDialog.show()
+    }
 
     @Override
     override fun attachBaseContext(base: Context) {
         super.attachBaseContext(LocaleManager.setLocale(base))
     }
+
+    /* private fun notification(){
+       val notification = NotificationCompat.Builder(this, App.CHANNEL_1_ID)
+           .setSmallIcon(R.drawable.profile_user)
+           .setContentTitle("Your bank have been increased!")
+           .setContentText("Your work successfully accepted by the client!")
+           .setPriority(NotificationCompat.PRIORITY_HIGH)
+           .setCategory(NotificationCompat.CATEGORY_MESSAGE)
+           .build()
+       notificationManager.notify(1, notification)
+   }*/
 
 }

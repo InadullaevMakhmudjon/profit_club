@@ -24,4 +24,8 @@ class BidsRepository(private val retrofit: BidsService, private val preference: 
 
     // All categories
     suspend fun getCategories() = retrofit.getCategories()
+
+    // User Rating
+    suspend fun getUserRating(user_id: Int?) = retrofit.getUserRating("JWT $token", user_id)
+
 }

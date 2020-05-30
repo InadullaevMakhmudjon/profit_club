@@ -19,7 +19,8 @@ class BidsAdapter(
     private val context: Context,
     private val items: ArrayList<ClientClickView>?,
     private val listener: View.OnClickListener,
-    private val callBack: (Int) -> Unit
+    private val callBack: (Int) -> Unit,
+    private val callBack2: (Int) -> Unit
 ) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
@@ -46,6 +47,9 @@ class BidsAdapter(
             binding.hire.setOnClickListener {
                 callBack.invoke(item.bid_id)
             }
+            binding.comment.setOnClickListener{
+                callBack2.invoke(item.consultant_id)
+            }
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)
@@ -63,6 +67,7 @@ class BidsAdapter(
         init {
             binding = DataBindingUtil.bind(itemView)
         }
+
     }
 
     override fun onClick(p0: View?) {
@@ -76,5 +81,4 @@ class BidsAdapter(
         }
     }
 
-    private operator fun <T> MutableLiveData<T>.get(position: Int): ClientClickView = get(position)
 }

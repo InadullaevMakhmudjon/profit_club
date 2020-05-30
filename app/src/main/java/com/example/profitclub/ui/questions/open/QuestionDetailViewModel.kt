@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.profitclub.data.bids.BidsRepository
 import com.example.profitclub.data.bids.ClientClickView
 import com.example.profitclub.data.bids.ResponseGeneric
+import com.example.profitclub.data.bids.ResponseUserRating
 import kotlinx.coroutines.launch
 
 class QuestionDetailViewModel(val repository: BidsRepository) : ViewModel() {
@@ -14,6 +15,9 @@ class QuestionDetailViewModel(val repository: BidsRepository) : ViewModel() {
     val data = MutableLiveData<ResponseGeneric<ClientClickView>>().apply {
         value = null
     }
+
+    val userRating = MutableLiveData<ResponseGeneric<ResponseUserRating>>().apply { value = null }
+
 
     val error = MutableLiveData<String>()
 
@@ -24,6 +28,20 @@ class QuestionDetailViewModel(val repository: BidsRepository) : ViewModel() {
                 notify.invoke()
             } catch (e: Exception) {
                 error.apply{ value = e.message.toString() }
+            }
+        }
+    }
+
+    val getUserRating = fun (user_id: Int?, notify: ()->Unit){
+        viewModelScope.launch {
+            try {
+                val response = repository.getUserRating(user_id)
+                notify.invoke()
+                if (response.isSuccessful){
+                    userRating.apply { value = response.body() }
+                }
+            } catch (e:Exception){
+                error.apply { value = e.message.toString() }
             }
         }
     }

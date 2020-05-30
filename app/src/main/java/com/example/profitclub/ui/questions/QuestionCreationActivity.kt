@@ -4,8 +4,6 @@ import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
@@ -17,9 +15,10 @@ import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.adapters.CategoryAdapter
 import com.example.profitclub.data.bids.DataBid
+import com.example.profitclub.data.bids.Language
 import com.example.profitclub.toast
 import kotlinx.android.synthetic.main.activity_question_creation.*
-import kotlinx.android.synthetic.main.category_alert_dialog.view.*
+import kotlinx.android.synthetic.main.single_language_alert.view.*
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -29,6 +28,7 @@ class QuestionCreationActivity : AppCompatActivity() {
     private var user_id: Int? = null
     private var deadline_final: String? = null
     val categoryIds = ArrayList<Int>()
+    var languageId: Int = 0
     val allCategories = ArrayList<DataBid>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -62,7 +62,11 @@ class QuestionCreationActivity : AppCompatActivity() {
         }*/
 
         category_question_creation.setOnClickListener {
-            this.alertDialog()
+            this.alertDialogCategory()
+        }
+
+        language_question_creation.setOnClickListener {
+            this.alertDialogLanguage()
         }
 
         val c = Calendar.getInstance()
@@ -85,12 +89,11 @@ class QuestionCreationActivity : AppCompatActivity() {
             /*Snackbar.make(it, "Your question posted successfully", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
             */
-            toast(categoryIds.toString())
 
-            if(categoryIds.size > 0) {
+            if(categoryIds.size > 0 && languageId != 0) {
                 viewModel.postQuestion(user_id!!, categoryIds, title.text.toString(), description.text.toString(),
-                    1, deadline_final.toString())
-            } else toast("Please select any category")
+                    languageId, deadline_final.toString())
+            }
         }
 
         this.viewModel.error.observe(this, androidx.lifecycle.Observer {
@@ -122,7 +125,7 @@ class QuestionCreationActivity : AppCompatActivity() {
         }
     }*/
 
-    private fun alertDialog(){
+    private fun alertDialogCategory(){
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Categories")
         val customLayout = layoutInflater.inflate(R.layout.category_alert_dialog, null)
@@ -168,16 +171,55 @@ class QuestionCreationActivity : AppCompatActivity() {
         alertDialogBuilder.show()
     }
 
-    /*private fun showDatePickerDialog(view: View) {
-        var datePickerDialog = DatePickerDialog(this, DatePickerDialog.OnDateSetListener{view,
-            question_text.text = "" +
-            ), Calendar.getInstance().get(Calendar.YEAR),
-            Calendar.getInstance().get(Calendar.MONTH),
-            Calendar.getInstance().get(Calendar.DAY_OF_MONTH)},
+    private fun alertDialogLanguage(){
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        alertDialogBuilder.setTitle("Languages")
+        val customLayout = layoutInflater.inflate(R.layout.single_language_alert, null)
+        alertDialogBuilder.setView(customLayout)
+        customLayout.checkbox_english.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                customLayout.name_english.setTextColor(getColor(R.color.colorAccent))
+                languageId = 1
+                customLayout.checkbox_uzbek.isChecked = false
+                customLayout.checkbox_russian.isChecked = false
+            } else
+                customLayout.name_english.setTextColor(getColor(R.color.black))
+        }
 
+        customLayout.checkbox_uzbek.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                customLayout.name_uzbek.setTextColor(getColor(R.color.colorAccent))
+                languageId = 2
+                customLayout.checkbox_english.isChecked = false
+                customLayout.checkbox_russian.isChecked = false
+            } else
+                customLayout.name_uzbek.setTextColor(getColor(R.color.black))
+        }
 
-        datePickerDialog?.show()
-    }*/
+        customLayout.checkbox_russian.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                customLayout.name_russian.setTextColor(getColor(R.color.colorAccent))
+                languageId = 3
+                customLayout.checkbox_uzbek.isChecked = false
+                customLayout.checkbox_english.isChecked = false
+            } else
+                customLayout.name_russian.setTextColor(getColor(R.color.black))
+        }
+
+        alertDialogBuilder.setMessage(getString(R.string.category_alert))
+
+        alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
+            Toast.makeText(this, "Languages checked", Toast.LENGTH_SHORT).show()
+
+        }
+
+        alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
+            Toast.makeText(this, "You should check at least one of languages", Toast.LENGTH_SHORT).show()
+            dialog?.dismiss()
+        }
+
+        alertDialogBuilder.show()
+    }
 
     @Override
     override fun attachBaseContext(base: Context) {
