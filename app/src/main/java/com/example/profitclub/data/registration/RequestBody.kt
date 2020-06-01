@@ -116,10 +116,9 @@ data class PostUserInfoBody(
     val phone: String,
     val country_id: Int,
     val region_id: Int,
-    val city_id: Int,
+    var city_id: Int,
     val address: String,
-    val info: InfoUser,
-    val lang: String
+    val info: InfoUser
 )
 
 data class InfoUser(
