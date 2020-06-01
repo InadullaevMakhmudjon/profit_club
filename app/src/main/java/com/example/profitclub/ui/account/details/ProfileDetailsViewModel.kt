@@ -84,7 +84,7 @@ class ProfileDetailsViewModel(val repository: AboutMeRepository) : ViewModel() {
             try {
                 val response = repository.save(
                     PostUserInfoBody(user_id, lname, fname, mname, gender_id, date, phone, country_id,
-                        region_id, city_id, address, InfoUser(about, languages, categories, passport_no, isPermitted), "en"))
+                        region_id, city_id, address, InfoUser(about, languages, categories, passport_no, isPermitted)))
                 if (response.isSuccessful){
                     status.apply { value = response.body() }
                 }
