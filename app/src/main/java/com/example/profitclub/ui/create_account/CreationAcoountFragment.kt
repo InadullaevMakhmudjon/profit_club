@@ -116,13 +116,13 @@ class CreationAcoountFragment : Fragment() {
             viewModel.status.observe(activity!!, Observer { status ->
 
                 when (status) {
-                    0, 2 -> {
+                    0 -> {
                         viewModel.loginId.value?.toInt()?.let { it1 -> emailAction.setLoginId(it1) }
                         Navigation.findNavController(create).navigate(emailAction)
                     }
                     -1 -> toast(getString(R.string.mail_already_registered))
                     1 -> toast(getString(R.string.account_not_activated))
-                   // 2 -> toast(getString(R.string.account_not_verified))
+                    2 -> toast(getString(R.string.account_not_verified))
                     3 -> {
                         viewModel.loginId.value?.toInt()?.let { it1 -> infoAction.setLoginId(it1) }
                         Navigation.findNavController(create).navigate(infoAction)

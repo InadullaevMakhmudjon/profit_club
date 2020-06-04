@@ -26,16 +26,16 @@ data class GetUserInfoBody(
     val city_id: Int,
     val address: String,
     val passport_no: String,
-    val languages: IntArray,
-    val categories: IntArray,
+    val languages: ArrayList<Int>,
+    val categories: ArrayList<Int>,
     val about: String,
     val info: Info
 )
 
 data class Info(
     val about: String,
-    val languages: IntArray,
-    val categories: IntArray,
+    val languages: ArrayList<Int>,
+    val categories: ArrayList<Int>,
     val passport_no: String
 )
 

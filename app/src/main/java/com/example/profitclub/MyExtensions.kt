@@ -25,7 +25,6 @@ import kotlinx.android.synthetic.main.main_custom_bar.*
 import java.io.File
 import kotlin.system.exitProcess
 
-
 fun log(message: String, TAG: String = "MyTagCheck") {
     Log.d(TAG, message)
 }

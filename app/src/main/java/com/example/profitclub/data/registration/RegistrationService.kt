@@ -18,13 +18,13 @@ interface RegistrationService {
     suspend fun getCategories(@Body body: PostCategoryBody = PostCategoryBody()): Response<ArrayList<DataBid>>
 
     @POST(USER_INFO)
-    suspend fun getUserInfoClientIndividual(@Body body: UserInfoBodyClientIndividual): Response<UserInfoResponse>
+    suspend fun getUserInfoClientIndividual(@Body body: HashMap<String, UserInfoBodyClientIndividual>): Response<UserInfoResponse>
 
     @POST(USER_INFO)
     suspend fun getUserInfoClientLegal(@Body body: UserInfoBodyClientLegal): Response<UserInfoResponse>
 
     @POST(USER_INFO)
-    suspend fun getUserInfoConsultantIndividual(@Body body: UserInfoBodyConsultantIndividual): Response<UserInfoResponse>
+    suspend fun getUserInfoConsultantIndividual(@Body body: HashMap<String, UserInfoBodyConsultantIndividual>): Response<UserInfoResponse>
 
     @POST(USER_INFO)
     suspend fun getUserInfoConsultantLegal(@Body body: UserInfoBodyConsultantLegal): Response<UserInfoResponse>
@@ -39,7 +39,10 @@ interface RegistrationService {
     suspend fun uploadPhoto(@Header("authorization") auth: String?, @Body body: DeleteUploadPhotoBody): Response<UploadPhotoResponse>
 
     @POST(SAVE)
-    suspend fun save(@Header("authorization") auth: String?, @Body body: HashMap<String, PostUserInfoBody>): Response<UploadPhotoResponse>
+    suspend fun saveClient(@Header("authorization") auth: String?, @Body body: HashMap<String, PostUserInfoBodyClientIndividual>): Response<UploadPhotoResponse>
+
+    @POST(SAVE)
+    suspend fun saveConsultant(@Header("authorization") auth: String?, @Body body: HashMap<String, PostUserInfoBodyConsultantIndividual>): Response<UploadPhotoResponse>
 
     @Multipart
     @POST(UPLOAD_IMAGE)

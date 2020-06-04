@@ -26,11 +26,16 @@ class AboutMeRepository(private val retrofit: RegistrationService, private val p
     suspend fun uploadPhoto(body: DeleteUploadPhotoBody) = retrofit.uploadPhoto("JWT $token", body)
 
     // Save
-    suspend fun save(req: PostUserInfoBody): Response<UploadPhotoResponse> {
-        val body = HashMap<String, PostUserInfoBody>()
+    suspend fun saveClient(req: PostUserInfoBodyClientIndividual): Response<UploadPhotoResponse> {
+        val body = HashMap<String, PostUserInfoBodyClientIndividual>()
         body["data"] = req
-        req.city_id = 3
-        return retrofit.save("JWT $token", body)
+        return retrofit.saveClient("JWT $token", body)
+    }
+
+    suspend fun saveConsultant(req: PostUserInfoBodyConsultantIndividual): Response<UploadPhotoResponse> {
+        val body = HashMap<String, PostUserInfoBodyConsultantIndividual>()
+        body["data"] = req
+        return retrofit.saveConsultant("JWT $token", body)
     }
 
     suspend fun uploadDemo(file: MultipartBody.Part, id: RequestBody, type: RequestBody) = retrofit.upload(file, id, type)

@@ -2,6 +2,7 @@ package com.example.profitclub.data.bids
 
 import BidsClientUpdate
 import BidsConsultantPreviewClient
+import PostCategoryBodyBid
 import RequestBidsClientAdd
 import RequestBidsConsultantBidItem
 import android.content.SharedPreferences
@@ -23,7 +24,7 @@ class BidsRepository(private val retrofit: BidsService, private val preference: 
 
 
     // All categories
-    suspend fun getCategories() = retrofit.getCategories()
+    suspend fun getCategories(lang: String) = retrofit.getCategories(PostCategoryBodyBid(lang))
 
     // User Rating
     suspend fun getUserRating(user_id: Int?) = retrofit.getUserRating("JWT $token", user_id)

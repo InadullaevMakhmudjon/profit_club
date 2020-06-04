@@ -418,7 +418,6 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if (resultCode == Activity.RESULT_OK && requestCode == Companion.USER_IMAGE_PICK_CODE){
-            viewModel.deletePhoto(loginId, 1)
             val image = data?.data
             user_photo.setImageURI(image)
             viewModel.uploadPhoto(loginId, 1)
@@ -429,7 +428,6 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
             }
         }
         if (resultCode == Activity.RESULT_OK && requestCode == Companion.LOGO_IMAGE_PICK_CODE){
-            viewModel.deletePhoto(loginId, 2)
             val image = data?.data
             company_logo.setImageURI(image)
             viewModel.uploadPhoto(loginId, 2)

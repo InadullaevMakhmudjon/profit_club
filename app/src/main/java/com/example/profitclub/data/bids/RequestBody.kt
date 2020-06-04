@@ -31,6 +31,6 @@ data class RequestBidsClientAdd(
 )
 
 data class PostCategoryBodyBid(
-    val lang: String = "en",
+    val lang: String,
     private val token: String = "249340fe"
 )

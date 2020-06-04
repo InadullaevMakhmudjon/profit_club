@@ -51,8 +51,12 @@ class ClientIndividualInfoViewModel(private val repository: RegistrationReposito
                        city_id: Int, address: String, passport_no: String, languages: ArrayList<Int>){
         viewModelScope.launch {
             try {
-                val response = repository.userInfoClientIndividual(login_id, lname, fname, mname, gender_id, date, phone, country_id,
-                        region_id, city_id, address, passport_no, languages)
+                val response = repository.userInfoClientIndividual(
+                    UserInfoBodyClientIndividual(
+                        login_id, lname, fname, mname, gender_id, date, phone, country_id,
+                        region_id, city_id, address, InfoIndividual(languages, passport_no)
+                    )
+                )
 
                 userId.apply { value = response.body()?.user_id }
                 companyId.apply { value = response.body()?.company_id }
@@ -86,8 +90,11 @@ class ClientIndividualInfoViewModel(private val repository: RegistrationReposito
                                            categories: ArrayList<Int>, passport_no: String){
         viewModelScope.launch {
             try {
-                val response = repository.userInfoConsultantIndividual(login_id, lname, fname, mname, gender_id, date, phone, country_id, region_id,
-                    city_id, address, about, languages, categories, passport_no)
+                val response = repository.userInfoConsultantIndividual(
+                    UserInfoBodyConsultantIndividual(login_id, lname, fname, mname, gender_id, date, phone, country_id, region_id,
+                        city_id, address, UserInfo(about, languages, categories, passport_no)
+                    )
+                )
 
                 userId.apply { value = response.body()?.user_id}
                 companyId.apply { value = response.body()?.company_id }
