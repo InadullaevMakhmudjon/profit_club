@@ -47,4 +47,10 @@ interface RegistrationService {
 
     @GET(USER_STAFF)
     suspend fun getUserStaff(@Header("authorization") auth: String?, @Query("lang") lang: String?): Response<UserStaffResponse>
+
+    @POST(USER_STAFF)
+    suspend fun postUserStaff(@Header("authorization") auth: String?, @Body body: PostUserStaffInfoBody): Response<UploadPhotoResponse>
+
+    @POST(STAFF_EDIT)
+    suspend fun postUserStaffEdit(@Header("authorization") auth: String?, @Body body: PostUserStaffInfoBody): Response<UploadPhotoResponse>
 }

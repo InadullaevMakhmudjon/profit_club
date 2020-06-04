@@ -1,6 +1,7 @@
 package com.example.profitclub.ui.account.employees
 
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
@@ -42,6 +43,12 @@ class EmployeesListActivity : AppCompatActivity(), View.OnClickListener {
                 adapter!!.notifyDataSetChanged()
             }
         })
+
+        add_user.setOnClickListener {
+            val intent: Intent = Intent(this, EmployeeCreationActivity::class.java)
+            intent.putExtra("key", 2)
+            this.startActivity(intent)
+        }
     }
 
     override fun onClick(p0: View?) {

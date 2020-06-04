@@ -208,4 +208,9 @@
     <string name="company_addres">Адрес организации</string>
     <string name="consultant_message">Ваш учетный запись еще не подтверждена, Для уточнения просим обратиться по телефону!</string>
     <string name="call">Вызов</string>
+    <string name="employees_account_details">Детали учетной записи</string>
+    <string name="manager_employee">Менеджер</string>
+    <string name="customer_employee">Заказчик</string>
+    <string name="about_us">О нас</string>
+    <string name="employees_definition">Посмотреть и изменить аккаунт сотрудников</string>
 </resources>

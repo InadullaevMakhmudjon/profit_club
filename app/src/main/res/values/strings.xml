@@ -242,4 +242,9 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="company_addres">Address of the company</string>
     <string name="consultant_message">Your account has not yet been verified. For clarification, please contact by phone!</string>
     <string name="call">Call</string>
+    <string name="employees_account_details">Account details</string>
+    <string name="manager_employee">Manager</string>
+    <string name="customer_employee">Customer</string>
+    <string name="about_us">About us</string>
+    <string name="employees_definition">View and edit employees\' profile</string>
 </resources>

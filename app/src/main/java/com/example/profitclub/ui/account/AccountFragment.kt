@@ -11,22 +11,19 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import com.example.profitclub.*
+import com.example.profitclub.MainActivity
+import com.example.profitclub.R
+import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.ui.AuthentificationActivity
 import com.example.profitclub.ui.account.details.ProfileActivity
 import com.example.profitclub.ui.account.employees.EmployeesListActivity
-import kotlinx.android.synthetic.main.activity_chat_view.*
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_account.*
 
 class AccountFragment : Fragment() {
 
@@ -41,6 +38,12 @@ class AccountFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        return inflater.inflate(R.layout.fragment_account, container, false)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
         val activity = activity as MainActivity?
         activity.let {
             activity?.customActionBarTitle(getString(R.string.Account))
@@ -49,19 +52,25 @@ class AccountFragment : Fragment() {
         val myDataFromActivity = activity!!.getMyData()
         preferences = context!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
         sendViewModel =
-           ViewModelProviders.of(this, AccountViewModelFactory(preferences)).get(AccountViewModel::class.java)
-        val root = inflater.inflate(R.layout.fragment_account, container, false)
+            ViewModelProviders.of(this, AccountViewModelFactory(preferences)).get(AccountViewModel::class.java)
 
-        val logOut: Button = root.findViewById(R.id.log_out)
-        this.penalty = root.findViewById(R.id.num_penalty)
-        val employeeList: ConstraintLayout = root.findViewById(R.id.employees_container)
-        val viewContainer: ConstraintLayout = root.findViewById(R.id.view_container)
-        val penaltyContainer: ConstraintLayout = root.findViewById(R.id.penalty_container)
+        val logOut: Button = view.findViewById(R.id.log_out)
+        val media = view.findViewById<ImageView>(R.id.avatar_user)
+        val name = view.findViewById<TextView>(R.id.name_user)
+        this.penalty = view.findViewById(R.id.num_penalty)
+        val employeeList: ConstraintLayout = view.findViewById(R.id.employees_container)
+        val viewContainer: ConstraintLayout = view.findViewById(R.id.view_container)
+        val penaltyContainer: ConstraintLayout = view.findViewById(R.id.penalty_container)
+
+        val imageUser = preferences.getString("media_url", null)
+        val nameUser = preferences.getString("lname", null)
+
+        if (imageUser != null){
+            Picasso.get().load(BASE_URL+imageUser).fit().into(media)
+            name.text = nameUser
+        }
 
         logOut.setOnClickListener {
-            /*val fm = fragmentManager
-            val alertDialog = MyAlertDialogFragment.newInstance()
-            alertDialog.show(fm!!, "fragment_alert")*/
             alertDialog()
         }
 
@@ -82,15 +91,13 @@ class AccountFragment : Fragment() {
                 employeeList.isVisible = false
                 penaltyContainer.isVisible = false
             }
-            4, 7 -> {
+             1, 4, 7 -> {
                 penaltyContainer.isVisible = false
             }
             6 -> {
                 employeeList.isVisible = false
             }
         }
-
-        return root
     }
 
     private fun alertDialog(){
@@ -130,7 +137,6 @@ class AccountFragment : Fragment() {
             val string = customLayout.comment.text
             val percent: String = resources.getString(R.string.percentage)
             this.penalty.text = percent + string
-
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->

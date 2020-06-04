@@ -14,8 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
-import androidx.core.content.ContextCompat.getColor
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -29,18 +27,14 @@ import com.example.profitclub.adapters.LanguageAdapter
 import com.example.profitclub.data.bids.DataBid
 import com.example.profitclub.data.bids.Language
 import com.example.profitclub.getImagePath
-import com.example.profitclub.log
 import com.example.profitclub.toast
-import kotlinx.android.synthetic.main.fragment_account.*
 import kotlinx.android.synthetic.main.fragment_client_individual_infos.*
-import kotlinx.android.synthetic.main.single_language_alert.view.*
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import java.util.*
-import java.util.jar.Manifest
 import kotlin.collections.ArrayList
 
 class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListener{
@@ -191,8 +185,8 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
 
        activity.let {
            preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
-           /*role = preferences.getInt("role", 0)
-           lname.setText(role.toString())*/
+           role = preferences.getInt("role", 0)
+           //lname.setText(role.toString())
            viewModel =
                ViewModelProviders.of(this, ClientindividualViewModelFactory(preferences)).get(ClientIndividualInfoViewModel::class.java)
 

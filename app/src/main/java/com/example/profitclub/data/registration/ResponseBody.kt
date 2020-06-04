@@ -1,5 +1,7 @@
 package com.example.profitclub.data.registration
 
+import java.io.Serializable
+
 data class Data(
     val id: Int,
     val name:String
@@ -57,15 +59,15 @@ data class GetUserStaffInfoBody(
     val region_id: Int,
     val city_id: Int,
     val address: String
-)
+): Serializable
 
 data class InfoStuff(
     val role: String,
     val company_id: Int,
     val passport_no: String
-)
+): Serializable
 
 data class UserStaffResponse(
     val count: Int,
     val data: ArrayList<GetUserStaffInfoBody>
-)
+): Serializable

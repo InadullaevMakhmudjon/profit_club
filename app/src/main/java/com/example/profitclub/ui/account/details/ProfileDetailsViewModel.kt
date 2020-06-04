@@ -3,6 +3,7 @@ package com.example.profitclub.ui.account.details
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.profitclub.data.bids.DataBid
 import com.example.profitclub.data.registration.*
 import kotlinx.coroutines.launch
 import okhttp3.MultipartBody
@@ -21,6 +22,8 @@ class ProfileDetailsViewModel(val repository: AboutMeRepository) : ViewModel() {
     val cities = MutableLiveData<ArrayList<Data>>().apply {
         value = arrayListOf()
     }
+
+    val categories = MutableLiveData<ArrayList<DataBid>>().apply { value = null }
 
     val status = MutableLiveData<UploadPhotoResponse>()
 
@@ -78,13 +81,13 @@ class ProfileDetailsViewModel(val repository: AboutMeRepository) : ViewModel() {
 
     val save = fun(user_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
                        date: String, phone: String, country_id: Int, region_id: Int,
-                       city_id: Int, address: String, passport_no: String, about: String, languages: IntArray,
-                       categories: IntArray, isPermitted: Int){
+                       city_id: Int, address: String, passport_no: String, about: String, languages: ArrayList<Int>,
+                       categories: ArrayList<Int>){
         viewModelScope.launch {
             try {
                 val response = repository.save(
                     PostUserInfoBody(user_id, lname, fname, mname, gender_id, date, phone, country_id,
-                        region_id, city_id, address, InfoUser(about, languages, categories, passport_no, isPermitted)))
+                      region_id, city_id, address, InfoUser(about, languages, categories, passport_no, isPermitted)))
                 if (response.isSuccessful){
                     status.apply { value = response.body() }
                 }
@@ -107,11 +110,62 @@ class ProfileDetailsViewModel(val repository: AboutMeRepository) : ViewModel() {
         }
     }
 
+    val postUserStaff = fun(userId: Int, email: String, password: String, passwordRepeat: String,
+                            lname: String, fname: String, mname: String, genderId: Int, bdate: String,
+                            role: String, companyId: Int, passport_no: String, phone: String, country_id: Int,
+                            region_id: Int, city_id: Int, address: String){
+        viewModelScope.launch {
+            try {
+                val response = repository.postUserStaff(PostUserStaffInfoBody(
+                    userId, email, password, passwordRepeat, lname, fname, mname, genderId, bdate, InfoStuff(role,
+                        companyId, passport_no), phone, role, country_id, region_id, city_id, address
+                ))
+                if (response.isSuccessful){
+                    status.apply { value = response.body() }
+                }
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
+            }
+        }
+    }
+
+    val userStaffEdit = fun(userId: Int, email: String, password: String, passwordRepeat: String,
+                            lname: String, fname: String, mname: String, genderId: Int, bdate: String,
+                            role: String, companyId: Int, passport_no: String, phone: String, country_id: Int,
+                            region_id: Int, city_id: Int, address: String){
+        viewModelScope.launch {
+            try {
+                val response = repository.userStaffEdit(PostUserStaffInfoBody(
+                    userId, email, password, passwordRepeat, lname, fname, mname, genderId, bdate, InfoStuff(role,
+                        companyId, passport_no), phone, role, country_id, region_id, city_id, address
+                ))
+                if (response.isSuccessful){
+                    status.apply { value = response.body() }
+                }
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
+            }
+        }
+    }
+
     init {
         viewModelScope.launch {
             try {
                 val response = repository.getRegions()
                 regions.apply { value = response.body() }
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
+            }
+        }
+    }
+
+    init {
+        viewModelScope.launch {
+            try {
+                val response = repository.getCategories()
+                if (response.isSuccessful){
+                    categories.apply { value = response.body() }
+                }
             } catch (e: Exception){
                 error.apply { value = e.message.toString() }
             }
