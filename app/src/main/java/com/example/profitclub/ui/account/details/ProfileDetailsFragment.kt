@@ -200,6 +200,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                 vm.save(userId, mNameText!!,
                     lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
                     regionId!!, cityId!!, addressText!!, passportNoText!!, about,  language, category, 1)
+                    activity!!.finish()
             }
 
            // toast("$userId, $image, $mNameText, $lNameText, $fNameText, $genderId, $date, $phoneText, $countryId, $regionId, $cityId, $addressText, $passportNoText")
