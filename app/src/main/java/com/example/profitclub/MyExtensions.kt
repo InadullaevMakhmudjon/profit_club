@@ -3,9 +3,11 @@ package com.example.profitclub
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.database.Cursor
 import android.graphics.drawable.Drawable
 import android.net.ConnectivityManager
 import android.net.Uri
+import android.provider.MediaStore
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -13,13 +15,16 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.RelativeLayout
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.graphics.PathUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import com.example.profitclub.utils.ImageFilePath
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import kotlinx.android.synthetic.main.fragment_splash.*
 import kotlinx.android.synthetic.main.main_custom_bar.*
+import java.io.File
 import kotlin.system.exitProcess
+
 
 fun log(message: String, TAG: String = "MyTagCheck") {
     Log.d(TAG, message)
@@ -71,6 +76,21 @@ fun Activity.hideSoftKeyboard() {
         ) as InputMethodManager
         inputMethodManager.hideSoftInputFromWindow(currentFocus!!.windowToken, 0)
     }
+}
+
+fun Fragment.path(context: Context, contentUri: Uri): String {
+    var cursor: Cursor? = context.contentResolver.query(contentUri, null, null, null, null)
+    cursor?.moveToFirst()
+    var document_id: String = cursor?.getString(0) ?: ""
+    document_id = document_id.substring(document_id.lastIndexOf(":") + 1)
+    cursor?.close()
+
+    cursor = context.contentResolver.query(
+        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null
+        , MediaStore.Images.Media._ID + " = ? ", arrayOf(document_id), null
+    )
+    cursor?.moveToFirst()
+    return (cursor?.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA)) ?: cursor?.close()) as String
 }
 
 /**

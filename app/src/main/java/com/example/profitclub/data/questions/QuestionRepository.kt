@@ -8,6 +8,9 @@ import RequestQuestionDisputeCloseItem
 import RequestQuestionDisputeOpenItem
 import RequestQuestionMessage
 import android.content.SharedPreferences
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
+import retrofit2.Response
 
 class QuestionRepository(private val retrofit: QuestionService, private val preference: SharedPreferences) {
     private var token: String? = preference.getString("token", null)
@@ -53,4 +56,8 @@ class QuestionRepository(private val retrofit: QuestionService, private val pref
     suspend fun postQuestionClientClose(body: RequestQuestionConsultantCloseItem) = retrofit.postQuestionClientClose("JWT $token", GenericRequest(body))
 
     suspend fun getQuestionClientDisputeView(lang: String? = "") = retrofit.getQuestionClientDisputeView("JWT $token", lang)
+
+    suspend fun uploadFileChat(file: MultipartBody.Part, questionId: RequestBody): Response<Unit> {
+        return retrofit.postUploadFile("JWT $token", file, questionId)
+    }
 }

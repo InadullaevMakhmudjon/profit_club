@@ -37,7 +37,7 @@ data class Message(
     val date: String // time
 )
 
-data class QuestionClientFile(
+data class File(
     val file_id: Int,
     val question_id: Int,
     val user_id: Int,
@@ -66,8 +66,8 @@ data class ResponseQuestionConsultantPreview(
     val answer_end_description: String = "",
     val answer_end_date: String = "",
     val messages: ArrayList<Message>,
-    val client_files: ArrayList<QuestionClientFile>,
-    val consultant_files: ArrayList<QuestionClientFile>,
+    val client_files: ArrayList<File>,
+    val consultant_files: ArrayList<File>,
     val status: Int
 )
 

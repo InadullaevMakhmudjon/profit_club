@@ -39,7 +39,7 @@ interface RegistrationService {
     suspend fun uploadPhoto(@Header("authorization") auth: String?, @Body body: DeleteUploadPhotoBody): Response<UploadPhotoResponse>
 
     @POST(SAVE)
-    suspend fun save(@Header("authorization") auth: String?, @Body body: PostUserInfoBody): Response<UploadPhotoResponse>
+    suspend fun save(@Header("authorization") auth: String?, @Body body: HashMap<String, PostUserInfoBody>): Response<UploadPhotoResponse>
 
     @Multipart
     @POST(UPLOAD_IMAGE)

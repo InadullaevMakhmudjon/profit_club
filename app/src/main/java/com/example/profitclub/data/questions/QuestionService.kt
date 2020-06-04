@@ -9,6 +9,8 @@ import RequestQuestionDisputeOpenItem
 import RequestQuestionMessage
 import RequestUploadFile
 import com.example.profitclub.data.*
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Response
 import retrofit2.http.*
 import java.util.ArrayList
@@ -19,7 +21,7 @@ interface QuestionService {
 
     @Multipart
     @POST(FILE_UPLOAD)
-    suspend fun postUploadFile(@Header("authorization") auth: String?, @Body body: ResponseGeneric<RequestUploadFile>)
+    suspend fun postUploadFile(@Header("authorization") auth: String?, @Part file: MultipartBody.Part, @Part("question_id") question_id: RequestBody): Response<Unit>
 
     @POST(QUESTION_DISPUTE_OPEN)
     suspend fun postQuestionDisputeOpen(@Header("authorization") auth: String?, @Body body: GenericRequest<RequestQuestionDisputeOpenItem>): Response<Unit>
@@ -84,4 +86,7 @@ interface QuestionService {
     @GET(QUESTION_CLIENT_VIEW)
     suspend fun getQuestionClientApproveView(@Header("authorization") auth: String?, @Query("status") status: Int): Response<QuestionConsultantApproveData>
 
+    @Multipart
+    @POST(UPLOAD_IMAGE)
+    suspend fun upload(@Part file: MultipartBody.Part, @Part("id") id: RequestBody, @Part("type") type: RequestBody): Response<Unit>
 }

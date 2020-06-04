@@ -3,12 +3,14 @@ package com.example.profitclub.ui.account.details
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.content.Context
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isVisible
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -20,8 +22,11 @@ import com.example.profitclub.adapters.LanguageAdapter
 import com.example.profitclub.data.bids.DataBid
 import com.example.profitclub.data.bids.Language
 import kotlinx.android.synthetic.main.fragment_profile_details.*
+import java.net.HttpURLConnection
+import java.net.URL
 import java.text.SimpleDateFormat
 import java.util.*
+import javax.net.ssl.HttpsURLConnection
 import kotlin.collections.ArrayList
 
 class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
@@ -58,6 +63,8 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+       // val activityProfile = activity as ProfileActivity
 
         val lname = view.findViewById<AutoCompleteTextView>(R.id.name_detail)
         val fname = view.findViewById<AutoCompleteTextView>(R.id.last_name_detail)
@@ -209,7 +216,8 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             if (userId != 0){
                 vm.save(userId, mNameText!!,
                     lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
-                    regionId!!, cityId!!, addressText!!, passportNoText!!, about,  languageIds, categoryIds)
+                    regionId!!, cityId!!, addressText!!, passportNoText!!, about,  language, category, 1)
+                    activity!!.finish()
             }
         }
 
@@ -240,7 +248,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         val readDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S")
         readDate.timeZone = TimeZone.getTimeZone("GMT") // missing line
         val date = readDate.parse(string)
-        val writeDate = SimpleDateFormat("dd.MM.yyyy")
+        val writeDate = SimpleDateFormat("yyyy-MM-dd")
         writeDate.timeZone = TimeZone.getTimeZone("GMT+04:00")
         return writeDate.format(date)
     }
