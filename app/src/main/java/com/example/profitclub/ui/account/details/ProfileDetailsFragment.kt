@@ -216,7 +216,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             if (userId != 0){
                 vm.save(userId, mNameText!!,
                     lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
-                    regionId!!, cityId!!, addressText!!, passportNoText!!, about,  language, category, 1)
+                    regionId!!, cityId!!, addressText!!, passportNoText!!, about,  languageIds, categoryIds)
                     activity!!.finish()
             }
         }
