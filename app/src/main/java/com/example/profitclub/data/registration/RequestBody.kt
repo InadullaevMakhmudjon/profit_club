@@ -124,8 +124,26 @@ data class PostUserInfoBody(
 
 data class InfoUser(
     val about: String,
-    val languages: IntArray,
-    val categories: IntArray,
-    val passport_no: String,
-    val ispermitted: Int
+    val languages: ArrayList<Int>,
+    val categories: ArrayList<Int>,
+    val passport_no: String
+)
+
+data class PostUserStaffInfoBody(
+    val user_id: Int,
+    val email: String,
+    val password: String,
+    val password_repeat: String,
+    val lname: String,
+    val fname: String,
+    val mname: String,
+    val gender_id: Int,
+    val bdate: String,
+    val info: InfoStuff,
+    val phone: String,
+    val role: String,
+    val country_id: Int,
+    val region_id: Int,
+    val city_id: Int,
+    val address: String
 )

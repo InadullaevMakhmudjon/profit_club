@@ -207,4 +207,9 @@
     <string name="company_addres">Tashkilot manzili</string>
     <string name="consultant_message">Ma\'lumotingiz hali tasdiqlanmagan. Tafsilot uchun telefon orqali murojaat qiling!</string>
     <string name="call">Qo\'ng\'iroq</string>
+    <string name="employees_account_details">Foydalanuvchi ma\'lumotlari</string>
+    <string name="customer_employee">Mijoz</string>
+    <string name="manager_employee">Menejer</string>
+    <string name="about_us">Biz haqimizda</string>
+    <string name="employees_definition">Xodimlarning profilini ko\'rish va tahrirlash</string>
 </resources>

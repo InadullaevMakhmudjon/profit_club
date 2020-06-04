@@ -1,6 +1,7 @@
 package com.example.profitclub.adapters
 
 import android.content.Context
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +11,10 @@ import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.data.registration.GetUserStaffInfoBody
 import com.example.profitclub.databinding.EmployeesItemBinding
+import com.example.profitclub.ui.account.details.ProfileActivity
+import com.example.profitclub.ui.account.details.ProfileDetailsFragment
+import com.example.profitclub.ui.account.employees.EmployeeCreationActivity
+import com.example.profitclub.ui.questions.open.QuestionDetailActivity
 import com.squareup.picasso.Picasso
 
 class EmployeesAdapter(private val context: Context, val items: ArrayList<GetUserStaffInfoBody>?, val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
@@ -57,11 +62,11 @@ class EmployeesAdapter(private val context: Context, val items: ArrayList<GetUse
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.container -> {
-              //  val item = p0?.getTag() as Questions
-               // val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
-                //intent.putExtra(Const.EVENT_EXTRA, item)
-               // context.startActivity(intent)
-               // context.startActivity(Intent(context, ProfileActivity::class.java))
+                val item = p0?.tag as GetUserStaffInfoBody
+                val intent: Intent = Intent(context, EmployeeCreationActivity::class.java)
+                intent.putExtra("key", 1)
+                intent.putExtra("item", item)
+                context.startActivity(intent)
             }
         }
     }

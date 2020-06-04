@@ -23,17 +23,14 @@ import com.example.profitclub.toast
 import com.google.android.material.appbar.AppBarLayout
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_profile.*
-import okhttp3.MediaType
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
 import kotlin.math.abs
 
 class ProfileActivity : AppCompatActivity() {
-    //private lateinit var notificationManager: NotificationManagerCompat
     private lateinit var preferences: SharedPreferences
     private lateinit var binding: ActivityProfileBinding
     private val APP_PREFERENCE = "MYSETTINGS"
@@ -74,7 +71,7 @@ class ProfileActivity : AppCompatActivity() {
                          .load("$BASE_URL${picture}/sm_avatar.jpg").into(binding.logo)
                  }
                  collapsing_toolbar.title = data.fname
-                 toast(picture.toString())
+                 //toast(picture.toString())
              }
         })
 
@@ -147,19 +144,6 @@ class ProfileActivity : AppCompatActivity() {
         finish()
         return true
     }
-
-  /*  private fun notification(){
-
-        val notification = NotificationCompat.Builder(this, App.CHANNEL_1_ID)
-            .setSmallIcon(R.drawable.profile_user)
-            .setContentTitle("You were hired!")
-            .setContentText("You were hired!")
-            .setPriority(NotificationCompat.PRIORITY_HIGH)
-            .setCategory(NotificationCompat.CATEGORY_MESSAGE)
-            .build()
-
-        notificationManager.notify(1, notification)
-    }*/
 
     @Override
     override fun attachBaseContext(base: Context) {

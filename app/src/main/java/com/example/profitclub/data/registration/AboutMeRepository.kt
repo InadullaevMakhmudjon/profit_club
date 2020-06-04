@@ -29,6 +29,12 @@ class AboutMeRepository(private val retrofit: RegistrationService, private val p
 
     suspend fun uploadDemo(file: MultipartBody.Part, id: RequestBody, type: RequestBody) = retrofit.upload(file, id, type)
 
-    // User Staff
+    // Get User Staff
     suspend fun userStaff(lang: String? = "") = retrofit.getUserStaff("JWT $token", lang)
+
+    // Post User Staff
+    suspend fun postUserStaff(body: PostUserStaffInfoBody) = retrofit.postUserStaff("JWT $token", body)
+
+    // Post User Staff Edit
+    suspend fun userStaffEdit(body: PostUserStaffInfoBody) = retrofit.postUserStaffEdit("JWT $token", body)
 }
