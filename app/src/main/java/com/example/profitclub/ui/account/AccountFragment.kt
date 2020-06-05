@@ -15,15 +15,19 @@ import android.widget.*
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.MainActivity
 import com.example.profitclub.R
 import com.example.profitclub.data.BASE_URL
+import com.example.profitclub.toast
 import com.example.profitclub.ui.AuthentificationActivity
 import com.example.profitclub.ui.account.details.ProfileActivity
 import com.example.profitclub.ui.account.employees.EmployeesListActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
+import kotlinx.android.synthetic.main.change_password_alert_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_account.*
 
 class AccountFragment : Fragment() {
 
@@ -60,6 +64,7 @@ class AccountFragment : Fragment() {
         this.penalty = view.findViewById(R.id.num_penalty)
         val employeeList: ConstraintLayout = view.findViewById(R.id.employees_container)
         val viewContainer: ConstraintLayout = view.findViewById(R.id.view_container)
+        val passwordContainer: ConstraintLayout = view.findViewById(R.id.changePassword_container)
         val penaltyContainer: ConstraintLayout = view.findViewById(R.id.penalty_container)
 
         val imageUser = preferences.getString("media_url", null)
@@ -72,6 +77,10 @@ class AccountFragment : Fragment() {
 
         logOut.setOnClickListener {
             alertDialog()
+        }
+
+        changePassword_container.setOnClickListener {
+            alertDialogChangePassword()
         }
 
         this.penalty.setOnClickListener {
@@ -140,7 +149,36 @@ class AccountFragment : Fragment() {
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
-            Toast.makeText(context!!, "Cancelled", Toast.LENGTH_SHORT).show()
+            dialog?.dismiss()
+        }
+
+        alertDialogBuilder.show()
+    }
+
+    private fun alertDialogChangePassword(){
+        val alertDialogBuilder = androidx.appcompat.app.AlertDialog.Builder(context!!)
+        alertDialogBuilder.setTitle(R.string.change_password)
+        val customLayout = layoutInflater.inflate(R.layout.change_password_alert_dialog, null)
+
+        alertDialogBuilder.setView(customLayout)
+
+        alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
+            val oldPassword = customLayout.old_password.text.toString()
+            val newPassword = customLayout.new_password.text.toString()
+            val passwordConfirmation = customLayout.password_confirmation.text.toString()
+            if (oldPassword != "" && newPassword != "" && passwordConfirmation != ""){
+                sendViewModel.changePassword(oldPassword, newPassword, passwordConfirmation)
+            } else {
+                toast(getString(R.string.all_fiels))
+            }
+            sendViewModel.status.observe(viewLifecycleOwner, Observer { data ->
+                if (data.status == 0){
+                    toast(getString(R.string.password_successfully))
+                }
+            })
+        }
+
+        alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
             dialog?.dismiss()
         }
 

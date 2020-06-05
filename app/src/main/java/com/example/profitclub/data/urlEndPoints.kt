@@ -96,3 +96,9 @@ const val USER_RATING = "main/userrating"
 const val USER_STAFF = "system/staff"
 
 const val STAFF_EDIT = "system/staff-edit"
+
+const val CHANGE_PASSWORD = "user/change-password"
+
+const val RESET_PASSWORD = "user/reset-password"
+
+const val CHECK_AUTH = "user/check-auth"

@@ -213,4 +213,9 @@
     <string name="customer_employee">Заказчик</string>
     <string name="about_us">О нас</string>
     <string name="employees_definition">Посмотреть и изменить аккаунт сотрудников</string>
+    <string name="change_password">Изменить пароль</string>
+    <string name="old_password">Старый пароль</string>
+    <string name="new_password">Новый пароль</string>
+    <string name="password_confirmation">Подтверждение пароля</string>
+    <string name="password_successfully">Пароль удачно изменён</string>
 </resources>

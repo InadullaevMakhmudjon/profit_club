@@ -212,4 +212,9 @@
     <string name="manager_employee">Menejer</string>
     <string name="about_us">Biz haqimizda</string>
     <string name="employees_definition">Xodimlarning profilini ko\'rish va tahrirlash</string>
+    <string name="change_password">Parol o\'zgartirish</string>
+    <string name="old_password">Eski parol</string>
+    <string name="new_password">Yangi parol</string>
+    <string name="password_confirmation">Parol tasdiqlash</string>
+    <string name="password_successfully">Parol muvaffaqiyatli o\'zgartirildi</string>
 </resources>

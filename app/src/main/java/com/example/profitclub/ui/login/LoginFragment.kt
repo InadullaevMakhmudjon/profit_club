@@ -14,13 +14,21 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.Toast
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import com.example.profitclub.*
+import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
+import kotlinx.android.synthetic.main.change_password_alert_dialog.view.*
+import kotlinx.android.synthetic.main.fragment_login.*
 
 class LoginFragment : Fragment() {
     private val APP_PREFERENCE = "MYSETTINGS"
+    private var key: Int = 0
+    private var email_: String? = null
+    private var hash: String? = null
+    private lateinit var viewModel: MainActivityViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -39,16 +47,64 @@ class LoginFragment : Fragment() {
 
         activity?.let {
             val preferences = it.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
-            val viewModel = ViewModelProviders.of(it, MainActivityViewModelFactory(preferences)).get(MainActivityViewModel::class.java)
+            viewModel = ViewModelProviders.of(it, MainActivityViewModelFactory(preferences)).get(MainActivityViewModel::class.java)
+
+            forgot_password.setOnClickListener {
+                password_container.isVisible = false
+                forgot_password.isVisible = false
+                log_in.text = getString(R.string.forgot)
+                login.text = getString(R.string.next)
+                key = 1
+            }
 
             login.setOnClickListener {
-                viewModel.login(email.text.toString(), password.text.toString())
+                when (key){
+                    1 -> {
+                        email_ = email.text.toString()
+                        if (email_ != ""){
+                            viewModel.resetPasswordStep1(email.text.toString(), 1, "en")
+                        }
+                    }
+                    0 -> {
+                        if (email.text.toString() != "" && password.text.toString() != ""){
+                            viewModel.login(email.text.toString(), password.text.toString())
+                        }
+                    }
+                }
             }
+
+            viewModel.step1Status.observe(viewLifecycleOwner, Observer { data ->
+                if (data != null) {
+                    if (data.status){
+                        alertReset2()
+                    }
+                }
+            })
+
+            viewModel.step2Status.observe(viewLifecycleOwner, Observer { data ->
+                if (data != null) {
+                    if (data.status){
+                        alertReset3()
+                    }
+                }
+            })
+
+            viewModel.step3Status.observe(viewLifecycleOwner, Observer { data ->
+                if (data != null) {
+                    if (data.status){
+                        key = 0
+                        password_container.isVisible = true
+                        forgot_password.isVisible = true
+                        log_in.text = getString(R.string.login)
+                        login.text = getString(R.string.action_sign_in)
+                    }
+                }
+            })
 
             viewModel.token.observe(activity!!, Observer { token ->
                 if(token != null) {
                     startActivity(Intent(activity, MainActivity::class.java))
-                    activity!!.finish();
+                    activity!!.finish()
                 }
             })
 
@@ -60,7 +116,7 @@ class LoginFragment : Fragment() {
 
             viewModel.error.observe(activity!!, Observer { error ->
                 if(error.isNotEmpty()) {
-                    toast("$error")
+                    toast(error)
                 }
             })
 
@@ -77,6 +133,49 @@ class LoginFragment : Fragment() {
 
         alertDialogBuilder.setPositiveButton(getString(R.string.call)) { dialog, which ->
             checkPermission()
+        }
+
+        alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
+            dialog?.cancel()
+        }
+
+        alertDialogBuilder.show()
+    }
+
+    private fun alertReset2(){
+        val alertDialogBuilder = AlertDialog.Builder(activity)
+        val customLayout = layoutInflater.inflate(R.layout.arbitration_alert_dialog, null)
+        alertDialogBuilder.setView(customLayout)
+        alertDialogBuilder.setTitle(getString(R.string.email_check))
+        customLayout.comment.hint = getString(R.string.confirmation_code)
+
+        alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
+            hash = customLayout.comment.text.toString()
+            if (hash != ""){
+                viewModel.resetPasswordStep2(email_!!, hash!!, 2, "en")
+            }
+            dialog?.cancel()
+        }
+
+        alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
+            dialog?.cancel()
+        }
+        alertDialogBuilder.show()
+    }
+
+    private fun alertReset3(){
+        val alertDialogBuilder = AlertDialog.Builder(activity)
+        val customLayout = layoutInflater.inflate(R.layout.change_password_alert_dialog, null)
+        alertDialogBuilder.setView(customLayout)
+        customLayout.old_password_container.isVisible = false
+
+        alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
+            val password = customLayout.new_password.text.toString()
+            val passwordRepeat = customLayout.password_confirmation.text.toString()
+            if (password != "" && passwordRepeat != "" && password == passwordRepeat){
+                viewModel.resetPasswordStep3(email_!!, hash!!, password, passwordRepeat, 3, "en")
+            }
+            dialog?.cancel()
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->

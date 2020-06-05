@@ -199,6 +199,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/changePassword_container"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="13dp"
@@ -207,18 +208,18 @@
             android:paddingTop="8dp">
 
             <TextView
-                android:id="@+id/transactions"
+                android:id="@+id/changePassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_bold"
-                android:text="@string/settings"
+                android:text="@string/change_password"
                 android:textColor="@color/black"
                 android:textSize="16sp"
                 app:layout_constraintVertical_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <!--<TextView
                 android:id="@+id/transactions_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -228,28 +229,28 @@
                 android:textColor="@android:color/tertiary_text_light"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/transactions"
-                app:layout_constraintTop_toBottomOf="@+id/transactions"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintStart_toStartOf="@+id/changePassword"
+                app:layout_constraintTop_toBottomOf="@+id/changePassword"
+                app:layout_constraintVertical_bias="0.0" />-->
 
-            <ImageView
+           <!-- <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_keyboard_arrow_right_black_24dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="parent"/>-->
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="1dp"
                 android:background="@android:color/darker_gray"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/transactions_desc"
+                app:layout_constraintTop_toBottomOf="@+id/changePassword"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginBottom="8dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="16dp"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
