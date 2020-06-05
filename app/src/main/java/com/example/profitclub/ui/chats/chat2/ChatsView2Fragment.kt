@@ -37,7 +37,6 @@ import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 
-
 class ChatsView2Fragment : Fragment(), View.OnClickListener {
     private var filePath: Uri? = null
     private val REQUEST_CODE = 101

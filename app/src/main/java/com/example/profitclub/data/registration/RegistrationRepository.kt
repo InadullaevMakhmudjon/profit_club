@@ -1,5 +1,7 @@
 package com.example.profitclub.data.registration
 
+import retrofit2.Response
+
 class RegistrationRepository(private val retrofit: RegistrationService){
     // All regions
     suspend fun getRegions() = retrofit.getRegions()
@@ -11,13 +13,18 @@ class RegistrationRepository(private val retrofit: RegistrationService){
     suspend fun getCategories() = retrofit.getCategories()
 
     //UserInfoClientIndividual
-    suspend fun userInfoClientIndividual(login_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
-                         date: String, phone: String, country_id: Int, region_id: Int,
-                         city_id: Int, address: String, passport_no: String, languages: ArrayList<Int>)
-            = retrofit.getUserInfoClientIndividual(
-        UserInfoBodyClientIndividual(login_id, lname, fname, mname, gender_id, date, phone, country_id,
-            region_id, city_id, address, InfoIndividual(languages, passport_no))
-    )
+    suspend fun userInfoClientIndividual(req: UserInfoBodyClientIndividual): Response<UserInfoResponse> {
+        val body = HashMap<String, UserInfoBodyClientIndividual>()
+        body["user"] = req
+        return retrofit.getUserInfoClientIndividual(body)
+    }
+
+    //UserInfoConsultantIndividual
+    suspend fun userInfoConsultantIndividual(req: UserInfoBodyConsultantIndividual): Response<UserInfoResponse>{
+        val body = HashMap<String, UserInfoBodyConsultantIndividual>()
+        body["user"] = req
+        return retrofit.getUserInfoConsultantIndividual(body)
+    }
 
     //UserInfoClientLegal
     suspend fun userInfoClientLegal(login_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
@@ -30,15 +37,6 @@ class RegistrationRepository(private val retrofit: RegistrationService){
             companyAddress))
     )
 
-    //UserInfoConsultantIndividual
-    suspend fun userInfoConsultantIndividual(login_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
-                                             date: String, phone: String, country_id: Int, region_id: Int,
-                                             city_id: Int, address: String, about: String, languages: ArrayList<Int>,
-                                             categories: ArrayList<Int>, passport_no: String)
-            = retrofit.getUserInfoConsultantIndividual(
-        UserInfoBodyConsultantIndividual(login_id, lname, fname, mname, gender_id, date, phone, country_id, region_id,
-            city_id, address, UserInfo(about, languages, categories, passport_no))
-    )
 
     //UserInfoConsultantLegal
     suspend fun userInfoConsultantLegal(login_id: Int, lname: String, fname: String, mname: String, gender_id: Int,

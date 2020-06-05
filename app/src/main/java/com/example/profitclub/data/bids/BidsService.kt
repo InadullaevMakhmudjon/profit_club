@@ -39,7 +39,7 @@ interface BidsService {
     suspend fun postBidsClientAdd(@Header("authorization") auth: String?, @Body body: RequestBidsClientAdd): Response<Unit>
 
     @POST(GET_ALL_FILTERED)
-    suspend fun getCategories(@Body body: PostCategoryBodyBid = PostCategoryBodyBid()): Response<ArrayList<DataBid>>
+    suspend fun getCategories(@Body body: PostCategoryBodyBid): Response<ArrayList<DataBid>>
 
     @GET(USER_RATING)
     suspend fun getUserRating(@Header("authorization") auth: String?, @Query("id") user_id: Int?): Response<ResponseGeneric<ResponseUserRating>>

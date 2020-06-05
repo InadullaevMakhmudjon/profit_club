@@ -29,10 +29,10 @@ class QuestionCreationViewModel(val repository: BidsRepository) : ViewModel() {
         }
     }
 
-    init {
+    val getCategories = fun(lang: String) {
         viewModelScope.launch {
             try {
-                val response = repository.getCategories()
+                val response = repository.getCategories(lang)
                 if (response.isSuccessful){
                     categories.apply { value = response.body() }
                 }

@@ -11,12 +11,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.profitclub.LocaleManager
-import com.example.profitclub.R
+import com.example.profitclub.*
 import com.example.profitclub.adapters.CategoryAdapter
 import com.example.profitclub.data.bids.DataBid
 import com.example.profitclub.data.bids.Language
-import com.example.profitclub.toast
 import kotlinx.android.synthetic.main.activity_question_creation.*
 import kotlinx.android.synthetic.main.single_language_alert.view.*
 import java.util.*
@@ -30,6 +28,8 @@ class QuestionCreationActivity : AppCompatActivity() {
     val categoryIds = ArrayList<Int>()
     var languageId: Int = 0
     val allCategories = ArrayList<DataBid>()
+    private val LANGUAGE = "profitclub"
+    private var lang: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,9 +38,15 @@ class QuestionCreationActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         val preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
+        val langPreferences = getSharedPreferences(LANGUAGE, Context.MODE_PRIVATE)
+        when (langPreferences.getString("lang", null)){
+            LANGUAGE_RUSSIAN -> lang = "ru"
+            LANGUAGE_ENGLISH -> lang = "en"
+            LANGUAGE_UZBEK -> lang = "uz"
+        }
+
         user_id = preferences.getInt("user_id", 0)
         viewModel = ViewModelProviders.of(this, QuestionCreationViewModelFactory(preferences)).get(QuestionCreationViewModel::class.java)
-
 
         val title = findViewById<AutoCompleteTextView>(R.id.title_question_creation)
         val description = findViewById<AutoCompleteTextView>(R.id.description_question_creation)
@@ -147,6 +153,7 @@ class QuestionCreationActivity : AppCompatActivity() {
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter
         adapter.notifyDataSetChanged()
+        viewModel.getCategories(lang!!)
 
         viewModel.categories.observe(this, androidx.lifecycle.Observer { data ->
             if (data != null){

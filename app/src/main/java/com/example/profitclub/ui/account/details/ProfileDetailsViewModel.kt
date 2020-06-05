@@ -79,15 +79,36 @@ class ProfileDetailsViewModel(val repository: AboutMeRepository) : ViewModel() {
         }
     }
 
-    val save = fun(user_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
+    val saveClient = fun(user_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
                        date: String, phone: String, country_id: Int, region_id: Int,
-                       city_id: Int, address: String, passport_no: String, about: String, languages: ArrayList<Int>,
-                       categories: ArrayList<Int>){
+                       city_id: Int, address: String, passport_no: String){
         viewModelScope.launch {
             try {
-                val response = repository.save(
-                    PostUserInfoBody(user_id, lname, fname, mname, gender_id, date, phone, country_id,
-                      region_id, city_id, address, InfoUser(about, languages, categories, passport_no)))
+                val response = repository.saveClient(
+                    PostUserInfoBodyClientIndividual(user_id, lname, fname, mname, gender_id, date, phone, country_id,
+                      region_id, city_id, address, InfoUserClient(passport_no)
+                    )
+                )
+                if (response.isSuccessful){
+                    status.apply { value = response.body() }
+                }
+
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
+            }
+        }
+    }
+
+    val saveConsultant = fun(user_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
+                         date: String, phone: String, country_id: Int, region_id: Int,
+                         city_id: Int, address: String, passport_no: String, categories: ArrayList<Int>,
+                         languages: ArrayList<Int>){
+        viewModelScope.launch {
+            try {
+                val response = repository.saveConsultant(
+                    PostUserInfoBodyConsultantIndividual(user_id, lname, fname, mname, gender_id, date, phone, country_id,
+                        region_id, city_id, address, InfoUserConsultant(languages, categories, passport_no))
+                )
                 if (response.isSuccessful){
                     status.apply { value = response.body() }
                 }

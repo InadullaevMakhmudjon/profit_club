@@ -106,7 +106,7 @@ data class DeleteUploadPhotoBody(
     val type: Int
 )
 
-data class PostUserInfoBody(
+data class PostUserInfoBodyClientIndividual(
     val user_id: Int,
     val lname: String,
     val fname: String,
@@ -118,11 +118,32 @@ data class PostUserInfoBody(
     val region_id: Int,
     var city_id: Int,
     val address: String,
-    val info: InfoUser
+    val info: InfoUserClient
 )
 
-data class InfoUser(
-    val about: String,
+data class InfoUserClient(
+    /*val about: String,
+    val languages: ArrayList<Int>,
+    val categories: ArrayList<Int>,*/
+    val passport_no: String
+)
+
+data class PostUserInfoBodyConsultantIndividual(
+    val user_id: Int,
+    val lname: String,
+    val fname: String,
+    val mname: String,
+    val gender_id: Int,
+    val bdate: String,
+    val phone: String,
+    val country_id: Int,
+    val region_id: Int,
+    var city_id: Int,
+    val address: String,
+    val info: InfoUserConsultant
+)
+
+data class InfoUserConsultant(
     val languages: ArrayList<Int>,
     val categories: ArrayList<Int>,
     val passport_no: String

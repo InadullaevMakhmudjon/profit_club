@@ -46,8 +46,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     var cityId: Int? = null
     var genderId: Int? = null
     var media: String? = null
-    var about: String = "about"
-    val categoryIds = ArrayList<Int>()
+    var categoryIds = ArrayList<Int>()
     var languageIds = ArrayList<Int>()
     val allCategories = ArrayList<DataBid>()
     val allLanguage = arrayListOf(Language(1, "English"), Language(2, "Uzbek"), Language(3, "Русский"))
@@ -66,8 +65,8 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
        // val activityProfile = activity as ProfileActivity
 
-        val lname = view.findViewById<AutoCompleteTextView>(R.id.name_detail)
-        val fname = view.findViewById<AutoCompleteTextView>(R.id.last_name_detail)
+        val fname = view.findViewById<AutoCompleteTextView>(R.id.name_detail)
+        val lname = view.findViewById<AutoCompleteTextView>(R.id.last_name_detail)
         val mname = view.findViewById<AutoCompleteTextView>(R.id.patronymic_detail)
         val phone = view.findViewById<AutoCompleteTextView>(R.id.phone_number_detail)
         val passportNo = view.findViewById<AutoCompleteTextView>(R.id.passport_no_detail)
@@ -118,7 +117,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                           categories.isVisible = false
                 }
                 5 -> { languages.isVisible = false
-                        categories.isVisible = false
+                       categories.isVisible = false
                 }
             }
 
@@ -194,14 +193,21 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                    female.isChecked = true
                }
                 dateOfBirth.text = date(data.bdate)
-                this.about.apply { data.about }
-                this.languageIds.apply { data.languages }
-                this.categoryIds.apply { data.categories }
+                languageIds = data.languages
+                categoryIds = data.categories
             }
         })
 
         dateOfBirth.setOnClickListener {
             showDatePickerDialog()
+        }
+
+        languages.setOnClickListener {
+            alertDialogLanguage()
+        }
+
+        categories.setOnClickListener {
+            alertDialogCategory()
         }
 
         save.setOnClickListener {
@@ -213,16 +219,26 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             addressText = address.text.toString()
             date = dateOfBirth.text.toString()
 
-            if (userId != 0){
-                vm.save(userId, mNameText!!,
-                    lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
-                    regionId!!, cityId!!, addressText!!, passportNoText!!, about,  languageIds, categoryIds)
-                    activity!!.finish()
+            when (role){
+                2 -> {
+                    if (userId != 0){
+                        vm.saveConsultant(userId, lNameText!!,
+                            fNameText!!, mNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
+                            regionId!!, cityId!!, addressText!!, passportNoText!!, languageIds, categoryIds)
+                    }
+                }
+                5 -> {
+                    if (userId != 0){
+                        vm.saveClient(userId, mNameText!!,
+                            lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
+                            regionId!!, cityId!!, addressText!!, passportNoText!!)
+                    }
+                }
             }
         }
 
         vm.status.observe(viewLifecycleOwner, Observer { status ->
-            if (status.status == 0){
+            if (status.status == 1){
                 activity!!.finish()
             }
         })
