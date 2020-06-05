@@ -1,11 +1,9 @@
 package com.example.profitclub.data.auth
 
-import com.example.profitclub.data.AUTH_POST
-import com.example.profitclub.data.MAIL_CONFIRM
-import com.example.profitclub.data.MAIL_VERIFY
-import com.example.profitclub.data.REGISTER
+import com.example.profitclub.data.*
 import retrofit2.Response
 import retrofit2.http.Body
+import retrofit2.http.Header
 import retrofit2.http.POST
 
 interface AuthService {
@@ -18,4 +16,15 @@ interface AuthService {
     @POST(MAIL_VERIFY)
     suspend fun mailVerify(@Body req: MailVerifyBody ): Response<Boolean>
 
+    @POST(CHANGE_PASSWORD)
+    suspend fun changePassword(@Header("authorization") auth: String?, @Body body: ChangePasswordBody): Response<ChangePasswordStatus>
+
+    @POST(RESET_PASSWORD)
+    suspend fun resetPasswordStep1(@Body body: ResetPasswordStep1Body): Response<ResetPasswordStep1>
+
+    @POST(RESET_PASSWORD)
+    suspend fun resetPasswordStep2(@Body body: ResetPasswordStep2Body): Response<ResetPasswordStep1>
+
+    @POST(RESET_PASSWORD)
+    suspend fun resetPasswordStep3(@Body body: ResetPasswordStep3Body): Response<ResetPasswordStep1>
 }

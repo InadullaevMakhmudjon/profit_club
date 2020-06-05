@@ -247,4 +247,9 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="customer_employee">Customer</string>
     <string name="about_us">About us</string>
     <string name="employees_definition">View and edit employees\' profile</string>
+    <string name="change_password">Change password</string>
+    <string name="old_password">Old password</string>
+    <string name="new_password">New password</string>
+    <string name="password_confirmation">Password confirmation</string>
+    <string name="password_successfully">Password successfully changed</string>
 </resources>

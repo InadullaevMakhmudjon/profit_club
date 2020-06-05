@@ -3,7 +3,7 @@ package com.example.profitclub.data.auth
 import android.content.SharedPreferences
 
 class AuthRepository(private val retrofit: AuthService, private val preference: SharedPreferences) {
-
+    private var token_: String? = preference.getString("token", null)
     // Global token value
     var token: String? = null
 
@@ -78,4 +78,12 @@ class AuthRepository(private val retrofit: AuthService, private val preference: 
         role = preference.getInt("role", 0)
         userId = preference.getInt("user_id", 0)
     }
+
+    suspend fun changePassword(body: ChangePasswordBody) = retrofit.changePassword("JWT $token", body)
+
+    suspend fun resetPasswordStep1(body: ResetPasswordStep1Body) = retrofit.resetPasswordStep1(body)
+
+    suspend fun resetPasswordStep2(body: ResetPasswordStep2Body) = retrofit.resetPasswordStep2(body)
+
+    suspend fun resetPasswordStep3(body: ResetPasswordStep3Body) = retrofit.resetPasswordStep3(body)
 }

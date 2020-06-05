@@ -16,11 +16,17 @@ data class UserSignIn(
     val type: Int
 )
 
-/*
-data class MailStatus(
-    val status: Boolean
-)*/
+
+data class ChangePasswordStatus(
+    val status: Int
+)
+
 data class UserInfoRequest(
     val user_id: Int,
     val company_id: Int
 )
+
+data class ResetPasswordStep1(
+    val status: Boolean
+)
+
