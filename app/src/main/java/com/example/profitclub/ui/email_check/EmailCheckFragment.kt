@@ -59,7 +59,7 @@ class EmailCheckFragment : Fragment() {
             role = safeArgs.clientRole
             //emailCheck.text = safeArgs.loginId.toString()
             loginId = safeArgs.loginId
-    }
+        }
 
         activity?.let { it ->
             preferences = it.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
