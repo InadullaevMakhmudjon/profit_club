@@ -48,17 +48,42 @@ class ClientIndividualInfoViewModel(private val repository: RegistrationReposito
 
     val userInfoClientIndividual = fun(login_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
                        date: String, phone: String, country_id: Int, region_id: Int,
-                       city_id: Int, address: String, passport_no: String, languages: ArrayList<Int>){
+                       city_id: Int, address: String, passport_no: String, languages: ArrayList<Int>, email: String,
+                        password: String, password_repeat: String, type_c: Int, type_t: Int, lang: String, email_code:String){
         viewModelScope.launch {
             try {
                 val response = repository.userInfoClientIndividual(
                     UserInfoBodyClientIndividual(
-                        login_id, lname, fname, mname, gender_id, date, phone, country_id,
-                        region_id, city_id, address, InfoIndividual(languages, passport_no)
+                        UserIndividual(lname, fname, mname, gender_id, date, phone, country_id,
+                            region_id, city_id, address, InfoIndividual(languages, passport_no),
+                            CompanyIndividual(country_id)), email, password, password_repeat, type_c, type_t, lang, email_code, login_id
                     )
                 )
 
                 userId.apply { value = response.body()?.user_id }
+                companyId.apply { value = response.body()?.company_id }
+            } catch (e: Exception){
+                error.apply { value = e.message.toString() }
+            }
+        }
+    }
+
+    val userInfoConsultantIndividual = fun(login_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
+                                           date: String, phone: String, country_id: Int, region_id: Int,
+                                           city_id: Int, address: String, about: String, languages: ArrayList<Int>,
+                                           categories: ArrayList<Int>, passport_no: String, email: String,
+                                           password: String, password_repeat: String, type_c: Int, type_t: Int, lang: String, email_code:String){
+        viewModelScope.launch {
+            try {
+                val response = repository.userInfoConsultantIndividual(
+                    UserInfoBodyConsultantIndividual(
+                        UserConsultantIndividual(lname, fname, mname, gender_id, date, phone, country_id, region_id,
+                            city_id, address, InfoConsultantIndividual(passport_no, languages, categories, about), CompanyIndividual(country_id)),
+                        email, password, password_repeat, type_c, type_t, lang, email_code, login_id
+                    )
+                )
+
+                userId.apply { value = response.body()?.user_id}
                 companyId.apply { value = response.body()?.company_id }
             } catch (e: Exception){
                 error.apply { value = e.message.toString() }
@@ -75,26 +100,6 @@ class ClientIndividualInfoViewModel(private val repository: RegistrationReposito
                 val response = repository.userInfoClientLegal(login_id, lname, fname, mname, gender_id, date, phone, country_id,
                     region_id, city_id, address, companyName, companyPhone, companyCountryId, companyRegionId, companyCityId,
                         companyAddress)
-
-                userId.apply { value = response.body()?.user_id}
-                companyId.apply { value = response.body()?.company_id }
-            } catch (e: Exception){
-                error.apply { value = e.message.toString() }
-            }
-        }
-    }
-
-    val userInfoConsultantIndividual = fun(login_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
-                                           date: String, phone: String, country_id: Int, region_id: Int,
-                                           city_id: Int, address: String, about: String, languages: ArrayList<Int>,
-                                           categories: ArrayList<Int>, passport_no: String){
-        viewModelScope.launch {
-            try {
-                val response = repository.userInfoConsultantIndividual(
-                    UserInfoBodyConsultantIndividual(login_id, lname, fname, mname, gender_id, date, phone, country_id, region_id,
-                        city_id, address, UserInfo(about, languages, categories, passport_no)
-                    )
-                )
 
                 userId.apply { value = response.body()?.user_id}
                 companyId.apply { value = response.body()?.company_id }

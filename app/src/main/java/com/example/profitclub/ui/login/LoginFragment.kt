@@ -26,6 +26,7 @@ import kotlinx.android.synthetic.main.fragment_login.*
 class LoginFragment : Fragment() {
     private val APP_PREFERENCE = "MYSETTINGS"
     private var key: Int = 0
+    var step: Int? = 0
     private var email_: String? = null
     private var hash: String? = null
     private lateinit var viewModel: MainActivityViewModel
@@ -71,27 +72,29 @@ class LoginFragment : Fragment() {
                         }
                     }
                 }
+
+                viewModel.step1Status.observe(viewLifecycleOwner, Observer { data1 ->
+                    if (data1 != null) {
+                        if (data1.status){
+                            alertReset2()
+                        } else {
+                            toast(getString(R.string.account_not_verified))
+                        }
+                    }
+                })
             }
 
-            viewModel.step1Status.observe(viewLifecycleOwner, Observer { data ->
-                if (data != null) {
-                    if (data.status){
-                        alertReset2()
-                    }
-                }
-            })
-
-            viewModel.step2Status.observe(viewLifecycleOwner, Observer { data ->
-                if (data != null) {
-                    if (data.status){
+            viewModel.step2Status.observe(viewLifecycleOwner, Observer { data2 ->
+                if (data2 != null) {
+                    if (data2.status){
                         alertReset3()
                     }
                 }
             })
 
-            viewModel.step3Status.observe(viewLifecycleOwner, Observer { data ->
-                if (data != null) {
-                    if (data.status){
+            viewModel.step3Status.observe(viewLifecycleOwner, Observer { data3 ->
+                if (data3 != null) {
+                    if (data3.status){
                         key = 0
                         password_container.isVisible = true
                         forgot_password.isVisible = true
@@ -185,7 +188,7 @@ class LoginFragment : Fragment() {
         alertDialogBuilder.show()
     }
 
-    fun checkPermission() {
+    private fun checkPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             if (ContextCompat.checkSelfPermission(activity!!, android.Manifest.permission.CALL_PHONE) ==
                 PackageManager.PERMISSION_DENIED){

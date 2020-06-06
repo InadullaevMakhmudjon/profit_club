@@ -18,13 +18,13 @@ interface RegistrationService {
     suspend fun getCategories(@Body body: PostCategoryBody = PostCategoryBody()): Response<ArrayList<DataBid>>
 
     @POST(USER_INFO)
-    suspend fun getUserInfoClientIndividual(@Body body: HashMap<String, UserInfoBodyClientIndividual>): Response<UserInfoResponse>
+    suspend fun getUserInfoClientIndividual(@Body body: UserInfoBodyClientIndividual): Response<UserInfoResponse>
 
     @POST(USER_INFO)
     suspend fun getUserInfoClientLegal(@Body body: UserInfoBodyClientLegal): Response<UserInfoResponse>
 
     @POST(USER_INFO)
-    suspend fun getUserInfoConsultantIndividual(@Body body: HashMap<String, UserInfoBodyConsultantIndividual>): Response<UserInfoResponse>
+    suspend fun getUserInfoConsultantIndividual(@Body body: UserInfoBodyConsultantIndividual): Response<UserInfoResponse>
 
     @POST(USER_INFO)
     suspend fun getUserInfoConsultantLegal(@Body body: UserInfoBodyConsultantLegal): Response<UserInfoResponse>

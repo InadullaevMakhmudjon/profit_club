@@ -18,7 +18,7 @@ class MainActivityViewModel(private val repository: AuthRepository): ViewModel()
 
     val status = MutableLiveData<Int?>()
 
-    val step1Status = MutableLiveData<ResetPasswordStep1?>()
+    val step1Status = MutableLiveData<ResetPasswordStep1?>().apply { value = null }
 
     val step2Status = MutableLiveData<ResetPasswordStep1?>()
 
