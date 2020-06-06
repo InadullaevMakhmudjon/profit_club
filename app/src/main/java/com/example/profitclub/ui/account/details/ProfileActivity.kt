@@ -71,7 +71,7 @@ class ProfileActivity : AppCompatActivity() {
                          .load("$BASE_URL${picture}/sm_avatar.jpg").into(binding.logo)
                  }
                  collapsing_toolbar.title = data.fname
-                 //toast(picture.toString())
+                 //edit(picture)
              }
         })
 
@@ -213,4 +213,10 @@ class ProfileActivity : AppCompatActivity() {
             }
         }
     }
+
+    /*private fun edit(media_url: String?){
+        val editor = preferences.edit()
+        editor.putString("media_url", media_url)
+        editor.apply()
+    }*/
 }

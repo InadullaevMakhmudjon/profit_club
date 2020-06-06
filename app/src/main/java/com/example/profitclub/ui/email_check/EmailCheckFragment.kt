@@ -25,6 +25,7 @@ class EmailCheckFragment : Fragment() {
     private lateinit var preferences: SharedPreferences
     private val APP_PREFERENCE = "MYSETTINGS"
     var loginId: Int? = 0
+    var emailText: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,9 +56,7 @@ class EmailCheckFragment : Fragment() {
 
         arguments?.let {
             val safeArgs = EmailCheckFragmentArgs.fromBundle(it)
-            //email_check.text = "Role number: ${safeArgs.clientRole}"
             role = safeArgs.clientRole
-            //emailCheck.text = safeArgs.loginId.toString()
             loginId = safeArgs.loginId
     }
 
@@ -67,18 +66,10 @@ class EmailCheckFragment : Fragment() {
 
             val userInfoAction = EmailCheckFragmentDirections.clientIndividualInfoAction()
             confirm.setOnClickListener {
-                viewModel.emailVerify(emailConfirm.text.toString())
-                /*if (viewModel.status.value == true){
-
-                    when (role) {
-                        7 -> Navigation.findNavController(it).navigate(R.id.clientLegalinfoAction)
-                        5 -> Navigation.findNavController(it).navigate(R.id.clientIndividualInfoAction)
-                        4 -> Navigation.findNavController(it).navigate(R.id.action_emailCheckFragment_to_consultantLegalInfoFragment)
-                        2 ->  Navigation.findNavController(it).navigate(R.id.action_emailCheckFragment_to_consultantIndividualInfoFragment)
-                    }
-                } else{
-                    toast("Your TOKEN did not match!")
-                }*/
+                emailText = emailConfirm.text.toString()
+                if (emailText != "" && emailText != null){
+                    viewModel.emailVerify(emailText!!)
+                }
             }
 
             viewModel.error.observe(activity!!, Observer { error ->
@@ -94,9 +85,19 @@ class EmailCheckFragment : Fragment() {
             viewModel.status.observe(activity!!, Observer { status ->
                 loginId?.let { it1 -> userInfoAction.setLoginId(it1) }
                 when(status){
-                    true -> Navigation.findNavController(confirm).navigate(userInfoAction)
+                    true -> {
+                        edit()
+                        Navigation.findNavController(confirm).navigate(userInfoAction)
+                    }
                 }
             })
         }
+    }
+
+    private fun edit(){
+        val editor = preferences.edit()
+        editor.putInt("login_id", loginId!!)
+        editor.putString("email_code", emailText!!)
+        editor.apply()
     }
 }

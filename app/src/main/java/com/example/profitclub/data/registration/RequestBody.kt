@@ -21,23 +21,75 @@ data class PostCategoryBody(
 )
 
 data class UserInfoBodyClientIndividual(
-    val login_id: Int,
+   val user: UserIndividual,
+   val email: String,
+   val password: String,
+   val password_repeat: String,
+   val type_c: Int,
+   val type_t: Int,
+   val lang: String,
+   val email_code: String,
+   val login_id: Int
+)
+
+data class UserIndividual(
     val lname: String,
     val fname: String,
     val mname: String,
     val gender_id: Int,
-    val date: String,
+    val bdate: String,
     val phone: String,
     val country_id: Int,
     val region_id: Int,
     val city_id: Int,
     val address: String,
-    val info: InfoIndividual
+    val info: InfoIndividual,
+    val company: CompanyIndividual
+)
+
+data class CompanyIndividual(
+    val country_id: Int
 )
 
 data class InfoIndividual(
     val languages: ArrayList<Int>,
     val passport_no: String
+)
+
+data class UserInfoBodyConsultantIndividual(
+    val user: UserConsultantIndividual,
+    val email: String,
+    val password: String,
+    val password_repeat: String,
+    val type_c: Int,
+    val type_t: Int,
+    val lang: String,
+    val email_code: String,
+    val login_id: Int
+)
+
+data class UserConsultantIndividual(
+    val lname: String,
+    val fname: String,
+    val mname: String,
+    val gender_id: Int,
+    val bdate: String,
+    val phone: String,
+    val country_id: Int,
+    val region_id: Int,
+    val city_id: Int,
+    val address: String,
+    val info: InfoConsultantIndividual,
+    val company: CompanyIndividual
+)
+
+
+
+data class InfoConsultantIndividual(
+    val passport_no: String,
+    val languages: ArrayList<Int>,
+    val categories: ArrayList<Int>,
+    val about: String
 )
 
 data class UserInfoBodyClientLegal(
@@ -53,21 +105,6 @@ data class UserInfoBodyClientLegal(
     val city_id: Int,
     val address: String,
     val company: CompanyInfo
-)
-
-data class UserInfoBodyConsultantIndividual(
-    val login_id: Int,
-    val lname: String,
-    val fname: String,
-    val mname: String,
-    val gender_id: Int,
-    val date: String,
-    val phone: String,
-    val country_id: Int,
-    val region_id: Int,
-    val city_id: Int,
-    val address: String,
-    val info: UserInfo
 )
 
 data class UserInfoBodyConsultantLegal(

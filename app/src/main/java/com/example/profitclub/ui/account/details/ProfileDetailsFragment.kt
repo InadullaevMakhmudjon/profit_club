@@ -188,9 +188,9 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
                 address.setText(data.address)
                 vm.getCity(data.region_id)
                if (data.gender_id == 1){
-                   male.isChecked = true
-               } else{
                    female.isChecked = true
+               } else{
+                   male.isChecked = true
                }
                 dateOfBirth.text = date(data.bdate)
                 languageIds = data.languages

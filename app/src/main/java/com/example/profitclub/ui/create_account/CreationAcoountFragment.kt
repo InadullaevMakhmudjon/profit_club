@@ -21,6 +21,9 @@ class CreationAcoountFragment : Fragment() {
     private var role: Int = 0
     private lateinit var preferences: SharedPreferences
     private val APP_PREFERENCE = "MYSETTINGS"
+    private var emailText: String? = null
+    private var passwordText: String? = null
+    private var passwordRepeatText: String? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -90,7 +93,10 @@ class CreationAcoountFragment : Fragment() {
                 }
 
                 if (individual.isChecked || legal_entity.isChecked){
-                    if (email.text.toString() != "" && password.text.toString() != "" && passwordRepeat.text.toString() != ""){
+                    emailText = email.text.toString()
+                    passwordText = password.text.toString()
+                    passwordRepeatText = passwordRepeat.text.toString()
+                    if (emailText != "" && passwordText != "" && passwordRepeatText != ""){
                         viewModel.register(email.text.toString(), password.text.toString(),
                             passwordRepeat.text.toString(), role)
                     } else {
@@ -117,6 +123,12 @@ class CreationAcoountFragment : Fragment() {
 
                 when (status) {
                     0 -> {
+                        val editor = preferences.edit()
+                        editor.putString("email", emailText)
+                        editor.putString("password", passwordText)
+                        editor.putString("password_repeat", passwordRepeatText)
+                        editor.putInt("type_t", role)
+                        editor.apply()
                         viewModel.loginId.value?.toInt()?.let { it1 -> emailAction.setLoginId(it1) }
                         Navigation.findNavController(create).navigate(emailAction)
                     }
