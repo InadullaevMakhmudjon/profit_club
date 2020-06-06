@@ -68,6 +68,13 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
     var companyCityId: Int? = null
     var genderId: Int? = null
 
+    var email: String? = null
+    var password: String? = null
+    var passwordRepeat: String? = null
+    var type_t: Int? = 0
+    var emailCode: String? = null
+    val type_c = 0
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -79,9 +86,9 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val lname = view.findViewById<AutoCompleteTextView>(R.id.name)
+        val lname = view.findViewById<AutoCompleteTextView>(R.id.last_name)
         val nameCompany = view.findViewById<AutoCompleteTextView>(R.id.company_name)
-        val fname = view.findViewById<AutoCompleteTextView>(R.id.last_name)
+        val fname = view.findViewById<AutoCompleteTextView>(R.id.name)
         val mname = view.findViewById<AutoCompleteTextView>(R.id.patronymic)
         val phone = view.findViewById<AutoCompleteTextView>(R.id.phone_number)
         val phoneCompany = view.findViewById<AutoCompleteTextView>(R.id.company_phone)
@@ -186,9 +193,14 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
        activity.let {
            preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
            role = preferences.getInt("role", 0)
-           //lname.setText(role.toString())
            viewModel =
                ViewModelProviders.of(this, ClientindividualViewModelFactory(preferences)).get(ClientIndividualInfoViewModel::class.java)
+
+           email = preferences.getString("email", null)
+           password = preferences.getString("password", null)
+           passwordRepeat = preferences.getString("password_repeat", null)
+           type_t = preferences.getInt("type_t", 0)
+           emailCode = preferences.getString("email_code", null)
 
            when (role){
                2 -> {
@@ -303,7 +315,8 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
                            viewModel.userInfoConsultantIndividual(
                                loginId, mNameText!!, lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
                                regionId!!, cityId!!, addressText!!, aboutText!!,
-                               languageIds, categoryIds, passportNoText!!
+                               languageIds, categoryIds, passportNoText!!, email!!, password!!, passwordRepeat!!,
+                               type_c, type_t!!, "en", emailCode!!
                            )
                        } else {
                            toast(resources.getString(R.string.all_fiels))
@@ -326,9 +339,11 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
                        if (mNameText != null && lNameText != null && fNameText != null && genderId != 0 && date != null
                            && phoneText != null && regionId != 0 && cityId != 0 && addressText != null && passportNoText != null
                            && languageIds.size > 0) {
+
                            viewModel.userInfoClientIndividual(
-                               this.loginId, mNameText!!, lNameText!!, fNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
-                               regionId!!, cityId!!, addressText!!, passportNoText!!, languageIds
+                               this.loginId, lNameText!!, fNameText!!, mNameText!!, genderId!!, date!!, phoneText!!, countryId!!,
+                               regionId!!, cityId!!, addressText!!, passportNoText!!, languageIds, email!!, password!!, passwordRepeat!!,
+                               type_c, type_t!!, "en", emailCode!!
                            )
                        } else {
                            toast(resources.getString(R.string.all_fiels))

@@ -13,18 +13,10 @@ class RegistrationRepository(private val retrofit: RegistrationService){
     suspend fun getCategories() = retrofit.getCategories()
 
     //UserInfoClientIndividual
-    suspend fun userInfoClientIndividual(req: UserInfoBodyClientIndividual): Response<UserInfoResponse> {
-        val body = HashMap<String, UserInfoBodyClientIndividual>()
-        body["user"] = req
-        return retrofit.getUserInfoClientIndividual(body)
-    }
+    suspend fun userInfoClientIndividual(body: UserInfoBodyClientIndividual) = retrofit.getUserInfoClientIndividual(body)
 
     //UserInfoConsultantIndividual
-    suspend fun userInfoConsultantIndividual(req: UserInfoBodyConsultantIndividual): Response<UserInfoResponse>{
-        val body = HashMap<String, UserInfoBodyConsultantIndividual>()
-        body["user"] = req
-        return retrofit.getUserInfoConsultantIndividual(body)
-    }
+    suspend fun userInfoConsultantIndividual(body: UserInfoBodyConsultantIndividual) = retrofit.getUserInfoConsultantIndividual(body)
 
     //UserInfoClientLegal
     suspend fun userInfoClientLegal(login_id: Int, lname: String, fname: String, mname: String, gender_id: Int,
