@@ -17,27 +17,15 @@ class SectionPageAdapter2(fm: FragmentManager, context: Context) : FragmentPager
             0 -> {
                 OpenQuestionsFragment()
             }
-
-           /* 1 -> {
-                InProgressQuestionsFragment()
-            }
-
-            2 -> {
-                InApprovingQuestionsFragment()
-            }*/
-
             1 -> {
                 InArbitrationQuestionsFragment()
             }
-
             2 -> {
                 RejectedQuestionsFragment()
             }
-
             3 -> {
                 CompletedQuestionsFragment()
             }
-
             else -> Fragment()
         }
     }
@@ -49,13 +37,9 @@ class SectionPageAdapter2(fm: FragmentManager, context: Context) : FragmentPager
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
             0 -> context.getString(R.string.bids_client)
-
             1 -> context.getString(R.string.arbitration)
-
             2 -> context.getString(R.string.closed)
-
             3 -> context.getString(R.string.cancelled)
-
             else -> null
         }
     }

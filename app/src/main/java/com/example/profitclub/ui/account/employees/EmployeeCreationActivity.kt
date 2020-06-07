@@ -67,6 +67,7 @@ class EmployeeCreationActivity : AppCompatActivity(), DatePickerDialog.OnDateSet
     val allLanguage = arrayListOf(Language(1, "English"), Language(2, "Uzbek"), Language(3, "Русский"))
     var role: Int = 0
     var roleEmployee: String? = null
+    val categoryNames = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -360,7 +361,15 @@ class EmployeeCreationActivity : AppCompatActivity(), DatePickerDialog.OnDateSet
             }
         }
 
-        val adapter = CategoryAdapter(this, allCategories, categoryIds, itemCallBack)
+        val itemCallBackNames = {name: String, checked: Boolean ->
+            if(checked) {
+                categoryNames.add(name)
+            } else {
+                categoryNames.remove(name)
+            }
+        }
+
+        val adapter = CategoryAdapter(this, allCategories, categoryIds, categoryNames, itemCallBack, itemCallBackNames)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter

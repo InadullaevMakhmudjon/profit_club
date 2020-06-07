@@ -218,4 +218,8 @@
     <string name="new_password">Новый пароль</string>
     <string name="password_confirmation">Подтверждение пароля</string>
     <string name="password_successfully">Пароль удачно изменён</string>
+    <string name="reviews">Отзывы</string>
+    <string name="at_least_one_category">Необходимо выбрать минимум одну категорию</string>
+    <string name="at_least_one_language">Необходимо выбрать минимум один язык</string>
+    <string name="about_me">Обо мне</string>
 </resources>

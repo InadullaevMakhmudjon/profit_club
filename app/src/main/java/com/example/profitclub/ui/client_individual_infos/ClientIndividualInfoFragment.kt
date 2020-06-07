@@ -48,6 +48,7 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
     val allCategories = ArrayList<DataBid>()
     val allLanguage = arrayListOf(Language(1, "English"), Language(2, "Uzbek"), Language(3, "Русский"))
     var role: Int = 0
+    val categoryNames = ArrayList<String>()
 
     var lNameText: String? = null
     var nameCompanyText: String? = null
@@ -497,7 +498,15 @@ class ClientIndividualInfoFragment : Fragment(), DatePickerDialog.OnDateSetListe
             }
         }
 
-        val adapter = CategoryAdapter(context!!, allCategories, categoryIds, itemCallBack)
+        val itemCallBackNames = {name: String, checked: Boolean ->
+            if(checked) {
+                categoryNames.add(name)
+            } else {
+                categoryNames.remove(name)
+            }
+        }
+
+        val adapter = CategoryAdapter(context!!, allCategories, categoryIds, categoryNames, itemCallBack, itemCallBackNames)
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter

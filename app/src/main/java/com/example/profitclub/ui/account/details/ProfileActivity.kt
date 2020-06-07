@@ -53,10 +53,9 @@ class ProfileActivity : AppCompatActivity() {
 
         preferences = getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
 
-        mSectionPageAdapter = SectionPageAdapter(supportFragmentManager)
+        mSectionPageAdapter = SectionPageAdapter(supportFragmentManager, this)
         binding.viewPager!!.adapter = mSectionPageAdapter
-        binding.pagerHeader.setTabIndicatorColorResource(R.color.colorAccent2)
-        //notificationManager = NotificationManagerCompat.from(this)
+        binding.pagerHeader.setTabIndicatorColorResource(R.color.white)
 
         vm = ViewModelProviders.of(this, ProfileDetailsViewModelFactory(preferences)).get(ProfileDetailsViewModel::class.java)
 

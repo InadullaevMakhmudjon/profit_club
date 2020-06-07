@@ -11,7 +11,7 @@ import com.example.profitclub.R
 import com.example.profitclub.data.bids.DataBid
 import com.example.profitclub.databinding.CategoryListItemBinding
 
-class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid>?, val categories: ArrayList<Int>, private val callBack: (Int, Boolean) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid>?, val categories: ArrayList<Int>, val categoriesNames: ArrayList<String>,  private val callBack: (Int, Boolean) -> Boolean, private  val callBack_: (String, Boolean) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = CategoryListItemBinding.inflate(inflater, parent, false)
@@ -27,7 +27,12 @@ class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid
             binding.nameCategory.text = item?.name
             val color = context.resources.getColor(R.color.colorAccent)
             val black = context.resources.getColor(R.color.black)
-            binding.checkboxCategory.isChecked = categories.contains(item!!.id)
+            when (binding.checkboxCategory.isChecked){
+                true -> {
+                    categories.contains(item!!.id)
+                    categoriesNames.contains(item.name)
+                }
+            }
 
             binding.checkboxCategory.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
@@ -35,7 +40,8 @@ class CategoryAdapter(private val context: Context, val items: ArrayList<DataBid
                 } else {
                     binding.nameCategory.setTextColor(black)
                 }
-                callBack.invoke(item.id, isChecked)
+                callBack.invoke(item!!.id, isChecked)
+                callBack_.invoke(item.name, isChecked)
             }
 
             binding.container.tag = item

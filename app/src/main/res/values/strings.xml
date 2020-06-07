@@ -252,4 +252,11 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="new_password">New password</string>
     <string name="password_confirmation">Password confirmation</string>
     <string name="password_successfully">Password successfully changed</string>
+    <string name="english" translatable="false">English</string>
+    <string name="uzbek" translatable="false">O\'zbekcha</string>
+    <string name="russian" translatable="false">Русский</string>
+    <string name="reviews">Reviews</string>
+    <string name="at_least_one_category">You should check at least one of categories</string>
+    <string name="at_least_one_language">You should check at least one of languages</string>
+    <string name="about_me">About me</string>
 </resources>

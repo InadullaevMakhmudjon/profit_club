@@ -72,7 +72,7 @@
         android:layout_below="@+id/deadline_question"
         android:layout_marginTop="15dp"
         android:textSize="16sp"
-        android:text="@string/review"
+        android:text="@string/reviews"
         android:fontFamily="@font/roboto_bold"
         android:textColor="@android:color/black"/>
 

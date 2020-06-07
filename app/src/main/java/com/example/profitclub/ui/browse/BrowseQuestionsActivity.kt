@@ -147,7 +147,6 @@ class BrowseQuestionsActivity : AppCompatActivity() {
             }
         }
 
-
        if (client != null){
            client.setOnClickListener {
                vm.previewClient(data.question_id.toString())

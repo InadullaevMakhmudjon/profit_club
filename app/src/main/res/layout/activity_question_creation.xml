@@ -27,37 +27,11 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <TextView
-        android:id="@+id/category_question_creation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/category_"
-        android:textSize="18sp"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:backgroundTint="@color/black"
-        android:maxLines="1"
-        android:singleLine="true" />
-
-    <TextView
-        android:id="@+id/language_question_creation"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/language"
-        android:textSize="18sp"
-        android:layout_marginTop="14dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:backgroundTint="@color/black"
-        android:maxLines="1"
-        android:singleLine="true" />
-
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/title_question"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
+        android:textColorHint="@android:color/darker_gray"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -70,7 +44,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/title"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@android:color/darker_gray"
             android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
@@ -81,7 +55,7 @@
         android:id="@+id/description_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
+        android:textColorHint="@android:color/darker_gray"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -94,7 +68,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/description"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@android:color/darker_gray"
             android:inputType="text"
             android:maxLines="1"
             android:singleLine="true" />
@@ -105,7 +79,7 @@
         android:id="@+id/price_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColorHint="@color/black"
+        android:textColorHint="@android:color/darker_gray"
         android:layout_marginTop="14dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -118,7 +92,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/price"
-            android:backgroundTint="@color/black"
+            android:backgroundTint="@android:color/darker_gray"
             android:inputType="number"
             android:maxLines="1"
             android:singleLine="true" />
@@ -140,6 +114,61 @@
         android:layout_marginTop="14dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/category_question_creation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category_"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:theme="@style/Theme.MaterialComponents"
+        android:textSize="14sp"
+        android:background="@android:color/background_light"
+        android:textColor="@color/background_button"
+        app:strokeColor="@color/background_button"
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/chosen_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/category_"
+        android:textSize="18sp"
+        android:textColor="@color/background_button"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:maxLines="3" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/language_question_creation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/language"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:theme="@style/Theme.MaterialComponents"
+        android:textSize="14sp"
+        android:background="@android:color/background_light"
+        android:textColor="@color/background_button"
+        app:strokeColor="@color/background_button"
+        android:layout_marginTop="14dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
+
+    <TextView
+        android:id="@+id/chosen_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/language"
+        android:textSize="18sp"
+        android:textColor="@color/background_button"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:maxLines="1"
+        android:singleLine="true"/>
 
     <Button
         android:id="@+id/post"
