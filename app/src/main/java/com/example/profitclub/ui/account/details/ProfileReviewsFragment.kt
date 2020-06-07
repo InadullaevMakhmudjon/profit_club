@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -27,10 +26,7 @@ class ProfileReviewsFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
-        val root = inflater.inflate(R.layout.fragment_profile_reviews, container, false)
-
-        return root
+        return inflater.inflate(R.layout.fragment_profile_reviews, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -40,10 +36,6 @@ class ProfileReviewsFragment : Fragment(), View.OnClickListener {
             val preferences = activity!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             vm =
                 ViewModelProviders.of(this, ProfileReviewViewModelFactory(preferences)).get(ProfileReviewsViewModel::class.java)
-            val textView: TextView = view.findViewById(R.id.text_home)
-            vm.text.observe(viewLifecycleOwner, Observer {
-                textView.text = it
-            })
 
             val recyclerView: RecyclerView = view.findViewById(R.id.recycler_reviews)
             adapter = ReviewsAdapter(context!!, reviews)

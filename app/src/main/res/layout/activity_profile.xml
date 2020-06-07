@@ -104,28 +104,11 @@
                         android:paddingTop="10dp"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
-                        android:background="@android:color/white"
-                        android:textColor = "@color/colorAccent2"/>
+                        android:background="@color/colorAccent2"
+                        android:textColor = "@color/white"/>
                 </androidx.viewpager.widget.ViewPager>
 
             </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
-
-      <!--  <Button
-            android:id="@+id/hire_me"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="bottom"
-            android:textColor="@color/white"
-            android:background="@color/colorAccent2"
-            android:visibility="invisible"
-            android:text="@string/choose"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
-
-        </Button>-->
-
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

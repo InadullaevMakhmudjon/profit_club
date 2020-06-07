@@ -1,22 +1,21 @@
 package com.example.profitclub.ui.account.details
 
-
+import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.example.profitclub.R
 
-class SectionPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
-
+class SectionPageAdapter(fm: FragmentManager, context: Context) : FragmentPagerAdapter(fm) {
+    var context: Context = context
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> {
                 ProfileDetailsFragment()
             }
-
             1 -> {
                 ProfileReviewsFragment()
             }
-
             else -> Fragment()
         }
     }
@@ -27,10 +26,8 @@ class SectionPageAdapter(fm: FragmentManager) : FragmentPagerAdapter(fm) {
 
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
-            0 -> "Details"
-
-            1 -> "Reviews"
-
+            0 -> context.getString(R.string.about)
+            1 -> context.getString(R.string.reviews)
             else -> null
         }
     }

@@ -79,7 +79,7 @@ class AccountFragment : Fragment() {
             alertDialog()
         }
 
-        changePassword_container.setOnClickListener {
+        passwordContainer.setOnClickListener {
             alertDialogChangePassword()
         }
 

@@ -8,6 +8,7 @@ import android.widget.AutoCompleteTextView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -26,10 +27,14 @@ class QuestionCreationActivity : AppCompatActivity() {
     private var user_id: Int? = null
     private var deadline_final: String? = null
     val categoryIds = ArrayList<Int>()
+    val categoryNames = ArrayList<String>()
     var languageId: Int = 0
+    var languageName: String? = null
     val allCategories = ArrayList<DataBid>()
     private val LANGUAGE = "profitclub"
     private var lang: String? = null
+    private lateinit var chosenCategories: TextView
+    private lateinit var chosenLanguage: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,7 +56,10 @@ class QuestionCreationActivity : AppCompatActivity() {
         val title = findViewById<AutoCompleteTextView>(R.id.title_question_creation)
         val description = findViewById<AutoCompleteTextView>(R.id.description_question_creation)
         val price = findViewById<AutoCompleteTextView>(R.id.price_question_creation)
-        val deadline = findViewById<TextView>(R.id.question_deadline)
+        chosenCategories = findViewById(R.id.chosen_category)
+        chosenLanguage = findViewById(R.id.chosen_language)
+        chosenCategories.isVisible = false
+        chosenLanguage.isVisible = false
         //val role = this.intent.getIntExtra("role",1)
 
        /* if(role == 2){
@@ -100,6 +108,7 @@ class QuestionCreationActivity : AppCompatActivity() {
                 viewModel.postQuestion(user_id!!, categoryIds, title.text.toString(), description.text.toString(),
                     languageId, deadline_final.toString())
             }
+
         }
 
         this.viewModel.error.observe(this, androidx.lifecycle.Observer {
@@ -148,7 +157,15 @@ class QuestionCreationActivity : AppCompatActivity() {
             }
         }
 
-        val adapter = CategoryAdapter(this, allCategories, categoryIds, itemCallBack)
+        val itemCallBackNames = {name: String, checked: Boolean ->
+            if(checked) {
+                categoryNames.add(name)
+            } else {
+                categoryNames.remove(name)
+            }
+        }
+
+        val adapter = CategoryAdapter(this, allCategories, categoryIds, categoryNames, itemCallBack, itemCallBackNames)
         layoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter
@@ -166,12 +183,14 @@ class QuestionCreationActivity : AppCompatActivity() {
         alertDialogBuilder.setMessage(getString(R.string.category_alert))
 
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
-            Toast.makeText(this, "Categories checked", Toast.LENGTH_SHORT).show()
-
+            if (categoryNames.size > 0){
+                chosen_category.isVisible = true
+                chosenCategories.text = categoryNames.reduce{a, b -> "$a/$b"}
+            }
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
-            Toast.makeText(this, "You should check at least one of categories", Toast.LENGTH_SHORT).show()
+            toast(getString(R.string.at_least_one_category))
             dialog?.dismiss()
         }
 
@@ -216,12 +235,25 @@ class QuestionCreationActivity : AppCompatActivity() {
         alertDialogBuilder.setMessage(getString(R.string.category_alert))
 
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
-            Toast.makeText(this, "Languages checked", Toast.LENGTH_SHORT).show()
+            when (languageId){
+                1 -> {
+                    chosenLanguage.isVisible = true
+                    chosenLanguage.text = getString(R.string.english)
+                }
+                2 -> {
+                    chosenLanguage.isVisible = true
+                    chosenLanguage.text = getString(R.string.uzbek)
+                }
+                3 -> {
+                    chosenLanguage.isVisible = true
+                    chosenLanguage.text = getString(R.string.russian)
+                }
+            }
 
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
-            Toast.makeText(this, "You should check at least one of languages", Toast.LENGTH_SHORT).show()
+            toast(getString(R.string.at_least_one_language))
             dialog?.dismiss()
         }
 

@@ -217,4 +217,8 @@
     <string name="new_password">Yangi parol</string>
     <string name="password_confirmation">Parol tasdiqlash</string>
     <string name="password_successfully">Parol muvaffaqiyatli o\'zgartirildi</string>
+    <string name="reviews">Sharhlar</string>
+    <string name="at_least_one_language">Kamida bitta tilni tanlashingiz kerak</string>
+    <string name="at_least_one_category">Kamida bitta kategoriya tanlashingiz kerak</string>
+    <string name="about_me">Men haqimda</string>
 </resources>

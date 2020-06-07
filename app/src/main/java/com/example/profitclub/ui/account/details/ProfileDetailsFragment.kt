@@ -49,8 +49,9 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     var categoryIds = ArrayList<Int>()
     var languageIds = ArrayList<Int>()
     val allCategories = ArrayList<DataBid>()
-    val allLanguage = arrayListOf(Language(1, "English"), Language(2, "Uzbek"), Language(3, "Русский"))
+    val allLanguage = arrayListOf(Language(1, "English"), Language(2, "O'zbekcha"), Language(3, "Русский"))
     var role: Int = 0
+    val categoryNames = ArrayList<String>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -286,7 +287,15 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             }
         }
 
-        val adapter = CategoryAdapter(context!!, allCategories, categoryIds, itemCallBack)
+        val itemCallBackNames = {name: String, checked: Boolean ->
+            if(checked) {
+                categoryNames.add(name)
+            } else {
+                categoryNames.remove(name)
+            }
+        }
+
+        val adapter = CategoryAdapter(context!!, allCategories, categoryIds, categoryNames, itemCallBack, itemCallBackNames)
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter
