@@ -61,7 +61,7 @@ class EmailCheckFragment : Fragment() {
             val safeArgs = EmailCheckFragmentArgs.fromBundle(it)
             role = safeArgs.clientRole
             loginId = safeArgs.loginId
-    }
+        }
 
         activity?.let { it ->
             preferences = it.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
