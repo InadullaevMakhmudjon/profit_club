@@ -11,23 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.RejectedBidAdapter
 import com.example.profitclub.databinding.FragmentRejectedBidsBinding
-import com.example.profitclub.model.Bid
 import com.example.profitclub.toast
 
 class RejectedBidsFragment : Fragment(), View.OnClickListener {
-
     private lateinit var binding: FragmentRejectedBidsBinding
     private lateinit var vm: RejectedBidsViewModel
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: RejectedBidAdapter? = null
     private val APP_PREFERENCE = "MYSETTINGS"
-
-        val list = listOf(Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,7 +33,6 @@ class RejectedBidsFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
         activity?.let {activity ->
-
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             vm =
                 ViewModelProviders.of(this, BidsRejectViewModelFactory(preferences)).get(RejectedBidsViewModel::class.java)

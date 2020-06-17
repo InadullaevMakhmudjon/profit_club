@@ -17,7 +17,6 @@ import com.google.android.material.snackbar.Snackbar
 import kotlinx.android.synthetic.main.fragment_creation_account.*
 
 class CreationAcoountFragment : Fragment() {
-
     private var role: Int = 0
     private lateinit var preferences: SharedPreferences
     private val APP_PREFERENCE = "MYSETTINGS"
@@ -122,7 +121,7 @@ class CreationAcoountFragment : Fragment() {
             viewModel.status.observe(activity!!, Observer { status ->
 
                 when (status) {
-                    0 -> {
+                    0, 2 -> {
                         val editor = preferences.edit()
                         editor.putString("email", emailText)
                         editor.putString("password", passwordText)
@@ -134,7 +133,6 @@ class CreationAcoountFragment : Fragment() {
                     }
                     -1 -> toast(getString(R.string.mail_already_registered))
                     1 -> toast(getString(R.string.account_not_activated))
-                    2 -> toast(getString(R.string.account_not_verified))
                     3 -> {
                         viewModel.loginId.value?.toInt()?.let { it1 -> infoAction.setLoginId(it1) }
                         Navigation.findNavController(create).navigate(infoAction)

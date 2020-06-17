@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -28,8 +27,6 @@ class MainActivity : AppCompatActivity() {
     private lateinit var preferences: SharedPreferences
     private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var titleView: TextView
-
-    //private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
     private lateinit var navController: NavController
 
@@ -40,7 +37,6 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         val actionBar = this.supportActionBar
-
         actionBar?.setDisplayShowCustomEnabled(true)
 
         val mLayoutInflater: LayoutInflater = this.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
@@ -69,9 +65,6 @@ class MainActivity : AppCompatActivity() {
                 //Toast.makeText(this, error, Toast.LENGTH_LONG).show()
             }
         })
-
-        //setSupportActionBar(binding.toolbar)
-        // this.role = this.intent.getIntExtra("role", 1)
 
         val myNavHostFragment: NavHostFragment = face as NavHostFragment
         val inflater = myNavHostFragment.navController.navInflater

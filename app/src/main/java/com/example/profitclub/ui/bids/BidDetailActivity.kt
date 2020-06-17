@@ -52,15 +52,12 @@ class BidDetailActivity : AppCompatActivity() {
         if (questionId != 0){
             when (role) {
                 2, 4, 5,7 -> {
-                   // vm.postPreview(questionId, "ru")
                     vm.postPreview(questionId, "ru")
                 }
-               // else -> toast("Errored...")
             }
         }
                 vm.data.observe(this, Observer { data ->
                     if(data != null) {
-                       // toast("come data")
                         when(data.status){
                             1 -> close.isVisible = false
                             2 -> {
@@ -72,7 +69,8 @@ class BidDetailActivity : AppCompatActivity() {
                         consultantId = data.consultant_id
                         bid_title.text = data.title
                         bid_detail.text = data.description
-                        deadline.text = " " + resources.getString(R.string.day) + data.day_deadline.toString() + " " + resources.getString(R.string.hour) + data.hour_deadline
+                        deadline.text = data.question_date
+                        time_left.text = " " + data.day_deadline.toString() + resources.getString(R.string.day) + " " +  + data.hour_deadline +resources.getString(R.string.hour)
                         price_question.text = " " + data.price.toString()
                         skills.text = data.categories.reduce{a, b -> "$a/$b"}
                         question_id_desc.text = data.question_id.toString()
@@ -94,7 +92,6 @@ class BidDetailActivity : AppCompatActivity() {
                         }
                     }
                 })
-       // resources.getString(R.string.price)
                 vm.dataClient.observe(this, Observer { result ->
                     if(result != null && result.size > 0) {
                         val data = result[0]
@@ -171,10 +168,6 @@ class BidDetailActivity : AppCompatActivity() {
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle(R.string.review_alert)
         val customLayout = layoutInflater.inflate(R.layout.review_alert_dialog, null)
-        //val stars: LayerDrawable = ratingBar.progressDrawable as LayerDrawable
-        // stars.getDrawable(2).setColorFilter(getColor(R.color.star_color_yellow), PorterDuff.Mode.SRC_ATOP)
-        // stars.getDrawable(0).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP)
-        //stars.getDrawable(1).setColorFilter(Color.GRAY, PorterDuff.Mode.SRC_ATOP)
         when (role){
             2, 4 -> customLayout.review_2.isVisible = false
         }
@@ -186,7 +179,6 @@ class BidDetailActivity : AppCompatActivity() {
         }
 
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
-            //Toast.makeText(this, """You put rating: ${ratingBar.rating}""", Toast.LENGTH_SHORT).show()
             val description = customLayout.review.text.toString()
             val description2 = customLayout.review_2.text.toString()
             val ratingBar = customLayout.rating_bar
@@ -223,7 +215,6 @@ class BidDetailActivity : AppCompatActivity() {
             toast(resources.getString(R.string.successfully))
         }
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
-            //Toast.makeText(this, "Your request directed to the Manager", Toast.LENGTH_SHORT).show()
             dialog?.dismiss()
         }
         alertDialogBuilder.show()
@@ -242,13 +233,11 @@ class BidDetailActivity : AppCompatActivity() {
             if(description != ""){
                vm.postDisputeOpen(questionId, description)
             } else{
-                //toast("comment should be given")
                 return@setPositiveButton
             }
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
-            //Toast.makeText(this, "Completed without a review", Toast.LENGTH_SHORT).show()
             dialog?.dismiss()
         }
         alertDialogBuilder.show()

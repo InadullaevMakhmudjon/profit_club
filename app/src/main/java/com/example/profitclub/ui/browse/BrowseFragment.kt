@@ -22,11 +22,9 @@ import com.example.profitclub.databinding.FragmentBrowseBinding
 import com.example.profitclub.toast
 
 class BrowseFragment : Fragment(), View.OnClickListener {
-
     private lateinit var viewModel: BrowseViewModel
     private val APP_PREFERENCE = "MYSETTINGS"
     private lateinit var binding: FragmentBrowseBinding
-
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: BrowseListAdapter? = null
 
@@ -35,16 +33,12 @@ class BrowseFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        /*var mainGrid = root.findViewById(R.id.mainGrid) as GridLayout
-        setSingleEvent(mainGrid)*/
         binding = FragmentBrowseBinding.inflate(layoutInflater)
-
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         activity?.let {activity ->
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             viewModel =

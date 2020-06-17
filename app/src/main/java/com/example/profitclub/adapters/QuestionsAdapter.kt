@@ -1,12 +1,12 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.data.bids.ConsultantBidsData
@@ -21,16 +21,24 @@ class QuestionsAdapter(private val context: Context, private val items: ArrayLis
         return EventFeedHolder(binding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.question = item
-            binding.questionText.text = item?.title
-            binding.questionId.text = item?.question_id.toString()
-            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
-            binding.price.text = item?.qlang
-            binding.status.text = item?.status.toString()
+
+            val title = context.getString(R.string.title_)
+            val description = context.getString(R.string.description_)
+            val language = context.getString(R.string.language_)
+            val categories = context.getString(R.string.categories)
+            val deadline = context.getString(R.string.deadline__)
+
+            binding.questionTitle.text = "$title ${item?.title}"
+            binding.questionDescription.text = "$description ${item?.description}"
+            binding.questionLanguage.text = "$language ${item?.qlang}"
+            binding.questionCategory.text = "$categories ${item?.categories?.reduce { acc, s -> "$acc/$s" }}"
+            binding.questionDeadline.text = "$deadline ${item?.question_date}"
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)
@@ -59,6 +67,4 @@ class QuestionsAdapter(private val context: Context, private val items: ArrayLis
             }
         }
     }
-
-    private operator fun <T> MutableLiveData<T>.get(position: Int): ConsultantBidsData = get(position)
 }

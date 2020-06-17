@@ -14,7 +14,10 @@ interface AuthService {
     suspend fun register(@Body req: PostRegisterBody): Response<UserSignIn>
 
     @POST(MAIL_VERIFY)
-    suspend fun mailVerify(@Body req: MailVerifyBody ): Response<Boolean>
+    suspend fun mailVerify(@Body req: MailVerifyBody): Response<Boolean>
+
+    @POST(MAIL_CONFIRM)
+    suspend fun mailConfirm(@Body req: MailConfirmBody): Response<MailConfirmStatus>
 
     @POST(CHANGE_PASSWORD)
     suspend fun changePassword(@Header("authorization") auth: String?, @Body body: ChangePasswordBody): Response<ChangePasswordStatus>

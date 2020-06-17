@@ -14,10 +14,6 @@ class ChatsViewModel(val repository: QuestionRepository) : ViewModel() {
 
     val error = MutableLiveData<String>()
 
-    val text = MutableLiveData<String>().apply {
-        value = "Total Messages: 10"
-    }
-
     val data = MutableLiveData<QuestionConsultantView>().apply {
         value = null
     }

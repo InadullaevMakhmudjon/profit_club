@@ -14,7 +14,6 @@ import com.example.profitclub.databinding.FragmentRejectedQuestionsBinding
 import com.example.profitclub.toast
 
 class RejectedQuestionsFragment : Fragment(), View.OnClickListener {
-
     private lateinit var binding: FragmentRejectedQuestionsBinding
     private lateinit var vm: RejectedQuestionsViewModel
     private var layoutManager: LinearLayoutManager? = null

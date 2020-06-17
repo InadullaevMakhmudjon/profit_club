@@ -11,17 +11,18 @@ import android.widget.AutoCompleteTextView
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import com.example.profitclub.R
+import com.google.android.material.button.MaterialButton
 
 class EmailCheckFragment : Fragment() {
 
     private lateinit var viewModel: EmailCheckViewModel
     private var role = 1
-
     private lateinit var preferences: SharedPreferences
     private val APP_PREFERENCE = "MYSETTINGS"
     var loginId: Int? = 0
@@ -42,6 +43,7 @@ class EmailCheckFragment : Fragment() {
         val timerText = view.findViewById<TextView>(R.id.timer)
         val confirm = view.findViewById<Button>(R.id.confirm)
         val emailConfirm = view.findViewById<AutoCompleteTextView>(R.id.confirm_email)
+        val resend = view.findViewById<MaterialButton>(R.id.resend)
 
         val timer = object: CountDownTimer(60000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -50,6 +52,7 @@ class EmailCheckFragment : Fragment() {
 
             override fun onFinish() {
                 timerText.text = "0"
+                resend.isVisible = true
             }
         }
         timer.start()
@@ -71,6 +74,18 @@ class EmailCheckFragment : Fragment() {
                     viewModel.emailVerify(emailText!!)
                 }
             }
+
+                resend.setOnClickListener {
+                    viewModel.emailResend(loginId!!, "en")
+                }
+
+
+            viewModel.statusResend.observe(activity!!, Observer { data ->
+                if (data.status == 0){
+                    resend.isVisible = false
+                    timer.start()
+                }
+            })
 
             viewModel.error.observe(activity!!, Observer { error ->
                 if(error.isNotEmpty()) {

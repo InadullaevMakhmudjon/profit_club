@@ -33,8 +33,7 @@
     <string name="dummy_button">Create an account</string>
     <string name="dummy_content">PROFITCLUB</string>
     <string name="selection">Select your account</string>
-    <string name="client">I want to hire</string>
-    <string name="consultant">I want to work</string>
+    <string name="client">Find a consultant</string>
     <string name="login">Log in</string>
     <string name="individual">Individual</string>
     <string name="legal_entity">Legal entity</string>
@@ -190,8 +189,8 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="region">Region</string>
     <string name="city">City</string>
     <string name="uzbekistan">Uzbekistan</string>
-    <string name="day">Day:</string>
-    <string name="hour">hour:</string>
+    <string name="day">Day</string>
+    <string name="hour">hour</string>
     <string name="open">Open</string>
     <string name="approve">Client confirm</string>
     <string name="arbitration">Arbitration</string>
@@ -259,4 +258,17 @@ dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor  </string>
     <string name="at_least_one_category">You should check at least one of categories</string>
     <string name="at_least_one_language">You should check at least one of languages</string>
     <string name="about_me">About me</string>
+    <string name="resend">Resend email</string>
+    <string name="consultant">Become a consultant</string>
+    <string name="payment_methods">Payment methods</string>
+    <string name="amount_balance">Amount</string>
+    <string name="language_">Language: </string>
+    <string name="title_">Title: </string>
+    <string name="description_">Description: </string>
+    <string name="categories">Categories: </string>
+    <string name="deadline__">Deadline: </string>
+    <string name="time_left">Time left: </string>
+    <string name="date_closure">Date of answer closure</string>
+    <string name="incorrect_email">Incorrect email or password</string>
+    <string name="blocked_account">Your account is blocked</string>
 </resources>

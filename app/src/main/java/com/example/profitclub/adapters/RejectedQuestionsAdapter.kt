@@ -1,5 +1,6 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -20,20 +21,24 @@ class RejectedQuestionsAdapter(private val context: Context, private val items: 
         return EventFeedHolder(binding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.cancel = item
-
-            binding.questionText.text = item?.title
-            binding.questionId.text = item?.question_id.toString()
-            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
-            binding.price.text = item?.price.toString()
-            binding.status.text = item?.status.toString()
-
-            binding?.container.tag = item
-            binding?.container.setOnClickListener(this)
+            val title = context.getString(R.string.title_)
+            val language = context.getString(R.string.language_)
+            val categories = context.getString(R.string.categories)
+            val answer = context.getString(R.string.answer_desc)
+            val dateClosure = context.getString(R.string.date_closure)
+            binding.questionTitle.text = "$title ${item?.title}"
+            binding.questionLanguage.text = "$language ${item?.qlang}"
+            binding.questionCategory.text = "$categories ${item?.categories!!.reduce { acc, s -> "$acc/$s" }}"
+            binding.questionAnswer.text = "$answer : ${item.answer_end_description}"
+            binding.timeAnswer.text = "$dateClosure : ${item.answer_end_date}"
+            binding.container.tag = item
+            binding.container.setOnClickListener(this)
         }
     }
 

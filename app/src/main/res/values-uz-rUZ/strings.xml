@@ -16,7 +16,6 @@
     <string name="dummy_button">Akkaunt yaratish</string>
     <string name="dummy_content">PROFITKLUB</string>
     <string name="selection">Akkauntingizni tanlang</string>
-    <string name="client">Men yollamoqchiman</string>
     <string name="consultant">Men ishlamoqchiman</string>
     <string name="login">Kirish</string>
     <string name="individual">Jismoniy shaxs</string>
@@ -156,8 +155,8 @@
     <string name="region">Viloyat</string>
     <string name="city">Shahar</string>
     <string name="uzbekistan">O\'zbekiston</string>
-    <string name="day">Kun:</string>
-    <string name="hour">soat:</string>
+    <string name="day">Kun</string>
+    <string name="hour">soat</string>
     <string name="open">Ochiq</string>
     <string name="approve">Mijoz tasdiqlovchi</string>
     <string name="arbitration">Hakamlik</string>
@@ -221,4 +220,17 @@
     <string name="at_least_one_language">Kamida bitta tilni tanlashingiz kerak</string>
     <string name="at_least_one_category">Kamida bitta kategoriya tanlashingiz kerak</string>
     <string name="about_me">Men haqimda</string>
+    <string name="resend">Kodni qayta yuborish</string>
+    <string name="client">Maslahatchi topish</string>
+    <string name="payment_methods">To\'lov usullari</string>
+    <string name="amount_balance">Miqdori</string>
+    <string name="language_">Til:</string>
+    <string name="title_">Sarlavha:</string>
+    <string name="categories">Toifalar:</string>
+    <string name="deadline__">Tugaash sanasi:</string>
+    <string name="time_left">Vaqt qoldi:</string>
+    <string name="description_">Ta\'rif:</string>
+    <string name="date_closure">Savolning yopilish sanasi</string>
+    <string name="incorrect_email">Noto\'g\'ri email yoki parol</string>
+    <string name="blocked_account">Sizning akkauntingiz bloklangan</string>
 </resources>

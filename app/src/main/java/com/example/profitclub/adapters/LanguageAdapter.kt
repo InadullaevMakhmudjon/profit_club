@@ -11,7 +11,7 @@ import com.example.profitclub.R
 import com.example.profitclub.data.bids.Language
 import com.example.profitclub.databinding.LanguageListItemBinding
 
-class LanguageAdapter(private val context: Context, val items: ArrayList<Language>?, val languages: ArrayList<Int>, private val callBack: (Int, Boolean) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
+class LanguageAdapter(private val context: Context, val items: ArrayList<Language>?, val languages: ArrayList<Int>, val languagesNames: ArrayList<String>, private val callBack: (Int, Boolean) -> Boolean, private val callBack_: (String, Boolean) -> Boolean) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val binding = LanguageListItemBinding.inflate(inflater, parent, false)
@@ -27,7 +27,13 @@ class LanguageAdapter(private val context: Context, val items: ArrayList<Languag
             binding.nameLanguage.text = item?.name
             val color = context.resources.getColor(R.color.colorAccent)
             val black = context.resources.getColor(R.color.black)
-            binding.checkboxLanguage.isChecked = languages.contains(item!!.id)
+            when (binding.checkboxLanguage.isChecked) {
+                true -> {
+                    languages.contains(item!!.id)
+                    languagesNames.contains(item.name)
+                }
+            }
+
 
             binding.checkboxLanguage.setOnCheckedChangeListener { buttonView, isChecked ->
                 if (isChecked) {
@@ -35,7 +41,8 @@ class LanguageAdapter(private val context: Context, val items: ArrayList<Languag
                 } else {
                     binding.nameLanguage.setTextColor(black)
                 }
-                callBack.invoke(item.id, isChecked)
+                callBack.invoke(item!!.id, isChecked)
+                callBack_.invoke(item.name, isChecked)
             }
 
             binding.container.tag = item

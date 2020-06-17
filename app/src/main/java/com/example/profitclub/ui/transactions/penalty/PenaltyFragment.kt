@@ -38,9 +38,7 @@ class PenaltyFragment : Fragment(), View.OnClickListener {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         activity.let {
-
             preferences = it!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             val activity = activity as MainActivity?
             activity.let {
@@ -48,7 +46,6 @@ class PenaltyFragment : Fragment(), View.OnClickListener {
             }
             vm =
                 ViewModelProviders.of(this, TransactionViewModelFactory(preferences)).get(TransactionViewModel::class.java)
-
             adapter = TransactionAdapter2(this.context!!, null, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.transactionList.layoutManager = layoutManager

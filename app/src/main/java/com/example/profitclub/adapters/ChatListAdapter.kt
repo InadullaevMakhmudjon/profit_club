@@ -1,12 +1,12 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
 import com.example.profitclub.data.questions.QuestionConsultantData
@@ -17,45 +17,32 @@ class ChatListAdapter(private val context: Context, private val items: ArrayList
     private val inflater: LayoutInflater = LayoutInflater.from(context)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-//        if (viewType == TYPE_FEED) {
         val binding = ChatItemBinding.inflate(inflater, parent, false)
         return EventFeedHolder(binding.root)
-//        }
-//        return null
-
     }
     
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.chatQuestion = item
-
-         /*   when {
-                item.status == "Open" -> binding.status.setBackgroundResource(R.drawable.bc_status_open)
-                item.status == "Rejected" -> binding.status.setBackgroundResource(R.drawable.bc_status_rejected)
-                item.status == "Arbitration" -> binding.status.setBackgroundResource(R.drawable.bc_status_in_arbitration)
-                item.status == "Progress" -> binding.status.setBackgroundResource(R.drawable.bc_status_in_progress)
-            }*/
-
-            /* Picasso.get()
-                     .load(item.phost_photo)
-                     .into(binding.imageActual)*/
-            binding.questionText.text = item?.title
-            binding.questionId.text = item?.question_id.toString()
-            binding.status.text = item?.status.toString()
+            val title = context.getString(R.string.title_)
+            val language = context.getString(R.string.language_)
+            val categories = context.getString(R.string.categories)
+            val deadline = context.getString(R.string.deadline__)
+            val timeLeft = context.getString(R.string.time_left)
+            val day = context.getString(R.string.day)
+            val hour = context.getString(R.string.hour)
+            binding.questionTitle.text = "$title ${item?.title}"
+            binding.questionLanguage.text = "$language ${item?.qlang}"
+            binding.questionCategory.text = "$categories ${item?.categories!!.reduce { acc, s -> "$acc/$s" }}"
+            binding.questionDeadline.text = "$deadline ${item.question_date}"
+            binding.timeLeft.text = "$timeLeft ${item.day} $day ${item.day} $hour"
             binding.container.tag = item
             binding.container.setOnClickListener(this)
-
         }
     }
-
-    /*private val <T> MutableLiveData<T>.size: Int
-        get() {
-            observe(lifecycleowner: LifecycleOwner, Observer { data ->
-
-            })
-        }*/
 
     override fun getItemCount(): Int{
         return items?.size ?: 0
@@ -80,5 +67,3 @@ class ChatListAdapter(private val context: Context, private val items: ArrayList
         }
     }
 }
-
-private operator fun <T> MutableLiveData<T>.get(position: Int): QuestionConsultantData = get(position)

@@ -24,20 +24,6 @@ class InArbitrationQuestionsFragment : Fragment(), View.OnClickListener {
     private var adapter: InArbitrationQuestionsAdapter? = null
     private val APP_PREFERENCE = "MYSETTINGS"
 
-        val list = listOf(
-            Questions("I need en expert who will help me putting my website into a domain", 5, 15) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 41, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 42, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 43, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 44, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 45, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 46, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 47, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 48, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 49, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 40, 99) { msg -> toast(msg) },
-            Questions("I need en expert who will help me putting my website into a domain", 499, 99) { msg -> toast(msg) }
-        )
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -11,23 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.ApprovingBidAdapter
 import com.example.profitclub.databinding.FragmentInApprovingBidsBinding
-import com.example.profitclub.model.Bid
 import com.example.profitclub.toast
 
 class InApprovingBidsFragment : Fragment(), View.OnClickListener {
-
     private lateinit var binding: FragmentInApprovingBidsBinding
     private lateinit var vm: InApprovingBidsViewModel
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: ApprovingBidAdapter? = null
     private val APP_PREFERENCE = "MYSETTINGS"
-
-        val list = listOf(Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,12 +31,10 @@ class InApprovingBidsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         activity?.let { activity ->
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             vm =
                 ViewModelProviders.of(this, BidsApproveViewModelFactory(preferences)).get(InApprovingBidsViewModel::class.java)
-
             adapter = ApprovingBidAdapter(this.context!!, null, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.recyclerApprovingBids.layoutManager = layoutManager

@@ -76,6 +76,8 @@ class QuestionCreationActivity : AppCompatActivity() {
         }*/
 
         category_question_creation.setOnClickListener {
+            categoryIds.clear()
+            categoryNames.clear()
             this.alertDialogCategory()
         }
 
@@ -124,25 +126,9 @@ class QuestionCreationActivity : AppCompatActivity() {
         return true
     }
 
-    /*override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.checkable_menu, menu)
-
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.law, R.id.accounting , R.id.it -> {
-                item.isChecked = !item.isChecked
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }*/
-
     private fun alertDialogCategory(){
         val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle("Categories")
+        alertDialogBuilder.setTitle(getString(R.string.category_))
         val customLayout = layoutInflater.inflate(R.layout.category_alert_dialog, null)
         alertDialogBuilder.setView(customLayout)
         val recycler = customLayout.findViewById<RecyclerView>(R.id.category_list)
@@ -199,7 +185,7 @@ class QuestionCreationActivity : AppCompatActivity() {
 
     private fun alertDialogLanguage(){
         val alertDialogBuilder = AlertDialog.Builder(this)
-        alertDialogBuilder.setTitle("Languages")
+        alertDialogBuilder.setTitle(getString(R.string.language))
         val customLayout = layoutInflater.inflate(R.layout.single_language_alert, null)
         alertDialogBuilder.setView(customLayout)
         customLayout.checkbox_english.setOnCheckedChangeListener { buttonView, isChecked ->
