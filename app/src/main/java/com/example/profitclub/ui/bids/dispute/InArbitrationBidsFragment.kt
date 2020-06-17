@@ -13,7 +13,6 @@ import com.example.profitclub.adapters.InArbitrationBidAdapter
 import com.example.profitclub.databinding.FragmentInarbitrationBidsBinding
 
 class InArbitrationBidsFragment : Fragment(), View.OnClickListener {
-
     private lateinit var binding: FragmentInarbitrationBidsBinding
     private lateinit var vm: InArbitrationBidsViewModel
     private var layoutManager: LinearLayoutManager? = null
@@ -52,7 +51,6 @@ class InArbitrationBidsFragment : Fragment(), View.OnClickListener {
                 }
             })
         }
-
     }
 
     override fun onResume() {

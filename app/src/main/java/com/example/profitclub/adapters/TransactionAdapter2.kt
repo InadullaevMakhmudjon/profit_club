@@ -11,7 +11,6 @@ import com.example.profitclub.R
 import com.example.profitclub.data.transactions.PenaltyResponseBody
 import com.example.profitclub.databinding.TransactionItem2Binding
 
-
 class TransactionAdapter2(private val context: Context, val items: ArrayList<PenaltyResponseBody>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
     private val inflater: LayoutInflater = LayoutInflater.from(context)
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
@@ -41,10 +40,6 @@ class TransactionAdapter2(private val context: Context, val items: ArrayList<Pen
             when (item?.penalty_status){
                 0 ->  binding.penaltyStatus.text = "$status $status0"
             }
-            /* Picasso.get()
-                     .load(item.phost_photo)
-                     .into(binding.imageActual)*/
-
             binding.container.tag = item
             binding.container.setOnClickListener(this)
         }
@@ -65,10 +60,6 @@ class TransactionAdapter2(private val context: Context, val items: ArrayList<Pen
     override fun onClick(p0: View?) {
         when(p0?.id){
             R.id.container -> {
-              //  val item = p0?.getTag() as Questions
-               // val intent: Intent = Intent(context, QuestionDetailActivity::class.java)
-                //intent.putExtra(Const.EVENT_EXTRA, item)
-               // context.startActivity(intent)
             }
         }
     }

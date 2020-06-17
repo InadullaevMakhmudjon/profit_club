@@ -27,7 +27,6 @@ class TransactionFragment : Fragment(), View.OnClickListener {
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: TransactionAdapter? = null
 
-   // val list = listOf(TransactionResponseBody(22, "Doxod", 1, 0f, "asdasd", "asdasdf", "asdasf", "asddfga" ))
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -40,27 +39,14 @@ class TransactionFragment : Fragment(), View.OnClickListener {
     @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         activity.let {
-
             preferences = it!!.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             val activity = activity as MainActivity?
             activity.let {
                 activity?.customActionBarTitle(getString(R.string.transaction))
             }
-
             vm =
                 ViewModelProviders.of(this, TransactionViewModelFactory(preferences)).get(TransactionViewModel::class.java)
-
-            val myDataFromActivity = activity!!.getMyData()
-
-          /*  if(myDataFromActivity == 3 || myDataFromActivity == 4){
-                binding.transactionList.isVisible = false
-                binding.topUp.isVisible = false
-            } else{
-                binding.transactionList2.isVisible = false
-                binding.withdraw.isVisible = false
-            }*/
             adapter = TransactionAdapter(this.context!!, null, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.transactionList.layoutManager = layoutManager

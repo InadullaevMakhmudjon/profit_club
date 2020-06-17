@@ -17,22 +17,35 @@ android {
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').canRead()) {
+        properties.load(project.rootProject.file("local.properties").newDataInputStream())
+    }
+
+    buildTypes.each {
+        it.buildConfigField "long", "SERVICE_ID", properties.getProperty("SERVICE_ID", "14706")
+        it.buildConfigField "long", "MERCHANT_ID", properties.getProperty("MERCHANT_ID", "10163")
+        it.buildConfigField "long", "MERCHANT_USER_ID", properties.getProperty("MERCHANT_USER_ID", "14445")
+    }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+
     dataBinding {
         enabled = true
     }
-    android {
+
         compileOptions {
             sourceCompatibility JavaVersion.VERSION_1_8
             targetCompatibility JavaVersion.VERSION_1_8
         }
     }
-}
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -78,4 +91,6 @@ dependencies {
     //Socketio
     implementation 'com.github.nkzawa:socket.io-client:0.6.0'
 
+    // Click
+    implementation "uz.click.mobilesdk:clickmsdk:1.1.1"
 }

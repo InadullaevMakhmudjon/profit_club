@@ -8,8 +8,8 @@
                 android:radius="30dp"/>
 
             <gradient
-                android:startColor="#d31027"
-                android:endColor="#ea384d"
+                android:startColor="@color/colorAccent2"
+                android:endColor="@color/colorAccent2"
                 />
 
         </shape>

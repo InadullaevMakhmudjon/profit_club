@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.App
 import com.example.profitclub.adapters.OpenBidAdapter
 import com.example.profitclub.data.bids.ConsultantBidsClickData
-import com.example.profitclub.data.bids.ConsultantBidsData
 import com.example.profitclub.databinding.FragmentOpenBidsBinding
 import com.example.profitclub.toast
 
 class OpenBidsFragment : Fragment(), View.OnClickListener {
-
     private lateinit var binding: FragmentOpenBidsBinding
     private lateinit var viewModel: OpenBidsViewModel
     private var layoutManager: LinearLayoutManager? = null

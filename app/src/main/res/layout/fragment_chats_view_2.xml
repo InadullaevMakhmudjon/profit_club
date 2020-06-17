@@ -28,6 +28,7 @@
         android:layout_gravity="bottom"
         android:background="@color/colorAccent2"
         android:text="@string/attach_file"
+        android:visibility="invisible"
         android:textColor="@color/white"/>
 
 </RelativeLayout>

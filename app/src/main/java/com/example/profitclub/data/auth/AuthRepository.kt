@@ -55,6 +55,9 @@ class AuthRepository(private val retrofit: AuthService, private val preference: 
     // Mail confirm --------->
     suspend fun mailVerify(emailToken: String) = retrofit.mailVerify(MailVerifyBody(emailToken))
 
+    // Resend mail
+    suspend fun mailResend(login_id: Int, lang: String) = retrofit.mailConfirm(MailConfirmBody(login_id, lang))
+
     // Set user to local storage
     fun setUserToken(userToken: Token?) {
         if(userToken != null) {

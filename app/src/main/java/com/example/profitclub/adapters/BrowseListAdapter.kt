@@ -1,5 +1,6 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -20,16 +21,23 @@ class BrowseListAdapter(private val context: Context, private val items: ArrayLi
         return EventFeedHolder(binding.root)
     }
     
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.browseItem = item
+            val title = context.getString(R.string.title_)
+            val description = context.getString(R.string.description_)
+            val language = context.getString(R.string.language_)
+            val categories = context.getString(R.string.categories)
+            val deadline = context.getString(R.string.deadline__)
 
-            binding.bidText.text = item?.title
-            binding.bidCategories.text = item?.categories?.reduce{a, b -> "$a/$b"}
-            binding.questionId.text = item?.question_id.toString()
-            binding.clickCount.text = item?.status.toString()
+            binding.questionTitle.text = "$title ${item?.title}"
+            binding.questionDescription.text = "$description ${item?.description}"
+            binding.questionLanguage.text = "$language ${item?.qlang}"
+            binding.questionCategory.text = "$categories ${item?.categories?.reduce { acc, s -> "$acc/$s" }}"
+            binding.timeAnswer.text = "$deadline ${item?.question_date}"
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)

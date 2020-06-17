@@ -16,6 +16,11 @@ data class MailVerifyBody(
     val token: String
 )
 
+data class MailConfirmBody(
+    val login_id: Int,
+    val lang: String
+)
+
 data class ChangePasswordBody(
     val old_password: String,
     val new_password: String,

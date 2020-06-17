@@ -11,7 +11,7 @@
             type="com.example.profitclub.data.bids.ConsultantBidsData"/>
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:id="@+id/container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -31,70 +31,62 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="vertical"
             android:padding="8dp">
 
             <TextView
-                android:id="@+id/bid_text"
+                android:id="@+id/question_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/black"
                 android:textSize="14sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"
                 tools:text="@string/question" />
 
             <TextView
-                android:id="@+id/question_id"
+                android:id="@+id/question_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/black"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/bid_text"
-                app:layout_constraintTop_toBottomOf="@id/bid_text"
-                tools:text="50" />
+                android:textSize="14sp"
+                tools:text="@string/question" />
 
             <TextView
-                android:id="@+id/bid_categories"
+                android:id="@+id/question_language"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/roboto"
                 android:textColor="@color/black"
-                android:textSize="12sp"
-                app:layout_constraintStart_toStartOf="@id/question_id"
-                app:layout_constraintTop_toBottomOf="@id/question_id"
-                tools:text="50" />
+                android:textSize="14sp"
+                tools:text="@string/question" />
 
             <TextView
-                android:id="@+id/click_count"
+                android:id="@+id/question_category"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:fontFamily="@font/roboto_bold"
-                android:textColor="@color/white"
-                android:textSize="12sp"
-                android:textAlignment="center"
-                app:layout_constraintTop_toBottomOf="@id/bid_categories"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:paddingTop="4dp"
-                android:paddingBottom="4dp"
-                android:paddingStart="8dp"
-                android:paddingEnd="8dp"
-                android:background="@drawable/bc_status"
-                tools:text="Completed" />
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/colorAccent2"
+                android:textSize="14sp"
+                tools:text="@string/question" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/time_answer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/roboto"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                tools:text="@string/question" />
 
+        </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    </LinearLayout>
 </layout>

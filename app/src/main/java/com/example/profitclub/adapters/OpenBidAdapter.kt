@@ -1,5 +1,6 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -21,21 +22,22 @@ class OpenBidAdapter(private val context: Context, private val items: ArrayList<
         return EventFeedHolder(binding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.chatQuestion = item
-
-            /* Picasso.get()
-                     .load(item.phost_photo)
-                     .into(binding.imageActual)*/
-            binding.questionText.text = item?.title
-            binding.questionId.text = item?.bid_id.toString()
-            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
-            binding.price.text = item?.price
-            binding.status.text = item?.deadline
-
+            val title = context.getString(R.string.title_)
+            val description = context.getString(R.string.description_)
+            val language = context.getString(R.string.language_)
+            val categories = context.getString(R.string.categories)
+            val price = context.getString(R.string.price)
+            binding.questionTitle.text = "$title ${item?.title}"
+            binding.questionDescription.text = "$description ${item?.description}"
+            binding.questionLanguage.text = "$language ${item?.qlang}"
+            binding.questionCategory.text = "$categories ${item?.categories?.reduce { acc, s -> "$acc/$s" }}"
+            binding.questionPrice.text = "$price ${item?.price}"
             binding.container.tag = item
             binding.container.setOnClickListener(this)
         }

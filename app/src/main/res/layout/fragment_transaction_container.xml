@@ -18,7 +18,7 @@
         android:animateLayoutChanges="true"
         android:descendantFocusability="beforeDescendants"
         android:scrollbars="none"
-        android:layout_above="@+id/withdraw"
+        android:layout_above="@+id/top_up"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
@@ -49,13 +49,13 @@
     </androidx.core.widget.NestedScrollView>
 
     <Button
-        android:id="@+id/withdraw"
+        android:id="@+id/top_up"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="0dp"
         android:background="@color/colorAccent2"
-        android:text="@string/withdraw"
+        android:text="@string/top_up"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

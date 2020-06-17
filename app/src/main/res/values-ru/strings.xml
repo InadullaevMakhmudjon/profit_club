@@ -107,7 +107,7 @@
     <string name="create">Создать</string>
     <string name="consultant_id_approve">ID консультанта:</string>
     <string name="consultant_">Консультант</string>
-    <string name="consultant">Я хочу работать</string>
+    <string name="consultant">Стать консультантом</string>
     <string name="confirmation_code">Код</string>
     <string name="confirm">Подтверждение</string>
     <string name="condition_of_work">Состояние работы</string>
@@ -120,7 +120,6 @@
     <string name="close">Закрыть</string>
     <string name="client_id_approve">ID клиента:</string>
     <string name="client_">Клиент</string>
-    <string name="client">Я хочу нанять</string>
     <string name="choose">Выбрать</string>
     <string name="Chats">Сообщения</string>
     <string name="category_id_approve">Категория:</string>
@@ -161,8 +160,8 @@
     <string name="country">Страна</string>
     <string name="region">Регион</string>
     <string name="uzbekistan">Узбекистан</string>
-    <string name="day">День:</string>
-    <string name="hour">час:</string>
+    <string name="day">День</string>
+    <string name="hour">час</string>
     <string name="open">Открытые</string>
     <string name="approve">Подтвержденные клиентом</string>
     <string name="bids_client">Новые вопросы</string>
@@ -222,4 +221,17 @@
     <string name="at_least_one_category">Необходимо выбрать минимум одну категорию</string>
     <string name="at_least_one_language">Необходимо выбрать минимум один язык</string>
     <string name="about_me">Обо мне</string>
+    <string name="resend">Повторная отправка кода</string>
+    <string name="client">Найти консультанта</string>
+    <string name="payment_methods">Методы оплаты</string>
+    <string name="amount_balance">Сумма</string>
+    <string name="language_">Язык:</string>
+    <string name="title_">Наименование:</string>
+    <string name="categories">Категории:</string>
+    <string name="deadline__">Дата окончания:</string>
+    <string name="time_left">Осталось времени:</string>
+    <string name="description_">Описание:</string>
+    <string name="date_closure">Дата закрытия вопроса</string>
+    <string name="incorrect_email">Неверный логин или пароль</string>
+    <string name="blocked_account">Ваш аккаунт заблокирован</string>
 </resources>

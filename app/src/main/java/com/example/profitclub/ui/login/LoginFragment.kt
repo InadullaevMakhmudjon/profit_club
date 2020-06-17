@@ -10,9 +10,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AutoCompleteTextView
-import android.widget.Button
-import android.widget.Toast
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -45,6 +43,8 @@ class LoginFragment : Fragment() {
         val email = view.findViewById<AutoCompleteTextView>(R.id.email)
         val password = view.findViewById<AutoCompleteTextView>(R.id.password)
         val login = view.findViewById<Button>(R.id.login)
+        val layoutMain = view.findViewById<ScrollView>(R.id.layout_main)
+        val loading = view.findViewById<RelativeLayout>(R.id.loading_dots)
 
         activity?.let {
             val preferences = it.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
@@ -69,9 +69,27 @@ class LoginFragment : Fragment() {
                     0 -> {
                         if (email.text.toString() != "" && password.text.toString() != ""){
                             viewModel.login(email.text.toString(), password.text.toString())
+
+                            viewModel.status.observe(activity!!, Observer { status ->
+                                when (status){
+                                    1 -> toast(getString(R.string.incorrect_email))
+                                    2 -> toast(getString(R.string.blocked_account))
+                                    3 -> alertDialogInfo()
+                                }
+                            })
                         }
                     }
                 }
+
+                viewModel.loading.observe(viewLifecycleOwner, Observer { status ->
+                    if (status == true){
+                        layoutMain.hide()
+                        loading.show()
+                    } else {
+                        layoutMain.show()
+                        loading.hide()
+                    }
+                })
 
                 viewModel.step1Status.observe(viewLifecycleOwner, Observer { data1 ->
                     if (data1 != null) {
@@ -108,12 +126,6 @@ class LoginFragment : Fragment() {
                 if(token != null) {
                     startActivity(Intent(activity, MainActivity::class.java))
                     activity!!.finish()
-                }
-            })
-
-            viewModel.status.observe(activity!!, Observer { status ->
-                if (status == 3){
-                    alertDialogInfo()
                 }
             })
 
@@ -211,13 +223,9 @@ class LoginFragment : Fragment() {
     override fun onRequestPermissionsResult(requestCode: Int,
                                             permissions: Array<String>, grantResults: IntArray) {
         if (requestCode == 42) {
-            // If request is cancelled, the result arrays are empty.
             if ((grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED)) {
-                // permission was granted, yay!
                 callPhone()
             } else {
-                // permission denied, boo! Disable the
-                // functionality
                 Toast.makeText(context, "Permission denied", Toast.LENGTH_SHORT).show()
             }
             return

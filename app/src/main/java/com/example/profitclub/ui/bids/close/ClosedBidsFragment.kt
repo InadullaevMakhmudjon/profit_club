@@ -11,23 +11,14 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.profitclub.adapters.ClosedBidAdapter
 import com.example.profitclub.databinding.FragmentClosedBidsBinding
-import com.example.profitclub.model.Bid
 import com.example.profitclub.toast
 
 class ClosedBidsFragment : Fragment(), View.OnClickListener {
-
     private lateinit var binding: FragmentClosedBidsBinding
     private lateinit var vm: ClosedBidsViewModel
     private var layoutManager: LinearLayoutManager? = null
     private var adapter: ClosedBidAdapter? = null
     private val APP_PREFERENCE = "MYSETTINGS"
-
-        val list = listOf(Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"),
-            Bid("Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor Lorem ipsum possum dolor  vLorem ipsum possum dolor"))
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,13 +31,10 @@ class ClosedBidsFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         activity?.let { activity ->
-
             val preferences = activity.getSharedPreferences(APP_PREFERENCE, Context.MODE_PRIVATE)
             vm =
                 ViewModelProviders.of(this, BidsCloseViewModelFactory(preferences)).get(ClosedBidsViewModel::class.java)
-
             adapter = ClosedBidAdapter(this.context!!, null, this)
             layoutManager = LinearLayoutManager(this.context!!, LinearLayoutManager.VERTICAL, false)
             binding.recyclerClosedBids.layoutManager = layoutManager

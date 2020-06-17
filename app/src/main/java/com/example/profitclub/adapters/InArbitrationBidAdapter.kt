@@ -1,5 +1,6 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -20,17 +21,24 @@ class InArbitrationBidAdapter(private val context: Context, private val items: A
         return EventFeedHolder(binding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.arbitration = item
 
-            binding.questionText.text = item?.title
-            binding.questionId.text = item?.question_id.toString()
-            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
-            binding.price.text = item?.price.toString()
-            binding.status.text = item?.status.toString()
+            val title = context.getString(R.string.title_)
+            val language = context.getString(R.string.language_)
+            val categories = context.getString(R.string.categories)
+            val answerManager = context.getString(R.string.dispute_manager)
+            val winner = context.getString(R.string.winner_desc)
+
+            binding.questionTitle.text = "$title ${item?.title}"
+            binding.questionLanguage.text = "$language ${item?.qlang}"
+            binding.questionCategory.text = "$categories ${item?.categories!!.reduce { acc, s -> "$acc/$s" }}"
+            binding.answerManager.text = "$answerManager: ${item.answer_dispute}"
+            binding.winner.text = "$winner: ${item.true_user_fullname}"
 
             binding.container.tag = item
             binding.container.setOnClickListener(this)

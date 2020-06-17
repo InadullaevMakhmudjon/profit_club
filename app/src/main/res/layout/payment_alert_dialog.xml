@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/price_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColorHint="@android:color/darker_gray"
+        android:layout_marginTop="14dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <AutoCompleteTextView
+            android:id="@+id/amount_payment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/amount_balance"
+            android:backgroundTint="@android:color/darker_gray"
+            android:inputType="number"
+            android:singleLine="true" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <ImageView
+        android:id="@+id/pay_me"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:src="@drawable/ic_payme_01"/>
+
+    <ImageView
+        android:id="@+id/click"
+        android:layout_width="140dp"
+        android:layout_height="70dp"
+        android:layout_gravity="center"
+        android:src="@drawable/iconchik"/>
+
+</LinearLayout>

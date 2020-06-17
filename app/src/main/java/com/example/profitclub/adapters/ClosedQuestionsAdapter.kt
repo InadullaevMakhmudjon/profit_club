@@ -1,5 +1,6 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -20,17 +21,18 @@ class ClosedQuestionsAdapter(private val context: Context, private val items: Ar
         return EventFeedHolder(binding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
                 binding!!.close = item
-
-            binding.questionText.text = item?.title
-            binding.questionId.text = item?.question_id.toString()
-            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
-            binding.price.text = item?.price.toString()
-            binding.status.text = item?.status.toString()
+            val title = context.getString(R.string.title_)
+            val language = context.getString(R.string.language_)
+            val categories = context.getString(R.string.categories)
+            binding.questionTitle.text = "$title ${item?.title}"
+            binding.questionLanguage.text = "$language ${item?.qlang}"
+            binding.questionCategory.text = "$categories ${item?.categories!!.reduce { acc, s -> "$acc/$s" }}"
 
             binding?.container?.tag = item
             binding?.container?.setOnClickListener(this)

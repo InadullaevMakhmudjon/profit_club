@@ -1,5 +1,6 @@
 package com.example.profitclub.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -8,11 +9,8 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.profitclub.R
-import com.example.profitclub.data.questions.QuestionConsultantCancelledData
 import com.example.profitclub.data.questions.QuestionConsultantClosedData
 import com.example.profitclub.databinding.ClosedBidItemBinding
-import com.example.profitclub.model.Bid
-import com.example.profitclub.ui.bids.BidDetailActivity
 import com.example.profitclub.ui.browse.BrowseQuestionsActivity
 
 class ClosedBidAdapter(private val context: Context, private val items: ArrayList<QuestionConsultantClosedData>?, private val listener: View.OnClickListener) : RecyclerView.Adapter<RecyclerView.ViewHolder>(), View.OnClickListener {
@@ -23,18 +21,18 @@ class ClosedBidAdapter(private val context: Context, private val items: ArrayLis
         return EventFeedHolder(binding.root)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val item = items?.get(position)
         if (holder is EventFeedHolder) {
             val binding = holder.binding
             binding!!.close = item
-
-            binding.questionText.text = item?.title
-            binding.questionId.text = item?.question_id.toString()
-            binding.category.text = item?.categories?.reduce { a, b -> "$a/$b"}
-            binding.price.text = item?.price.toString()
-            binding.status.text = item?.status.toString()
-
+            val title = context.getString(R.string.title_)
+            val language = context.getString(R.string.language_)
+            val categories = context.getString(R.string.categories)
+            binding.questionTitle.text = "$title ${item?.title}"
+            binding.questionLanguage.text = "$language ${item?.qlang}"
+            binding.questionCategory.text = "$categories ${item?.categories!!.reduce { acc, s -> "$acc/$s" }}"
             binding.container.tag = item
             binding.container.setOnClickListener(this)
 

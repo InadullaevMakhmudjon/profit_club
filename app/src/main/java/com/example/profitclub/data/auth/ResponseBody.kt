@@ -21,6 +21,10 @@ data class ChangePasswordStatus(
     val status: Int
 )
 
+data class MailConfirmStatus(
+    val status: Int
+)
+
 data class UserInfoRequest(
     val user_id: Int,
     val company_id: Int

@@ -58,7 +58,7 @@
                 android:textSize="18sp"
                 android:fontFamily="@font/roboto_medium"
                 android:textColor="@color/black"
-                android:text="Uzbek"/>
+                android:text="O'zbekcha"/>
 
         </LinearLayout>
 

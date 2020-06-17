@@ -11,7 +11,9 @@ import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.Button
+import android.widget.ImageView
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -27,13 +29,10 @@ import com.example.profitclub.ui.account.employees.EmployeesListActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
 import kotlinx.android.synthetic.main.change_password_alert_dialog.view.*
-import kotlinx.android.synthetic.main.fragment_account.*
 
 class AccountFragment : Fragment() {
-
     private lateinit var preferences: SharedPreferences
     private val APP_PREFERENCE = "MYSETTINGS"
-
     private lateinit var sendViewModel: AccountViewModel
     private lateinit var penalty: TextView
 
@@ -66,13 +65,12 @@ class AccountFragment : Fragment() {
         val viewContainer: ConstraintLayout = view.findViewById(R.id.view_container)
         val passwordContainer: ConstraintLayout = view.findViewById(R.id.changePassword_container)
         val penaltyContainer: ConstraintLayout = view.findViewById(R.id.penalty_container)
-
         val imageUser = preferences.getString("media_url", null)
         val nameUser = preferences.getString("lname", null)
+        name.text = nameUser
 
         if (imageUser != null){
             Picasso.get().load(BASE_URL+imageUser).fit().into(media)
-            name.text = nameUser
         }
 
         logOut.setOnClickListener {

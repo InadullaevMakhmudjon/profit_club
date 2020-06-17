@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/roboto_medium"
                     android:text="@string/lorem"
-                    android:textColor="@color/black"
+                    android:textColor="@android:color/darker_gray"
                     android:textSize="16sp"
                     android:layout_marginTop="8dp"
                     app:layout_constraintVertical_bias="0.0"
@@ -141,6 +141,21 @@
                     app:layout_constraintTop_toBottomOf="@id/bid_detail" />
 
                 <TextView
+                    android:id="@+id/time_left"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto_bold"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/deadline_"
+                    android:drawableStart="@drawable/ic_baseline_watch_later_24"
+                    android:drawableTint="@color/black"
+                    android:textColor="@android:color/black"
+                    android:textSize="20sp"
+                    app:layout_constraintVertical_bias="0.0"
+                    app:layout_constraintStart_toStartOf="@id/deadline"
+                    app:layout_constraintTop_toBottomOf="@id/deadline" />
+
+                <TextView
                     android:id="@+id/price_question"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -151,8 +166,8 @@
                     android:textColor="@android:color/black"
                     android:textSize="20sp"
                     app:layout_constraintVertical_bias="0.0"
-                    app:layout_constraintStart_toStartOf="@id/deadline"
-                    app:layout_constraintTop_toBottomOf="@id/deadline" />
+                    app:layout_constraintStart_toStartOf="@id/time_left"
+                    app:layout_constraintTop_toBottomOf="@id/time_left" />
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -579,6 +594,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
+        android:backgroundTint="@color/colorAccent2"
+        app:rippleColor="@color/colorAccent2"
         android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:src="@drawable/ic_sovetnik_white"/>

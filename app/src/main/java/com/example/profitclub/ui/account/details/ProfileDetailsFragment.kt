@@ -21,6 +21,8 @@ import com.example.profitclub.adapters.CategoryAdapter
 import com.example.profitclub.adapters.LanguageAdapter
 import com.example.profitclub.data.bids.DataBid
 import com.example.profitclub.data.bids.Language
+import com.example.profitclub.toast
+import com.google.android.material.button.MaterialButton
 import kotlinx.android.synthetic.main.fragment_profile_details.*
 import java.net.HttpURLConnection
 import java.net.URL
@@ -52,6 +54,9 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
     val allLanguage = arrayListOf(Language(1, "English"), Language(2, "O'zbekcha"), Language(3, "Русский"))
     var role: Int = 0
     val categoryNames = ArrayList<String>()
+    val languageNames = ArrayList<String>()
+    lateinit var chosenLanguage: TextView
+    lateinit var chosenCategory: TextView
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -79,8 +84,12 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         val maleText = view.findViewById<TextView>(R.id.male_text_detail)
         val female = view.findViewById<CheckBox>(R.id.female_detail)
         val femaleText = view.findViewById<TextView>(R.id.female_text_detail)
-        val languages = view.findViewById<TextView>(R.id.profile_languages)
-        val categories = view.findViewById<TextView>(R.id.profile_categories)
+        val languages = view.findViewById<MaterialButton>(R.id.profile_languages)
+        val categories = view.findViewById<MaterialButton>(R.id.profile_categories)
+        chosenCategory = view.findViewById(R.id.chosen_category)
+        chosenLanguage = view.findViewById(R.id.chosen_language)
+        chosenCategory.isVisible = false
+        chosenLanguage.isVisible = false
 
         val regionDropDown = view.findViewById<Spinner>(R.id.regions_detail)
         val citiesDropDown = view.findViewById<Spinner>(R.id.cities_detail)
@@ -204,10 +213,14 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         }
 
         languages.setOnClickListener {
+            languageIds.clear()
+            languageNames.clear()
             alertDialogLanguage()
         }
 
         categories.setOnClickListener {
+            categoryIds.clear()
+            categoryNames.clear()
             alertDialogCategory()
         }
 
@@ -272,7 +285,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     private fun alertDialogCategory(){
         val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.setTitle("Categories")
+        alertDialogBuilder.setTitle(getString(R.string.category_))
         val customLayout = layoutInflater.inflate(R.layout.category_alert_dialog, null)
         alertDialogBuilder.setView(customLayout)
         val recycler = customLayout.findViewById<RecyclerView>(R.id.category_list)
@@ -312,12 +325,14 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         alertDialogBuilder.setMessage(getString(R.string.category_alert))
 
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
-            Toast.makeText(context, "Categories checked", Toast.LENGTH_SHORT).show()
-
+            if (categoryNames.size > 0){
+                chosenCategory.isVisible = true
+                chosenCategory.text = categoryNames.reduce{a, b -> "$a/$b"}
+            }
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
-            Toast.makeText(context, "You should check at least one of categories", Toast.LENGTH_SHORT).show()
+            toast(getString(R.string.at_least_one_category))
             dialog?.dismiss()
         }
 
@@ -326,7 +341,7 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
 
     private fun alertDialogLanguage(){
         val alertDialogBuilder = AlertDialog.Builder(context)
-        alertDialogBuilder.setTitle("Languages")
+        alertDialogBuilder.setTitle(getString(R.string.language))
         val customLayout = layoutInflater.inflate(R.layout.category_alert_dialog, null)
         alertDialogBuilder.setView(customLayout)
 
@@ -342,7 +357,15 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
             }
         }
 
-        val adapter = LanguageAdapter(context!!, allLanguage, languageIds, itemCallBack)
+        val itemCallBackNames = {name: String, checked: Boolean ->
+            if(checked) {
+                languageNames.add(name)
+            } else {
+                languageNames.remove(name)
+            }
+        }
+
+        val adapter = LanguageAdapter(context!!, allLanguage, languageIds, languageNames, itemCallBack, itemCallBackNames)
         layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
         recycler.layoutManager = layoutManager
         recycler.adapter = adapter
@@ -351,11 +374,14 @@ class ProfileDetailsFragment : Fragment(), DatePickerDialog.OnDateSetListener {
         alertDialogBuilder.setMessage(getString(R.string.category_alert))
 
         alertDialogBuilder.setPositiveButton(getString(R.string.confirm)) { dialog, which ->
-            Toast.makeText(context, "Languages checked", Toast.LENGTH_SHORT).show()
+            if (languageNames.size > 0){
+                chosenLanguage.isVisible = true
+                chosenLanguage.text = languageNames.reduce{a, b -> "$a/$b"}
+            }
         }
 
         alertDialogBuilder.setNegativeButton(getString(R.string.cancel_alert)) { dialog, which ->
-            Toast.makeText(context, "You should check at least one of languages", Toast.LENGTH_SHORT).show()
+            toast(getString(R.string.at_least_one_language))
             dialog?.dismiss()
         }
 

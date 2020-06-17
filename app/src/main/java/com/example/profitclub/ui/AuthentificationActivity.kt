@@ -1,14 +1,12 @@
 package com.example.profitclub.ui
 
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import com.example.profitclub.LocaleManager
 import com.example.profitclub.R
 import com.example.profitclub.databinding.ActivityAuthentificationBinding
@@ -33,5 +31,4 @@ class AuthentificationActivity : AppCompatActivity() {
     override fun onResume() {
         super.onResume()
     }
-
 }

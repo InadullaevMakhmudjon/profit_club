@@ -12,9 +12,11 @@ import androidx.core.view.isVisible
 import androidx.databinding.DataBindingUtil
 import com.example.profitclub.App
 import com.example.profitclub.R
+import com.example.profitclub.data.BASE_URL
 import com.example.profitclub.databinding.ActivityChatViewBinding
 import com.example.profitclub.ui.chats.adapters.SectionPageAdapter4
 import com.github.nkzawa.socketio.client.Socket
+import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_chat_view.*
 import kotlinx.android.synthetic.main.arbitration_alert_dialog.view.*
 import kotlinx.android.synthetic.main.chat_custom_bar.view.*
@@ -41,6 +43,9 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         client_id = this.intent.getIntExtra("client_id", 0)
         consultant_id = this.intent.getIntExtra("consultant_id", 0)
 
+        val photo = preferences.getString("media_url", null)
+        val lname = preferences.getString("lname", null)
+
 
         setSupportActionBar(toolbar)
         val actionBar = this.supportActionBar
@@ -52,6 +57,11 @@ class ChatViewActivity : AppCompatActivity(), View.OnClickListener {
         val actionBarView: View = mLayoutInflater.inflate(R.layout.chat_custom_bar, null)
         actionBar?.customView = actionBarView
         actionBarView.question_id.text = question_id.toString()
+        actionBarView.name.text = lname
+
+        if (photo != null){
+            Picasso.get().load(BASE_URL + photo).fit().into(actionBarView.user_image)
+        }
 
         // toast("client id: $client_id, consultant_id: $consultant_id")
 

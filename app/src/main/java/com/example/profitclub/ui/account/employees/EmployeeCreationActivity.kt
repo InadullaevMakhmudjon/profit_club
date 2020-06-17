@@ -398,7 +398,7 @@ class EmployeeCreationActivity : AppCompatActivity(), DatePickerDialog.OnDateSet
         alertDialogBuilder.show()
     }
 
-    private fun alertDialogLanguage(){
+    /*private fun alertDialogLanguage(){
         val alertDialogBuilder = AlertDialog.Builder(this)
         alertDialogBuilder.setTitle("Languages")
         val customLayout = layoutInflater.inflate(R.layout.category_alert_dialog, null)
@@ -434,7 +434,7 @@ class EmployeeCreationActivity : AppCompatActivity(), DatePickerDialog.OnDateSet
         }
 
         alertDialogBuilder.show()
-    }
+    }*/
 
     fun date(string: String): String{
         val readDate = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.S")

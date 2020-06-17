@@ -13,8 +13,7 @@ import com.example.profitclub.ui.bids.open.OpenBidsFragment
 import com.example.profitclub.ui.browse.BrowseFragment
 
 class SectionPageAdapter3(fm: FragmentManager, context: Context) : FragmentPagerAdapter(fm) {
-    lateinit var context: Context
-
+    var context: Context
     init {
         this.context = context
     }
@@ -23,27 +22,18 @@ class SectionPageAdapter3(fm: FragmentManager, context: Context) : FragmentPager
             0 -> {
                 BrowseFragment()
             }
-
             1 -> {
                 OpenBidsFragment()
             }
-
-           /* 2 -> {
-                InProgressBidsFragment()
-            }*/
-
             2 -> {
                 InApprovingBidsFragment()
             }
-
             3 -> {
                 InArbitrationBidsFragment()
             }
-
             4 -> {
                 RejectedBidsFragment()
             }
-
             5 -> {
                 ClosedBidsFragment()
             }
@@ -58,17 +48,11 @@ class SectionPageAdapter3(fm: FragmentManager, context: Context) : FragmentPager
     override fun getPageTitle(position: Int): CharSequence? {
         return when (position) {
             0 ->  context.getString(R.string.bids)
-
             1 -> context.getString(R.string.bids_consultant)
-
             2 -> context.getString(R.string.approve)
-
             3 -> context.getString(R.string.arbitration)
-
             4 -> context.getString(R.string.closed)
-
             5 -> context.getString(R.string.cancelled)
-
             else -> null
         }
     }

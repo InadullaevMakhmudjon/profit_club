@@ -230,25 +230,52 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
 
-                    <TextView
-                        android:id="@+id/profile_languages"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="start"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:text="@string/language"/>
-
-                    <TextView
+                    <com.google.android.material.button.MaterialButton
                         android:id="@+id/profile_categories"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="10dp"
-                        android:layout_gravity="start"
-                        android:textColor="@color/black"
-                        android:textSize="16sp"
-                        android:text="@string/category_"/>
+                        android:text="@string/category_"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:theme="@style/Theme.MaterialComponents"
+                        android:textSize="14sp"
+                        android:background="@android:color/background_light"
+                        android:textColor="@color/background_button"
+                        app:strokeColor="@color/background_button"
+                        android:layout_marginTop="14dp"/>
+
+                    <TextView
+                        android:id="@+id/chosen_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/category_"
+                        android:textSize="18sp"
+                        android:textColor="@color/background_button"
+                        android:layout_marginTop="14dp"
+                        android:maxLines="3" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/profile_languages"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/language"
+                        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                        android:theme="@style/Theme.MaterialComponents"
+                        android:textSize="14sp"
+                        android:background="@android:color/background_light"
+                        android:textColor="@color/background_button"
+                        app:strokeColor="@color/background_button"
+                        android:layout_marginTop="14dp"/>
+
+                    <TextView
+                        android:id="@+id/chosen_language"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/language"
+                        android:textSize="18sp"
+                        android:textColor="@color/background_button"
+                        android:layout_marginTop="14dp"
+                        android:maxLines="1"
+                        android:singleLine="true"/>
 
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
